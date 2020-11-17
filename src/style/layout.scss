@@ -1,6 +1,10 @@
 @import "../style/breakpoints.scss";
 
 body {
+  margin: 0;
+}
+
+.full-width {
   max-width: 80rem;
   
   margin-left: 1rem;

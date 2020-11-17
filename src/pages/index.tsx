@@ -5,14 +5,18 @@ import '../style/layout.scss';
 
 import LandingHero from '@/components/LandingHero';
 import ProjectCard from '@/components/ProjectCard';
+import Cursor from '@/components/Cursor/Cursor';
 
 const Home: React.FC<PageProps> = () => (
-  <main>
-    {/* <Title /> */}
-    <LandingHero />
-    <ProjectCard>test</ProjectCard>
-    <ProjectCard>tesfdsat</ProjectCard>
-  </main>
+  <>
+    <Cursor />
+    <main className="full-width">
+      {/* <Title /> */}
+      <LandingHero />
+      <ProjectCard>test</ProjectCard>
+      <ProjectCard>tesfdsat</ProjectCard>
+    </main>
+  </>
 );
 
 export default Home;
