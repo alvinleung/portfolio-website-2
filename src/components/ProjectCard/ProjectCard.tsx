@@ -8,12 +8,15 @@ interface Props {
   children?: React.ReactNode;
 }
 
+const transitionConfig = { duration: 0.01, ease: 'easeOut' };
+
 export const ProjectCard: React.FC<Props> = () => {
   const [containerOffset, setContainerOffset] = useState({ x: 0, y: 0 });
   const [containerBounds, setContainerBounds] = useState<DOMRect>();
   const containerRef = useRef(null);
 
   const handleMouseMove = (e: React.MouseEvent) => {
+    // translate mouse position to element position, creating dampening effect
     setContainerOffset({
       x: (e.clientX - containerBounds.left - containerBounds.width / 2) * 0.02,
       y: (e.clientY - containerBounds.top - containerBounds.height / 2) * 0.02,
@@ -21,11 +24,14 @@ export const ProjectCard: React.FC<Props> = () => {
   };
 
   const handleHoverEnd = (e: MouseEvent) => {
+    // reset the elm position when the mouse is off the element
     setContainerOffset({ x: 0, y: 0 });
   };
 
   // capture the container state once
   useEffect(() => {
+    // calculate the element boundary
+    // it is expensive to access getboundingclientrect, that why the value is cached
     setContainerBounds(containerRef.current.getBoundingClientRect());
   }, []);
 
@@ -34,7 +40,8 @@ export const ProjectCard: React.FC<Props> = () => {
       <motion.a
         ref={containerRef}
         className={style.projectCard}
-        transition={{ duration: 0.1, ease: 'easeOut' }}
+        transition={transitionConfig}
+        // register mouse listeners
         onMouseMove={handleMouseMove}
         onHoverEnd={handleHoverEnd}
         // follow the mouse position

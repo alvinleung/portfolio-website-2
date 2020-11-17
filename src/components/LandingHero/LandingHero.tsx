@@ -5,7 +5,7 @@ import './LandingHero.scss';
 export default () => {
   const { scrollY } = useViewportScroll();
   const headerOpacity = useTransform(scrollY, [0, 400], [1, 0]);
-  const headerScale = useTransform(scrollY, [0, 400], [1, 0.98]);
+  const headerScale = useTransform(scrollY, [0, 400], [1, 0.95]);
 
   return (
     <div className="LandingHero">

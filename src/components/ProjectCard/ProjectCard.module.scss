@@ -7,9 +7,11 @@
   justify-content: flex-end;
 
   max-width: 100%;
-  min-height: 20rem;
+  min-height: 30rem;
 
   padding: 1rem;
+  // create vertical seperation between each item
+  margin-bottom: 2rem;
 
   font-family: "Source Sans Pro";
 
@@ -41,6 +43,8 @@
     margin-bottom: var(--spacing-vertical);
     
   }
+
+  z-index: 10;
 }
 
 .projectCard:hover {

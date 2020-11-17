@@ -1,6 +1,13 @@
-body {
-  max-width: 60rem;
-  margin-left: auto;
-  margin-right: auto;
-}
+@import "../style/breakpoints.scss";
 
+body {
+  max-width: 80rem;
+  
+  margin-left: 1rem;
+  margin-right: 1rem;
+
+  @include viewportLargerThan(80em) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
