@@ -1,0 +1,19 @@
+/*
+ *
+ * A CSS file that mananges all the break points
+ * 
+ * Referenced Article
+ * https: //medium.com/codeartisan/breakpoints-and-media-queries-in-scss-46e8f551e2f2
+ * 
+ */
+
+$breakpoint-s: 600px;
+$breakpoint-m: 800px;
+$breakpoint-l: 1000px;
+$breakpoint-xl: 1200px;
+
+@mixin viewportLargerThan($screen) {
+  @media only screen and (min-width: $screen) {
+    @content;
+  }
+}

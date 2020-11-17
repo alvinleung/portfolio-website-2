@@ -1,16 +1,17 @@
 import React from 'react';
 import { PageProps } from 'gatsby';
+import '../style/typography.scss';
+import '../style/layout.scss';
 
-import Title from '@/components/Title';
+import LandingHero from '@/components/LandingHero';
+import ProjectCard from '@/components/ProjectCard';
 
 const Home: React.FC<PageProps> = () => (
   <main>
-    <Title />
-    <p>A TypeScript starter for Gatsby. Great for advanced users.</p>
-    <p>
-      Follow me on Twitter (
-      <a href="https://twitter.com/jpedroschmitz">@jpedroschmitz</a>)
-    </p>
+    {/* <Title /> */}
+    <LandingHero />
+    <ProjectCard>test</ProjectCard>
+    <ProjectCard>tesfdsat</ProjectCard>
   </main>
 );
 

@@ -1,0 +1,48 @@
+.projectCard {
+
+  --spacing-vertical: 4px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  max-width: 100%;
+  min-height: 20rem;
+
+  padding: 1rem;
+
+  font-family: "Source Sans Pro";
+
+  background-color: #000;
+  color: #fff;
+
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  transition-duration: 0.2s;
+
+  .projectType {
+    margin-bottom: auto;
+    // font-family: "Roboto Mono";
+    font-size: 12px;
+  }
+
+  h3 {
+    font-size: 36px;
+    font-weight: normal;
+    letter-spacing: -.04em;
+    margin-bottom: var(--spacing-vertical);
+  }
+
+  p {
+    max-width: 15rem;
+    letter-spacing: .007em;
+
+    margin-top: 0rem;
+    margin-bottom: var(--spacing-vertical);
+    
+  }
+}
+
+.projectCard:hover {
+  cursor: pointer;
+}

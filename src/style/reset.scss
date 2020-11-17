@@ -1,0 +1,176 @@
+/* 
+ * 
+ * CSS RESETS
+ * 
+ * Code adapted from Bootstrap 4 _reboot.css
+ * 
+ * SOURCE
+ * https: //github.com/twbs/bootstrap/blob/v4-dev/scss/_reboot.scss
+ * 
+ */
+
+/* 
+ * remove the iphone touch area indicator in all interactive elements except links
+ */
+
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  -webkit-tap-highlight-color: default;
+}
+
+/* 
+ * text selection style
+ */
+::selection {
+  background-color: rgba(200, 200, 200, 0.5);
+  color: var(--color-primary-darkest) !important;
+}
+
+/* 
+ * make it smooth scrolling compatable
+ */
+html {
+  scroll-behavior: smooth;
+}
+/* 
+ *++++++++++++++++++++++
+ * 
+ * LAYOUT element resets
+ * 
+ * ++++++++++++++++++++++
+ */
+
+/* reset box-sizing with "inheritance" - https://css-tricks.com/box-sizing/ */
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+/* turn off all the default css collapsing margin behaviour */
+body {
+  margin: 0rem;
+}
+
+* {
+  margin: 0rem;
+  padding: 0rem;
+  box-sizing: border-box;
+}
+
+/* 
+ * +++++++++++++++++++++
+ * 
+ * IMAGE element resets
+ * 
+ *+++++++++++++++++++++
+ */
+
+/* remove the image margin */
+img {
+  display: block;
+  /* constraint it within the assigned block */
+  max-width: 100%;
+  height: auto;
+}
+/* 
+ *++++++++++++++++++++++++++++++++++++++++++++++++
+ * 
+ * Make footer stick to bottom of the page if the page is too short
+ * 
+ *++++++++++++++++++++++++++++++++++++++++++++++++
+ */
+body {
+  min-height: 100vh;
+}
+
+/* 
+ * +++++++++++++++++++++
+ * 
+ * FORM element resets
+ * 
+ *+++++++++++++++++++++
+ */
+
+/* add "hand" cursor to non-disabled button elements. */
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"],
+input[type="submit"]:not(:disabled) {
+  cursor: pointer;
+}
+
+/* 
+ *++++++++++++++++++++++++++++++++++++++++++++++++
+ * 
+ * Fix the Material Design icon alignment issue
+ * 
+ *++++++++++++++++++++++++++++++++++++++++++++++++
+ */
+.material-icons {
+  font-size: 1.2em;
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+/* 
+ * 
+ * Trick adapted from the following link
+ * purpose is to stop the menu animation showing when window resizing
+ * https://css-tricks.com/stop-animations-during-window-resizing/
+ * 
+ * 
+ * Refer to index.js to see the javascript component of this fix
+ * 
+ */
+
+.resize-animation-stopper * {
+  animation: none !important;
+  transition: none !important;
+}
+
+/*
+ *
+ * No bullet list
+ * 
+ */
+
+ul.no-bullet {
+  list-style: none;
+}
+
+/*
+ *
+ * List style reset
+ * 
+ */
+ul {
+  margin: 2rem 0rem;
+}
+li {
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+}
+
+/*
+ *
+ * utilities for list css
+ * 
+ */
+
+ul.list-reset {
+  margin: 0rem 0rem;
+}
+
+ul.list-reset > li {
+  margin-left: 0rem;
+  margin-bottom: 0rem;
+}
