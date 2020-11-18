@@ -15,8 +15,10 @@ export default () => {
           scale: headerScale,
         }}
       >
-        Hi, this is Alvin. I fight for my users against bad designs by combining
-        function with aesthetics.
+        Hi, this is Alvin. Lorem ipsum dolor sit amet, consectetur adipiscing
+        elit. Sit arcu ornare ipsum, leo, at donec pulvinar.
+        {/* I fight for my users against bad designs by combining
+        function with aesthetics. */}
       </motion.h1>
     </div>
   );
