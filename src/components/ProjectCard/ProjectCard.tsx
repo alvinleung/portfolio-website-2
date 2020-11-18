@@ -28,11 +28,20 @@ export const ProjectCard: React.FC<Props> = () => {
     setContainerOffset({ x: 0, y: 0 });
   };
 
-  // capture the container state once
+  const calculateContainerBounds = () => {
+    setContainerBounds(containerRef.current.getBoundingClientRect());
+  };
+
+  // capture the container state once when the window resize
   useEffect(() => {
     // calculate the element boundary
     // it is expensive to access getboundingclientrect, that why the value is cached
-    setContainerBounds(containerRef.current.getBoundingClientRect());
+    calculateContainerBounds();
+
+    window.addEventListener('resize', calculateContainerBounds);
+    return () => {
+      window.removeEventListener('resize', calculateContainerBounds);
+    };
   }, []);
 
   return (
