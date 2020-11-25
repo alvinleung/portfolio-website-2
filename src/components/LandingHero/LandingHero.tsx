@@ -13,6 +13,7 @@ export default () => {
         // animate={{
         //   opacity: [0, 1],
         // }}
+        className="callout"
         transition={{ ease: 'easeOut', duration: 0.5 }}
         style={{
           opacity: headerOpacity,

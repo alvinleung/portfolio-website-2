@@ -1,16 +1,25 @@
+* {
+  font-family: "source sans pro";
+}
+
 h1 {
-  font-family: "source serif pro";
-  font-variant-ligatures: common-ligatures;
+  // font-family: "source serif pro";
+  // font-variant-ligatures: common-ligatures;
   font-size: 36px;
   letter-spacing: -0.023em;
 }
 
 h2 {
-  font-family: "source serif pro";
+  // font-family: "source serif pro";
   font-size: 24px;
   letter-spacing: -0.023em;
 }
 
 p {
   font-family: "source sans pro";
+}
+
+.callout {
+  font-family: "source serif pro";
+  font-variant-ligatures: common-ligatures;
 }
