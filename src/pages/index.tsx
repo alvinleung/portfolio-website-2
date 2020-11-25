@@ -13,8 +13,10 @@ const Home: React.FC<PageProps> = () => (
     <main className="full-width">
       {/* <Title /> */}
       <LandingHero />
-      <ProjectCard name="HelpMate"></ProjectCard>
-      <ProjectCard name="FreeGeek"></ProjectCard>
+      <section id="works">
+        <ProjectCard name="HelpMate"></ProjectCard>
+        <ProjectCard name="FreeGeek"></ProjectCard>
+      </section>
     </main>
   </>
 );
