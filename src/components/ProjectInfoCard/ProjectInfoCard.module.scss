@@ -1,0 +1,28 @@
+.ProjectInfoCard {
+  position: absolute;
+  top:90%;
+  left:4rem;
+
+  padding: 2rem;
+  max-width: 25rem;
+
+  background-color: #FFF;
+
+  // reset margin top
+  h1 {
+    margin:0rem;
+  }
+
+  z-index: 10;
+}
+
+.ProjectInfoCard__title {
+  font-weight: normal;
+}
+
+.ProjectInfoCard__info {
+  font-weight: normal;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  margin-bottom: rem;
+}

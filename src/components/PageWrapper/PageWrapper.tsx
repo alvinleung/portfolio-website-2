@@ -29,7 +29,7 @@ const PageWrapper = ({ children, location }) => (
     <Cursor />
     <MainNav />
     <AnimatePresence>
-      <AnimateSharedLayout>
+      <AnimateSharedLayout type="crossfade">
         <motion.div key={location.pathname}>{children}</motion.div>
       </AnimateSharedLayout>
     </AnimatePresence>
