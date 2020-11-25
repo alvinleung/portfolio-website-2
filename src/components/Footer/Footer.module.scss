@@ -1,0 +1,21 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  
+  height: 4rem;
+  
+  // margin-top:2rem;
+  // padding-top: 2rem;
+  padding-bottom: 4rem;
+
+  // border-bottom: 1px solid #CCC;
+  opacity: .9;
+}
+
+.footerGroup {
+  margin-top:.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}

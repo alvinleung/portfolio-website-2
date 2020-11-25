@@ -2,6 +2,7 @@ import React from 'react';
 import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 import Cursor from '../Cursor/Cursor';
 import MainNav from '../MainNav/MainNav';
+import { Footer } from '../Footer/Footer';
 
 const duration = 0.3;
 
@@ -33,6 +34,7 @@ const PageWrapper = ({ children, location }) => (
         <motion.div key={location.pathname}>{children}</motion.div>
       </AnimateSharedLayout>
     </AnimatePresence>
+    <Footer />
   </>
 );
 

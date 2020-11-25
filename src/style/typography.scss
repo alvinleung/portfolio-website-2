@@ -24,3 +24,12 @@ p {
   font-variant-ligatures: common-ligatures;
   font-weight: 400;
 }
+
+a {
+  color: #999;
+  text-decoration: none;
+}
+
+a:active {
+  opacity: .7;
+}

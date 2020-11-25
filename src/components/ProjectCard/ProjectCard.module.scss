@@ -54,4 +54,8 @@
 
 .projectCardLink {
   text-decoration: none;
+
+  &:active {
+    opacity: 1;
+  }
 }
