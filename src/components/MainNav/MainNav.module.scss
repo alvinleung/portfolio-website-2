@@ -1,0 +1,26 @@
+.navLink, .navLogo {
+  font-family: "source sans pro";
+  font-size: 1rem;
+
+  color: #999;
+  text-decoration: none;
+}
+
+.navLogo {
+  margin-right: auto;
+}
+
+.navLink {
+  margin-left: 1rem;
+}
+
+.navContainer {
+  padding-top: 2rem;
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.fixedContainer {
+  position: fixed;
+  width: 100%;
+}

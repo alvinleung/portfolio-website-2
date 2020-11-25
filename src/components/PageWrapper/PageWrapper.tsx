@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 import Cursor from '../Cursor/Cursor';
+import MainNav from '../MainNav/MainNav';
 
 const duration = 0.3;
 
@@ -26,6 +27,7 @@ const variants = {
 const PageWrapper = ({ children, location }) => (
   <>
     <Cursor />
+    <MainNav />
     <AnimatePresence>
       <AnimateSharedLayout>
         <motion.div key={location.pathname}>{children}</motion.div>
