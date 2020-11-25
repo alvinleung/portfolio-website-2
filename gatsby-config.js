@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 module.exports = {
   // Since `gatsby-plugin-typescript` is automatically included in Gatsby you
   // don't need to define it here (just if you need to change the options)
@@ -8,13 +10,11 @@ module.exports = {
   plugins: [
     `gatsby-plugin-sass`,
     {
-      resolve: `gatsby-plugin-google-fonts`,
+      resolve: "gatsby-plugin-web-font-loader",
       options: {
-        fonts: [
-          `source serif pro\:300`,
-          `source sans pro\:300,400,400i,700`, // you can also specify font weights and styles
-        ],
-        display: "swap",
+        typekit: {
+          id: process.env.TYPEKIT_ID,
+        },
       },
     },
   ],
