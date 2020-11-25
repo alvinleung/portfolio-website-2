@@ -7,16 +7,11 @@ import LandingHero from '@/components/LandingHero';
 import ProjectCard from '@/components/ProjectCard';
 import Cursor from '@/components/Cursor/Cursor';
 
-const Home: React.FC<PageProps> = () => (
+const Test: React.FC<PageProps> = () => (
   <>
     {/* <Cursor /> */}
-    {/* <main className="full-width"> */}
-    {/* <Title /> */}
-    <LandingHero />
-    <ProjectCard>test</ProjectCard>
-    <ProjectCard>tesfdsat</ProjectCard>
-    {/* </main> */}
+    <main className="full-width">test</main>
   </>
 );
 
-export default Home;
+export default Test;

@@ -1,4 +1,5 @@
 .projectCard {
+  cursor: none;
 
   --spacing-vertical: 4px;
 
@@ -14,6 +15,7 @@
   margin-bottom: 2rem;
 
   font-family: "Source Sans Pro";
+  text-decoration: none;
 
   background-color: #000;
   color: #fff;

@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect, ReactNode } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+import { Link } from 'gatsby';
+
 import style from './ProjectCard.module.scss';
 
 interface Props {
@@ -9,6 +11,33 @@ interface Props {
 }
 
 const transitionConfig = { duration: 0.01, ease: 'easeOut' };
+const variantsSelectedProject = {
+  initial: {
+    y: 100,
+  },
+  enter: {
+    y: 0,
+    transition: { duration: 0.3, ease: 'easeOut' },
+  },
+  exit: {
+    y: 100,
+    transition: { duration: 0.3, ease: 'easeOut' },
+  },
+};
+
+const variantsDefault = {
+  initial: {
+    y: 100,
+  },
+  enter: {
+    y: 0,
+    transition: { duration: 0.3, ease: 'easeOut' },
+  },
+  exit: {
+    y: 100,
+    transition: { duration: 0.3, ease: 'easeOut' },
+  },
+};
 
 export const ProjectCard: React.FC<Props> = () => {
   const [containerOffset, setContainerOffset] = useState({ x: 0, y: 0 });
@@ -16,6 +45,9 @@ export const ProjectCard: React.FC<Props> = () => {
   const containerRef = useRef(null);
 
   const handleMouseMove = (e: React.MouseEvent) => {
+    // null check for the container bounds, for rare cases when the event listener
+    // fires before the page loaded
+    if (!containerBounds) return;
     // translate mouse position to element position, creating dampening effect
     setContainerOffset({
       x: (e.clientX - containerBounds.left - containerBounds.width / 2) * 0.02,
@@ -45,35 +77,47 @@ export const ProjectCard: React.FC<Props> = () => {
   }, []);
 
   return (
-    <AnimatePresence>
-      <motion.a
-        ref={containerRef}
-        className={style.projectCard}
-        transition={transitionConfig}
-        // register mouse listeners
-        onMouseMove={handleMouseMove}
-        onHoverEnd={handleHoverEnd}
-        // follow the mouse position
-        initial={{ x: 0, y: 10, opacity: 0 }}
-        animate={{
-          x: containerOffset.x,
-          y: containerOffset.y,
-          scale: 1,
-          opacity: 1,
-        }}
-        whileHover={{
-          outline: '10px solid rgba(0,0,0,.1)',
-        }}
-        whileTap={{
-          scale: 0.99,
-        }}
+    // <AnimatePresence>
+    <Link to="test">
+      {/* the container for effects */}
+      <motion.div
+        variants={variantsDefault}
+        initial="inital"
+        animate="enter"
+        exit="exit"
       >
-        <div className={style.projectType}>UX/UI Design</div>
-        <motion.h3>HelpMate</motion.h3>
-        <motion.p>
-          Build connections in the community one task at a time.
-        </motion.p>
-      </motion.a>
-    </AnimatePresence>
+        <motion.div
+          // href="test"
+          ref={containerRef}
+          className={style.projectCard}
+          transition={transitionConfig}
+          // register mouse listeners
+          onMouseMove={handleMouseMove}
+          onHoverEnd={handleHoverEnd}
+          // follow the mouse position
+
+          animate={{
+            x: containerOffset.x,
+            y: containerOffset.y,
+            scale: 1,
+            opacity: 1,
+          }}
+          // for mouse behaviour
+          whileHover={{
+            outline: '10px solid rgba(0,0,0,.1)',
+          }}
+          whileTap={{
+            scale: 0.99,
+          }}
+        >
+          <div className={style.projectType}>UX/UI Design</div>
+          <motion.h3>HelpMate</motion.h3>
+          <motion.p>
+            Build connections in the community one task at a time.
+          </motion.p>
+        </motion.div>
+      </motion.div>
+    </Link>
+    // </AnimatePresence>
   );
 };
