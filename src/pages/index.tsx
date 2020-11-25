@@ -10,12 +10,12 @@ import Cursor from '@/components/Cursor/Cursor';
 const Home: React.FC<PageProps> = () => (
   <>
     {/* <Cursor /> */}
-    {/* <main className="full-width"> */}
-    {/* <Title /> */}
-    <LandingHero />
-    <ProjectCard>test</ProjectCard>
-    <ProjectCard>tesfdsat</ProjectCard>
-    {/* </main> */}
+    <main className="full-width">
+      {/* <Title /> */}
+      <LandingHero />
+      <ProjectCard name="HelpMate"></ProjectCard>
+      <ProjectCard name="FreeGeek"></ProjectCard>
+    </main>
   </>
 );
 

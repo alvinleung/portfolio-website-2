@@ -10,13 +10,16 @@ export default () => {
   return (
     <div className="LandingHero">
       <motion.h1
-        animate={{
-          opacity: [0, 1],
-        }}
-        transition={{ ease: 'easeOut', duration: 2 }}
+        // animate={{
+        //   opacity: [0, 1],
+        // }}
+        transition={{ ease: 'easeOut', duration: 0.5 }}
         style={{
           opacity: headerOpacity,
           scale: headerScale,
+        }}
+        exit={{
+          opacity: 0,
         }}
       >
         Hi, this is Alvin. Lorem ipsum dolor sit amet, consectetur adipiscing

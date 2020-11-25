@@ -15,7 +15,6 @@
   margin-bottom: 2rem;
 
   font-family: "Source Sans Pro";
-  text-decoration: none;
 
   background-color: #000;
   color: #fff;
@@ -51,4 +50,8 @@
 
 .projectCard:hover {
   cursor: none;
+}
+
+.projectCardLink {
+  text-decoration: none;
 }

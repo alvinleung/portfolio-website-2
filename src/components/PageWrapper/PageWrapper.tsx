@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 import Cursor from '../Cursor/Cursor';
 
 const duration = 0.3;
@@ -27,16 +27,9 @@ const PageWrapper = ({ children, location }) => (
   <>
     <Cursor />
     <AnimatePresence>
-      <motion.div
-        className="full-width"
-        key={location.pathname}
-        variants={variants}
-        initial="initial"
-        animate="enter"
-        exit="exit"
-      >
-        {children}
-      </motion.div>
+      <AnimateSharedLayout>
+        <motion.div key={location.pathname}>{children}</motion.div>
+      </AnimateSharedLayout>
     </AnimatePresence>
   </>
 );
