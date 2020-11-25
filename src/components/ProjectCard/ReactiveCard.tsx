@@ -57,7 +57,6 @@ const ReactiveCard: React.FC<Props> = (props) => {
         onMouseMove={handleMouseMove}
         onHoverEnd={handleHoverEnd}
         // follow the mouse position
-
         animate={{
           x: containerOffset.x,
           y: containerOffset.y,
@@ -81,7 +80,10 @@ const ReactiveCard: React.FC<Props> = (props) => {
       <motion.div
         // href="test"
         ref={containerRef}
-        className={style.projectCard}
+        className={
+          style.projectCard +
+          (!props.reactive ? ' ' + style.projectCardViewing : '')
+        }
         transition={transitionConfig}
         // register mouse listeners
       >

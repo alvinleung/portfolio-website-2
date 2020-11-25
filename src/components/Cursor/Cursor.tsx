@@ -35,8 +35,8 @@ export default function Cursor() {
         width: config.width,
         height: config.width,
         borderRadius: config.width,
-        zIndex: 1000,
-        backgroundColor: '#000',
+        zIndex: 100000,
+        backgroundColor: '#00F',
       }}
     />
   );

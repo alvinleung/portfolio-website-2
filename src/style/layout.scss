@@ -1,5 +1,7 @@
 @import "../style/breakpoints.scss";
-
+html {
+  scroll-behavior: smooth;
+}
 body {
   margin: 0;
 }

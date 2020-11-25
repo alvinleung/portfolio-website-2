@@ -29,6 +29,11 @@ const variantsDefault = {
 
 // for the selected project, we want it to say at the original position
 const variantsSelectedProject = {
+  initial: {
+    y: 0,
+    opacity: 1,
+    transition: pageTransitionConfig,
+  },
   enter: {
     y: 0,
     opacity: 1,
@@ -36,6 +41,7 @@ const variantsSelectedProject = {
   },
   exit: {
     y: 0,
+    scale: 2,
     transition: pageTransitionConfig,
   },
 };

@@ -12,9 +12,10 @@ import { ProjectInfoCard } from '@/components/ProjectInfoCard/ProjectInfoCard';
 const CaseStudy: React.FC<PageProps> = () => (
   <>
     {/* <Cursor /> */}
+    <ProjectCard name="HelpMate" isViewing={true}></ProjectCard>
     <motion.main className="full-width nav-padding">
       <ProjectInfoCard name="HelpMate" />
-      <ProjectCard name="HelpMate" isViewing={true}></ProjectCard>
+      <div style={{ height: '10rem' }}></div>
     </motion.main>
   </>
 );

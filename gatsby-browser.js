@@ -1,7 +1,7 @@
 import React from "react";
 import PageWrapper from "./src/components/PageWrapper";
 
-const transitionDelay = 500;
+const transitionDelay = 1;
 
 export const wrapPageElement = ({ element, props }) => {
   return <PageWrapper {...props}>{element}</PageWrapper>;
@@ -11,14 +11,14 @@ export const shouldUpdateScroll = ({
   routerProps: { location },
   getSavedScrollPosition,
 }) => {
-  // if (location.action === "PUSH") {
-  //   window.setTimeout(() => window.scrollTo(0, 0), transitionDelay);
-  // } else {
-  //   const savedPosition = getSavedScrollPosition(location);
-  //   window.setTimeout(
-  //     // () => window.scrollTo(...(savedPosition || [0, 0])),
-  //     // transitionDelay
-  //   );
-  // }
+  if (location.action === "PUSH") {
+    window.setTimeout(() => window.scrollTo(0, 0), transitionDelay);
+  } else {
+    const savedPosition = getSavedScrollPosition(location);
+    window.setTimeout(
+      () => window.scrollTo(...(savedPosition || [0, 0])),
+      transitionDelay
+    );
+  }
   return false;
 };
