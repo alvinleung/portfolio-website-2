@@ -12,7 +12,7 @@ interface Props {
 }
 
 const Home: React.FC<Props> = ({ data }: Props) => {
-  const projectCaseStudies = data.allMarkdownRemark.edges;
+  const projectCaseStudies = data.allMdx.edges;
 
   return (
     <>
@@ -44,7 +44,7 @@ interface PageQueryData {
       title: string;
     };
   };
-  allMarkdownRemark: {
+  allMdx: {
     edges: {
       node: {
         frontmatter: {
@@ -65,7 +65,7 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(limit: 1000) {
+    allMdx(limit: 1000) {
       edges {
         node {
           frontmatter {

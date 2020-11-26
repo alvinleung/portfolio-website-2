@@ -29,6 +29,12 @@ module.exports = {
         path: `${__dirname}/src/data/projects`,
       },
     },
-    `gatsby-transformer-remark`,
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        gatsbyRemarkPlugins: [],
+        extensions: [`.md`, `.mdx`],
+      },
+    },
   ],
 };

@@ -2,14 +2,20 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import ProjectTitle from '@/components/ProjectLayout/ProjectTitle/ProjectTitle';
 import ProjectCard from '@/components/ProjectCard';
+import {
+  ProjectSectionHeader,
+  SectionDescription,
+  SectionNumber,
+  SectionTitle,
+} from '@/components/ProjectLayout/ProjectSectionHeader/ProjectSectionHeader';
 
 export default function Template({
   data, // this prop will be injected by the GraphQL query below.
 }) {
-  const { markdownRemark } = data; // data.markdownRemark holds your post data
-  const { frontmatter, html } = markdownRemark;
+  // const { markdownRemark } = data; // data.markdownRemark holds your post data
+  const { frontmatter, html } = data.mdx;
 
-  console.log(markdownRemark);
+  // console.log(markdownRemark);
 
   return (
     // <div className="blog-post-container">
@@ -37,12 +43,23 @@ export default function Template({
           isViewing={true}
         ></ProjectCard>
       </header>
+      <main className="full-width article-grid">
+        <ProjectSectionHeader>
+          <SectionNumber>01</SectionNumber>
+          <SectionTitle>Project Context</SectionTitle>
+          <SectionDescription>
+            As a final project in an Interface Design course at Simon Fraser
+            University, our team designed, prototyped, tested and pitched an App
+            idea to the class in 7 weeks.
+          </SectionDescription>
+        </ProjectSectionHeader>
+      </main>
     </>
   );
 }
 export const pageQuery = graphql`
   query($slug: String!) {
-    markdownRemark(frontmatter: { slug: { eq: $slug } }) {
+    mdx(frontmatter: { slug: { eq: $slug } }) {
       html
       frontmatter {
         slug
