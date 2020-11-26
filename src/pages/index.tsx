@@ -65,7 +65,7 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMdx(limit: 1000) {
+    allMdx(limit: 1000, sort: { fields: frontmatter___weight }) {
       edges {
         node {
           frontmatter {
