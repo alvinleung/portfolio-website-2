@@ -25,6 +25,12 @@ const ReactiveCard: React.FC<Props> = (props) => {
     });
   };
 
+  // recalculate bounds when the mouse over
+  // make sure the value is fresh
+  const handleMouseOver = (e: React.MouseEvent) => {
+    calculateContainerBounds();
+  };
+
   const handleHoverEnd = (e: MouseEvent) => {
     // reset the elm position when the mouse is off the element
     setContainerOffset({ x: 0, y: 0 });
@@ -56,6 +62,7 @@ const ReactiveCard: React.FC<Props> = (props) => {
         transition={transitionConfig}
         // register mouse listeners
         onMouseMove={handleMouseMove}
+        onMouseOver={handleMouseOver}
         onHoverEnd={handleHoverEnd}
         // follow the mouse position
         animate={{
