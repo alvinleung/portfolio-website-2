@@ -1,5 +1,8 @@
 import React from 'react';
 import { graphql } from 'gatsby';
+
+import { motion } from 'framer-motion';
+
 import ProjectTitle from '@/components/ProjectLayout/ProjectTitle/ProjectTitle';
 import ProjectCard from '@/components/ProjectCard';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
@@ -16,6 +19,26 @@ import {
   SectionTitle,
 } from '@/components/ProjectLayout/ProjectSectionHeader/ProjectSectionHeader';
 import ProjectSectionSeperator from '@/components/ProjectLayout/ProjectSectionSeperator/ProjectSectionSeperator';
+
+const duration = 0.3;
+const variants = {
+  initial: {
+    opacity: 0,
+  },
+  enter: {
+    opacity: 1,
+    transition: {
+      duration: duration,
+      // delay: duration,
+      when: 'beforeChildren',
+    },
+  },
+  exit: {
+    opacity: 0,
+    // page transition exit after the children
+    transition: { duration: duration, when: 'afterChildren' },
+  },
+};
 
 export default function Template({
   data, // this prop will be injected by the GraphQL query below.
@@ -35,7 +58,13 @@ export default function Template({
     //   </div>
     // </div>
     <>
-      <header className="nav-padding">
+      <motion.header
+        className="nav-padding"
+        variants={variants}
+        initial="initial"
+        animate="enter"
+        exit="exit"
+      >
         <ProjectTitle
           title={frontmatter.title}
           description={frontmatter.description}
@@ -49,8 +78,14 @@ export default function Template({
           cover={frontmatter.cover}
           isViewing={true}
         ></ProjectCard>
-      </header>
-      <main className="full-width article-grid">
+      </motion.header>
+      <motion.main
+        className="full-width article-grid"
+        variants={variants}
+        initial="initial"
+        animate="enter"
+        exit="exit"
+      >
         <MDXProvider
           components={{
             // overriding default markdown syntax for custom look
@@ -66,7 +101,7 @@ export default function Template({
         >
           <MDXRenderer>{body}</MDXRenderer>
         </MDXProvider>
-      </main>
+      </motion.main>
     </>
   );
 }

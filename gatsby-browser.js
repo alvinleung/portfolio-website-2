@@ -1,7 +1,7 @@
 import React from "react";
 import PageWrapper from "./src/components/PageWrapper";
 
-const transitionDelay = 1;
+const transitionDelay = 500;
 
 export const wrapPageElement = ({ element, props }) => {
   return <PageWrapper {...props}>{element}</PageWrapper>;

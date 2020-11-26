@@ -6,7 +6,7 @@ const transitionConfig = { duration: 0.01, ease: 'easeOut' };
 interface Props {
   children?: React.ReactNode;
   reactive?: boolean;
-  style?: {};
+  style;
 }
 
 const ReactiveCard: React.FC<Props> = (props) => {

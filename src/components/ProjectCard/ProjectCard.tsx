@@ -45,7 +45,7 @@ const variantsSelectedProject = {
   },
   exit: {
     y: 0,
-    scale: 2,
+    width: 2,
     transition: pageTransitionConfig,
   },
 };
@@ -60,8 +60,8 @@ export const ProjectCard: React.FC<Props> = (props: Props) => {
         initial="inital"
         animate="enter"
         exit="exit"
-        layout
-        layoutId={props.slug}
+        // layout
+        // layoutId={props.slug}
       >
         <ReactiveCard
           reactive={!props.isViewing}
