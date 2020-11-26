@@ -1,5 +1,3 @@
-import React from 'react';
-
 import React, { ReactElement } from 'react';
 
 export default function ProjectSectionSeperator(): ReactElement {

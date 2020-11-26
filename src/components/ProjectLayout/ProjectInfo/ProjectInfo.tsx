@@ -3,7 +3,9 @@ import React from 'react';
 import './ProjectInfo.scss';
 
 export const ProjectInfo: React.FC = ({ children }) => {
-  return <div className="project-info">{children}</div>;
+  return (
+    <div className="article-grid__primary-col project-info">{children}</div>
+  );
 };
 
 interface iItem {
