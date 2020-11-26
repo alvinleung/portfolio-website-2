@@ -50,36 +50,38 @@ export const ProjectCard: React.FC<Props> = (props) => {
   const [isViewing, setIsViewing] = useState(false);
 
   const cardContent = (
-    <motion.div
-      variants={isViewing ? variantsSelectedProject : variantsDefault}
-      initial="inital"
-      animate="enter"
-      exit="exit"
-      layout
-      layoutId={props.name}
-    >
-      <ReactiveCard reactive={!props.isViewing}>
-        <motion.div
-          className={style.projectType}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: props.isViewing ? 0 : 1 }}
-        >
-          UX/UI Design
-        </motion.div>
-        <motion.h3
-          initial={{ opacity: 0 }}
-          animate={{ opacity: props.isViewing ? 0 : 1 }}
-        >
-          {props.name}
-        </motion.h3>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: props.isViewing ? 0 : 1 }}
-        >
-          Build connections in the community one task at a time.
-        </motion.p>
-      </ReactiveCard>
-    </motion.div>
+    <AnimatePresence>
+      <motion.div
+        variants={isViewing ? variantsSelectedProject : variantsDefault}
+        initial="inital"
+        animate="enter"
+        exit="exit"
+        layout
+        layoutId={props.name}
+      >
+        <ReactiveCard reactive={!props.isViewing}>
+          <motion.div
+            className={style.projectType}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: props.isViewing ? 0 : 1 }}
+          >
+            UX/UI Design
+          </motion.div>
+          <motion.h3
+            initial={{ opacity: 0 }}
+            animate={{ opacity: props.isViewing ? 0 : 1 }}
+          >
+            {props.name}
+          </motion.h3>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: props.isViewing ? 0 : 1 }}
+          >
+            Build connections in the community one task at a time.
+          </motion.p>
+        </ReactiveCard>
+      </motion.div>
+    </AnimatePresence>
   );
 
   return (

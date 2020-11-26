@@ -23,3 +23,36 @@ body {
 .nav-padding {
   padding-top:8rem;
 }
+
+// ======================================================
+//
+// Grid layout for the article view in project case study 
+//
+// ======================================================
+.article-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: 24px;
+}
+
+// use these to determine the horizontal layout of the grid
+.article-grid__side-col {
+  grid-column: 1/2;
+}
+.article-grid__full-grid-col {
+  grid-column: 3/12;
+}
+
+.article-grid__full-content-col {
+  grid-column: 3/12;
+}
+.article-grid__primary-col {
+  grid-column: 3/8;
+}
+.article-grid__secondary-col {
+  grid-column: 8/13;
+}
+
+.article-grid__section-seperator {
+  margin-bottom: 8rem;
+}

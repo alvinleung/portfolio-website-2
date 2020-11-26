@@ -4,7 +4,7 @@ module.exports = {
   // Since `gatsby-plugin-typescript` is automatically included in Gatsby you
   // don't need to define it here (just if you need to change the options)
   siteMetadata: {
-    title: `Myblog`,
+    title: `Alvin Leung - Experience designer, Visual Designer`,
   },
 
   plugins: [
@@ -15,6 +15,9 @@ module.exports = {
         typekit: {
           // id: process.env.TYPEKIT_ID,
           id: "sdz1siz",
+        },
+        google: {
+          families: ["Roboto Mono"],
         },
       },
     },

@@ -1,10 +1,11 @@
 * {
-  font-family: "source sans pro";
+  font-family: "Source Sans Pro";
 }
 
 h1 {
   // font-family: "source serif pro";
   // font-variant-ligatures: common-ligatures;
+  font-weight: 400; // regular
   font-size: 36px;
   letter-spacing: -0.023em;
 }
@@ -16,11 +17,11 @@ h2 {
 }
 
 p {
-  font-family: "source sans pro";
+  font-family: "Source Sans Pro";
 }
 
 .callout {
-  font-family: "source serif pro";
+  font-family: "Source Serif Pro";
   font-variant-ligatures: common-ligatures;
   font-weight: 400;
 }
@@ -32,4 +33,24 @@ a {
 
 a:active {
   opacity: .7;
+}
+
+// ===============================
+//
+// TYPOGRAPHY OF ARTICLE/CASE STUDY/PROJCET VIEW
+//
+// ===============================
+.article__section-header, .article__section-number {
+  margin-top: 0rem;
+  margin-bottom: .5rem;
+
+  font-size: 36px;
+  font-weight: normal;
+}
+
+.article__section-description {
+  font-size: 24px;
+  color: var(--clr-primary-lighter);
+  margin-top:1rem;
+  margin-bottom:4rem;
 }

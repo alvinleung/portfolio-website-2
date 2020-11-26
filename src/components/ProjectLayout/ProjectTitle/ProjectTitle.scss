@@ -1,0 +1,21 @@
+.ProjectTitle {
+
+  display: flex;
+  flex-direction: column;
+
+  margin-top: 3rem;
+
+  &__title {
+    font-size: 48px;
+    margin: 0rem;
+  }
+  &__description {
+    font-size: 24px;
+    font-weight: normal;
+    max-width: 36rem;
+    margin-top: .5rem;
+    margin-bottom: 2rem;
+
+    color: var(--clr-primary-lighter);
+  }
+}

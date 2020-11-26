@@ -1,0 +1,27 @@
+// ======================================================
+//
+// Grid layout for project info grid
+//
+// ======================================================
+
+.project-info {
+  
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  border-top: 1px solid #CCC;
+  padding-top: 2.5rem;
+  
+  &__item {
+     
+  }
+  &__key {
+    font-family: "Roboto Mono";
+    font-size: 12px;
+    
+    margin-bottom: .75rem;
+  }
+  &__entry {
+    margin-bottom: 1.5rem;
+  }
+}

@@ -1,3 +1,5 @@
+@import "../../style/breakpoints.scss";
+
 .projectCard {
   cursor: none;
 
@@ -62,4 +64,10 @@
 
 .projectCardViewing {
   height:80vh;
+
+  @include viewportLargerThan($breakpoint-xl) {
+    // max-width: 90vw;
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
 }
