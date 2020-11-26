@@ -11,11 +11,9 @@ interface Props {
   readonly data: PageQueryData;
 }
 
-const Home: React.FC<Props> = ({
-  data: {
-    allMarkdownRemark: { edges },
-  },
-}) => {
+const Home: React.FC<Props> = ({ data }: Props) => {
+  const projectCaseStudies = data.allMarkdownRemark.edges;
+
   return (
     <>
       {/* <Cursor /> */}
@@ -23,18 +21,15 @@ const Home: React.FC<Props> = ({
         {/* <Title /> */}
         <LandingHero />
         <section id="works">
-          <ProjectCard
-            title="HelpMate"
-            slug="/projects/HelpMate"
-            catagory="UX/UI Design"
-            tagline="Build connections in the community one task at a time"
-          ></ProjectCard>
-          <ProjectCard
-            title="FreeGeek"
-            slug="/projects/FreeGeek"
-            catagory="UX/UI Design"
-            tagline="Build connections in the community one task at a time"
-          ></ProjectCard>
+          {projectCaseStudies.map((project) => (
+            <ProjectCard
+              title={project.node.frontmatter.title}
+              slug={project.node.frontmatter.slug}
+              catagory={project.node.frontmatter.catagory}
+              tagline={project.node.frontmatter.tagline}
+              isViewing={false}
+            />
+          ))}
         </section>
       </main>
     </>
@@ -52,13 +47,11 @@ interface PageQueryData {
   allMarkdownRemark: {
     edges: {
       node: {
-        excerpt: string;
-        fields: {
-          slug: string;
-        };
         frontmatter: {
-          date: string;
+          slug: string;
           title: string;
+          catagory: string;
+          tagline: string;
         };
       };
     }[];
@@ -75,7 +68,6 @@ export const pageQuery = graphql`
     allMarkdownRemark(limit: 1000) {
       edges {
         node {
-          excerpt
           frontmatter {
             slug
             title
