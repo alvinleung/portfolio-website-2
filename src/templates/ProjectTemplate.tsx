@@ -6,7 +6,11 @@ import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { MDXProvider } from '@mdx-js/react';
 
 import {
-  ProjectSectionHeader,
+  ProjectInfo,
+  ProjectInfoItem,
+} from '@/components/ProjectLayout/ProjectInfo/ProjectInfo';
+
+import {
   SectionDescription,
   SectionNumber,
   SectionTitle,
@@ -48,10 +52,14 @@ export default function Template({
       <main className="full-width article-grid">
         <MDXProvider
           components={{
+            // overriding default markdown syntax for custom look
             h2: SectionHead,
             h3: SectionDescription,
             p: ParagraphProcessor,
             hr: ThematicBreak,
+            // context for custom react component layout
+            ProjectInfo,
+            ProjectInfoItem,
           }}
         >
           <MDXRenderer>{body}</MDXRenderer>
@@ -63,8 +71,6 @@ export default function Template({
 
 // hack to automatically generate an incrementing section text
 const SectionHead = ({ children, key }) => {
-  const splittedText = children.split(' ');
-  //
   const headingText = children.substring(3);
   const headingNumber = children.substring(0, 3);
   // get the
@@ -77,6 +83,7 @@ const SectionHead = ({ children, key }) => {
   );
 };
 
+// for large break between sections
 const ThematicBreak = () => <ProjectSectionSeperator />;
 
 // for processing paragraph text
