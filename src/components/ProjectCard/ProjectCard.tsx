@@ -7,7 +7,10 @@ import style from './ProjectCard.module.scss';
 import ReactiveCard from './ReactiveCard';
 
 interface Props {
-  name: string;
+  title: string;
+  slug: string;
+  catagory: string;
+  tagline: string;
   children?: React.ReactNode;
   isViewing?: boolean;
 }
@@ -46,7 +49,7 @@ const variantsSelectedProject = {
   },
 };
 
-export const ProjectCard: React.FC<Props> = (props) => {
+export const ProjectCard: React.FC<Props> = (props: Props) => {
   const [isViewing, setIsViewing] = useState(false);
 
   const cardContent = (
@@ -57,7 +60,7 @@ export const ProjectCard: React.FC<Props> = (props) => {
         animate="enter"
         exit="exit"
         layout
-        layoutId={props.name}
+        layoutId={props.slug}
       >
         <ReactiveCard reactive={!props.isViewing}>
           <motion.div
@@ -65,19 +68,21 @@ export const ProjectCard: React.FC<Props> = (props) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: props.isViewing ? 0 : 1 }}
           >
-            UX/UI Design
+            {/* UX/UI Design */}
+            {props.catagory}
           </motion.div>
           <motion.h3
             initial={{ opacity: 0 }}
             animate={{ opacity: props.isViewing ? 0 : 1 }}
           >
-            {props.name}
+            {props.title}
           </motion.h3>
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: props.isViewing ? 0 : 1 }}
           >
-            Build connections in the community one task at a time.
+            {/* Build connections in the community one task at a time. */}
+            {props.tagline}
           </motion.p>
         </ReactiveCard>
       </motion.div>
@@ -86,7 +91,7 @@ export const ProjectCard: React.FC<Props> = (props) => {
 
   return (
     <Link
-      to={!props.isViewing ? 'caseStudy' : null}
+      to={!props.isViewing ? props.slug : null}
       onClick={() => {
         setIsViewing(true);
       }}

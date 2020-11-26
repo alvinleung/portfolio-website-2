@@ -21,5 +21,14 @@ module.exports = {
         },
       },
     },
+    // for sourcing and transforming the markdwon files
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `markdown-pages`,
+        path: `${__dirname}/src/data/projects`,
+      },
+    },
+    `gatsby-transformer-remark`,
   ],
 };
