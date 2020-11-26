@@ -10,6 +10,7 @@ interface Props {
   title: string;
   slug: string;
   catagory: string;
+  cover: string;
   tagline: string;
   children?: React.ReactNode;
   isViewing?: boolean;
@@ -62,7 +63,13 @@ export const ProjectCard: React.FC<Props> = (props: Props) => {
         layout
         layoutId={props.slug}
       >
-        <ReactiveCard reactive={!props.isViewing}>
+        <ReactiveCard
+          reactive={!props.isViewing}
+          style={{
+            backgroundImage: `url(${props.cover})`,
+            backgroundSize: 'cover',
+          }}
+        >
           <motion.div
             className={style.projectType}
             initial={{ opacity: 0 }}

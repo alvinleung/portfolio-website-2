@@ -46,6 +46,7 @@ export default function Template({
           slug={frontmatter.slug}
           catagory={frontmatter.catagory}
           tagline={frontmatter.tagline}
+          cover={frontmatter.cover}
           isViewing={true}
         ></ProjectCard>
       </header>
@@ -57,6 +58,7 @@ export default function Template({
             h3: SectionDescription,
             p: ParagraphProcessor,
             hr: ThematicBreak,
+            img: ImageSub,
             // context for custom react component layout
             ProjectInfo,
             ProjectInfoItem,
@@ -88,17 +90,28 @@ const ThematicBreak = () => <ProjectSectionSeperator />;
 
 // for processing paragraph text
 const ParagraphProcessor = ({ children }) => {
-  const isSectopmHeadingParagrah = children.substring(0, 2) === '--';
-
-  if (isSectopmHeadingParagrah) {
-    return (
-      <p className="article-grid__primary-col article__section-description">
-        {children.substring(2)}
-      </p>
-    );
+  // make sure the pargraph is string only
+  if (typeof children === 'string') {
+    const isSectopmHeadingParagrah = children.substring(0, 2) === '--';
+    if (isSectopmHeadingParagrah) {
+      return (
+        <p className="article-grid__primary-col article__section-description">
+          {children.substring(2)}
+        </p>
+      );
+    }
   }
-  return <p className="article-grid__primary-col">{children}</p>;
+  return <p className="article-grid__full-content-col">{children}</p>;
 };
+
+const ImageSub = (props) => (
+  <img
+    src={props.src}
+    alt={props.alt}
+    className="article-grid__primary-col"
+    style={{ width: '100%' }}
+  />
+);
 
 export const pageQuery = graphql`
   query($slug: String!) {
@@ -108,6 +121,7 @@ export const pageQuery = graphql`
         slug
         title
         description
+        cover
       }
     }
   }

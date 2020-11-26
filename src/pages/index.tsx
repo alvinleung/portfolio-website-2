@@ -27,6 +27,7 @@ const Home: React.FC<Props> = ({ data }: Props) => {
               slug={project.node.frontmatter.slug}
               catagory={project.node.frontmatter.catagory}
               tagline={project.node.frontmatter.tagline}
+              cover={project.node.frontmatter.cover}
               isViewing={false}
             />
           ))}
@@ -52,6 +53,7 @@ interface PageQueryData {
           title: string;
           catagory: string;
           tagline: string;
+          cover: string;
         };
       };
     }[];
@@ -73,6 +75,7 @@ export const pageQuery = graphql`
             title
             tagline
             catagory
+            cover
           }
         }
       }

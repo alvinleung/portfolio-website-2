@@ -6,6 +6,7 @@ const transitionConfig = { duration: 0.01, ease: 'easeOut' };
 interface Props {
   children?: React.ReactNode;
   reactive?: boolean;
+  style?: {};
 }
 
 const ReactiveCard: React.FC<Props> = (props) => {
@@ -70,6 +71,7 @@ const ReactiveCard: React.FC<Props> = (props) => {
         whileTap={{
           scale: 0.99,
         }}
+        style={props.style}
       >
         {props.children}
       </motion.div>
@@ -86,6 +88,7 @@ const ReactiveCard: React.FC<Props> = (props) => {
         }
         transition={transitionConfig}
         // register mouse listeners
+        style={props.style}
       >
         {props.children}
       </motion.div>
