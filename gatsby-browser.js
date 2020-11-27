@@ -12,14 +12,19 @@ export const shouldUpdateScroll = ({
   getSavedScrollPosition,
 }) => {
   if (location.action === "PUSH") {
-    window.setTimeout(() => window.scrollTo(0, 0), transitionDelay);
+    window.setTimeout(() => {
+      window.scrollTo(0, 0);
+      bodyScrollUnlock();
+    }, transitionDelay);
   } else {
     const savedPosition = getSavedScrollPosition(location);
-    window.setTimeout(
-      () => window.scrollTo(...(savedPosition || [0, 0])),
-      transitionDelay
-    );
+    window.setTimeout(() => {
+      window.scrollTo(...(savedPosition || [0, 0]));
+      bodyScrollUnlock();
+    }, transitionDelay);
   }
+
+  bodyScrollLock();
   // return false;
 
   // ========================================================
@@ -30,4 +35,16 @@ export const shouldUpdateScroll = ({
 
   // by default gatsby will scroll to top when a new link is clicked
   return false;
+};
+
+const bodyScrollLock = () => {
+  document.body.style.position = "fixed";
+  document.body.style.overflowY = "scroll";
+  document.body.style.width = "100%";
+};
+
+const bodyScrollUnlock = () => {
+  document.body.style.position = "static";
+  document.body.style.overflowY = "scroll";
+  document.body.style.width = "100%";
 };
