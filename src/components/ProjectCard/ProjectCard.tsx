@@ -164,7 +164,8 @@ export const ProjectCard: React.FC<Props> = (props: Props) => {
   // because sometimes the cycle is too late for the animation
   // and we get the effect of a flash of bad layout
   if (isPresent && props.isViewOnly) {
-    window.scrollTo(0, 0);
+    // for SSR: window object not available on the server
+    if (window) window.scrollTo(0, 0);
   }
 
   const decideVariant = (() => {
