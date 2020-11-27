@@ -21,8 +21,9 @@ const Home: React.FC<Props> = ({ data }: Props) => {
         {/* <Title /> */}
         <LandingHero />
         <section id="works">
-          {projectCaseStudies.map((project) => (
+          {projectCaseStudies.map((project, index) => (
             <ProjectCard
+              key={index}
               title={project.node.frontmatter.title}
               slug={project.node.frontmatter.slug}
               catagory={project.node.frontmatter.catagory}

@@ -24,18 +24,16 @@ const variants = {
 
 const ProjectTitle: React.FC<Props> = ({ title, description }: Props) => {
   return (
-    <AnimatePresence>
-      <motion.div
-        className="ProjectTitle full-width"
-        variants={variants}
-        initial="initial"
-        animate="enter"
-        exit="exit"
-      >
-        <h1 className="ProjectTitle__title">{title}</h1>
-        <p className="ProjectTitle__description">{description}</p>
-      </motion.div>
-    </AnimatePresence>
+    <motion.div
+      className="ProjectTitle full-width"
+      variants={variants}
+      initial="initial"
+      animate="enter"
+      exit="exit"
+    >
+      <h1 className="ProjectTitle__title">{title}</h1>
+      <p className="ProjectTitle__description">{description}</p>
+    </motion.div>
   );
 };
 

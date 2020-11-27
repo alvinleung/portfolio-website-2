@@ -3,6 +3,7 @@ import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 import Cursor from '../Cursor/Cursor';
 import MainNav from '../MainNav/MainNav';
 import { Footer } from '../Footer/Footer';
+import { ProjectCardTransition } from '../ProjectCard/ProjectCardTransition';
 
 const duration = 0.3;
 
@@ -29,11 +30,13 @@ const PageWrapper = ({ children, location }) => (
   <>
     <Cursor />
     <MainNav />
-    {/* <AnimateSharedLayout type="crossfade"> */}
-    <AnimatePresence>
-      <motion.div key={location.pathname}>{children}</motion.div>
-    </AnimatePresence>
-    {/* </AnimateSharedLayout> */}
+    {/* a context provider for the transitions */}
+    <ProjectCardTransition>
+      <AnimatePresence>
+        {/* <motion.div key={location.pathname}>{children}</motion.div> */}
+        {children}
+      </AnimatePresence>
+    </ProjectCardTransition>
     <Footer />
   </>
 );

@@ -72,9 +72,9 @@ const ReactiveCard: React.FC<Props> = (props) => {
           opacity: 1,
         }}
         // for mouse behaviour
-        whileHover={{
-          outline: '10px solid rgba(0,0,0,.1)',
-        }}
+        // whileHover={{
+        //   outline: '10px solid rgba(0,0,0,.1)',
+        // }}
         whileTap={{
           scale: 0.99,
         }}
