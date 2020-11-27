@@ -3,6 +3,7 @@ import { PageProps, graphql } from 'gatsby';
 import '../style/typography.scss';
 import '../style/layout.scss';
 import '../style/variables.scss';
+import '../style/reset.scss';
 
 import LandingHero from '@/components/LandingHero';
 import ProjectCard from '@/components/ProjectCard';
@@ -29,7 +30,7 @@ const Home: React.FC<Props> = ({ data }: Props) => {
               catagory={project.node.frontmatter.catagory}
               tagline={project.node.frontmatter.tagline}
               cover={project.node.frontmatter.cover}
-              isViewing={false}
+              isViewOnly={false}
             />
           ))}
         </section>

@@ -19,8 +19,8 @@ import {
   SectionTitle,
 } from '@/components/ProjectLayout/ProjectSectionHeader/ProjectSectionHeader';
 import ProjectSectionSeperator from '@/components/ProjectLayout/ProjectSectionSeperator/ProjectSectionSeperator';
+import { AnimationConfig } from '@/components/AnimationConfig';
 
-const duration = 0.3;
 const variants = {
   initial: {
     opacity: 0,
@@ -28,15 +28,15 @@ const variants = {
   enter: {
     opacity: 1,
     transition: {
-      duration: duration,
-      // delay: duration,
+      duration: AnimationConfig.FAST,
+      delay: 1,
       when: 'beforeChildren',
     },
   },
   exit: {
     opacity: 0,
     // page transition exit after the children
-    transition: { duration: duration, when: 'afterChildren' },
+    transition: { duration: AnimationConfig.FAST, when: 'afterChildren' },
   },
 };
 
@@ -58,13 +58,7 @@ export default function Template({
     //   </div>
     // </div>
     <>
-      <motion.header
-        className="nav-padding"
-        variants={variants}
-        initial="initial"
-        animate="enter"
-        exit="exit"
-      >
+      <motion.header className="nav-padding">
         <ProjectTitle
           title={frontmatter.title}
           description={frontmatter.description}
@@ -76,7 +70,7 @@ export default function Template({
           catagory={frontmatter.catagory}
           tagline={frontmatter.tagline}
           cover={frontmatter.cover}
-          isViewing={true}
+          isViewOnly={true}
         ></ProjectCard>
       </motion.header>
       <motion.main

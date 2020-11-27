@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useViewportScroll, useTransform } from 'framer-motion';
 import './LandingHero.scss';
+import { AnimationConfig } from '../AnimationConfig';
 
 export default () => {
   const { scrollY } = useViewportScroll();
@@ -14,7 +15,7 @@ export default () => {
         //   opacity: [0, 1],
         // }}
         className="callout"
-        transition={{ ease: 'easeOut', duration: 0.5 }}
+        transition={{ ease: 'easeOut', duration: AnimationConfig.FAST }}
         style={{
           opacity: headerOpacity,
           scale: headerScale,

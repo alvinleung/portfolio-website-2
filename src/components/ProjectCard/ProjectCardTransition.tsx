@@ -21,14 +21,14 @@
 import React, { useState, useContext } from 'react';
 
 type projectCardStateContext = [
-  TargetTransformState,
-  React.Dispatch<React.SetStateAction<TargetTransformState>>,
+  PreviousTransformState,
+  React.Dispatch<React.SetStateAction<PreviousTransformState>>,
 ];
 const ProjectCardContext: React.Context<projectCardStateContext> = React.createContext(
   null,
 );
 
-export interface TargetTransformState {
+export interface PreviousTransformState {
   x: number;
   y: number;
   width: number;
@@ -49,16 +49,10 @@ interface Props {
   children: React.ReactNode;
 }
 export const ProjectCardTransition: React.FC<Props> = ({ children }: Props) => {
-  const targetTransformState = useState<TargetTransformState>({
-    x: 0,
-    y: 0,
-    width: 0,
-    height: 0,
-    slug: '',
-  });
+  const previousTransformState = useState<PreviousTransformState>();
 
   return (
-    <ProjectCardContext.Provider value={targetTransformState}>
+    <ProjectCardContext.Provider value={previousTransformState}>
       {children}
     </ProjectCardContext.Provider>
   );

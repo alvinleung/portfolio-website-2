@@ -8,18 +8,21 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  box-sizing: border-box;
 
   max-width: 100%;
   min-height: 30rem;
 
   padding: 1rem;
-  // create vertical seperation between each item
-  margin-bottom: 2rem;
 
-  font-family: "Source Sans Pro";
+font-family: "Source Sans Pro";
 
   background-color: #000;
   color: #fff;
+  
+  background-size: cover;
+  background-position: center;
+  height: 100%;
 
   transition-property: transform;
   transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
@@ -55,6 +58,14 @@
   outline: 10px solid rgba(0,0,0,0.1);
 }
 
+.projectCardContainer {
+  margin-left: auto;
+  margin-right: auto;
+  // create vertical seperation between each item
+  margin-bottom: 2rem;
+}
+
+
 .projectCardLink {
   text-decoration: none;
 
@@ -64,7 +75,8 @@
 }
 
 .projectCardViewing {
-  height:80vh;
+  // height:80vh;
+  height: 100%;
 
   @include viewportLargerThan($breakpoint-xl) {
     // max-width: 90vw;

@@ -4,8 +4,9 @@ import Cursor from '../Cursor/Cursor';
 import MainNav from '../MainNav/MainNav';
 import { Footer } from '../Footer/Footer';
 import { ProjectCardTransition } from '../ProjectCard/ProjectCardTransition';
+import { AnimationConfig } from '../AnimationConfig';
 
-const duration = 0.3;
+const duration = AnimationConfig.FAST;
 
 const variants = {
   initial: {
@@ -32,7 +33,7 @@ const PageWrapper = ({ children, location }) => (
     <MainNav />
     {/* a context provider for the transitions */}
     <ProjectCardTransition>
-      <AnimatePresence>
+      <AnimatePresence exitBeforeEnter initial={true}>
         {/* <motion.div key={location.pathname}>{children}</motion.div> */}
         {children}
       </AnimatePresence>

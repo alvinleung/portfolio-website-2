@@ -6,6 +6,8 @@ import React, { useRef, useState, useEffect } from 'react';
 interface ElementMeasurement {
   x: number;
   y: number;
+  centerX: number;
+  centerY: number;
   width: number;
   height: number;
 }
@@ -18,11 +20,18 @@ const measureElement = <T extends HTMLElement>(
 
   // funciton for saving the value to node
   const computeClientRect = () => {
+    const x = nodeRef.current.offsetLeft;
+    const y = nodeRef.current.offsetTop;
+    const width = nodeRef.current.clientWidth;
+    const height = nodeRef.current.clientHeight;
+
     setOffset({
-      x: nodeRef.current.offsetLeft,
-      y: nodeRef.current.offsetTop,
-      width: nodeRef.current.clientWidth,
-      height: nodeRef.current.clientHeight,
+      x: x,
+      y: y,
+      width: width,
+      height: height,
+      centerX: x + width / 2,
+      centerY: y + height / 2,
     });
   };
 
