@@ -38,10 +38,10 @@ const PageWrapper = ({ children, location }) => (
         <TransitionContentWrapper visible={true} key={location.pathname}>
           {/* <motion.div key={location.pathname}>{children}</motion.div> */}
           {children}
+          <Footer />
         </TransitionContentWrapper>
       </AnimatePresence>
     </ProjectCardTransition>
-    <Footer />
   </>
 );
 
