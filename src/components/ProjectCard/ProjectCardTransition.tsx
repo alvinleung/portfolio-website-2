@@ -21,20 +21,22 @@
 import React, { useState, useContext } from 'react';
 
 type projectCardStateContext = [
-  PreviousTransformState,
-  React.Dispatch<React.SetStateAction<PreviousTransformState>>,
+  TargetTransformState,
+  React.Dispatch<React.SetStateAction<TargetTransformState>>,
 ];
 const ProjectCardContext: React.Context<projectCardStateContext> = React.createContext(
   null,
 );
 
-export interface PreviousTransformState {
+export interface TargetTransformState {
   x: number;
   y: number;
   width: number;
   height: number;
   // the identification of ProjectCard, use this to make sure which card to transition to
   slug: string;
+  // id of the project card that initiated the animation
+  initiatorId: string;
 }
 
 /**
@@ -49,7 +51,7 @@ interface Props {
   children: React.ReactNode;
 }
 export const ProjectCardTransition: React.FC<Props> = ({ children }: Props) => {
-  const previousTransformState = useState<PreviousTransformState>();
+  const previousTransformState = useState<TargetTransformState>();
 
   return (
     <ProjectCardContext.Provider value={previousTransformState}>

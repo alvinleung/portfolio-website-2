@@ -8,6 +8,7 @@ import ReactiveCard from './ReactiveCard';
 import { useProjectCardTransition } from './ProjectCardTransition';
 import measureElement from '@/hooks/measureElement';
 import { AnimationConfig } from '../AnimationConfig';
+import useUniqueId from '@/hooks/useUniqueId';
 
 interface Props {
   title: string;
@@ -70,6 +71,7 @@ const variantsViewOnly = {
 };
 
 export const ProjectCard: React.FC<Props> = (props: Props) => {
+  const cardInstanceId = useUniqueId('ProjectCard');
   const [isViewing, setIsViewing] = useState(false);
   const [containerMeasurement, containerRef] = measureElement<HTMLDivElement>(
     [],
@@ -77,8 +79,8 @@ export const ProjectCard: React.FC<Props> = (props: Props) => {
   // for card transition
   const isPresent = useIsPresent();
   const [
-    previousTrasnformState,
-    setPreviousTransformState,
+    targetTrasnformState,
+    setSetTagetTransformState,
   ] = useProjectCardTransition();
 
   // when the present state is change
@@ -86,12 +88,13 @@ export const ProjectCard: React.FC<Props> = (props: Props) => {
     // when the viewing card is exiting/going to destroy pass the animation state
     // for the upcoming card to pickup
     if (!isPresent && isViewing) {
-      setPreviousTransformState({
+      setSetTagetTransformState({
         x: containerMeasurement.x,
         y: containerMeasurement.y - window.scrollY,
         width: containerMeasurement.width,
         height: containerMeasurement.height,
         slug: props.slug,
+        initiatorId: cardInstanceId,
       });
     }
   }, [isPresent]);
