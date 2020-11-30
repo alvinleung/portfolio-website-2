@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion, useViewportScroll, useTransform } from 'framer-motion';
 import './LandingHero.scss';
 import { AnimationConfig } from '../AnimationConfig';

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { motion, useIsPresent } from 'framer-motion';
+import { motion, useIsPresent, useAnimation, usePresence } from 'framer-motion';
 
 import { Link } from 'gatsby';
 
@@ -9,6 +9,9 @@ import { useProjectCardTransition } from './ProjectCardTransition';
 import measureElement from '@/hooks/measureElement';
 import { AnimationConfig } from '../AnimationConfig';
 import useUniqueId from '@/hooks/useUniqueId';
+import useForceUpdate from '@/hooks/useForceUpdate';
+
+const DEBUG = false;
 
 interface Props {
   title: string;
@@ -43,7 +46,9 @@ const variantsDefault = {
   },
   exit: {
     opacity: 0,
-    transition: { duration: AnimationConfig.FAST },
+    transition: {
+      duration: DEBUG ? AnimationConfig.DEBUG : AnimationConfig.NORMAL,
+    },
   },
 };
 
@@ -54,6 +59,7 @@ const variantsDefault = {
 const variantsViewOnly = {
   initial: {
     opacity: 1,
+    height: '80vh',
     transition: pageTransitionConfig,
   },
   enter: {
@@ -66,51 +72,174 @@ const variantsViewOnly = {
   },
   exit: {
     opacity: 0,
-    transition: { duration: AnimationConfig.FAST },
+    transition: {
+      duration: DEBUG ? AnimationConfig.DEBUG : AnimationConfig.NORMAL,
+    },
   },
 };
 
 export const ProjectCard: React.FC<Props> = (props: Props) => {
+  const forceUpdate = useForceUpdate();
   const cardInstanceId = useUniqueId('ProjectCard');
   const [isViewing, setIsViewing] = useState(false);
   const [containerMeasurement, containerRef] = measureElement<HTMLDivElement>(
     [],
   );
   // for card transition
-  const isPresent = useIsPresent();
+  const [isPresent, safeToRemove] = usePresence();
+  const animationControl = useAnimation();
+
   const [
-    targetTrasnformState,
-    setSetTagetTransformState,
+    targetTransformState,
+    setTargetTransformState,
   ] = useProjectCardTransition();
 
-  // when the present state is change
+  const isPerformingTransition = targetTransformState.slug === props.slug;
+
+  // when present state changes
   useEffect(() => {
-    // when the viewing card is exiting/going to destroy pass the animation state
-    // for the upcoming card to pickup
-    if (!isPresent && isViewing) {
-      setSetTagetTransformState({
-        x: containerMeasurement.x,
-        y: containerMeasurement.y - window.scrollY,
-        width: containerMeasurement.width,
-        height: containerMeasurement.height,
-        slug: props.slug,
-        initiatorId: cardInstanceId,
-      });
+    if (DEBUG) alert(isPresent + ' is present ' + cardInstanceId);
+    if (!isPresent) {
+      // has to remove the element manually
+      // https://stackoverflow.com/questions/63259019/framer-motion-dom-node-does-not-unmounts-immediately-after-exit-animation
+      if (!isPerformingTransition) {
+        // alert(`${cardInstanceId} is safe to be removed`);
+        // safeToRemove();
+      }
     }
   }, [isPresent]);
 
+  useEffect(() => {
+    if (containerMeasurement !== null) {
+      // container measurement is ready here
+      // set the target transformation when the measurement is ready
+      if (
+        targetTransformState.hasTransitionDone === null &&
+        targetTransformState.initiatorId === ''
+      ) {
+        // there is no precceding transition, the page just loaded
+
+        // TODO: potentially prevent transition initiate when page first load
+        // enable transition only after page load
+        // UPDATE: that kinda done? wtf?
+
+        setTargetTransformState({
+          ...targetTransformState,
+          hasTransitionDone: true,
+        });
+        if (DEBUG)
+          alert(
+            `transition has done is null, initiator id is ${targetTransformState.initiatorId}`,
+          );
+      } else if (targetTransformState.hasTransitionDone) {
+        // there is precedding transition
+        if (DEBUG) alert(`setting transition state by ${cardInstanceId}`);
+        setTargetTransformState({
+          x: containerMeasurement.x,
+          y: containerMeasurement.y,
+          width: containerMeasurement.width,
+          height: containerMeasurement.height,
+          slug: props.slug,
+          initiatorId: cardInstanceId,
+          hasTransitionDone: false,
+        });
+      }
+    }
+  }, [containerMeasurement]);
+
+  useEffect(() => {
+    if (targetTransformState !== null) {
+      if (DEBUG) alert(`transition state received by ${cardInstanceId}`);
+      console.log(targetTransformState);
+      if (
+        !targetTransformState.hasTransitionDone &&
+        targetTransformState.initiatorId !== cardInstanceId &&
+        targetTransformState.slug === props.slug
+      ) {
+        // animation started and this project card (the common one from the previous state) is
+        // the one that would try to match the other one
+        if (DEBUG)
+          alert(
+            `${cardInstanceId} matching exit path to the upcoming card transform state`,
+          );
+        setTargetTransformState({
+          ...targetTransformState,
+          hasTransitionDone: true,
+        });
+      }
+    }
+  }, [targetTransformState]);
+
+  useEffect(() => {
+    return () => {
+      // when the project card is going to be unmounted, AFTER exit animation
+      if (targetTransformState.slug === props.slug) {
+        if (DEBUG)
+          alert(
+            `finished transformation, ${cardInstanceId} is going to unmount`,
+          );
+        setTargetTransformState({
+          ...targetTransformState,
+          hasTransitionDone: true,
+        });
+      }
+    };
+  }, []);
+
+  // TODO: We want to NEW project card to initiate the setTargetTransformState
+  useEffect(() => {
+    if (isViewing && targetTransformState.hasTransitionDone) {
+      if (DEBUG)
+        alert(
+          `Element ${cardInstanceId} is transforming to ${targetTransformState.y}`,
+        );
+
+      if (targetTransformState.y !== 0) {
+        const exitTransition = async () => {
+          await animationControl.start({
+            x: targetTransformState.x - containerMeasurement.x,
+            y: targetTransformState.y - containerMeasurement.y,
+            width: targetTransformState.width,
+            height: targetTransformState.height,
+            opacity: 1,
+            transition: pageTransitionConfig,
+          });
+
+          // tell framer motion to remove this component
+
+          // temp: try force update the component
+          safeToRemove();
+          // alert(`${isPresent} isPresent`);
+          forceUpdate();
+        };
+        exitTransition();
+      }
+    }
+  }, [isViewing, targetTransformState]);
+
   const cardContent = (
     <motion.div
-      variants={variantsDefault}
-      animate="enter"
+      variants={props.isViewOnly ? variantsViewOnly : variantsDefault}
+      animate={animationControl}
       initial="initial"
-      exit="exit"
+      // if the one is the selected project
+      exit={isViewing ? { opacity: 1 } : 'exit'}
       // exit="exit"
       ref={containerRef}
       // disabling the pointer even when the view is viewing
       className={style.projectCardContainer}
       style={{
         pointerEvents: props.isViewOnly ? 'none' : 'all',
+      }}
+      onAnimationComplete={() => {
+        if (!isPresent) {
+          // when the animation
+          // has to remove the element manually
+          // https://stackoverflow.com/questions/63259019/framer-motion-dom-node-does-not-unmounts-immediately-after-exit-animation
+          if (!isPerformingTransition) {
+            safeToRemove();
+          }
+        }
       }}
     >
       <ReactiveCard

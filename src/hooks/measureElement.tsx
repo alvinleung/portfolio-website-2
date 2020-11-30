@@ -20,7 +20,7 @@ const measureElement = <T extends HTMLElement>(
 
   // funciton for saving the value to node
   const computeClientRect = () => {
-    const x = nodeRef.current.offsetLeft;
+    const x = nodeRef.current.getBoundingClientRect().left;
     const y = nodeRef.current.offsetTop;
     const width = nodeRef.current.clientWidth;
     const height = nodeRef.current.clientHeight;

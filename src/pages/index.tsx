@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { PageProps, graphql } from 'gatsby';
 import '../style/typography.scss';
 import '../style/layout.scss';

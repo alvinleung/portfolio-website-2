@@ -37,6 +37,8 @@ export interface TargetTransformState {
   slug: string;
   // id of the project card that initiated the animation
   initiatorId: string;
+  // to communicate if the transition has done
+  hasTransitionDone: boolean;
 }
 
 /**
@@ -51,10 +53,27 @@ interface Props {
   children: React.ReactNode;
 }
 export const ProjectCardTransition: React.FC<Props> = ({ children }: Props) => {
-  const previousTransformState = useState<TargetTransformState>();
+  /**
+   *
+   *  The "following" card will try to match the "leading" card
+   *  targetTransformState provided the necessary info
+   *
+   */
+  const targetTransformState = useState<TargetTransformState>({
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0,
+    slug: '',
+    initiatorId: '',
+    // null > havent started any transition, the initial value
+    // false > transition running
+    // true > transition done
+    hasTransitionDone: null,
+  });
 
   return (
-    <ProjectCardContext.Provider value={previousTransformState}>
+    <ProjectCardContext.Provider value={targetTransformState}>
       {children}
     </ProjectCardContext.Provider>
   );

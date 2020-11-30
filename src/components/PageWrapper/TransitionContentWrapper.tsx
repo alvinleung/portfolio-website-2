@@ -1,11 +1,12 @@
 import { motion } from 'framer-motion';
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useState, useEffect } from 'react';
 import { AnimationConfig } from '../AnimationConfig';
+import { useProjectCardTransition } from '../ProjectCard/ProjectCardTransition';
 
 interface Props {
   children: React.ReactNode;
   key: string;
-  visible: boolean;
+  visible?: boolean;
 }
 
 const variants = {
@@ -27,11 +28,32 @@ const variants = {
   },
 };
 
-export default function TransitionContentWrapper({
-  children,
-  key,
-  visible = false,
-}: Props) {
+/**
+ *
+ * This is a ABSOLUTE position wrapper,
+ * the purpose of this is to make the new content overlap
+ * the old one, so that we can measure the new content position relative
+ * browser's top.
+ *
+ * TODO: Make ONLY the upcomming page wrapper hidden, let the current page
+ * wrapper stay visible (when clicked on card)
+ */
+export default function TransitionContentWrapper({ children, key }: Props) {
+  const [
+    targetTransitionState,
+    setTargetTransitionState,
+  ] = useProjectCardTransition();
+
+  // the the content by default unless the transition has done
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    if (targetTransitionState.hasTransitionDone) setVisible(true);
+    // alert(targetTransitionState.hasTransitionDone);
+  }, [targetTransitionState.hasTransitionDone]);
+
+  //use the slug to determine if we are transitioning to other place
+  const isOutgoingTransition = key !== targetTransitionState.slug;
+
   return (
     <div
       style={{
@@ -43,6 +65,7 @@ export default function TransitionContentWrapper({
         // the magin below the footer
         paddingBottom: '2rem',
         visibility: visible ? 'visible' : 'hidden',
+        // visibility: 'visible',
       }}
       // variants={variants}
       // initial="initial"

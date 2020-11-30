@@ -34,8 +34,8 @@ const PageWrapper = ({ children, location }) => (
     <MainNav />
     {/* a context provider for the transitions need to be outside of Animate Presence in order to work */}
     <ProjectCardTransition>
-      <AnimatePresence initial={true}>
-        <TransitionContentWrapper visible={true} key={location.pathname}>
+      <AnimatePresence initial={true} custom={location.pathname}>
+        <TransitionContentWrapper key={location.pathname}>
           {/* <motion.div key={location.pathname}>{children}</motion.div> */}
           {children}
           <Footer />
