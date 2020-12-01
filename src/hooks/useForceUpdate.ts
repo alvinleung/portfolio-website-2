@@ -1,8 +1,13 @@
-import { useState } from 'react';
+import { useState, useCallback, useRef } from 'react';
+import { useUnmountEffect } from './useUmountEffect';
 
-const useForceUpdate = () => {
-  const [state, setState] = useState(false);
-  return () => setState(!state);
-};
+export default function useForceUpdate() {
+  const unloadingRef = useRef(false);
+  const [forcedRenderCount, setForcedRenderCount] = useState(0);
 
-export default useForceUpdate;
+  useUnmountEffect(() => (unloadingRef.current = true));
+
+  return useCallback(() => {
+    !unloadingRef.current && setForcedRenderCount(forcedRenderCount + 1);
+  }, [forcedRenderCount]);
+}
