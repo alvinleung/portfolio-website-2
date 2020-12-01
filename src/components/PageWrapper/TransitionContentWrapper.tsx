@@ -46,13 +46,6 @@ export default function TransitionContentWrapper({ children, key }: Props) {
 
   // the the content by default unless the transition has done
   const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    if (targetTransitionState.hasTransitionDone) setVisible(true);
-    // alert(targetTransitionState.hasTransitionDone);
-  }, [targetTransitionState.hasTransitionDone]);
-
-  //use the slug to determine if we are transitioning to other place
-  const isOutgoingTransition = key !== targetTransitionState.slug;
 
   return (
     <div
@@ -64,8 +57,8 @@ export default function TransitionContentWrapper({ children, key }: Props) {
         width: '100%',
         // the magin below the footer
         paddingBottom: '2rem',
-        visibility: visible ? 'visible' : 'hidden',
-        // visibility: 'visible',
+        // visibility: visible ? 'visible' : 'hidden',
+        visibility: 'visible',
       }}
       // variants={variants}
       // initial="initial"

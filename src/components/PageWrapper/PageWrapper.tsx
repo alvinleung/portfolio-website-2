@@ -6,6 +6,7 @@ import { Footer } from '../Footer/Footer';
 import { ProjectCardTransition } from '../ProjectCard/ProjectCardTransition';
 import { AnimationConfig } from '../AnimationConfig';
 import TransitionContentWrapper from './TransitionContentWrapper';
+import DeferContentWrapper from './DeferContentWrapper';
 
 const duration = AnimationConfig.FAST;
 
@@ -28,21 +29,26 @@ const variants = {
   },
 };
 
-const PageWrapper = ({ children, location }) => (
-  <>
-    <Cursor />
-    <MainNav />
-    {/* a context provider for the transitions need to be outside of Animate Presence in order to work */}
-    <ProjectCardTransition>
-      <AnimatePresence initial={true} custom={location.pathname}>
-        <TransitionContentWrapper key={location.pathname}>
-          {/* <motion.div key={location.pathname}>{children}</motion.div> */}
-          {children}
-          <Footer />
-        </TransitionContentWrapper>
-      </AnimatePresence>
-    </ProjectCardTransition>
-  </>
-);
+const PageWrapper = ({ children, location }) => {
+  console.log(children);
+  return (
+    <>
+      <Cursor />
+      <MainNav />
+      {/* a context provider for the transitions need to be outside of Animate Presence in order to work */}
+      <ProjectCardTransition>
+        <DeferContentWrapper>
+          <AnimatePresence initial={true} custom={location.pathname}>
+            <TransitionContentWrapper key={location.pathname}>
+              {/* <motion.div key={location.pathname}>{children}</motion.div> */}
+              {children}
+              <Footer />
+            </TransitionContentWrapper>
+          </AnimatePresence>
+        </DeferContentWrapper>
+      </ProjectCardTransition>
+    </>
+  );
+};
 
 export default PageWrapper;

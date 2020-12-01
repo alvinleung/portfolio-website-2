@@ -96,81 +96,8 @@ export const ProjectCard: React.FC<Props> = (props: Props) => {
 
   const isPerformingTransition = targetTransformState.slug === props.slug;
 
-  // when present state changes
   useEffect(() => {
-    if (DEBUG) alert(isPresent + ' is present ' + cardInstanceId);
-    if (!isPresent) {
-      // has to remove the element manually
-      // https://stackoverflow.com/questions/63259019/framer-motion-dom-node-does-not-unmounts-immediately-after-exit-animation
-      if (!isPerformingTransition) {
-        // alert(`${cardInstanceId} is safe to be removed`);
-        // safeToRemove();
-      }
-    }
-  }, [isPresent]);
-
-  useEffect(() => {
-    if (containerMeasurement !== null) {
-      // container measurement is ready here
-      // set the target transformation when the measurement is ready
-      if (
-        targetTransformState.hasTransitionDone === null &&
-        targetTransformState.initiatorId === ''
-      ) {
-        // there is no precceding transition, the page just loaded
-
-        // TODO: potentially prevent transition initiate when page first load
-        // enable transition only after page load
-        // UPDATE: that kinda done? wtf?
-
-        setTargetTransformState({
-          ...targetTransformState,
-          hasTransitionDone: true,
-        });
-        if (DEBUG)
-          alert(
-            `transition has done is null, initiator id is ${targetTransformState.initiatorId}`,
-          );
-      } else if (targetTransformState.hasTransitionDone) {
-        // there is precedding transition
-        if (DEBUG) alert(`setting transition state by ${cardInstanceId}`);
-        setTargetTransformState({
-          x: containerMeasurement.x,
-          y: containerMeasurement.y,
-          width: containerMeasurement.width,
-          height: containerMeasurement.height,
-          slug: props.slug,
-          initiatorId: cardInstanceId,
-          hasTransitionDone: false,
-        });
-      }
-    }
-  }, [containerMeasurement]);
-
-  useEffect(() => {
-    if (targetTransformState !== null) {
-      if (DEBUG) alert(`transition state received by ${cardInstanceId}`);
-      console.log(targetTransformState);
-      if (
-        !targetTransformState.hasTransitionDone &&
-        targetTransformState.initiatorId !== cardInstanceId &&
-        targetTransformState.slug === props.slug
-      ) {
-        // animation started and this project card (the common one from the previous state) is
-        // the one that would try to match the other one
-        if (DEBUG)
-          alert(
-            `${cardInstanceId} matching exit path to the upcoming card transform state`,
-          );
-        setTargetTransformState({
-          ...targetTransformState,
-          hasTransitionDone: true,
-        });
-      }
-    }
-  }, [targetTransformState]);
-
-  useEffect(() => {
+    DEBUG && alert(`${cardInstanceId} is mounting`);
     return () => {
       // when the project card is going to be unmounted, AFTER exit animation
       if (targetTransformState.slug === props.slug) {
@@ -186,36 +113,18 @@ export const ProjectCard: React.FC<Props> = (props: Props) => {
     };
   }, []);
 
-  // TODO: We want to NEW project card to initiate the setTargetTransformState
+  // when present state changes
   useEffect(() => {
-    if (isViewing && targetTransformState.hasTransitionDone) {
-      if (DEBUG)
-        alert(
-          `Element ${cardInstanceId} is transforming to ${targetTransformState.y}`,
-        );
-
-      if (targetTransformState.y !== 0) {
-        const exitTransition = async () => {
-          await animationControl.start({
-            x: targetTransformState.x - containerMeasurement.x,
-            y: targetTransformState.y - containerMeasurement.y,
-            width: targetTransformState.width,
-            height: targetTransformState.height,
-            opacity: 1,
-            transition: pageTransitionConfig,
-          });
-
-          // tell framer motion to remove this component
-
-          // temp: try force update the component
-          safeToRemove();
-          // alert(`${isPresent} isPresent`);
-          forceUpdate();
-        };
-        exitTransition();
-      }
+    if (DEBUG) alert(isPresent + ' is present ' + cardInstanceId);
+    if (!isPresent) {
+      // has to remove the element manually
+      // https://stackoverflow.com/questions/63259019/framer-motion-dom-node-does-not-unmounts-immediately-after-exit-animation
+      // if (!isPerformingTransition) {
+      // alert(`${cardInstanceId} is safe to be removed`);
+      safeToRemove();
+      // }
     }
-  }, [isViewing, targetTransformState]);
+  }, [isPresent]);
 
   const cardContent = (
     <motion.div
@@ -230,16 +139,6 @@ export const ProjectCard: React.FC<Props> = (props: Props) => {
       className={style.projectCardContainer}
       style={{
         pointerEvents: props.isViewOnly ? 'none' : 'all',
-      }}
-      onAnimationComplete={() => {
-        if (!isPresent) {
-          // when the animation
-          // has to remove the element manually
-          // https://stackoverflow.com/questions/63259019/framer-motion-dom-node-does-not-unmounts-immediately-after-exit-animation
-          if (!isPerformingTransition) {
-            safeToRemove();
-          }
-        }
       }}
     >
       <ReactiveCard
