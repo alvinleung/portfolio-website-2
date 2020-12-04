@@ -5,13 +5,16 @@ import { Link } from 'gatsby';
 
 import style from './ProjectCard.module.scss';
 import ReactiveCard from './ReactiveCard';
-import { useProjectCardTransition } from './ProjectCardTransition';
+import {
+  TargetTransformState,
+  useProjectCardTransition,
+} from './ProjectCardTransition';
 import measureElement from '@/hooks/measureElement';
 import { AnimationConfig } from '../AnimationConfig';
 import useUniqueId from '@/hooks/useUniqueId';
 import useForceUpdate from '@/hooks/useForceUpdate';
 
-const DEBUG = false;
+const DEBUG = true;
 
 interface Props {
   title: string;
@@ -47,7 +50,10 @@ const variantsDefault = {
   exit: {
     opacity: 0,
     transition: {
-      duration: DEBUG ? AnimationConfig.DEBUG : AnimationConfig.NORMAL,
+      ease: AnimationConfig.EASING,
+      duration: DEBUG ? AnimationConfig.DEBUG : 0.3,
+      // "anticipation effect to make the animation more vivid/forceful"
+      delay: 0.1,
     },
   },
 };
@@ -58,7 +64,7 @@ const variantsDefault = {
 
 const variantsViewOnly = {
   initial: {
-    opacity: 1,
+    opacity: 0,
     height: '80vh',
     transition: pageTransitionConfig,
   },
@@ -73,13 +79,12 @@ const variantsViewOnly = {
   exit: {
     opacity: 0,
     transition: {
-      duration: DEBUG ? AnimationConfig.DEBUG : AnimationConfig.NORMAL,
+      duration: DEBUG ? AnimationConfig.DEBUG : AnimationConfig.FAST,
     },
   },
 };
 
 export const ProjectCard: React.FC<Props> = (props: Props) => {
-  const forceUpdate = useForceUpdate();
   const cardInstanceId = useUniqueId('ProjectCard');
   const [isViewing, setIsViewing] = useState(false);
   const [containerMeasurement, containerRef] = measureElement<HTMLDivElement>(
@@ -94,37 +99,105 @@ export const ProjectCard: React.FC<Props> = (props: Props) => {
     setTargetTransformState,
   ] = useProjectCardTransition();
 
-  const isPerformingTransition = targetTransformState.slug === props.slug;
+  // get measurement
+  useEffect(() => {
+    // The measurement only available in the 2nd render
+    // skip the setup code in the first pass
+    if (!containerMeasurement || !targetTransformState) return;
+
+    const isFirstRun = targetTransformState.hasTransitionDone === null;
+
+    // if (isFirstRun && targetTransformState.slug !== props.slug) {
+    //   setTargetTransformState({
+    //     ...targetTransformState,
+    //     slug: props.slug,
+    //     hasTransitionDone: true,
+    //   });
+    //   return;
+    // }
+    // console.log(`test coming from ${cardInstanceId}`);
+
+    if (isFirstRun) {
+      setTargetTransformState({
+        ...targetTransformState,
+        hasTransitionDone: true,
+      });
+    }
+
+    // dont set transition when current transform is not done
+    if (!targetTransformState.hasTransitionDone) return;
+
+    // if targetTransformState is identical to the current container
+    // it means that this container is the final state of the animation
+
+    const trasnformState: TargetTransformState = {
+      x: containerMeasurement.x,
+      y: containerMeasurement.y,
+      width: containerMeasurement.width,
+      height: containerMeasurement.height,
+      slug: props.slug,
+      initiatorId: cardInstanceId,
+      hasTransitionDone: false,
+    };
+    console.log(`Setting transform state by ${cardInstanceId}`);
+    console.log(trasnformState);
+
+    setTargetTransformState(trasnformState);
+  }, [containerMeasurement]);
 
   useEffect(() => {
-    DEBUG && alert(`${cardInstanceId} is mounting`);
+    DEBUG && console.log(`${cardInstanceId} is mounting`);
     return () => {
       // when the project card is going to be unmounted, AFTER exit animation
       if (targetTransformState.slug === props.slug) {
         if (DEBUG)
-          alert(
+          console.log(
             `finished transformation, ${cardInstanceId} is going to unmount`,
           );
-        setTargetTransformState({
-          ...targetTransformState,
-          hasTransitionDone: true,
-        });
+        // setTargetTransformState({
+        //   ...targetTransformState,
+        //   hasTransitionDone: true,
+        // });
       }
     };
   }, []);
 
   // when present state changes
   useEffect(() => {
-    if (DEBUG) alert(isPresent + ' is present ' + cardInstanceId);
+    if (DEBUG) console.log(isPresent + ' is present ' + cardInstanceId);
     if (!isPresent) {
-      // has to remove the element manually
-      // https://stackoverflow.com/questions/63259019/framer-motion-dom-node-does-not-unmounts-immediately-after-exit-animation
-      // if (!isPerformingTransition) {
-      // alert(`${cardInstanceId} is safe to be removed`);
+      if (
+        targetTransformState.hasTransitionDone &&
+        targetTransformState.slug === props.slug
+      ) {
+        animationControl.set({ opacity: 1 });
+      }
       safeToRemove();
-      // }
     }
   }, [isPresent]);
+
+  useEffect(() => {
+    if (
+      targetTransformState.hasTransitionDone &&
+      targetTransformState.slug === props.slug
+    ) {
+      animationControl.set({ opacity: 1 });
+    }
+  }, [targetTransformState]);
+
+  const getExitAnimation = useCallback(() => {
+    if (targetTransformState === null || containerMeasurement === null) return;
+    console.log(`${cardInstanceId} is changing exit animation`);
+    console.log(targetTransformState);
+    return {
+      opacity: 1,
+      y: targetTransformState.y - containerMeasurement.y,
+      x: targetTransformState.x - containerMeasurement.x,
+      width: targetTransformState.width,
+      height: targetTransformState.height,
+      transition: variantsDefault.exit.transition,
+    };
+  }, [targetTransformState, containerMeasurement, isViewing]);
 
   const cardContent = (
     <motion.div
@@ -132,13 +205,19 @@ export const ProjectCard: React.FC<Props> = (props: Props) => {
       animate={animationControl}
       initial="initial"
       // if the one is the selected project
-      exit={isViewing ? { opacity: 1 } : 'exit'}
+      exit={isViewing ? getExitAnimation : 'exit'}
       // exit="exit"
       ref={containerRef}
       // disabling the pointer even when the view is viewing
       className={style.projectCardContainer}
       style={{
         pointerEvents: props.isViewOnly ? 'none' : 'all',
+      }}
+      onAnimationComplete={() => {
+        setTargetTransformState({
+          ...targetTransformState,
+          hasTransitionDone: true,
+        });
       }}
     >
       <ReactiveCard
@@ -159,7 +238,7 @@ export const ProjectCard: React.FC<Props> = (props: Props) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: props.isViewOnly ? 0 : 1 }}
         >
-          {props.title}
+          b{props.title}
         </motion.h3>
         <motion.p
           initial={{ opacity: 0 }}

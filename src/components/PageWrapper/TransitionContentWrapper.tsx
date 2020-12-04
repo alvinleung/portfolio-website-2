@@ -1,11 +1,11 @@
-import { motion } from 'framer-motion';
+import { motion, Transition } from 'framer-motion';
 import React, { ReactElement, useState, useEffect } from 'react';
 import { AnimationConfig } from '../AnimationConfig';
 import { useProjectCardTransition } from '../ProjectCard/ProjectCardTransition';
 
 interface Props {
   children: React.ReactNode;
-  key: string;
+  // key: string;
   visible?: boolean;
 }
 
@@ -38,7 +38,10 @@ const variants = {
  * TODO: Make ONLY the upcomming page wrapper hidden, let the current page
  * wrapper stay visible (when clicked on card)
  */
-export default function TransitionContentWrapper({ children, key }: Props) {
+const TransitionContentWrapper: React.FC<Props> = ({
+  children,
+}: // key,
+Props) => {
   const [
     targetTransitionState,
     setTargetTransitionState,
@@ -67,9 +70,11 @@ export default function TransitionContentWrapper({ children, key }: Props) {
 
       // it's the key that messes up the animation of its' child
       // without the key, the animation at the child wont be working
-      key={key}
+      // key={key}
     >
       {children}
     </div>
   );
-}
+};
+
+export default TransitionContentWrapper;

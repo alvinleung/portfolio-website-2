@@ -79,9 +79,9 @@
   // height:80vh;
   height: 100%;
 
-  @include viewportLargerThan($breakpoint-xl) {
+  // @include viewportLargerThan($breakpoint-xl) {
     // max-width: 90vw;
-    margin-left: 1rem;
-    margin-right: 1rem;
-  }
+    // margin-left: 1rem;
+    // margin-right: 1rem;
+  // }
 }
