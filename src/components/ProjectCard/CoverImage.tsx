@@ -10,6 +10,7 @@
  */
 
 import measureElement from '@/hooks/measureElement';
+import useMeasurement from '@/hooks/useMeasurement';
 import { motion, useAnimation, usePresence } from 'framer-motion';
 import React, { useRef, useEffect, ReactNode, CSSProperties } from 'react';
 import { AnimationConfig } from '../AnimationConfig';
@@ -75,6 +76,9 @@ const CoverImage = ({
   const [isPresent, safeToRemove] = usePresence();
   const control = useAnimation();
 
+  // for measuring interrupted transition
+  const [measureCoverImage, coverImageRef] = useMeasurement();
+
   const hasPreviousTransitionState = transitionState !== null;
   const shouldPerformEnteringTransition =
     hasPreviousTransitionState &&
@@ -89,32 +93,33 @@ const CoverImage = ({
     isFirstRun.current = false;
   }
 
+  const updateContextSnapshot = () => {
+    // step 1 - measure the current state
+    const coverImageMeasurement = measureCoverImage();
+    if (!coverImageMeasurement) return; // in case the cover image is not ready yet
+
+    // step 2 - update the snapshot
+    setTransformSnapshot({
+      x: coverImageMeasurement.x,
+      // returning the screen position of the card
+      y: coverImageMeasurement.y - window.scrollY,
+      width: coverImageMeasurement.width,
+      height: coverImageMeasurement.height,
+      slug: slug,
+    });
+  };
+
   useEffect(() => {
     if (!isPresent) {
       // pass the configuration to the context if this is the card which the user clicked on
-      if (willPresist)
-        setTransformSnapshot({
-          x: placeholderMeasurement.x,
-          // returning the screen position of the card
-          y: placeholderMeasurement.y - window.scrollY,
-          width: placeholderMeasurement.width,
-          height: placeholderMeasurement.height,
-          slug: slug,
-        });
+      if (willPresist) updateContextSnapshot();
       safeToRemove();
     }
   }, [isPresent]);
 
   useEffect(() => {
     if (transitionState === TransitionState.INTERRUPTED) {
-      setTransformSnapshot({
-        x: placeholderMeasurement.x,
-        // returning the screen position of the card
-        y: placeholderMeasurement.y - window.scrollY,
-        width: placeholderMeasurement.width,
-        height: placeholderMeasurement.height,
-        slug: slug,
-      });
+      updateContextSnapshot();
       setTransitionState(TransitionState.BEGAN);
     }
   }, [transitionState]);
@@ -194,6 +199,7 @@ const CoverImage = ({
       {...props}
     >
       <motion.div
+        ref={coverImageRef}
         style={{
           backgroundImage: `url(${cover})`,
           backgroundPosition: 'center',
