@@ -26,8 +26,8 @@ const ProjectCardCover = ({ cover, slug }: CoverProps) => {
       style={{
         width: dimensions.WIDTH,
         height: dimensions.HEIGHT,
-        marginLeft: '1rem',
-        marginRight: '1rem',
+        // marginLeft: '1rem',
+        // marginRight: '1rem',
         marginBottom: '4rem',
       }}
       cover={cover}

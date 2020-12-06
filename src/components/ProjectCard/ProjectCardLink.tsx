@@ -7,6 +7,10 @@ import style from './ProjectCard.module.scss';
 import ReactiveCard from './ReactiveCard';
 import { AnimationConfig } from '../AnimationConfig';
 import CoverImage from './CoverImage';
+import {
+  useTransformSnapshot,
+  useTransitionState,
+} from './ProjectCardTransition';
 
 const DEBUG = false;
 const VERBOSE = false;
@@ -24,6 +28,7 @@ interface Props {
 const ProjectCardLink: React.FC<Props> = (props: Props) => {
   const [isViewing, setIsViewing] = useState(false);
   const [hasTransitionDone, setHasTransitionDone] = useState(false);
+  const [transformSnapshot, setTransformSnapshot] = useTransformSnapshot();
   const handleTransitionComplete = () => {
     setHasTransitionDone(true);
   };
@@ -33,7 +38,10 @@ const ProjectCardLink: React.FC<Props> = (props: Props) => {
       <CoverImage
         cover={props.cover}
         slug={props.slug}
-        willPresist={isViewing}
+        willPresist={
+          isViewing ||
+          (transformSnapshot && transformSnapshot.slug === props.slug)
+        }
         className={style.projectCard}
         onTransitionComplete={handleTransitionComplete}
       >
