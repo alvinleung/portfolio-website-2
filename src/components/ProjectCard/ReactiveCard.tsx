@@ -2,11 +2,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import style from './ProjectCard.module.scss';
 
-const transitionConfig = { duration: 0.01, ease: 'easeOut' };
+const transitionConfig = { duration: 0.05, ease: 'easeOut' };
 interface Props {
   children?: React.ReactNode;
   reactive?: boolean;
-  style;
+  style?;
 }
 
 const ReactiveCard: React.FC<Props> = (props) => {
@@ -58,7 +58,7 @@ const ReactiveCard: React.FC<Props> = (props) => {
       <motion.div
         // href="test"
         ref={containerRef}
-        className={style.projectCard}
+        // className={style.projectCard}
         transition={transitionConfig}
         // register mouse listeners
         onMouseMove={handleMouseMove}
@@ -78,7 +78,7 @@ const ReactiveCard: React.FC<Props> = (props) => {
         whileTap={{
           scale: 0.99,
         }}
-        style={props.style}
+        // style={props.style}
       >
         {props.children}
       </motion.div>

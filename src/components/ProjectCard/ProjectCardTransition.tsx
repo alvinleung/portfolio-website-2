@@ -1,3 +1,6 @@
+// Development Flags
+const VERBOSE = true;
+
 /**
  *
  *
@@ -18,32 +21,46 @@
  *
  *
  */
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 
-type projectCardStateContext = [
-  TargetTransformState,
-  React.Dispatch<React.SetStateAction<TargetTransformState>>,
-];
+type projectCardStateContext = {
+  transitionState: TransitionState;
+  setTransitionState: React.Dispatch<React.SetStateAction<TransitionState>>;
+  transformSnapshot: TransformSnapshot;
+  setTransformSnapshot: React.Dispatch<React.SetStateAction<TransformSnapshot>>;
+};
 const ProjectCardContext: React.Context<projectCardStateContext> = React.createContext(
   null,
 );
 
-export interface TargetTransformState {
+/**
+ * TransformSnapshot
+ *
+ * to pass project card exit configuration to the next page's project card
+ */
+export interface TransformSnapshot {
   x: number;
   y: number;
   width: number;
   height: number;
-  // the identification of ProjectCard, use this to make sure which card to transition to
   slug: string;
-  // id of the project card that initiated the animation
-  initiatorId: string;
-  // to communicate if the transition has done
-  hasTransitionDone: boolean;
+}
+
+/**
+ * TransitionState
+ *
+ * Describe what state the transition is currently in
+ */
+export enum TransitionState {
+  BEGAN,
+  DONE,
+  INTERRUPTED,
 }
 
 /**
  * COMPONENT:
- * ProjectCardTransition
+ * ProjectCardContext
+ *
  *
  * A Context provider component store state of the target
  * project card state
@@ -51,29 +68,69 @@ export interface TargetTransformState {
 
 interface Props {
   children: React.ReactNode;
+  upcomingRoute: string;
 }
-export const ProjectCardTransition: React.FC<Props> = ({ children }: Props) => {
+export const ProjectCardTransition: React.FC<Props> = ({
+  children,
+  upcomingRoute,
+}: Props) => {
+  // mutable state for transition
+  const [transitionState, setTransitionState] = useState<TransitionState>(
+    TransitionState.DONE,
+  );
+  const route = useRef(upcomingRoute);
+
+  const processRouteChange = () => {
+    // setTransitionState if the transition haven't begun
+    if (transitionState === TransitionState.DONE) {
+      // transition begins
+      setTransitionState(TransitionState.BEGAN);
+      VERBOSE && console.log(`Transition State: BEGAN`);
+      return;
+    }
+    // route change but the it already started
+    if (transitionState === TransitionState.BEGAN) {
+      // transition interrupted
+      setTransitionState(TransitionState.INTERRUPTED);
+      VERBOSE && console.log(`Transition State: Interrupted`);
+      return;
+    }
+
+    // route change but it's already interrupted
+    if (transitionState === TransitionState.INTERRUPTED) {
+      // transition interrupted
+      setTransitionState(TransitionState.BEGAN);
+      VERBOSE && console.log(`Transition State: Began`);
+      return;
+    }
+  };
+
+  // route change detected, process route change
+  if (route.current !== upcomingRoute) {
+    processRouteChange();
+    // update the current route to match the latest one
+    route.current = upcomingRoute;
+  }
+
   /**
    *
-   *  The "following" card will try to match the "leading" card
-   *  targetTransformState provided the necessary info
+   * The upcomming card will try to match the previous configuration
+   * base on the TransformSnaptshot stored in the context.
    *
    */
-  const targetTransformState = useState<TargetTransformState>({
-    x: 0,
-    y: 0,
-    width: 0,
-    height: 0,
-    slug: '',
-    initiatorId: '',
-    // null > havent started any transition, the initial value
-    // false > transition running
-    // true > transition done
-    hasTransitionDone: null,
-  });
+  const [currentTransformSnapshot, setCurrentTransformSnapshot] = useState<
+    TransformSnapshot
+  >(null);
+
+  const context: projectCardStateContext = {
+    transitionState: transitionState,
+    setTransitionState: setTransitionState,
+    transformSnapshot: currentTransformSnapshot,
+    setTransformSnapshot: setCurrentTransformSnapshot,
+  };
 
   return (
-    <ProjectCardContext.Provider value={targetTransformState}>
+    <ProjectCardContext.Provider value={context}>
       {children}
     </ProjectCardContext.Provider>
   );
@@ -81,7 +138,7 @@ export const ProjectCardTransition: React.FC<Props> = ({ children }: Props) => {
 
 /**
  * HOOK:
- * ProjectCardTransition
+ * useTransitionState
  *
  * A hook for ProjectCardTransition consmuer component to
  * interact with the system, basically Wrapper of "useContext"
@@ -90,6 +147,48 @@ export const ProjectCardTransition: React.FC<Props> = ({ children }: Props) => {
  * const [targetTransformState, setTargetTransformState] = useProjectCardTransition();
  */
 // targetTransformState, setTargetTransformState
-export const useProjectCardTransition = () => {
-  return useContext(ProjectCardContext);
+export const useTransitionState = () => {
+  const { transitionState, setTransitionState } = useContext(
+    ProjectCardContext,
+  );
+  return [transitionState, setTransitionState] as [
+    TransitionState,
+    React.Dispatch<React.SetStateAction<TransitionState>>,
+  ];
+};
+
+/**
+ * HOOK:
+ * useTransformSnapshot
+ *
+ * a hook for accessing the snapshot object
+ *
+ * usage:
+ * const [targetTransformState, setTargetTransformState] = useProjectCardTransition();
+ */
+export const useTransformSnapshot = () => {
+  const { transformSnapshot, setTransformSnapshot } = useContext(
+    ProjectCardContext,
+  );
+  return [transformSnapshot, setTransformSnapshot] as [
+    TransformSnapshot,
+    React.Dispatch<React.SetStateAction<TransformSnapshot>>,
+  ];
+};
+
+/**
+ * Project Card compoennt
+ *
+ * TransitionElement
+ */
+interface TransitionWrapperProps {
+  onTransitionBegin: Function;
+  onMeasurementReady: Function;
+  onTransitionInterrupt: Function;
+  onTransitionComplete: Function;
+  transitionId: string;
+  children: React.ReactNode;
+}
+export const TransitionWrapper = (props: TransitionWrapperProps) => {
+  return props.children;
 };

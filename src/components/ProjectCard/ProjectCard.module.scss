@@ -3,32 +3,44 @@
 .projectCard {
   cursor: none;
 
+  max-width: 100%;
+  min-height: 30rem;
+  margin-bottom: 2rem;
+
+  z-index: 10;
+}
+
+.projectCard:hover {
+  cursor: none;
+  outline: 10px solid rgba(0,0,0,0.1);
+}
+
+
+.projectCardLink {
+  text-decoration: none;
+
+  &:active {
+    opacity: 1;
+  }
+}
+
+.projectCardContent { 
   --spacing-vertical: 4px;
+
+  padding: 1rem;
 
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   box-sizing: border-box;
 
-  max-width: 100%;
-  min-height: 30rem;
-
-  padding: 1rem;
+  width: 100%;
+  height: 100%;
 
   
   font-family: "source-sans-pro", sans-serif;
-
-  background-color: #000;
   color: #fff;
   
-  background-size: cover;
-  background-position: center;
-  height: 100%;
-
-  transition-property: transform;
-  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-  transition-duration: 0.2s;
-
   .projectType {
     margin-bottom: auto;
     // font-family: "Roboto Mono";
@@ -50,29 +62,6 @@
     margin-bottom: var(--spacing-vertical);
     
   }
-
-  z-index: 10;
-}
-
-.projectCard:hover {
-  cursor: none;
-  outline: 10px solid rgba(0,0,0,0.1);
-}
-
-.projectCardContainer {
-  margin-left: auto;
-  margin-right: auto;
-  // create vertical seperation between each item
-  margin-bottom: 2rem;
-}
-
-
-.projectCardLink {
-  text-decoration: none;
-
-  &:active {
-    opacity: 1;
-  }
 }
 
 .projectCardViewing {
@@ -85,3 +74,4 @@
     // margin-right: 1rem;
   // }
 }
+

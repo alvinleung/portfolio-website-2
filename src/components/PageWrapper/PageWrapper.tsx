@@ -6,7 +6,6 @@ import { Footer } from '../Footer/Footer';
 import { ProjectCardTransition } from '../ProjectCard/ProjectCardTransition';
 import { AnimationConfig } from '../AnimationConfig';
 import TransitionContentWrapper from './TransitionContentWrapper';
-import DeferChangeWrapper from './DeferChangeWrapper';
 
 const duration = AnimationConfig.FAST;
 
@@ -35,14 +34,13 @@ const PageWrapper = ({ children, location }) => {
       <Cursor />
       <MainNav />
       {/* a context provider for the transitions need to be outside of Animate Presence in order to work */}
-      <ProjectCardTransition>
-        <DeferChangeWrapper currentRoute={location.pathname}>
-          <TransitionContentWrapper>
-            {/* <motion.div key={location.pathname}>{children}</motion.div> */}
+      <ProjectCardTransition upcomingRoute={location.pathname}>
+        <AnimatePresence initial={true} exitBeforeEnter>
+          <TransitionContentWrapper key={location.pathname}>
             {children}
             <Footer />
           </TransitionContentWrapper>
-        </DeferChangeWrapper>
+        </AnimatePresence>
       </ProjectCardTransition>
     </>
   );

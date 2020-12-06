@@ -6,7 +6,7 @@ import '../style/variables.scss';
 import '../style/reset.scss';
 
 import LandingHero from '@/components/LandingHero';
-import ProjectCard from '@/components/ProjectCard';
+import ProjectCardLink from '@/components/ProjectCard/ProjectCardLink';
 
 interface Props {
   readonly data: PageQueryData;
@@ -23,7 +23,7 @@ const Home: React.FC<Props> = ({ data }: Props) => {
         <LandingHero />
         <section id="works">
           {projectCaseStudies.map((project, index) => (
-            <ProjectCard
+            <ProjectCardLink
               key={index}
               title={project.node.frontmatter.title}
               slug={project.node.frontmatter.slug}

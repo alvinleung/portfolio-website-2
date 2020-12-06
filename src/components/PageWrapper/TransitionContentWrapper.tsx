@@ -1,7 +1,7 @@
 import { motion, Transition } from 'framer-motion';
 import React, { ReactElement, useState, useEffect } from 'react';
 import { AnimationConfig } from '../AnimationConfig';
-import { useProjectCardTransition } from '../ProjectCard/ProjectCardTransition';
+// import { useProjectCardTransition } from '../ProjectCard/ProjectCardTransition';
 
 interface Props {
   children: React.ReactNode;
@@ -38,15 +38,7 @@ const variants = {
  * TODO: Make ONLY the upcomming page wrapper hidden, let the current page
  * wrapper stay visible (when clicked on card)
  */
-const TransitionContentWrapper: React.FC<Props> = ({
-  children,
-}: // key,
-Props) => {
-  const [
-    targetTransitionState,
-    setTargetTransitionState,
-  ] = useProjectCardTransition();
-
+const TransitionContentWrapper: React.FC<Props> = ({ children }: Props) => {
   // the the content by default unless the transition has done
   const [visible, setVisible] = useState(false);
 

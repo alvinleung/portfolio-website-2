@@ -1,3 +1,3 @@
-import {ProjectCard} from "./ProjectCard";
+import ProjectCardLink from './ProjectCardLink';
 
-export default ProjectCard;
+export default ProjectCardLink;

@@ -4,7 +4,7 @@ import { graphql } from 'gatsby';
 import { motion } from 'framer-motion';
 
 import ProjectTitle from '@/components/ProjectLayout/ProjectTitle/ProjectTitle';
-import ProjectCard from '@/components/ProjectCard';
+import ProjectCardCover from '@/components/ProjectCard/ProjectCardCover';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { MDXProvider } from '@mdx-js/react';
 
@@ -64,14 +64,10 @@ export default function Template({
           description={frontmatter.description}
         />
         {/* <ProjectCard name={frontmatter.slug} isViewing={true}></ProjectCard> */}
-        <ProjectCard
-          title={frontmatter.title}
+        <ProjectCardCover
           slug={frontmatter.slug}
-          catagory={frontmatter.catagory}
-          tagline={frontmatter.tagline}
           cover={frontmatter.cover}
-          isViewOnly={true}
-        ></ProjectCard>
+        ></ProjectCardCover>
       </motion.header>
       <motion.main
         className="full-width article-grid"
