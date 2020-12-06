@@ -204,6 +204,7 @@ const CoverImage = ({
           backgroundImage: `url(${cover})`,
           backgroundPosition: 'center',
           backgroundSize: 'cover',
+          backgroundAttachment: 'scroll',
         }}
         variants={variants}
         initial={getInitialState()}
