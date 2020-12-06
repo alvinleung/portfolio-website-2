@@ -26,14 +26,14 @@ const ProjectCardCover = ({ cover, slug }: CoverProps) => {
       style={{
         width: dimensions.WIDTH,
         height: dimensions.HEIGHT,
-        marginLeft: '2rem',
-        marginRight: '2rem',
+        marginLeft: '1rem',
+        marginRight: '1rem',
         marginBottom: '4rem',
       }}
       cover={cover}
       slug={slug}
       willPresist
-    ></CoverImage>
+    />
   );
 };
 
