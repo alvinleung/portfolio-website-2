@@ -3,7 +3,7 @@ import React, { useRef, useState, useEffect } from 'react';
 // abstract the logic of getting the client rect
 
 // [bounds, nodeRef]
-interface ElementMeasurement {
+export interface ElementMeasurement {
   x: number;
   y: number;
   centerX: number;
