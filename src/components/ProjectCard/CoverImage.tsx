@@ -12,7 +12,7 @@
 import measureElement from '@/hooks/measureElement';
 import useMeasurement from '@/hooks/useMeasurement';
 import { motion, useAnimation, usePresence } from 'framer-motion';
-import React, { useRef, useEffect, ReactNode, CSSProperties } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { AnimationConfig } from '../AnimationConfig';
 import {
   TransitionState,
@@ -49,13 +49,12 @@ const variants = {
   },
 };
 
-interface CoverImageProps {
+interface CoverImageProps extends React.HTMLAttributes<HTMLDivElement> {
   cover: string;
   slug: string;
   willPresist?: boolean; // true: presist in the upcomming page, pass dimensions to the context when exit
   style?: object;
   scrollToOnEnter?: boolean;
-  children?: React.ReactNode;
   onTransitionComplete?: Function;
   onEnterPage?: Function;
 }
