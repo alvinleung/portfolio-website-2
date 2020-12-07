@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { motion, useViewportScroll, useTransform } from 'framer-motion';
 import './LandingHero.scss';
-import { AnimationConfig } from '../AnimationConfig';
+import { AnimationConfig, AnimationVariants } from '../AnimationConfig';
 
 export default () => {
   const { scrollY } = useViewportScroll();
@@ -20,11 +20,7 @@ export default () => {
           opacity: headerOpacity,
           scale: headerScale,
         }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{
-          opacity: 0,
-        }}
+        exit={AnimationVariants.PRIMARY.exit}
       >
         Hi, this is Alvin. Lorem ipsum dolor sit amet, consectetur adipiscing
         elit. Sit arcu ornare ipsum, leo, at donec pulvinar.

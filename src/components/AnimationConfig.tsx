@@ -13,7 +13,7 @@ export const AnimationConfig = {
 };
 
 export const AnimationVariants = {
-  TITLE: {
+  PRIMARY: {
     initial: {
       opacity: 0,
       y: 30,
@@ -26,7 +26,25 @@ export const AnimationVariants = {
     exit: {
       opacity: 0,
       y: 30,
-      transition: { duration: 0.1 },
+      transition: { duration: AnimationConfig.VERY_FAST },
+    },
+  },
+  SECONDARY: {
+    initial: {
+      opacity: 0,
+    },
+    enter: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: 0,
+        ease: AnimationConfig.EASING,
+        duration: AnimationConfig.FAST,
+      },
+    },
+    exit: {
+      opacity: 0,
+      transition: { duration: AnimationConfig.VERY_FAST },
     },
   },
 };

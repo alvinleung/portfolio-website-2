@@ -13,7 +13,7 @@ const ProjectTitle: React.FC<Props> = ({ title, description }: Props) => {
   return (
     <motion.div
       className="ProjectTitle full-width"
-      variants={AnimationVariants.TITLE}
+      variants={AnimationVariants.PRIMARY}
       initial="initial"
       animate="enter"
       exit="exit"
