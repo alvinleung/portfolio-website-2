@@ -1,7 +1,7 @@
 import React from "react";
 import PageWrapper from "./src/components/PageWrapper";
 
-const transitionDelay = 500;
+const transitionDelay = 100;
 
 export const wrapPageElement = ({ element, props }) => {
   return <PageWrapper {...props}>{element}</PageWrapper>;
@@ -10,17 +10,17 @@ export const wrapPageElement = ({ element, props }) => {
 export const shouldUpdateScroll = ({
   routerProps: { location },
   getSavedScrollPosition,
+  routerProps,
 }) => {
   if (location.action === "PUSH") {
+    // going to the next page
     window.setTimeout(() => {
       // window.scrollTo(0, 0);
-      // bodyScrollUnlock();
     }, transitionDelay);
   } else {
     const savedPosition = getSavedScrollPosition(location);
     window.setTimeout(() => {
       // window.scrollTo(...(savedPosition || [0, 0]));
-      // bodyScrollUnlock();
     }, transitionDelay);
   }
 
@@ -37,14 +37,6 @@ export const shouldUpdateScroll = ({
   return false;
 };
 
-const bodyScrollLock = () => {
-  document.body.style.position = "fixed";
-  document.body.style.overflowY = "scroll";
-  document.body.style.width = "100%";
-};
-
-const bodyScrollUnlock = () => {
-  document.body.style.position = "static";
-  document.body.style.overflowY = "scroll";
-  document.body.style.width = "100%";
-};
+// Prevent the browser history api to do scroll restoration
+// it is required or else the gatsby scroll prevention wont be working
+history.scrollRestoration = "manual";
