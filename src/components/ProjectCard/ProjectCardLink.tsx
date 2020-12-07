@@ -32,22 +32,32 @@ interface Props {
 }
 
 const ProjectCardLink: React.FC<Props> = (props: Props) => {
-  const [isViewing, setIsViewing] = useState(false);
+  // determine whether the card will do outgoing transition
+  const [willPresist, setWillPresist] = useState(false);
+
   const [hasTransitionDone, setHasTransitionDone] = useState(false);
   const [transformSnapshot, setTransformSnapshot] = useTransformSnapshot();
   const handleTransitionComplete = () => {
     setHasTransitionDone(true);
   };
 
+  useEffect(() => {
+    const handleBackButton = () => {
+      if (transformSnapshot && transformSnapshot.slug === props.slug)
+        setWillPresist(true);
+    };
+    window.addEventListener('popstate', handleBackButton);
+    return () => {
+      window.removeEventListener('popstate', handleBackButton);
+    };
+  }, []);
+
   const cardContent = (
     <ReactiveCard reactive={hasTransitionDone}>
       <CoverImage
         cover={props.cover}
         slug={props.slug}
-        willPresist={
-          isViewing ||
-          (transformSnapshot && transformSnapshot.slug === props.slug)
-        }
+        willPresist={willPresist}
         scrollToOnEnter={
           transformSnapshot && props.slug === transformSnapshot.slug
         }
@@ -79,7 +89,7 @@ const ProjectCardLink: React.FC<Props> = (props: Props) => {
     <Link
       to={!props.isViewOnly ? props.slug : null}
       onClick={() => {
-        setIsViewing(true);
+        setWillPresist(true);
       }}
       className={style.projectCardLink}
     >
