@@ -44,17 +44,19 @@ const TransitionContentWrapper: React.FC<Props> = ({ children }: Props) => {
 
   return (
     <div
-      style={{
-        display: 'inline-block',
-        position: 'absolute',
-        left: '0rem',
-        top: '0rem',
-        width: '100%',
-        // the magin below the footer
-        paddingBottom: '2rem',
-        // visibility: visible ? 'visible' : 'hidden',
-        visibility: 'visible',
-      }}
+      style={
+        {
+          // display: 'inline-block',
+          // position: 'absolute',
+          // left: '0rem',
+          // top: '0rem',
+          // width: '100%',
+          // the magin below the footer
+          // paddingBottom: '2rem',
+          // visibility: visible ? 'visible' : 'hidden',
+          // visibility: 'visible',
+        }
+      }
       // variants={variants}
       // initial="initial"
       // animate="enter"

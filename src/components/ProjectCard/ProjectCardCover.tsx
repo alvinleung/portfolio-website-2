@@ -20,6 +20,16 @@ interface CoverProps {
 }
 
 const ProjectCardCover = ({ cover, slug }: CoverProps) => {
+  const handleEnterPage = () => {
+    // force scroll to top to create seemless transition
+    if (typeof window !== 'undefined') {
+      //TODO: Seems like this overriding of scrolling position writes to the reach router
+      // scroll position history, so when the user use back button to go back, it tried to restore
+      // the scroll position, causing the jump effect.
+      window.scrollTo(0, 0);
+    }
+  };
+
   return (
     <CoverImage
       // define the style here
@@ -30,6 +40,7 @@ const ProjectCardCover = ({ cover, slug }: CoverProps) => {
         // marginRight: '1rem',
         marginBottom: '4rem',
       }}
+      onEnterPage={handleEnterPage}
       cover={cover}
       slug={slug}
       willPresist

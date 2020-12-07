@@ -14,14 +14,14 @@ export const shouldUpdateScroll = ({
 }) => {
   if (location.action === "PUSH") {
     // going to the next page
-    window.setTimeout(() => {
-      // window.scrollTo(0, 0);
-    }, transitionDelay);
+    // window.setTimeout(() => {
+    //   // window.scrollTo(0, 0);
+    // }, transitionDelay);
   } else {
     const savedPosition = getSavedScrollPosition(location);
-    window.setTimeout(() => {
-      // window.scrollTo(...(savedPosition || [0, 0]));
-    }, transitionDelay);
+    // window.setTimeout(() => {
+    //   // window.scrollTo(...(savedPosition || [0, 0]));
+    // }, transitionDelay);
   }
 
   // bodyScrollLock();

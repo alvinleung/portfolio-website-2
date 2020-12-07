@@ -33,7 +33,7 @@ const variants = {
   // this ensure the transition position from the previous transitionSnapshot
   // is referring to the screen space.
   initial: {
-    opacity: 1,
+    opacity: 0,
     left: 0,
     top: 0,
     right: 0,
@@ -54,8 +54,10 @@ interface CoverImageProps {
   slug: string;
   willPresist?: boolean; // true: presist in the upcomming page, pass dimensions to the context when exit
   style?: object;
+  scrollToOnEnter?: boolean;
   children?: React.ReactNode;
   onTransitionComplete?: Function;
+  onEnterPage?: Function;
 }
 
 const CoverImage = ({
@@ -64,6 +66,8 @@ const CoverImage = ({
   slug,
   willPresist,
   onTransitionComplete,
+  onEnterPage,
+  scrollToOnEnter,
   ...props
 }: CoverImageProps) => {
   const [placeholderMeasurement, placeholderRef] = measureElement<
@@ -88,8 +92,7 @@ const CoverImage = ({
 
   const isFirstRun = useRef(true);
   if (isFirstRun.current) {
-    // force scroll to top to create seemless transition
-    if (typeof window !== 'undefined') window.scrollTo(0, 0);
+    onEnterPage?.();
     isFirstRun.current = false;
   }
 
@@ -124,14 +127,27 @@ const CoverImage = ({
     }
   }, [transitionState]);
 
+  const scrollToCardPosition = () => {
+    if (typeof window !== 'undefined') {
+      window.scrollTo(
+        0,
+        placeholderMeasurement.y -
+          window.innerHeight / 2 +
+          placeholderMeasurement.height / 2,
+      );
+    }
+  };
+
   // use animation control to animate the card into the correct layout position
   useEffect(() => {
     if (!placeholderMeasurement) return;
     if (shouldPerformEnteringTransition) {
+      if (scrollToOnEnter) scrollToCardPosition();
+
       // when measurement ready, nudge the animation to the target position
       control.start({
         x: placeholderMeasurement.x,
-        y: placeholderMeasurement.y,
+        y: placeholderMeasurement.y - window.scrollY,
         width: placeholderMeasurement.width,
         height: placeholderMeasurement.height,
         transition: pageTransitionConfig,
@@ -145,7 +161,11 @@ const CoverImage = ({
         width: placeholderMeasurement.width,
         height: placeholderMeasurement.height,
         transition: pageTransitionConfig,
+        opacity: 0,
         position: 'relative',
+      });
+      control.start({
+        opacity: 1,
       });
       onTransitionComplete?.();
     }
@@ -158,7 +178,11 @@ const CoverImage = ({
   // fire when the object entered
   const handleAnimationComplete = () => {
     // update global transition state when the enter animation finish
-    if (transitionState !== TransitionState.DONE && isPresent) {
+    if (
+      transitionState !== TransitionState.DONE &&
+      isPresent &&
+      shouldPerformEnteringTransition
+    ) {
       setTransitionState(TransitionState.DONE);
       // change the animation positioning method from fixed to relative
       resetPosition();
@@ -179,7 +203,9 @@ const CoverImage = ({
       y: transformSnapshot.y,
       width: transformSnapshot.width,
       height: transformSnapshot.height,
+      opacity: 1,
       position: 'fixed',
+      zIndex: 1000,
     };
   };
 
@@ -205,6 +231,8 @@ const CoverImage = ({
           backgroundPosition: 'center',
           backgroundSize: 'cover',
           backgroundAttachment: 'scroll',
+          WebkitBackfaceVisibility: 'hidden',
+          backfaceVisibility: 'hidden',
         }}
         variants={variants}
         initial={getInitialState()}

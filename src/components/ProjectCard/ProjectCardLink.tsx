@@ -1,5 +1,11 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { motion, useIsPresent, useAnimation, usePresence } from 'framer-motion';
+import {
+  motion,
+  useIsPresent,
+  useAnimation,
+  usePresence,
+  transform,
+} from 'framer-motion';
 
 import { Link } from 'gatsby';
 
@@ -41,6 +47,9 @@ const ProjectCardLink: React.FC<Props> = (props: Props) => {
         willPresist={
           isViewing ||
           (transformSnapshot && transformSnapshot.slug === props.slug)
+        }
+        scrollToOnEnter={
+          transformSnapshot && props.slug === transformSnapshot.slug
         }
         className={style.projectCard}
         onTransitionComplete={handleTransitionComplete}
