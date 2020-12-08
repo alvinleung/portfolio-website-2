@@ -31,12 +31,12 @@ const variants = {
 const PageWrapper = ({ children, location }) => {
   return (
     <>
-      <Cursor />
       <MainNav />
       {/* a context provider for the transitions need to be outside of Animate Presence in order to work */}
       <ProjectCardTransition upcomingRoute={location.pathname}>
         <AnimatePresence initial={true} exitBeforeEnter>
           <TransitionContentWrapper key={location.pathname}>
+            <Cursor />
             {children}
             <Footer />
           </TransitionContentWrapper>

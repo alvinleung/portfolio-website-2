@@ -22,8 +22,9 @@ export default () => {
         }}
         exit={AnimationVariants.PRIMARY.exit}
       >
-        Hi, this is Alvin. Lorem ipsum dolor sit amet, consectetur adipiscing
-        elit. Sit arcu ornare ipsum, leo, at donec pulvinar.
+        Hi, this is Alvin! I fight for my users against bad designs, one pixel
+        at a time.
+        {/* by combining function with aesthetics. */}
         {/* I fight for my users against bad designs by combining
         function with aesthetics. */}
       </motion.h1>
