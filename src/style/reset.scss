@@ -20,6 +20,15 @@ html {
 a {
   -webkit-tap-highlight-color: default;
 }
+/* 
+ * remove horizontal scrolling for mobile
+ */
+html, body {
+  overflow-x: hidden;
+}
+body {
+  position: relative
+}
 
 /* 
  * text selection style
