@@ -82,9 +82,9 @@ const CoverImage = ({
   // for measuring interrupted transition
   const [measureCoverImage, coverImageRef] = useMeasurement();
 
-  const hasPreviousTransitionState = transitionState !== null;
+  // const hasPreviousTransitionState = transitionState !== null;
   const shouldPerformEnteringTransition =
-    hasPreviousTransitionState &&
+    // hasPreviousTransitionState &&
     transformSnapshot &&
     slug === transformSnapshot.slug &&
     transitionState !== TransitionState.DONE;
@@ -139,7 +139,19 @@ const CoverImage = ({
 
   // use animation control to animate the card into the correct layout position
   useEffect(() => {
-    if (!placeholderMeasurement) return;
+    if (!placeholderMeasurement || !isPresent) return;
+    if (transitionState === TransitionState.DONE) {
+      control.set({
+        x: 0,
+        y: 0,
+        width: placeholderMeasurement.width,
+        height: placeholderMeasurement.height,
+        transition: pageTransitionConfig,
+        opacity: 1,
+        position: 'relative',
+      });
+      return;
+    }
 
     if (shouldPerformEnteringTransition) {
       if (scrollToOnEnter) scrollToCardPosition();
@@ -161,7 +173,7 @@ const CoverImage = ({
         width: placeholderMeasurement.width,
         height: placeholderMeasurement.height,
         transition: pageTransitionConfig,
-        opacity: transitionState === TransitionState.DONE ? 1 : 0,
+        opacity: 0,
         position: 'relative',
       });
 
@@ -170,6 +182,16 @@ const CoverImage = ({
       });
       onTransitionComplete?.();
     }
+    // this will be called on mobile chrome/firefox after you scroll as the viewport changes
+    // and this is the suspicious part of the bug
+
+    //BUG: theory: When scrolll chrome/firefox will hide the menu bar,
+    // it causes viewport changes, triggering this effect.
+    // it will interrupt the exit animation
+    // and subsequently causing animate presence stop doing its job.
+    //
+    // That's why it worked on mobile safari, chrome mobile emulation
+    // but not the mobile chrome itself. (browsers which has that frame resizing behaviour when scroll)
   }, [placeholderMeasurement]);
 
   const resetPosition = () => {
