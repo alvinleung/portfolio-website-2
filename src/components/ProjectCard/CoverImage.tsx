@@ -139,8 +139,9 @@ const CoverImage = ({
 
   // use animation control to animate the card into the correct layout position
   useEffect(() => {
-    if (!placeholderMeasurement || !isPresent) return;
-    if (transitionState === TransitionState.DONE) {
+    if (!placeholderMeasurement) return;
+    if (transitionState === TransitionState.DONE || !isPresent) {
+      onTransitionComplete?.();
       control.set({
         x: 0,
         y: 0,
