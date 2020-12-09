@@ -140,6 +140,7 @@ const CoverImage = ({
   // use animation control to animate the card into the correct layout position
   useEffect(() => {
     if (!placeholderMeasurement) return;
+
     if (shouldPerformEnteringTransition) {
       if (scrollToOnEnter) scrollToCardPosition();
 
@@ -160,9 +161,10 @@ const CoverImage = ({
         width: placeholderMeasurement.width,
         height: placeholderMeasurement.height,
         transition: pageTransitionConfig,
-        opacity: 0,
+        opacity: transitionState === TransitionState.DONE ? 1 : 0,
         position: 'relative',
       });
+
       control.start({
         opacity: 1,
       });
