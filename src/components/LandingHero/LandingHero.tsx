@@ -7,7 +7,7 @@ export default () => {
   const { scrollY } = useViewportScroll();
 
   const [windowHeight, setWindowHeight] = useState(0);
-  const fullyHiddenPos = windowHeight * 0.37; // determine at which scroll position should it be hidden
+  const fullyHiddenPos = windowHeight * 0.25; // determine at which scroll position should it be hidden
 
   const headerOpacity = useTransform(scrollY, [0, fullyHiddenPos], [1, 0]);
   const headerScale = useTransform(scrollY, [0, fullyHiddenPos], [1, 0.95]);
@@ -32,7 +32,7 @@ export default () => {
         // animate={{
         //   opacity: [0, 1],
         // }}
-        className="callout"
+        className="callout "
         transition={{ ease: 'easeOut', duration: AnimationConfig.FAST }}
         style={{
           opacity: headerOpacity,
@@ -40,8 +40,8 @@ export default () => {
         }}
         exit={AnimationVariants.PRIMARY.exit}
       >
-        Hi, this is Alvin! I fight for my users against bad designs, one pixel
-        at a time.
+        Hi, this is Alvin! A UX/UI designer who is interested in creating
+        functional yet aesthetic experiences.
         {/* by combining function with aesthetics. */}
         {/* I fight for my users against bad designs by combining
         function with aesthetics. */}
