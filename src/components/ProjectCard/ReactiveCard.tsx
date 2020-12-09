@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import style from './ProjectCard.module.scss';
 
-const transitionConfig = { duration: 0.05, ease: 'easeOut' };
+const transitionConfig = { duration: 0.08, ease: 'easeOut' };
 interface Props {
   children?: React.ReactNode;
   reactive?: boolean;
@@ -20,8 +20,8 @@ const ReactiveCard: React.FC<Props> = (props) => {
     if (!containerBounds) return;
     // translate mouse position to element position, creating dampening effect
     setContainerOffset({
-      x: (e.clientX - containerBounds.left - containerBounds.width / 2) * 0.02,
-      y: (e.clientY - containerBounds.top - containerBounds.height / 2) * 0.02,
+      x: (e.clientX - containerBounds.left - containerBounds.width / 2) * 0.03,
+      y: (e.clientY - containerBounds.top - containerBounds.height / 2) * 0.03,
     });
   };
 
@@ -70,11 +70,14 @@ const ReactiveCard: React.FC<Props> = (props) => {
           y: containerOffset.y,
           scale: 1,
           opacity: 1,
+          outlineColor: 'rgba(0,0,0,0)',
         }}
         // for mouse behaviour
-        // whileHover={{
-        //   outline: '10px solid rgba(0,0,0,.1)',
-        // }}
+        whileHover={{
+          outlineColor: 'rgba(0,0,0,.1)',
+          outlineStyle: 'solid',
+          outlineWidth: '10px',
+        }}
         whileTap={{
           scale: 0.99,
         }}
