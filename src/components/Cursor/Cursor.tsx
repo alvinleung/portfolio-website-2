@@ -138,11 +138,19 @@ export default function Cursor() {
     };
   }, [location]);
 
+  const DEFAULT_SCALE = 1;
+  const MOUSEDOWN_SCALE = 0.9;
+  const LINK_HOVER_SCALE = 1.2;
+  const LINK_MOUSEDOWN_SCALE = 1.1;
+
   const getScale = () => {
     if (hidden) return 0;
-    if (mousedown) return 0.9;
-    if (linkHovered) return 1.2;
-    return 1;
+    if (linkHovered) {
+      if (mousedown) return LINK_MOUSEDOWN_SCALE;
+      return LINK_HOVER_SCALE;
+    }
+    if (mousedown) return MOUSEDOWN_SCALE;
+    return DEFAULT_SCALE;
   };
 
   // calculate the appropriate cursor position every update
