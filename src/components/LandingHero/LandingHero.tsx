@@ -40,7 +40,7 @@ export default () => {
         }}
         exit={AnimationVariants.PRIMARY.exit}
       >
-        Hi, this is Alvin! A UX/UI designer who is interested in creating
+        Hi, this is Alvin! A UX/UI designer who is obsessed in creating
         functional yet aesthetic experiences.
         {/* by combining function with aesthetics. */}
         {/* I fight for my users against bad designs by combining
