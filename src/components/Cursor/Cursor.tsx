@@ -195,6 +195,9 @@ export default function Cursor() {
         // border: '2px solid #000',
         zIndex: hoveredElementMeasurement ? -1 : 100000,
       }}
+      initial={{
+        borderRadius: config.width,
+      }}
       animate={{
         // x: hoveredElementMeasurement ? cursorPosition.x : null,
         // y: hoveredElementMeasurement ? cursorPosition.y : null,
