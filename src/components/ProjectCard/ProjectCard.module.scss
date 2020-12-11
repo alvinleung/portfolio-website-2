@@ -10,10 +10,10 @@
   z-index: 10;
 }
 
-.projectCard:hover {
-  cursor: none;
+// .projectCard:hover {
+//   cursor: none;
   // outline: 10px solid rgba(0,0,0,0.1);
-}
+// }
 
 
 .projectCardLink {
@@ -64,14 +64,13 @@
   }
 }
 
-.projectCardViewing {
-  // height:80vh;
-  height: 100%;
-
-  // @include viewportLargerThan($breakpoint-xl) {
-    // max-width: 90vw;
-    // margin-left: 1rem;
-    // margin-right: 1rem;
-  // }
+.reactiveCard {
+  outline: 0px solid rgba(0,0,0,.1);
+  transition-property: outline;
+  &:hover {
+    outline: 10px solid rgba(0,0,0,.1);
+    // outline-color: rgba(0,0,0,.1);
+    // outline-style: solid;
+    // outline-width: 10px;
+  }
 }
-

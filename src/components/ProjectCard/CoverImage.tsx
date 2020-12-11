@@ -257,7 +257,7 @@ const CoverImage = ({
           // backgroundAttachment: 'scroll',
           // WebkitBackfaceVisibility: 'hidden',
           // backfaceVisibility: 'hidden',
-          willChange: 'backgroundImage',
+          // willChange: 'backgroundImage',
         }}
         variants={variants}
         initial={getInitialState()}

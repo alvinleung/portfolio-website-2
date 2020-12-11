@@ -18,10 +18,19 @@ const ReactiveCard: React.FC<Props> = (props) => {
     // null check for the container bounds, for rare cases when the event listener
     // fires before the page loaded
     if (!containerBounds) return;
+
+    const maxDistFactor = 0.015;
+    const maxDistFactorHeight =
+      (containerBounds.width / containerBounds.height) * maxDistFactor;
+
     // translate mouse position to element position, creating dampening effect
     setContainerOffset({
-      x: (e.clientX - containerBounds.left - containerBounds.width / 2) * 0.02,
-      y: (e.clientY - containerBounds.top - containerBounds.height / 2) * 0.02,
+      x:
+        (e.clientX - containerBounds.left - containerBounds.width / 2) *
+        maxDistFactor,
+      y:
+        (e.clientY - containerBounds.top - containerBounds.height / 2) *
+        maxDistFactor,
     });
   };
 
@@ -58,7 +67,7 @@ const ReactiveCard: React.FC<Props> = (props) => {
       <motion.div
         // href="test"
         ref={containerRef}
-        // className={style.projectCard}
+        className={style.reactiveCard}
         transition={transitionConfig}
         // register mouse listeners
         onMouseMove={handleMouseMove}
@@ -70,14 +79,16 @@ const ReactiveCard: React.FC<Props> = (props) => {
           y: containerOffset.y,
           scale: 1,
           opacity: 1,
-          outlineColor: 'rgba(0,0,0,0)',
+          // outlineColor: 'rgba(0,0,0,0)',
         }}
         // for mouse behaviour
-        whileHover={{
-          outlineColor: 'rgba(0,0,0,.1)',
-          outlineStyle: 'solid',
-          outlineWidth: '10px',
-        }}
+        whileHover={
+          {
+            // outlineColor: 'rgba(0,0,0,.1)',
+            // outlineStyle: 'solid',
+            // outlineWidth: '10px',
+          }
+        }
         whileTap={{
           scale: 0.99,
         }}
@@ -92,10 +103,7 @@ const ReactiveCard: React.FC<Props> = (props) => {
       <motion.div
         // href="test"
         ref={containerRef}
-        className={
-          style.projectCard +
-          (!props.reactive ? ' ' + style.projectCardViewing : '')
-        }
+        // className={style.projectCard}
         transition={transitionConfig}
         // register mouse listeners
         style={props.style}

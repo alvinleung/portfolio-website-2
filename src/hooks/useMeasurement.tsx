@@ -15,8 +15,11 @@ const useMeasurement = <T extends HTMLElement>(): [
   const computeClientRect = () => {
     const boundingRect = nodeRef.current.getBoundingClientRect();
 
-    const x = boundingRect.left + window.scrollX;
-    const y = boundingRect.top + window.scrollY;
+    // const x = boundingRect.left + window.scrollX;
+    // const y = boundingRect.top + window.scrollY;
+
+    const x = boundingRect.left;
+    const y = nodeRef.current.offsetTop;
     // const width = nodeRef.current.clientWidth;
     // const height = nodeRef.current.clientHeight;
     const width = boundingRect.width;
