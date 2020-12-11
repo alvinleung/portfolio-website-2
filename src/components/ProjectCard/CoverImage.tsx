@@ -12,7 +12,7 @@
 import measureElement from '@/hooks/measureElement';
 import useMeasurement from '@/hooks/useMeasurement';
 import { motion, useAnimation, usePresence } from 'framer-motion';
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useLayoutEffect } from 'react';
 import { AnimationConfig } from '../AnimationConfig';
 import {
   TransitionState,
@@ -138,7 +138,7 @@ const CoverImage = ({
   };
 
   // use animation control to animate the card into the correct layout position
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!placeholderMeasurement) return;
     if (transitionState === TransitionState.DONE || !isPresent) {
       onTransitionComplete?.();
@@ -169,13 +169,13 @@ const CoverImage = ({
 
     if (!shouldPerformEnteringTransition) {
       control.set({
-        x: 0,
-        y: 0,
+        // x: 0,
+        // y: 0,
         width: placeholderMeasurement.width,
         height: placeholderMeasurement.height,
         transition: pageTransitionConfig,
         opacity: 0,
-        position: 'relative',
+        // position: 'relative',
       });
 
       control.start({
@@ -254,9 +254,10 @@ const CoverImage = ({
           backgroundImage: `url(${cover})`,
           backgroundPosition: 'center',
           backgroundSize: 'cover',
-          backgroundAttachment: 'scroll',
-          WebkitBackfaceVisibility: 'hidden',
-          backfaceVisibility: 'hidden',
+          // backgroundAttachment: 'scroll',
+          // WebkitBackfaceVisibility: 'hidden',
+          // backfaceVisibility: 'hidden',
+          willChange: 'backgroundImage',
         }}
         variants={variants}
         initial={getInitialState()}
