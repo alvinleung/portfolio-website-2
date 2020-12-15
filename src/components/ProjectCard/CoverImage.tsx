@@ -180,6 +180,7 @@ const CoverImage = ({
 
       control.start({
         opacity: 1,
+        transition: { delay: 0.2 },
       });
       onTransitionComplete?.();
     }
