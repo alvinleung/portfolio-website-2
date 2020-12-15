@@ -62,21 +62,21 @@ export default function Cursor() {
   };
 
   const removeAllMouseEventListeners = () => {
-    document.body.addEventListener('mousemove', handleMouseMove);
-    document.body.addEventListener('mouseenter', handleMouseEnter);
-    document.body.addEventListener('mouseleave', handleMouseLeave);
-    document.body.addEventListener('mousedown', handleMouseDown);
-    document.body.addEventListener('mouseup', handleMouseUp);
+    document.body.removeEventListener('mousemove', handleMouseMove);
+    document.body.removeEventListener('mouseenter', handleMouseEnter);
+    document.body.removeEventListener('mouseleave', handleMouseLeave);
+    document.body.removeEventListener('mousedown', handleMouseDown);
+    document.body.removeEventListener('mouseup', handleMouseUp);
   };
 
   const hideCursorForTouchScreen = () => {
-    addAllMouseEventListeners();
+    removeAllMouseEventListeners();
     isUsingTouch.current = true;
     setHidden(true);
   };
 
   const showCursorForMouseInput = () => {
-    removeAllMouseEventListeners();
+    addAllMouseEventListeners();
     setHidden(false);
     isUsingTouch.current = false;
   };
@@ -193,7 +193,7 @@ export default function Cursor() {
           ? hoveredElementMeasurement.height
           : config.width,
         // border: '2px solid #000',
-        zIndex: hoveredElementMeasurement ? -1 : 100000,
+        zIndex: 100000,
       }}
       initial={{
         borderRadius: config.width,
