@@ -33,7 +33,10 @@ body {
 // ======================================================
 .article-grid {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  @include viewportLargerThan($breakpoint-m) {
+    grid-template-columns: repeat(12, 1fr);
+  }
   column-gap: 24px;
 }
 
@@ -42,17 +45,26 @@ body {
   grid-column: 1/2;
 }
 .article-grid__full-grid-col {
-  grid-column: 3/12;
+  grid-column: 2/-1;
+  @include viewportLargerThan($breakpoint-m) {
+    grid-column: 3/13;
+  }
 }
 
 .article-grid__full-content-col {
-  grid-column: 3/12;
+  grid-column: 2/-1;
+  @include viewportLargerThan($breakpoint-m) {
+    grid-column: 3/13;
+  }
 }
 .article-grid__primary-col {
   grid-column: 3/8;
 }
 .article-grid__secondary-col {
-  grid-column: 8/13;
+  grid-column: 2/-1;
+  @include viewportLargerThan($breakpoint-m) {
+    grid-column: 8/13;
+  }
 }
 
 .article-grid__section-seperator {
