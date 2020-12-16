@@ -29,6 +29,10 @@
   align-items: flex-end;
 
   max-width: 40rem;
-  height: 80vh;
+
+  height: 70vh;
+  @include viewportLargerThan($breakpoint-s) {
+    height: 80vh;
+  }
   // max-height: 60rem;
 }

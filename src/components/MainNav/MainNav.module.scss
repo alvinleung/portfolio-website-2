@@ -21,21 +21,23 @@
   flex-direction: row;
   justify-content: flex-end;
 }
+
 .fixedContainer {
   position: fixed;
   width: 100%;
 
   // background-color:black;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 16px;
+  padding-bottom: 16px;
 
   z-index: 10000;
 
+  background-color: black;
 
   bottom: 0rem;
-  background-color: black;
   @include viewportLargerThan($breakpoint-s) {
-
+    // bottom: auto;
+    // background-color: transparent;
   }
   
 }
