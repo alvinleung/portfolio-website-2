@@ -23,7 +23,11 @@ body {
 }
 
 .nav-padding {
-  padding-top:4rem;
+  // ORIGINAL VALUE
+  @include viewportLargerThan($breakpoint-s) {
+    padding-top:8rem;
+  }
+  padding-top:1rem;
 }
 
 // ======================================================
