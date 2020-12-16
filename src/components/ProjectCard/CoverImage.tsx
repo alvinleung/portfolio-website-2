@@ -253,6 +253,7 @@ const CoverImage = ({
         ref={coverImageRef}
         style={{
           backgroundImage: `url(${cover})`,
+          // backgroundPosition: '20% 50%',
           backgroundPosition: 'center',
           backgroundSize: 'cover',
           // backgroundAttachment: 'scroll',

@@ -9,8 +9,8 @@ import measureElement from '@/hooks/measureElement';
 
 const config = {
   width: 20,
-  hoverColor: 'rgba(0,0,000, .1)',
-  normalColor: 'rgba(0,0,000, .4)',
+  hoverColor: 'rgba(0,0,255, .8)',
+  normalColor: 'rgba(0,0,255, .9)',
 };
 
 interface elmMeasurement {
@@ -194,6 +194,7 @@ export default function Cursor() {
           : config.width,
         // border: '2px solid #000',
         zIndex: 100000,
+        mixBlendMode: 'difference',
       }}
       initial={{
         borderRadius: config.width,
