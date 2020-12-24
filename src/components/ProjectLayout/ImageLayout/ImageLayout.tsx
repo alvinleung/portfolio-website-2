@@ -8,7 +8,7 @@ interface Props {
 export function ImageLayout({ src, children }: Props): ReactElement {
   return (
     <>
-      <img className="article-grid__full-content-col" src={src} />
+      <img className="main-grid__full-content-col" src={src} />
       {children}
     </>
   );

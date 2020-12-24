@@ -26,7 +26,7 @@ const CaseStudy: React.FC<PageProps> = () => (
       />
       <ProjectCard name="HelpMate" isViewing={true}></ProjectCard>
     </header>
-    <main className="full-width article-grid">
+    <main className="full-width main-grid">
       <ProjectSectionHeader>
         <SectionNumber>01</SectionNumber>
         <SectionTitle>Project Context</SectionTitle>
@@ -37,7 +37,7 @@ const CaseStudy: React.FC<PageProps> = () => (
         </SectionDescription>
       </ProjectSectionHeader>
 
-      <div className="article-grid__primary-col">
+      <div className="main-grid__primary-col">
         <ProjectInfo>
           <ProjectInfoItem
             fieldName="My Role"

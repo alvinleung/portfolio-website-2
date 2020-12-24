@@ -28,6 +28,13 @@ p {
   font-weight: 400;
 }
 
+.label {
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: .1em;
+  font-weight: bold;
+}
+
 a {
   cursor: none;
   color: #999;
@@ -36,6 +43,10 @@ a {
 
 a:active {
   opacity: .7;
+}
+
+body {
+  color: #282828;
 }
 
 // ===============================

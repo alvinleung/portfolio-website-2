@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion, useViewportScroll, useTransform } from 'framer-motion';
 import './LandingHero.scss';
 import { AnimationConfig, AnimationVariants } from '../AnimationConfig';
+import SlideInText from '../SlideInText/SlideInText';
 
 export default () => {
   const { scrollY } = useViewportScroll();
@@ -27,21 +28,28 @@ export default () => {
   }, []);
 
   return (
-    <div className="LandingHero">
+    <div className="LandingHero main-grid">
+      {/* <div className="main-grid__side-col label">Hello!</div> */}
       <motion.h1
         // animate={{
         //   opacity: [0, 1],
         // }}
-        className="callout "
+        className="callout main-grid__full-content"
         transition={{ ease: 'easeOut', duration: AnimationConfig.FAST }}
-        style={{
-          opacity: headerOpacity,
-          scale: headerScale,
-        }}
+        style={
+          {
+            // opacity: headerOpacity,
+            // scale: headerScale,
+          }
+        }
         exit={AnimationVariants.PRIMARY.exit}
       >
-        Hi, this is Alvin! A UX/UI designer who is obsessed in creating
-        functional yet aesthetic experiences.
+        <SlideInText>
+          {/* Hi, this is Alvin! A UX/UI Designer who is obsessed in creating
+          functional yet aesthetic experiences. */}
+          Hi, this is Alvin! A technologically supercharged Visual Designer who
+          is obsessed in creating functional yet aesthetic experiences.
+        </SlideInText>
         {/* by combining function with aesthetics. */}
         {/* I fight for my users against bad designs by combining
         function with aesthetics. */}

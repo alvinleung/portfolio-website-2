@@ -2,12 +2,11 @@
 
 .projectCard {
   cursor: none;
-
   max-width: 100%;
   min-height: 30rem;
-  margin-bottom: 2rem;
+  // margin-bottom: 1rem;
 
-  z-index: 10;
+  // z-index: 10;
 }
 
 // .projectCard:hover {
@@ -17,6 +16,7 @@
 
 
 .projectCardLink {
+
   text-decoration: none;
 
   &:active {
@@ -65,10 +65,13 @@
 }
 
 .reactiveCard {
-  outline: 0px solid rgba(0,0,0,.1);
+  position:relative;
+  outline: 0px solid rgba(0,0,0,0);
   transition-property: outline;
+  transition-duration: .1s;
   &:hover {
-    outline: 10px solid rgba(0,0,0,.1);
+    outline: 10px solid rgba(0,0,0,.9);
+    z-index: 10;
     // outline-color: rgba(0,0,0,.1);
     // outline-style: solid;
     // outline-width: 10px;

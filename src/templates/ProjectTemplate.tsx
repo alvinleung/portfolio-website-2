@@ -71,7 +71,7 @@ export default function Template({
         ></ProjectCardCover>
       </motion.header>
       <motion.main
-        className="full-width article-grid"
+        className="full-width main-grid"
         variants={variants}
         initial="initial"
         animate="enter"
@@ -121,20 +121,20 @@ const ParagraphProcessor = ({ children }) => {
     const isSectopmHeadingParagrah = children.substring(0, 2) === '--';
     if (isSectopmHeadingParagrah) {
       return (
-        <p className="article-grid__primary-col article__section-description">
+        <p className="main-grid__primary-col article__section-description">
           {children.substring(2)}
         </p>
       );
     }
   }
-  return <p className="article-grid__full-content-col">{children}</p>;
+  return <p className="main-grid__full-content">{children}</p>;
 };
 
 const ImageSub = (props) => (
   <img
     src={props.src}
     alt={props.alt}
-    className="article-grid__primary-col"
+    className="main-grid__primary-col"
     style={{ width: '100%' }}
   />
 );

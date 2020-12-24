@@ -5,19 +5,29 @@ import style from './MainNav.module.scss';
 const MainNav = () => {
   return (
     <div className={style.fixedContainer}>
-      <nav className={'full-width ' + style.navContainer}>
-        <Link to="/" className={style.navLogo}>
-          A.
-        </Link>
-        <Link to="/" className={style.navLink}>
-          Works
-        </Link>
-        <Link to="/" className={style.navLink}>
-          About
-        </Link>
-        <Link to="/" className={style.navLink}>
-          Resume
-        </Link>
+      <nav className={'full-width main-grid ' + style.navContainer}>
+        <div className="main-grid__side-col--presist">
+          <Link to="/" className={style.navLogo}>
+            A.
+          </Link>
+        </div>
+        <div
+          className="main-grid__primary-col--collapsable label"
+          style={{ marginTop: 'auto', marginBottom: 'auto' }}
+        >
+          UX/UI Designer
+        </div>
+        <div className={'main-grid__secondary-col ' + style.navLinkContainer}>
+          <Link to="/" className={style.navLink}>
+            Works
+          </Link>
+          <Link to="/" className={style.navLink}>
+            About
+          </Link>
+          <Link to="/" className={style.navLink}>
+            Resume
+          </Link>
+        </div>
       </nav>
     </div>
   );

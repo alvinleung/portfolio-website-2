@@ -1,0 +1,18 @@
+.wordContainer {
+  display:inline-block;
+  line-height: 1em;
+}
+.word {
+  color: inherit;
+  overflow-y:hidden;
+  display:inline-block;
+  line-height: 1em;
+  // adjusting the box height so the the box wouldn't eclipse the text
+  height: 1.1em;
+  font-family: "source-serif-pro";
+  span {
+    display: block;
+    // adjusting the box right side so the the box wouldn't eclipse the text
+    padding-right:.155em;
+  }
+}

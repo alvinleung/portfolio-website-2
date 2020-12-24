@@ -197,7 +197,7 @@ const CoverImage = ({
   }, [placeholderMeasurement]);
 
   const resetPosition = () => {
-    control.set({ position: 'relative', x: 0, y: 0 });
+    control.set({ position: 'relative', x: 0, y: 0, zIndex: 'auto' });
   };
 
   // fire when the object entered

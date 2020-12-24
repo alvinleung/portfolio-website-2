@@ -3,9 +3,9 @@ import React from 'react';
 export const ProjectSectionHeader: React.FC = ({ children }) => {
   return (
     <>
-      <div className="article-grid__full-grid-col article-grid__section-seperator"></div>
+      <div className="main-grid__full-content main-grid__section-seperator"></div>
       {children}
-      {/* <div className="article-grid__primary-col article__section-description">
+      {/* <div className="main-grid__primary-col article__section-description">
         As a final project in an Interface Design course at Simon Fraser
         University, our team designed, prototyped, tested and pitched an App
         idea to the class in 7 weeks.
@@ -16,7 +16,7 @@ export const ProjectSectionHeader: React.FC = ({ children }) => {
 
 export const SectionNumber: React.FC = ({ children }) => {
   return (
-    <div className="article-grid__side-col article__section-number">
+    <div className="main-grid__side-col article__section-number">
       {children}
     </div>
   );
@@ -24,7 +24,7 @@ export const SectionNumber: React.FC = ({ children }) => {
 
 export const SectionTitle: React.FC = ({ children }) => {
   return (
-    <h2 className="article-grid__primary-col article__section-header">
+    <h2 className="main-grid__primary-col article__section-header">
       {/* Project Context */}
       {children}
     </h2>
@@ -33,7 +33,7 @@ export const SectionTitle: React.FC = ({ children }) => {
 
 export const SectionDescription: React.FC = ({ children }) => {
   return (
-    <p className="article-grid__primary-col article__section-description">
+    <p className="main-grid__primary-col article__section-description">
       {/* Project Context */}
       {children}
     </p>

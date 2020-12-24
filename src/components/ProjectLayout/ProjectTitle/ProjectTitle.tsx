@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import './ProjectTitle.scss';
 import { AnimationVariants } from '@/components/AnimationConfig';
+import SlideInText from '@/components/SlideInText/SlideInText';
 
 interface Props {
   title: string;
@@ -19,7 +20,9 @@ const ProjectTitle: React.FC<Props> = ({ title, description }: Props) => {
       exit="exit"
     >
       <h1 className="ProjectTitle__title">{title}</h1>
-      <p className="ProjectTitle__description">{description}</p>
+      <p className="ProjectTitle__description">
+        <SlideInText>{description}</SlideInText>
+      </p>
     </motion.div>
   );
 };

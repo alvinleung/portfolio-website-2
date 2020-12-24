@@ -1,18 +1,26 @@
 @import "../../style/breakpoints.scss";
 
 .navLink, .navLogo {
-  font-size: 1.1rem;
+  font-size: 1rem;
 
   color: #999;
   text-decoration: none;
 }
 
 .navLogo {
-  margin-right: auto;
+  // margin-right: auto;
 }
 
+
+.navLinkContainer {
+  display:flex;
+}
 .navLink {
   margin-left: 1rem;
+
+  &:first-child {
+    margin-left: auto;
+  }
 }
 
 .navContainer {
@@ -35,7 +43,7 @@
   background-color: black;
 
   bottom: 0rem;
-  @include viewportLargerThan($breakpoint-s) {
+  @include viewportLargerThan($breakpoint-m) {
     bottom: auto;
     background-color: transparent;
   }

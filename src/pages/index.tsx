@@ -7,6 +7,7 @@ import '../style/reset.scss';
 
 import LandingHero from '@/components/LandingHero';
 import ProjectCardLink from '@/components/ProjectCard/ProjectCardLink';
+import VerticalLabel from '@/components/VerticalLabel/VerticalLabel';
 
 interface Props {
   readonly data: PageQueryData;
@@ -18,21 +19,25 @@ const Home: React.FC<Props> = ({ data }: Props) => {
   return (
     <>
       {/* <Cursor /> */}
-      <main className="full-width">
+      <main className="full-width nav-padding">
         {/* <Title /> */}
         <LandingHero />
-        <section id="works">
-          {projectCaseStudies.map((project, index) => (
-            <ProjectCardLink
-              key={index}
-              title={project.node.frontmatter.title}
-              slug={project.node.frontmatter.slug}
-              catagory={project.node.frontmatter.catagory}
-              tagline={project.node.frontmatter.tagline}
-              cover={project.node.frontmatter.cover}
-              isViewOnly={false}
-            />
-          ))}
+        <section id="works" className="main-grid">
+          <VerticalLabel>Featured Project</VerticalLabel>
+          <div className="main-grid__full-content">
+            {projectCaseStudies.map((project, index) => (
+              <ProjectCardLink
+                key={index}
+                title={project.node.frontmatter.title}
+                slug={project.node.frontmatter.slug}
+                catagory={project.node.frontmatter.catagory}
+                tagline={project.node.frontmatter.tagline}
+                cover={project.node.frontmatter.cover}
+                isViewOnly={false}
+              />
+            ))}
+          </div>
+          <div className="main-grid__vertical-label">Visual Design</div>
         </section>
       </main>
     </>
