@@ -23,7 +23,7 @@ export default () => {
     window.addEventListener('resize', updateWindowHeight);
     updateWindowHeight();
     return () => {
-      window.addEventListener('resize', updateWindowHeight);
+      window.removeEventListener('resize', updateWindowHeight);
     };
   }, []);
 

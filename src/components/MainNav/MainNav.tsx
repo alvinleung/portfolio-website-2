@@ -21,10 +21,10 @@ const MainNav = () => {
           <Link to="/" className={style.navLink}>
             Works
           </Link>
-          <Link to="/" className={style.navLink}>
+          <Link to="/about" className={style.navLink}>
             About
           </Link>
-          <Link to="/" className={style.navLink}>
+          <Link to="/resume.pdf" className={style.navLink}>
             Resume
           </Link>
         </div>

@@ -81,6 +81,13 @@ export const ProjectCardTransition: React.FC<Props> = ({
   const route = useRef(upcomingRoute);
 
   const processRouteChange = () => {
+    // abort if it's not a page transition of project page
+    // ONLY animate the route change between project page and project index page
+    if (upcomingRoute.indexOf('projects') === -1 && upcomingRoute !== '/')
+      return;
+    if (route.current.indexOf('projects') === -1 && route.current !== '/')
+      return;
+
     // setTransitionState if the transition haven't begun
     if (transitionState === TransitionState.DONE) {
       // transition begins
@@ -107,6 +114,7 @@ export const ProjectCardTransition: React.FC<Props> = ({
 
   // route change detected, process route change
   if (route.current !== upcomingRoute) {
+    // if the upcoming url is the project site
     processRouteChange();
     // update the current route to match the latest one
     route.current = upcomingRoute;
