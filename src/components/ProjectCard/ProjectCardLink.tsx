@@ -17,9 +17,19 @@ import {
   useTransformSnapshot,
   useTransitionState,
 } from './ProjectCardTransition';
+import SlideInText from '../SlideInText/SlideInText';
 
 const DEBUG = false;
 const VERBOSE = false;
+
+const variantCardContent = {
+  initial: {
+    opacity: 0,
+  },
+  enter: {
+    opacity: 1,
+  },
+};
 
 interface Props {
   title: string;
@@ -32,6 +42,9 @@ interface Props {
 }
 
 const ProjectCardLink: React.FC<Props> = (props: Props) => {
+  // Mouse Interaction
+  const [isMouseOver, setIsMouseOver] = useState(false);
+
   // determine whether the card will do outgoing transition
   const [willPresist, setWillPresist] = useState(false);
 
@@ -69,16 +82,32 @@ const ProjectCardLink: React.FC<Props> = (props: Props) => {
             className={style.projectType}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: AnimationConfig.FAST }}
           >
             {/* UX/UI Design */}
             {props.catagory}
           </motion.div>
-          <motion.h3 initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-            {props.title}
+          <motion.h3
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: AnimationConfig.FAST }}
+          >
+            <SlideInText visible={isMouseOver} delayBase={0}>
+              {props.title}
+            </SlideInText>
           </motion.h3>
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: AnimationConfig.FAST }}
+          >
             {/* Build connections in the community one task at a time. */}
-            {props.tagline}
+            <SlideInText visible={isMouseOver} delayBase={0}>
+              {props.tagline}
+            </SlideInText>
           </motion.p>
         </div>
       </CoverImage>
@@ -92,6 +121,8 @@ const ProjectCardLink: React.FC<Props> = (props: Props) => {
         setWillPresist(true);
       }}
       className={style.projectCardLink}
+      onMouseOver={() => setIsMouseOver(true)}
+      onMouseOut={() => setIsMouseOver(false)}
     >
       {cardContent}
     </Link>

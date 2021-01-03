@@ -37,6 +37,7 @@ const Home: React.FC<Props> = ({ data }: Props) => {
               />
             ))}
           </div>
+          <div className="main-grid__section-seperator"></div>
           <div className="main-grid__vertical-label">Visual Design</div>
         </section>
       </main>

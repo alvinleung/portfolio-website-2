@@ -9,7 +9,6 @@ export const AnimationConfig = {
   DEBUG: 10,
   EASING: [0.16, 1, 0.3, 1], // ease out expo
   // EASING: [0.22, 1, 0.36, 1], // ease out quint
-  variants: {},
 };
 
 export const AnimationVariants = {

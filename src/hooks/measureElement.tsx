@@ -27,6 +27,7 @@ const measureElement = <T extends HTMLElement>(
     const height = boundingRect.height;
     // const width = nodeRef.current.clientWidth;
     // const height = nodeRef.current.clientHeight;
+    // console.log(width);
 
     setOffset({
       x: x,

@@ -6,7 +6,10 @@ import { AnimationConfig } from '../AnimationConfig';
 
 interface Props {
   children: string;
+  visible?: boolean;
   delayFactor?: number;
+  delayBase?: number;
+  duration?: number;
 }
 
 const wordVariants = {
@@ -23,6 +26,9 @@ const DELAY_BASE = 0.2;
 const SlideInText: React.FC<Props> = ({
   children,
   delayFactor = DELAY_FACTOR,
+  delayBase = DELAY_BASE,
+  visible = true,
+  duration,
 }: Props) => {
   // make sure that we are working with text
   if (typeof children !== 'string') return children;
@@ -37,13 +43,13 @@ const SlideInText: React.FC<Props> = ({
             <motion.span
               variants={wordVariants}
               initial="initial"
-              animate="enter"
+              animate={visible ? 'enter' : 'initial'}
               exit="exit"
               transition={{
-                delay: index * 0.01 * delayFactor + DELAY_BASE,
+                delay: index * 0.01 * delayFactor + delayBase,
                 // easings: [0.19, 1, 0.22, 1],
                 easings: AnimationConfig.EASING,
-                duration: AnimationConfig.NORMAL,
+                duration: duration || AnimationConfig.NORMAL,
               }}
             >{`${word} `}</motion.span>
           </span>

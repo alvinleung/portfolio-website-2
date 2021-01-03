@@ -92,7 +92,7 @@ const ReactiveCard: React.FC<Props> = (props) => {
         whileTap={{
           scale: 0.99,
         }}
-        // style={props.style}
+        style={props.style}
       >
         {props.children}
       </motion.div>

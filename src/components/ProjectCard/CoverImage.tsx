@@ -145,7 +145,9 @@ const CoverImage = ({
       control.set({
         x: 0,
         y: 0,
-        width: placeholderMeasurement.width,
+        // width: placeholderMeasurement.width,
+        // prevent race condition with placeholderMeasurement, use the natural css method to handle resizing instead
+        width: '100%',
         height: placeholderMeasurement.height,
         transition: pageTransitionConfig,
         opacity: 1,
@@ -197,6 +199,7 @@ const CoverImage = ({
   }, [placeholderMeasurement]);
 
   const resetPosition = () => {
+    console.log('reseting position');
     control.set({ position: 'relative', x: 0, y: 0, zIndex: 'auto' });
   };
 
@@ -247,6 +250,7 @@ const CoverImage = ({
       // wrapper dimensions
       // the motion div will try to animate to the wrapper positions
       ref={placeholderRef}
+      style={{ width: '100%' }}
       {...props}
     >
       <motion.div
