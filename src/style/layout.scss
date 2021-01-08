@@ -9,14 +9,14 @@ body {
 .full-width {
   position: relative;
 
-  max-width: 90em;
+  max-width: 100em;
   
   // margin-left: 1rem;
   // margin-right: 1rem;
   margin-left: 20px;
   margin-right: 20px;
 
-  @include viewportLargerThan(98em) {
+  @include viewportLargerThan(100em) {
     margin-left: auto;
     margin-right: auto;
   }

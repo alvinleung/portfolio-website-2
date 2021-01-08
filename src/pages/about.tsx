@@ -29,19 +29,38 @@ const About: React.FC = () => {
           </SlideInText>
         </motion.h1>
         <motion.p
-          className="main-grid__full-content"
+          className="main-grid__primary-col"
           variants={AnimationVariants.PRIMARY}
           initial="initial"
           animate="enter"
           exit="exit"
         >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
+          I am currently a 4th-year student at Simon Fraser University, studying
+          Interactive Art and Technology. Thoughout my school years, I often
+          find myself wearing different hats in projects, doing works that are
+          needed to create an impressive experience.
+        </motion.p>
+        <motion.p
+          className="main-grid__primary-col"
+          variants={AnimationVariants.PRIMARY}
+          initial="initial"
+          animate="enter"
+          exit="exit"
+        >
+          My design practice include visual design, art direction, ux/ui design,
+          design researches, suprising buch of web development and a *healthy*
+          daily doses of coffee.
+        </motion.p>
+        <motion.p
+          className="main-grid__primary-col"
+          variants={AnimationVariants.PRIMARY}
+          initial="initial"
+          animate="enter"
+          exit="exit"
+        >
+          I am always looking forward to play a role in the making of cool
+          things, things which built with intention, things which *spark joy*,
+          things which are memorable.
         </motion.p>
       </main>
     </>
