@@ -23,7 +23,7 @@ const Home: React.FC<Props> = ({ data }: Props) => {
         {/* <Title /> */}
         <LandingHero />
         <section id="works" className="main-grid">
-          <VerticalLabel>Featured Project</VerticalLabel>
+          <VerticalLabel>Featured</VerticalLabel>
           <div className="main-grid__full-content">
             {projectCaseStudies.map((project, index) => (
               <ProjectCardLink
