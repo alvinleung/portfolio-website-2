@@ -6,17 +6,27 @@ body {
   margin: 0;
 }
 
+$full-width-size: 95em;
 .full-width {
   position: relative;
 
-  max-width: 100em;
-  
+  max-width: $full-width-size;
+
   // margin-left: 1rem;
   // margin-right: 1rem;
   margin-left: 20px;
   margin-right: 20px;
 
-  @include viewportLargerThan(100em) {
+  @include viewportLargerThan($full-width-size + 2em) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.full-width--bleed {
+  margin-left: 0px;
+  margin-right: 0px;
+  @include viewportLargerThan($full-width-size + 2em) {
     margin-left: auto;
     margin-right: auto;
   }
@@ -25,14 +35,14 @@ body {
 .nav-padding {
   // ORIGINAL VALUE
   @include viewportLargerThan($breakpoint-m) {
-    padding-top:8rem;
+    padding-top: 8rem;
   }
-  padding-top:1rem;
+  padding-top: 1rem;
 }
 
 // ======================================================
 //
-// Grid layout for the article view in project case study 
+// Grid layout for the article view in project case study
 //
 // ======================================================
 $grid-col-primary--collapsed: 1;
@@ -90,7 +100,6 @@ $grid-col-primary--full: 3;
   }
 }
 
-
 .main-grid__secondary-col {
   grid-column: 2/-1;
   @include viewportLargerThan($breakpoint-m) {
@@ -104,7 +113,7 @@ $grid-col-primary--full: 3;
 }
 
 // ++++++++++++++++++++++++++++++++++++++++++++
-// 
+//
 // for the project catagory on the landing page
 //
 // ++++++++++++++++++++++++++++++++++++++++++++
@@ -112,18 +121,18 @@ $grid-col-primary--full: 3;
   // display: none;
   font-size: 10vw;
   letter-spacing: -0.048em;
-  color: #CCC;
+  color: #ccc;
 
   grid-column: 1/-1;
 
-  transform: translateY(.55em);
+  transform: translateY(0.55em);
 
   @include viewportLargerThan($breakpoint-m) {
     font-size: 2.5vw;
-    color: #CCC;
-    
+    color: #ccc;
+
     transform: none;
-    
+
     display: block;
     margin-right: auto;
     grid-column: 2/3;

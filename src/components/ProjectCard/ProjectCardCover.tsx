@@ -17,9 +17,11 @@ const dimensions = {
 interface CoverProps {
   cover: string;
   slug: string;
+  className?: string;
+  style?: object;
 }
 
-const ProjectCardCover = ({ cover, slug }: CoverProps) => {
+const ProjectCardCover = ({ cover, slug, className, style }: CoverProps) => {
   const handleEnterPage = () => {
     // force scroll to top to create seemless transition
     if (typeof window !== 'undefined') {
@@ -39,7 +41,9 @@ const ProjectCardCover = ({ cover, slug }: CoverProps) => {
         // marginLeft: '1rem',
         // marginRight: '1rem',
         marginBottom: '4rem',
+        ...style,
       }}
+      className={className}
       onEnterPage={handleEnterPage}
       cover={cover}
       slug={slug}
