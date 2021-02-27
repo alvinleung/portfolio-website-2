@@ -3,8 +3,12 @@ import { graphql } from 'gatsby';
 
 import { motion } from 'framer-motion';
 
+// imports for custom react component in the article
 import ProjectTitle from '@/components/ProjectLayout/ProjectTitle/ProjectTitle';
 import ProjectCardCover from '@/components/ProjectCard/ProjectCardCover';
+import ComparisonView from '@/components/ComparisonView/ComparisonView';
+import ComparisonItem from '@/components/ComparisonView/ComparisonItem';
+
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { MDXProvider } from '@mdx-js/react';
 
@@ -82,6 +86,8 @@ export default function Template({
             // context for custom react component layout
             ProjectInfo,
             ProjectInfoItem,
+            ComparisonView,
+            ComparisonItem,
           }}
         >
           <MDXRenderer>{body}</MDXRenderer>
@@ -121,7 +127,7 @@ const ParagraphProcessor = ({ children }) => {
       );
     }
   }
-  return <p className="main-grid__full-content">{children}</p>;
+  return <p className="main-grid__primary-col">{children}</p>;
 };
 
 const ImageSub = (props) => (
