@@ -18,6 +18,7 @@ const ComparisonView: React.FC = ({ children }: Props) => {
   const containerRef = useRef(null);
   const dragHandleRef = useRef(null);
   const [containerWidth, setContainerWidth] = useState();
+  const [containerBoundingRect, setContainerBoundingRect] = useState();
 
   const [initialDragOffset, setInitialDragOffset] = useState(0);
   const dragControls = useDragControls();
@@ -30,38 +31,37 @@ const ComparisonView: React.FC = ({ children }: Props) => {
 
   // setup boundary for value calculation
   useEffect(() => {
-    if (containerRef.current) {
-      const boundingRect = containerRef.current.getBoundingClientRect();
-      setContainerWidth(boundingRect.width);
-      x.set(boundingRect.width / 2);
-    }
+    const calculateBounds = () => {
+      if (containerRef.current) {
+        const boundingRect = containerRef.current.getBoundingClientRect();
+        setContainerWidth(boundingRect.width);
+        setContainerBoundingRect(boundingRect);
+        x.set(boundingRect.width / 2);
+      }
+    };
+    // force calculate once when the component load
+    calculateBounds();
+    // and recalculate every time the window resize
+    window.addEventListener('resize', calculateBounds);
+    return () => {
+      window.removeEventListener('resize', calculateBounds);
+    };
   }, [containerRef]);
 
-  // setup constraint
-  useEffect(() => {
-    const windowSizeChange = () => {
-      const boundingRect = containerRef.current.getBoundingClientRect();
-      setContainerWidth(boundingRect.width);
-    };
-    window.addEventListener('resize', windowSizeChange);
-    return () => {
-      window.removeEventListener('resize', windowSizeChange);
-    };
-  }, []);
-
   const onBeginDrag = (event: React.MouseEvent) => {
-    setInitialDragOffset(event.screenX);
+    setInitialDragOffset(event.clientX);
     event.preventDefault();
     // return false;
   };
 
   const onDragUpdate = (event: React.MouseEvent) => {
-    x.set(event.screenX - containerRef.current.getBoundingClientRect().left);
+    const boundingRect = containerBoundingRect || { left: 0 };
+    x.set(event.clientX - boundingRect.left);
   };
   return (
     <div
       ref={containerRef}
-      className="comparison-view main-grid__full-content"
+      className="comparison-view display-image main-grid__full-content"
       draggable="true"
       onDragStart={onBeginDrag}
       onMouseMove={onDragUpdate}

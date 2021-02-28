@@ -4,19 +4,17 @@
   cursor: none;
   max-width: 100%;
   min-height: 30rem;
-  // margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 
   // z-index: 10;
 }
 
 // .projectCard:hover {
 //   cursor: none;
-  // outline: 10px solid rgba(0,0,0,0.1);
+// outline: 10px solid rgba(0,0,0,0.1);
 // }
 
-
 .projectCardLink {
-
   text-decoration: none;
 
   &:active {
@@ -24,7 +22,7 @@
   }
 }
 
-.projectCardContent { 
+.projectCardContent {
   --spacing-vertical: 4px;
 
   padding: 1rem;
@@ -37,10 +35,9 @@
   width: 100%;
   height: 100%;
 
-  
   font-family: "source-sans-pro", sans-serif;
   color: #fff;
-  
+
   .projectType {
     margin-bottom: auto;
     // font-family: "Roboto Mono";
@@ -50,28 +47,27 @@
   h3 {
     font-size: 36px;
     font-weight: normal;
-    letter-spacing: -.04em;
+    letter-spacing: -0.04em;
     line-height: 1em;
     margin-bottom: var(--spacing-vertical);
   }
 
   p {
     max-width: 15rem;
-    letter-spacing: .007em;
+    letter-spacing: 0.007em;
 
     margin-top: 0rem;
     margin-bottom: var(--spacing-vertical);
-    
   }
 }
 
 .reactiveCard {
-  position:relative;
-  outline: 0px solid rgba(0,0,0,0);
+  position: relative;
+  outline: 0px solid rgba(0, 0, 0, 0);
   transition-property: outline;
-  transition-duration: .1s;
+  transition-duration: 0.1s;
   &:hover {
-    outline: 8px solid rgba(210,210,210,.9);
+    outline: 8px solid rgba(210, 210, 210, 0.9);
     z-index: 10;
     // outline-color: rgba(0,0,0,.1);
     // outline-style: solid;

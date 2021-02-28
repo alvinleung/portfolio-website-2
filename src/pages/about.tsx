@@ -28,43 +28,48 @@ const About: React.FC = () => {
             A visual designer, web developer
           </SlideInText>
         </motion.h1>
-        <motion.p
-          className="main-grid__primary-col"
-          variants={AnimationVariants.PRIMARY}
-          initial="initial"
-          animate="enter"
-          exit="exit"
-        >
+        <SlideInParagraph>
           I am currently a 4th-year student at Simon Fraser University, studying
           Interactive Art and Technology. Thoughout my school years, I often
           find myself wearing different hats in projects, doing works that are
           needed to create an impressive experience.
-        </motion.p>
-        <motion.p
-          className="main-grid__primary-col"
-          variants={AnimationVariants.PRIMARY}
-          initial="initial"
-          animate="enter"
-          exit="exit"
-        >
+        </SlideInParagraph>
+        <SlideInParagraph>
           My design practice include visual design, art direction, ux/ui design,
           design researches, suprising buch of web development and a *healthy*
           daily doses of coffee.
-        </motion.p>
-        <motion.p
-          className="main-grid__primary-col"
+        </SlideInParagraph>
+        {/* <SlideInParagraph>
+          I am always looking forward to play a role in the making of cool
+          things, things which are built with intention, things which are
+          memorable.
+        </SlideInParagraph> */}
+
+        <motion.img
+          src="/img/portrait-small.jpg"
+          alt="me!"
+          className="main-grid__full-width display-image"
+          // animate in
           variants={AnimationVariants.PRIMARY}
           initial="initial"
           animate="enter"
           exit="exit"
-        >
-          I am always looking forward to play a role in the making of cool
-          things, things which built with intention, things which *spark joy*,
-          things which are memorable.
-        </motion.p>
+        />
       </main>
     </>
   );
 };
+
+const SlideInParagraph = ({ children }) => (
+  <motion.p
+    className="main-grid__primary-col"
+    variants={AnimationVariants.PRIMARY}
+    initial="initial"
+    animate="enter"
+    exit="exit"
+  >
+    {children}
+  </motion.p>
+);
 
 export default About;

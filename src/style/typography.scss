@@ -17,12 +17,23 @@ h2 {
   // font-family: "source serif pro";
   font-size: 24px;
   letter-spacing: -0.023em;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+}
+
+h4 {
+  font-weight: normal;
+  font-size: 24px;
+  letter-spacing: 0em;
+  line-height: 1.5rem;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
 }
 
 p {
   font-family: "source-sans-pro", sans-serif;
-  margin-top: 1rem;
-  margin-bottom: .5rem;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
 }
 
 .callout {
@@ -34,7 +45,7 @@ p {
 .label {
   text-transform: uppercase;
   font-size: 12px;
-  letter-spacing: .1em;
+  letter-spacing: 0.1em;
   font-weight: bold;
 }
 
@@ -45,11 +56,12 @@ a {
 }
 
 a:active {
-  opacity: .7;
+  opacity: 0.7;
 }
 
 body {
   color: #282828;
+  font-size: 16px;
 }
 
 // ===============================
@@ -57,9 +69,10 @@ body {
 // TYPOGRAPHY OF ARTICLE/CASE STUDY/PROJCET VIEW
 //
 // ===============================
-.article__section-header, .article__section-number {
+.article__section-header,
+.article__section-number {
   margin-top: 0rem;
-  margin-bottom: .5rem;
+  margin-bottom: 1.5rem;
 
   font-size: 36px;
   font-weight: normal;
@@ -68,6 +81,6 @@ body {
 .article__section-description {
   font-size: 24px;
   color: var(--clr-primary-lighter);
-  margin-top:1rem;
-  margin-bottom:4rem;
+  margin-top: 0rem;
+  margin-bottom: 2rem;
 }

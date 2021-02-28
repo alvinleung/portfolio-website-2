@@ -6,7 +6,7 @@ body {
   margin: 0;
 }
 
-$full-width-size: 95em;
+$full-width-size: 90em;
 .full-width {
   position: relative;
 
@@ -47,11 +47,12 @@ $full-width-size: 95em;
 // ======================================================
 $grid-col-primary--collapsed: 1;
 $grid-col-primary--full: 3;
+$grid-breakpoint-full: $breakpoint-m;
 
 .main-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  @include viewportLargerThan($breakpoint-m) {
+  @include viewportLargerThan($grid-breakpoint-full) {
     grid-template-columns: repeat(12, 1fr);
   }
   column-gap: 24px;
@@ -59,7 +60,7 @@ $grid-col-primary--full: 3;
 
 // use these to determine the horizontal layout of the grid
 .main-grid__side-col {
-  @include viewportLargerThan($breakpoint-m) {
+  @include viewportLargerThan($grid-breakpoint-full) {
     display: inline-block;
     grid-column: 1/3;
   }
@@ -74,20 +75,20 @@ $grid-col-primary--full: 3;
 
 .main-grid__full-width {
   grid-column: 1/-1;
-  @include viewportLargerThan($breakpoint-m) {
+  @include viewportLargerThan($grid-breakpoint-full) {
     grid-column: 3/-1;
   }
 }
 
 .main-grid__full-content {
   grid-column: 1/-1;
-  @include viewportLargerThan($breakpoint-m) {
+  @include viewportLargerThan($grid-breakpoint-full) {
     grid-column: 3/-1;
   }
 }
 .main-grid__primary-col {
   grid-column: 1/-1;
-  @include viewportLargerThan($breakpoint-m) {
+  @include viewportLargerThan($grid-breakpoint-full) {
     grid-column: 3/8;
   }
 }
@@ -95,14 +96,14 @@ $grid-col-primary--full: 3;
 .main-grid__primary-col--collapsable {
   @extend .main-grid__primary-col;
   display: none;
-  @include viewportLargerThan($breakpoint-m) {
+  @include viewportLargerThan($grid-breakpoint-full) {
     display: block;
   }
 }
 
 .main-grid__secondary-col {
-  grid-column: 2/-1;
-  @include viewportLargerThan($breakpoint-m) {
+  grid-column: 1/-1;
+  @include viewportLargerThan($grid-breakpoint-full) {
     grid-column: 8/-1;
   }
 }
@@ -127,7 +128,7 @@ $grid-col-primary--full: 3;
 
   transform: translateY(0.55em);
 
-  @include viewportLargerThan($breakpoint-m) {
+  @include viewportLargerThan($grid-breakpoint-full) {
     font-size: 2.5vw;
     color: #ccc;
 
@@ -138,5 +139,21 @@ $grid-col-primary--full: 3;
     grid-column: 2/3;
     writing-mode: vertical-rl;
     text-orientation: mixed;
+  }
+}
+
+.display-image {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.main-grid > ul {
+  @extend .main-grid__primary-col;
+  margin-top: 0rem;
+  margin-bottom: 0rem;
+
+  & > li {
+    margin-top: 0rem;
+    margin-bottom: 0rem;
   }
 }

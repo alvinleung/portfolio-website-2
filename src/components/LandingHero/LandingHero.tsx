@@ -34,7 +34,7 @@ export default () => {
         // animate={{
         //   opacity: [0, 1],
         // }}
-        className="callout main-grid__primary-col"
+        className="callout main-grid__full-content"
         transition={{ ease: 'easeOut', duration: AnimationConfig.FAST }}
         style={
           {

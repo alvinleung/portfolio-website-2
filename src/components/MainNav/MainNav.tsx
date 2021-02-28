@@ -24,9 +24,9 @@ const MainNav = () => {
           <Link to="/about" className={style.navLink}>
             About
           </Link>
-          <Link to="/resume.pdf" className={style.navLink}>
+          {/* <Link to="/resume.pdf" className={style.navLink}>
             Resume
-          </Link>
+          </Link> */}
         </div>
       </nav>
     </div>
