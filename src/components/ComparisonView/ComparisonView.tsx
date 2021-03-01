@@ -61,7 +61,7 @@ const ComparisonView: React.FC = ({ children }: Props) => {
   return (
     <div
       ref={containerRef}
-      className="comparison-view display-figure main-grid__full-content"
+      className="comparison-view main-grid__full-content"
       draggable="true"
       onDragStart={onBeginDrag}
       onMouseMove={onDragUpdate}

@@ -111,6 +111,7 @@ export default function Template({
             ComparisonItem,
             FullImage,
             HalfImage,
+            Pill,
           }}
         >
           <MDXRenderer>{body}</MDXRenderer>
@@ -135,7 +136,7 @@ const SectionHead = ({ children, key }) => {
 };
 
 const SubSectionHead = ({ children, key }) => (
-  <h4 className="main-grid__primary-col">{children}</h4>
+  <h4 className="main-grid__full-width">{children}</h4>
 );
 
 const ParagraphHead = ({ children, key }) => (
@@ -186,15 +187,20 @@ const ImageSub = (props) => (
   <img
     src={props.src}
     alt={props.alt}
+    loading="lazy"
     className="main-grid__full-content"
     style={{ width: '100%' }}
   />
 );
 
 const FullImage = (props) => {
+  const withPadding = 'main-grid__full-content display-figure';
+  const noPadding =
+    'main-grid__full-content display-figure display-figure--no-padding';
+
   return (
-    <figure className="main-grid__full-content display-figure">
-      <img src={props.src} alt={props.alt} />
+    <figure className={props.noPadding ? noPadding : withPadding}>
+      <img src={props.src} alt={props.alt} loading="lazy" />
       {props.caption && <figcaption>{props.caption}</figcaption>}
     </figure>
   );
@@ -206,9 +212,32 @@ const HalfImage = (props) => {
 
   return (
     <figure className={props.secondary ? secondaryClass : primaryClass}>
-      <img src={props.src} alt={props.alt} />
+      <img src={props.src} alt={props.alt} loading="lazy" />
       {props.caption && <figcaption>{props.caption}</figcaption>}
     </figure>
+  );
+};
+
+const Pill = (props) => {
+  return (
+    <span>
+      <div
+        style={{
+          display: 'inline-block',
+          fontSize: '.75rem',
+          textTransform: 'uppercase',
+          letterSpacing: '.07em',
+          fontWeight: 500,
+          backgroundColor: props.color,
+          color: '#FFF',
+          borderRadius: props.round ? '5em' : '0rem',
+          paddingLeft: '.5rem',
+          paddingRight: '.5rem',
+        }}
+      >
+        {props.children}
+      </div>
+    </span>
   );
 };
 
