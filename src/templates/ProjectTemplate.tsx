@@ -99,6 +99,7 @@ export default function Template({
             h2: SectionHead,
             h3: SectionDescription,
             h4: SubSectionHead,
+            h5: ParagraphHead,
             // p: ParagraphProcessor,
             p: customParagraphProcessor,
             hr: ThematicBreak,
@@ -109,6 +110,7 @@ export default function Template({
             ComparisonView,
             ComparisonItem,
             FullImage,
+            HalfImage,
           }}
         >
           <MDXRenderer>{body}</MDXRenderer>
@@ -134,6 +136,10 @@ const SectionHead = ({ children, key }) => {
 
 const SubSectionHead = ({ children, key }) => (
   <h4 className="main-grid__primary-col">{children}</h4>
+);
+
+const ParagraphHead = ({ children, key }) => (
+  <h5 className="main-grid__primary-col">{children}</h5>
 );
 
 // for large break between sections
@@ -187,9 +193,22 @@ const ImageSub = (props) => (
 
 const FullImage = (props) => {
   return (
-    <div className="main-grid__full-content display-image">
+    <figure className="main-grid__full-content display-figure">
       <img src={props.src} alt={props.alt} />
-    </div>
+      {props.caption && <figcaption>{props.caption}</figcaption>}
+    </figure>
+  );
+};
+
+const HalfImage = (props) => {
+  const primaryClass = 'main-grid__primary-col display-figure';
+  const secondaryClass = 'main-grid__secondary-col display-figure';
+
+  return (
+    <figure className={props.secondary ? secondaryClass : primaryClass}>
+      <img src={props.src} alt={props.alt} />
+      {props.caption && <figcaption>{props.caption}</figcaption>}
+    </figure>
   );
 };
 

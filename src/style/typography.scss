@@ -1,4 +1,6 @@
 @import url("https://use.typekit.net/sdz1siz.css");
+@import "./layout.scss";
+@import "./breakpoints.scss";
 
 * {
   font-family: "source-sans-pro";
@@ -28,6 +30,17 @@ h4 {
   line-height: 1.5rem;
   margin-top: 0rem;
   margin-bottom: 1rem;
+}
+
+h5 {
+  // @include viewportLargerThan($grid-breakpoint-full) {
+  //   font-weight: normal;
+  // }
+  font-weight: bold;
+  font-size: 16px;
+  letter-spacing: 0em;
+  margin-top: 0rem;
+  margin-bottom: 0.5rem;
 }
 
 p {

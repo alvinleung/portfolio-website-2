@@ -48,7 +48,7 @@ const About: React.FC = () => {
         <motion.img
           src="/img/portrait-small.jpg"
           alt="me!"
-          className="main-grid__full-width display-image"
+          className="main-grid__full-width display-figure"
           // animate in
           variants={AnimationVariants.PRIMARY}
           initial="initial"

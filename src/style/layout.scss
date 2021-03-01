@@ -142,9 +142,14 @@ $grid-breakpoint-full: $breakpoint-m;
   }
 }
 
-.display-image {
+.display-figure {
   margin-top: 1rem;
   margin-bottom: 1rem;
+
+  figcaption {
+    margin-top: 0.5rem;
+    font-style: italic;
+  }
 }
 
 .main-grid > ul {
