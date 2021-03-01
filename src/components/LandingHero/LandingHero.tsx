@@ -47,8 +47,12 @@ export default () => {
         <SlideInText>
           {/* Hi, this is Alvin! A UX/UI Designer who is obsessed in creating
           functional yet aesthetic experiences. */}
-          Hi, this is Alvin! A technologically supercharged Visual Designer who
-          is obsessed in creating functional yet aesthetic experiences.
+          {/* Hi, this is Alvin! A technologically supercharged Visual Designer who
+          is obsessed in creating functional yet aesthetic experiences. */}
+          {/* Hi, this is Alvin! A UX/UI designer with an eye for aesthetic, a mind
+          for code and a passion for coffee. */}
+          Hi, this is Alvin! A UX/UI designer with an eye for aesthetic, a hand
+          for code and a passion for coffee.
         </SlideInText>
         {/* by combining function with aesthetics. */}
         {/* I fight for my users against bad designs by combining

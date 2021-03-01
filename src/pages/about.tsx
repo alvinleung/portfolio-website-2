@@ -24,9 +24,7 @@ const About: React.FC = () => {
           animate="enter"
           exit="exit"
         >
-          <SlideInText delayBase={0}>
-            A visual designer, web developer
-          </SlideInText>
+          <SlideInText delayBase={0}>Hellloooo</SlideInText>
         </motion.h1>
         <SlideInParagraph>
           I am currently a 4th-year student at Simon Fraser University, studying

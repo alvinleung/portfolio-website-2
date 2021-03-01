@@ -17,7 +17,12 @@ const MainNav = () => {
         >
           UX/UI Designer
         </div>
-        <div className={'main-grid__secondary-col ' + style.navLinkContainer}>
+        <div
+          className={
+            'main-grid__secondary-col main-grid__secondary-col--mobile-break ' +
+            style.navLinkContainer
+          }
+        >
           <Link to="/" className={style.navLink}>
             Works
           </Link>

@@ -103,6 +103,11 @@ $grid-breakpoint-full: $breakpoint-m;
 
 .main-grid__secondary-col {
   grid-column: 1/-1;
+
+  &--mobile-break {
+    grid-column: 2/-1;
+  }
+
   @include viewportLargerThan($grid-breakpoint-full) {
     grid-column: 8/-1;
   }
@@ -147,16 +152,13 @@ $grid-breakpoint-full: $breakpoint-m;
   margin-bottom: 1rem;
 
   &--no-padding {
-    margin-top: 1rem;
+    margin-top: 0rem;
   }
 
   figcaption {
     margin-top: 0.5rem;
     font-style: italic;
   }
-}
-
-.pill {
 }
 
 .main-grid > ul {
