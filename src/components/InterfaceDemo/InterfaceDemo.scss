@@ -1,6 +1,14 @@
 .interface-demo {
+  position: relative;
+
   video {
     width: 100%;
     display: block;
   }
+}
+
+.progress-ring-container {
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.5rem;
 }

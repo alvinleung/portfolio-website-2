@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
+import ProgressRing from '../ProgressRing';
 import './InterfaceDemo.scss';
 
 interface Props {
@@ -11,6 +12,7 @@ const INTERSECTION_RATIO_THRESHOLD = 0.5;
 export const InterfaceDemo = (props: Props) => {
   const playerRef = useRef<HTMLVideoElement>();
   const [isViewing, setIsViewing] = useState(false);
+  const [videoProgress, setVideoProgress] = useState(0);
 
   const replayFromBeginning = () => {
     playerRef.current.currentTime = 0;
@@ -28,6 +30,20 @@ export const InterfaceDemo = (props: Props) => {
       pauseVideo();
     }
   }, [isViewing]);
+
+  // update the progress when the video is playing
+  useEffect(() => {
+    const handleTimeUpdate = () => {
+      setVideoProgress(
+        (playerRef.current.currentTime / playerRef.current.duration) * 100,
+      );
+    };
+    playerRef.current.addEventListener('timeupdate', handleTimeUpdate);
+
+    return () => {
+      playerRef.current.removeEventListener('timeupdate', handleTimeUpdate);
+    };
+  }, []);
 
   // setup intersection observer for auto playing video when user scroll to the page
   useEffect(() => {
@@ -69,6 +85,9 @@ export const InterfaceDemo = (props: Props) => {
       initial={{ opacity: 0.1 }}
       animate={{ opacity: isViewing ? 1 : 0.1 }}
     >
+      <div className="progress-ring-container">
+        <ProgressRing progress={videoProgress} strokeColor="rgba(0,0,0,.2)" />
+      </div>
       <video
         src={props.url}
         autoPlay={true}
