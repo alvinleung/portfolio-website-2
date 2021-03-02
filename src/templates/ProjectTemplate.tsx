@@ -17,6 +17,8 @@ import {
   ProjectInfoItem,
 } from '@/components/ProjectLayout/ProjectInfo/ProjectInfo';
 
+import InterfaceDemo from '../components/InterfaceDemo';
+
 import {
   SectionDescription,
   SectionNumber,
@@ -112,6 +114,7 @@ export default function Template({
             FullImage,
             HalfImage,
             Pill,
+            InterfaceDemo,
           }}
         >
           <MDXRenderer>{body}</MDXRenderer>
@@ -156,27 +159,47 @@ const createParagraphProcessor = (
 ) => {
   // function that would be called in runtime
   const combinedProcessor = ({ children }) => {
-    if (typeof children !== 'string')
-      return <p className="main-grid__primary-col">{children}</p>;
+    const isChildrenString = typeof children === 'string';
+    const paragraphHeadingChunk = (() => {
+      if (isChildrenString) return children;
+      if (Array.isArray(children)) return children[0];
+    })();
 
     const defaultParagraphFormat = (content) => (
       <p className="main-grid__primary-col">{content}</p>
     );
+
+    if (typeof paragraphHeadingChunk !== 'string')
+      return defaultParagraphFormat(children);
+
+    const trimParagraphToken = (children, token) => {
+      if (Array.isArray(children)) {
+        let newChildren = [...children];
+        newChildren[0] = paragraphHeadingChunk.substring(token.length);
+        return newChildren;
+      }
+
+      if (isChildrenString) return children.substring(token.length);
+    };
+
+    const reducerFunction = (
+      accumulator: IParagraphProcessor,
+      { token, output }: IParagraphProcessor,
+    ) => {
+      const isMatchingToken =
+        paragraphHeadingChunk.substring(0, token.length) === token;
+      if (isMatchingToken) {
+        return output(trimParagraphToken(children, token));
+      }
+      return accumulator;
+    };
+
     const result = processorList.reduce<
       React.ReactElement | IParagraphProcessor
     >(
-      (
-        accumulator: IParagraphProcessor,
-        { token, output }: IParagraphProcessor,
-      ) => {
-        const isMatchingToken = children.substring(0, token.length) === token;
-        if (isMatchingToken) {
-          return output(children.substring(token.length));
-        }
-        return accumulator;
-      },
+      reducerFunction,
       // default value is the children
-      defaultParagraphFormat(children),
+      defaultParagraphFormat(paragraphHeadingChunk),
     );
     return result;
   };
@@ -220,8 +243,8 @@ const HalfImage = (props) => {
 
 const Pill = (props) => {
   return (
-    <span>
-      <div
+    <span className="main-grid__col">
+      <span
         style={{
           display: 'inline-block',
           fontSize: '.75rem',
@@ -236,7 +259,7 @@ const Pill = (props) => {
         }}
       >
         {props.children}
-      </div>
+      </span>
     </span>
   );
 };

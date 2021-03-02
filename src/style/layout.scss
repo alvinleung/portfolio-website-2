@@ -118,6 +118,10 @@ $grid-breakpoint-full: $breakpoint-m;
   margin-bottom: 8rem;
 }
 
+.main-grid__col {
+  grid-column: auto / span 4;
+}
+
 // ++++++++++++++++++++++++++++++++++++++++++++
 //
 // for the project catagory on the landing page
