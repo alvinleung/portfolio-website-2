@@ -138,9 +138,9 @@ Existing solutions like Craiglist allows more causal exchange, but it does not p
   />
 </ComparisonView>
 
-Problem: Users were confused on how to get to the Check-In or Task Details screens from the Check-In card, as tapping on the card itself led to one screen but tapping the Check-In button itself led to another.
+**Problem**: Users were confused on how to get to the Check-In or Task Details screens from the Check-In card, as tapping on the card itself led to one screen but tapping the Check-In button itself led to another.
 
--> Fix: Removed the Check-In button and so that the user will only have one interaction when tapping the card, minimizing confusion.
+-> **Fix**: Removed the Check-In button and so that the user will only have one interaction when tapping the card, minimizing confusion.
 
 ---
 
@@ -157,9 +157,9 @@ Problem: Users were confused on how to get to the Check-In or Task Details scree
   />
 </ComparisonView>
 
-Problem: Users were concerned about the accept/decline options being buried in the chat if there are a lot of messages.
+**Problem**: Users were concerned about the accept/decline options being buried in the chat if there are a lot of messages.
 
--> Fix: Moved the task request to a sticky header at the top of the chat, rather than as a message.
+-> **Fix**: Moved the task request to a sticky header at the top of the chat, rather than as a message.
 
 ---
 
@@ -171,9 +171,9 @@ Problem: Users were concerned about the accept/decline options being buried in t
   noPadding
 />
 
-Problem: The check-in progress may be unnecessary and cumbersome for the Helper in scenarios where the Client is present during the Task, and they would be able to communicate in person more easily than in the app.
+**Problem**: The check-in progress may be unnecessary and cumbersome for the Helper in scenarios where the Client is present during the Task, and they would be able to communicate in person more easily than in the app.
 
--> Fix: Added an option in the confirmation screen after accepting a task, to allow Clients to indicate whether they want this check-in updates or not.
+-> **Fix**: Added an option in the confirmation screen after accepting a task, to allow Clients to indicate whether they want this check-in updates or not.
 
 ---
 
@@ -181,22 +181,40 @@ _Note: These are few of the major fixes, this presentation slide deck provide de
 
 ---
 
-## 09 Outcome - UI Flows
+## 09 Outcome - The UI Experience
 
 <InterfaceDemo url="https://www.sfu.ca/~kkl64/videos/helpmate/1-create-task.mp4" />
 
-##### Create a task
+##### Create a task [CLIENT]
 
--> fdsa
-
--> <Pill color="#27B2B2" round>Safty and Trust</Pill>
+-> To find help with chores, client can create a task under _My Tasks_. Task catagory and details like location, description, date, amount of helpers are customisable in the task creation modal. After the form is completed, an entry of task will be added to the community taskboard.
 
 <InterfaceDemo url="https://www.sfu.ca/~kkl64/videos/helpmate/2-find-task.mp4" />
 
+##### Find and Request for a task [HELPER]
+
+-> Helpers can find a task nearby using the _Taskboard_. Tasks can be filtered out by the helper's preference. When the helper found a choice, he/she can send a request to the client under the task screen.
+
 <InterfaceDemo url="https://www.sfu.ca/~kkl64/videos/helpmate/3-receive-request.mp4" />
+
+##### Receive Task Request [CLIENT]
+
+-> The client will receive a notification when a Helper send a task request. They can now chat and confirm the task details under the in app messaging system which was tailored for the scenario.
 
 <InterfaceDemo url="https://www.sfu.ca/~kkl64/videos/helpmate/4-check-in.mp4" />
 
+##### Appointment confirmation [CLIENT & HELPER]
+
+-> Before the appointment, the helper will be asked to confirm the arrival time. This is designed to give time for
+
 <InterfaceDemo url="https://www.sfu.ca/~kkl64/videos/helpmate/5-task-done.mp4" />
 
+##### Check in and Payment [CLIENT & HELPER]
+
+-> In order to give the clients a peace of mind, they will be informed as the task progress status updates. Some check in feature might be opted out if the client is present during the task.
+
 <InterfaceDemo url="https://www.sfu.ca/~kkl64/videos/helpmate/6-review.mp4" />
+
+##### [CLIENT & HELPER] Leave a Review
+
+-> Upon finishing the task, clients and Helpers can leave ratings and review for each other. This step is crucial for the HelpMate concept as user's peer review is the fundamental building block of safty and trust.

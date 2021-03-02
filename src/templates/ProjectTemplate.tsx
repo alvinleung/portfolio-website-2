@@ -173,6 +173,7 @@ const createParagraphProcessor = (
       return defaultParagraphFormat(children);
 
     const trimParagraphToken = (children, token) => {
+      console.log(typeof children);
       if (Array.isArray(children)) {
         let newChildren = [...children];
         newChildren[0] = paragraphHeadingChunk.substring(token.length);
@@ -199,7 +200,7 @@ const createParagraphProcessor = (
     >(
       reducerFunction,
       // default value is the children
-      defaultParagraphFormat(paragraphHeadingChunk),
+      defaultParagraphFormat(children),
     );
     return result;
   };

@@ -15,8 +15,11 @@ export const Footer: React.FC<Props> = () => {
       className={style.footer + ' full-width main-grid'}
     >
       <div className="main-grid__full-content">
-        <div>Seeking for 2021 Spring Internship</div>
-        <div>alvinleung2009@gmail.com</div>
+        <div>Designed and Coded by Alvin Leung </div>
+        <p>
+          <em>Seeking for 2021 Spring Internship</em>
+          <em>alvinleung2009@gmail.com</em>
+        </p>
         <div className={style.footerGroup}>
           <a href="resume.pdf" target="blank">
             Resume
