@@ -25,6 +25,10 @@
   }
 }
 
+.comparison-view:active > .comparison-view__split {
+  background-color: #00f;
+}
+
 $padding: 1rem;
 .comparison-item {
   &,
