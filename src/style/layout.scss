@@ -161,7 +161,8 @@ $grid-breakpoint-full: $breakpoint-m;
 
   figcaption {
     margin-top: 0.5rem;
-    font-style: italic;
+    // font-style: italic;
+    opacity: 0.5;
   }
 }
 
