@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import ProgressRing from '../ProgressRing';
+import { useCursorCustomState, CustomStates } from '../Cursor/Cursor';
 import './InterfaceDemo.scss';
 
 interface Props {
@@ -13,6 +14,7 @@ export const InterfaceDemo = (props: Props) => {
   const playerRef = useRef<HTMLVideoElement>();
   const [isViewing, setIsViewing] = useState(false);
   const [videoProgress, setVideoProgress] = useState(0);
+  const [, , setCursorCustomState] = useCursorCustomState();
 
   const replayFromBeginning = () => {
     playerRef.current.currentTime = 0;
@@ -80,11 +82,20 @@ export const InterfaceDemo = (props: Props) => {
     if (isViewing) replayFromBeginning();
   };
 
+  const handleMouseOver = () => {
+    setCursorCustomState(CustomStates.REPLAY);
+  };
+  const handleMouseOut = () => {
+    setCursorCustomState(CustomStates.NONE);
+  };
+
   return (
     <motion.div
       className="interface-demo display-figure  main-grid__full-width"
       initial={{ opacity: 0.1 }}
       animate={{ opacity: isViewing ? 1 : 0.1 }}
+      onMouseOver={handleMouseOver}
+      onMouseOut={handleMouseOut}
     >
       <div className="progress-ring-container">
         <ProgressRing progress={videoProgress} strokeColor="rgba(0,0,0,.2)" />

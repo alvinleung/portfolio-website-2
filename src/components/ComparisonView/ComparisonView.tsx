@@ -3,10 +3,9 @@ import {
   motion,
   useDragControls,
   useMotionValue,
-  useAnimation,
   useTransform,
-  PanInfo,
 } from 'framer-motion';
+import { useCursorCustomState, CustomStates } from '../Cursor/Cursor';
 import { AnimationVariants } from '@/components/AnimationConfig';
 import './ComparisonView.scss';
 
@@ -19,9 +18,11 @@ const ComparisonView: React.FC = ({ children }: Props) => {
   const dragHandleRef = useRef(null);
   const [containerWidth, setContainerWidth] = useState();
   const [containerBoundingRect, setContainerBoundingRect] = useState();
+  const [allowDrag, setAllowDrag] = useState(false);
+
+  const [, , setCursorCustomState] = useCursorCustomState();
 
   const [initialDragOffset, setInitialDragOffset] = useState(0);
-  const dragControls = useDragControls();
   const x = useMotionValue(0);
   const dragPercentage = useTransform(
     x,
@@ -48,16 +49,36 @@ const ComparisonView: React.FC = ({ children }: Props) => {
     };
   }, [containerRef]);
 
-  const onBeginDrag = (event: React.MouseEvent) => {
-    setInitialDragOffset(event.clientX);
-    event.preventDefault();
-    // return false;
-  };
-
-  const onDragUpdate = (event: React.MouseEvent) => {
+  const setSplitPosition = (event: React.MouseEvent) => {
     const boundingRect = containerBoundingRect || { left: 0 };
     x.set(event.clientX - boundingRect.left);
   };
+
+  const onBeginDrag = (event: React.MouseEvent) => {
+    event.preventDefault();
+  };
+
+  const onDragUpdate = (event: React.MouseEvent) => {
+    if (!allowDrag) return;
+    setSplitPosition(event);
+  };
+
+  const onMouseOver = () => {
+    setCursorCustomState(CustomStates.HORIZONTAL_SLIDE);
+  };
+  const onMouseOut = () => {
+    setCursorCustomState(CustomStates.NONE);
+  };
+
+  const onMouseUp = () => {
+    setAllowDrag(false);
+  };
+  const onMouseDown = (event: React.MouseEvent) => {
+    setAllowDrag(true);
+    setInitialDragOffset(event.clientX);
+    setSplitPosition(event);
+  };
+
   return (
     <div
       ref={containerRef}
@@ -65,6 +86,10 @@ const ComparisonView: React.FC = ({ children }: Props) => {
       draggable="true"
       onDragStart={onBeginDrag}
       onMouseMove={onDragUpdate}
+      onMouseOver={onMouseOver}
+      onMouseDown={onMouseDown}
+      onMouseUp={onMouseUp}
+      onMouseOut={onMouseOut}
     >
       {children.map((child, index) =>
         React.cloneElement(child, {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion';
-import Cursor from '../Cursor/Cursor';
+import Cursor, { CursorContextProvider } from '../Cursor/Cursor';
 import MainNav from '../MainNav/MainNav';
 import { Footer } from '../Footer/Footer';
 import { ProjectCardTransition } from '../ProjectCard/ProjectCardTransition';
@@ -32,16 +32,18 @@ const PageWrapper = ({ children, location }) => {
   return (
     <>
       <MainNav />
-      {/* a context provider for the transitions need to be outside of Animate Presence in order to work */}
-      <ProjectCardTransition upcomingRoute={location.pathname}>
-        <AnimatePresence initial={true} exitBeforeEnter>
-          <TransitionContentWrapper key={location.pathname}>
-            <Cursor />
-            {children}
-            <Footer />
-          </TransitionContentWrapper>
-        </AnimatePresence>
-      </ProjectCardTransition>
+      <CursorContextProvider>
+        {/* a context provider for the transitions need to be outside of Animate Presence in order to work */}
+        <ProjectCardTransition upcomingRoute={location.pathname}>
+          <AnimatePresence initial={true} exitBeforeEnter>
+            <TransitionContentWrapper key={location.pathname}>
+              <Cursor />
+              {children}
+              <Footer />
+            </TransitionContentWrapper>
+          </AnimatePresence>
+        </ProjectCardTransition>
+      </CursorContextProvider>
     </>
   );
 };
