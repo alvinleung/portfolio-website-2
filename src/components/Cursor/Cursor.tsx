@@ -374,7 +374,7 @@ export default function Cursor() {
           src={
             CustomStateIcons[customState] ||
             CustomStateIcons[previousCustomState] ||
-            false
+            '/img/cursor/empty.png'
           }
           style={{
             width: textSelectCursorAppearence.width * CUSTOM_STATE_ICON_SCALE,
