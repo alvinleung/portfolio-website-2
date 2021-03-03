@@ -16,6 +16,39 @@ interface Props {
 const Home: React.FC<Props> = ({ data }: Props) => {
   const projectCaseStudies = data.allMdx.edges;
 
+  const filterProjectByTag = (projectCaseStudies, tag: string) => {
+    return projectCaseStudies.filter((project) => {
+      const tagList = project.node.frontmatter.tag.split(' ');
+      const isMatchingProject = tagList.some((val) => val === tag);
+      if (isMatchingProject) return true;
+      return false;
+    });
+  };
+
+  const featuredProjectList = filterProjectByTag(
+    projectCaseStudies,
+    'featured',
+  );
+
+  const visualDesignProjectList = filterProjectByTag(
+    projectCaseStudies,
+    'visual-design',
+  );
+
+  const buildProjectList = (projectList) => {
+    return projectList.map((project, index) => (
+      <ProjectCardLink
+        key={index}
+        title={project.node.frontmatter.title}
+        slug={project.node.frontmatter.slug}
+        catagory={project.node.frontmatter.catagory}
+        tagline={project.node.frontmatter.tagline}
+        cover={project.node.frontmatter.cover}
+        isViewOnly={false}
+      />
+    ));
+  };
+
   return (
     <>
       {/* <Cursor /> */}
@@ -25,20 +58,13 @@ const Home: React.FC<Props> = ({ data }: Props) => {
         <section id="works" className="main-grid">
           <VerticalLabel>Featured</VerticalLabel>
           <div className="main-grid__full-content">
-            {projectCaseStudies.map((project, index) => (
-              <ProjectCardLink
-                key={index}
-                title={project.node.frontmatter.title}
-                slug={project.node.frontmatter.slug}
-                catagory={project.node.frontmatter.catagory}
-                tagline={project.node.frontmatter.tagline}
-                cover={project.node.frontmatter.cover}
-                isViewOnly={false}
-              />
-            ))}
+            {buildProjectList(featuredProjectList)}
           </div>
           <div className="main-grid__section-seperator"></div>
           <VerticalLabel>Visual Design</VerticalLabel>
+          <div className="main-grid__full-content">
+            {buildProjectList(visualDesignProjectList)}
+          </div>
         </section>
       </main>
     </>
@@ -62,6 +88,7 @@ interface PageQueryData {
           catagory: string;
           tagline: string;
           cover: string;
+          tag: string;
         };
       };
     }[];
@@ -84,6 +111,7 @@ export const pageQuery = graphql`
             tagline
             catagory
             cover
+            tag
           }
         }
       }
