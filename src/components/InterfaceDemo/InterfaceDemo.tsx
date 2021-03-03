@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import ProgressRing from '../ProgressRing';
 import { useCursorCustomState, CustomStates } from '../Cursor/Cursor';
 import './InterfaceDemo.scss';
+import { AnimationConfig } from '../AnimationConfig';
 
 interface Props {
   url: string;
@@ -13,22 +14,27 @@ const INTERSECTION_RATIO_THRESHOLD = 0.5;
 export const InterfaceDemo = (props: Props) => {
   const playerRef = useRef<HTMLVideoElement>();
   const [isViewing, setIsViewing] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [videoProgress, setVideoProgress] = useState(0);
-  const [, , setCursorCustomState] = useCursorCustomState();
+  const [cursorCustomState, , setCursorCustomState] = useCursorCustomState();
 
   const replayFromBeginning = () => {
     playerRef.current.currentTime = 0;
+    playVideo();
+  };
+
+  const playVideo = () => {
     playerRef.current.play();
+    setIsPlaying(true);
   };
 
   const pauseVideo = () => {
     playerRef.current.pause();
+    setIsPlaying(false);
   };
 
   useEffect(() => {
-    if (isViewing) {
-      replayFromBeginning();
-    } else {
+    if (!isViewing) {
       pauseVideo();
     }
   }, [isViewing]);
@@ -79,15 +85,44 @@ export const InterfaceDemo = (props: Props) => {
   }, [playerRef.current]);
 
   const handlePlayerClick = () => {
-    if (isViewing) replayFromBeginning();
+    if (!isViewing) return;
+
+    if (!isPlaying) {
+      playVideo();
+      return;
+    }
+    pauseVideo();
   };
 
   const handleMouseOver = () => {
-    setCursorCustomState(CustomStates.REPLAY);
+    // show different cursor icon base on whether the video is playing
+    const showCursorState = isPlaying ? CustomStates.STOP : CustomStates.PLAY;
+    setCursorCustomState(showCursorState);
   };
+
   const handleMouseOut = () => {
     setCursorCustomState(CustomStates.NONE);
   };
+
+  useEffect(() => {
+    // only change the cursor custom state when the user is hovering
+    if (cursorCustomState === CustomStates.NONE) return;
+
+    // set icon to opposite staste of video play state
+    // to indicate what "will" happen after clicking on video
+    if (isPlaying) {
+      setCursorCustomState(CustomStates.STOP);
+    } else {
+      setCursorCustomState(CustomStates.PLAY);
+    }
+  }, [isPlaying]);
+
+  const handleRestartClick = () => {
+    replayFromBeginning();
+  };
+
+  const hasPlayerPlayed =
+    playerRef.current && playerRef.current.currentTime !== 0 ? true : false;
 
   return (
     <motion.div
@@ -99,6 +134,20 @@ export const InterfaceDemo = (props: Props) => {
     >
       <div className="progress-ring-container">
         <ProgressRing progress={videoProgress} strokeColor="rgba(0,0,0,.2)" />
+        <motion.a
+          onClick={handleRestartClick}
+          style={{ filter: 'grayscale(100%)' }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: hasPlayerPlayed ? 0.2 : 0 }}
+          whileHover={{
+            filter: 'grayscale(0%)',
+            opacity: 1,
+          }}
+          transition={{
+            duration: AnimationConfig.FAST,
+            easings: AnimationConfig.EASING,
+          }}
+        ></motion.a>
       </div>
       <video
         src={props.url}

@@ -4,6 +4,18 @@ import { motion } from 'framer-motion';
 import './Cursor.scss';
 import { AnimationConfig } from '../AnimationConfig';
 
+/**
+ *
+ *
+ * Custom Cursor
+ *
+ * BEHAVIOUR
+ * 1. All clickable interaction highlight will override all the other state modification
+ * 2. Mouse button state(mouse down, mouse up etc.) is standalone behaviour unaffected by any states
+ * 3. Custom behaviour can be accessed and modified by a shared react context
+ *
+ */
+
 const config = {
   width: 20,
   hoverColor: 'rgba(0,0,255, .9)',
@@ -22,11 +34,15 @@ export enum CustomStates {
   NONE,
   REPLAY,
   HORIZONTAL_SLIDE,
+  PLAY,
+  STOP,
 }
 
 const CustomStateIcons = {
-  [CustomStates.REPLAY]: '/img/cursor/replay-white-18dp.svg',
-  [CustomStates.HORIZONTAL_SLIDE]: '/img/cursor/slide-horizontal.svg',
+  [CustomStates.REPLAY]: '/img/icons/replay.svg',
+  [CustomStates.HORIZONTAL_SLIDE]: '/img/icons/slide-horizontal.svg',
+  [CustomStates.PLAY]: '/img/icons/play.svg',
+  [CustomStates.STOP]: '/img/icons/stop.svg',
 };
 
 export const CursorContext = React.createContext<
@@ -264,13 +280,6 @@ export default function Cursor() {
 
   // determine the dimension of the cursor
   const textSelectCursorAppearence = (() => {
-    if (customState !== CustomStates.NONE)
-      return {
-        width: config.width * CUSTOM_STATE_SCALE,
-        height: config.width * CUSTOM_STATE_SCALE,
-        borderRadius: config.width * CUSTOM_STATE_SCALE,
-      };
-
     if (hoveredElementMeasurement)
       return {
         width: hoveredElementMeasurement.width,
@@ -278,6 +287,12 @@ export default function Cursor() {
         borderRadius: 4,
       };
 
+    if (customState !== CustomStates.NONE)
+      return {
+        width: config.width * CUSTOM_STATE_SCALE,
+        height: config.width * CUSTOM_STATE_SCALE,
+        borderRadius: config.width * CUSTOM_STATE_SCALE,
+      };
     if (!isHoveringParagraph)
       return {
         width: config.width,
@@ -382,8 +397,14 @@ export default function Cursor() {
           }}
           alt="Cursor icon"
           animate={{
-            opacity: customState === CustomStates.NONE ? 0 : 1,
-            scale: customState === CustomStates.NONE ? 0 : 1,
+            opacity:
+              customState === CustomStates.NONE || hoveredElementMeasurement
+                ? 0
+                : 1,
+            scale:
+              customState === CustomStates.NONE || hoveredElementMeasurement
+                ? 0
+                : 1,
           }}
           transition={{
             duration: AnimationConfig.FAST,
