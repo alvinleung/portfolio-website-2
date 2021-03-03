@@ -4,6 +4,8 @@
 
 * {
   font-family: "source-sans-pro";
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
 }
 
 h1 {
