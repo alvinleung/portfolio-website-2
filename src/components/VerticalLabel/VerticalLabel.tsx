@@ -9,6 +9,7 @@ const labelVariants = {
   enter: {
     opacity: 1,
     transition: {
+      delay: 0.2,
       duration: AnimationConfig.NORMAL,
     },
   },
@@ -28,6 +29,7 @@ const VerticalLabel = ({ children }) => {
       animate="enter"
       exit="exit"
       className="main-grid__vertical-label"
+      style={{ opacity: 0 }}
     >
       {children}
     </motion.div>
