@@ -67,7 +67,11 @@ export default function Cursor() {
   const isUsingTouch = useRef(false);
   const [mousedown, setMouseDown] = useState(false);
 
-  const [customState, previousCustomState] = useCursorCustomState();
+  const [
+    customState,
+    previousCustomState,
+    setCustomState,
+  ] = useCursorCustomState();
 
   const handleMouseMove = (e: MouseEvent) => {
     if (!isUsingTouch.current) setHidden(false);
@@ -123,6 +127,13 @@ export default function Cursor() {
     setHidden(false);
     isUsingTouch.current = false;
   };
+
+  // reset the custom state when page change
+  useEffect(() => {
+    return () => {
+      setCustomState(CustomStates.NONE);
+    };
+  }, []);
 
   useEffect(() => {
     addAllMouseEventListeners();
@@ -362,7 +373,8 @@ export default function Cursor() {
           // src="/img/cursor/replay-white-18dp.svg"
           src={
             CustomStateIcons[customState] ||
-            CustomStateIcons[previousCustomState]
+            CustomStateIcons[previousCustomState] ||
+            false
           }
           style={{
             width: textSelectCursorAppearence.width * CUSTOM_STATE_ICON_SCALE,

@@ -1,6 +1,10 @@
 import React from 'react';
 import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion';
-import Cursor, { CursorContextProvider } from '../Cursor/Cursor';
+import Cursor, {
+  CursorContextProvider,
+  useCursorCustomState,
+  CustomStates,
+} from '../Cursor/Cursor';
 import MainNav from '../MainNav/MainNav';
 import { Footer } from '../Footer/Footer';
 import { ProjectCardTransition } from '../ProjectCard/ProjectCardTransition';
