@@ -14,6 +14,11 @@ const config = {
   pressedColor: 'rgba(0,0,255, .2)',
 };
 
+export enum CustomStates {
+  NONE,
+  REPLAY,
+}
+
 interface elmMeasurement {
   width: number;
   height: number;
@@ -23,11 +28,14 @@ interface elmMeasurement {
 
 export default function Cursor() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
   const [hidden, setHidden] = useState(true);
   const isUsingTouch = useRef(false);
   const [mousedown, setMouseDown] = useState(false);
 
-  const [customState, useCustomState] = useState();
+  const [customState, useCustomState] = useState<CustomStates>(
+    CustomStates.NONE,
+  );
 
   const handleMouseMove = (e: MouseEvent) => {
     if (!isUsingTouch.current) setHidden(false);
@@ -99,7 +107,6 @@ export default function Cursor() {
   }, []);
 
   // for link hovering effect
-  const location = useLocation();
   const [linkHovered, setLinkHovered] = useState(false);
   const [hoveredElementMeasurement, setHoveredElementMeasurement] = useState<
     elmMeasurement
@@ -141,6 +148,7 @@ export default function Cursor() {
       const source = e.target as HTMLAnchorElement;
       source.style.color = sourceInitialColor;
     };
+
     allAnchorElements.forEach((el) => {
       el.addEventListener('mouseover', handleLinkMouseOver);
       el.addEventListener('mouseout', handleLinkMouseOut);
@@ -151,16 +159,12 @@ export default function Cursor() {
         el.removeEventListener('mouseout', handleLinkMouseOut);
       });
     };
-  }, [location]);
+  }, []);
 
   // for hovering paragraph effect
   const [isHoveringParagraph, setIsHoveringParagraph] = useState(false);
   const [targetParagraphFontSize, setTargetParagraphFontSize] = useState('');
   useEffect(() => {
-    const allParagraphElements = document.querySelectorAll(
-      'p, h1, h2, h3, h4, h5',
-    );
-
     const handleParagraphMouseOver = (e: MouseEvent) => {
       setIsHoveringParagraph(true);
       const style = window.getComputedStyle(e.target as HTMLParagraphElement);
@@ -170,18 +174,34 @@ export default function Cursor() {
       setIsHoveringParagraph(false);
     };
 
-    allParagraphElements.forEach((el) => {
-      el.addEventListener('mouseover', handleParagraphMouseOver);
-      el.addEventListener('mouseout', handleParagraphMouseOut);
-    });
+    const handleWindowMouseOver = (e: MouseEvent) => {
+      if (
+        !(e.target instanceof HTMLSpanElement) &&
+        !(e.target instanceof HTMLParagraphElement) &&
+        !(e.target instanceof HTMLHeadingElement)
+      )
+        return;
 
-    return () => {
-      allParagraphElements.forEach((el) => {
-        el.removeEventListener('mouseover', handleParagraphMouseOver);
-        el.removeEventListener('mouseout', handleParagraphMouseOut);
-      });
+      handleParagraphMouseOver(e);
     };
-  }, [location]);
+    const handleWindowMouseOut = (e: MouseEvent) => {
+      if (
+        !(e.target instanceof HTMLSpanElement) &&
+        !(e.target instanceof HTMLParagraphElement) &&
+        !(e.target instanceof HTMLHeadingElement)
+      )
+        return;
+
+      handleParagraphMouseOut(e);
+    };
+
+    window.addEventListener('mouseover', handleWindowMouseOver);
+    window.addEventListener('mouseout', handleWindowMouseOut);
+    return () => {
+      window.removeEventListener('mouseover', handleWindowMouseOver);
+      window.removeEventListener('mouseout', handleWindowMouseOut);
+    };
+  }, []);
 
   const DEFAULT_SCALE = 1;
   const MOUSEDOWN_SCALE = 0.9;
@@ -204,12 +224,14 @@ export default function Cursor() {
       return {
         width: hoveredElementMeasurement.width,
         height: hoveredElementMeasurement.height,
+        borderRadius: 4,
       };
 
     if (!isHoveringParagraph)
       return {
         width: config.width,
         height: config.width,
+        borderRadius: config.width,
       };
 
     return {
@@ -254,12 +276,12 @@ export default function Cursor() {
         pointerEvents: 'none',
         x: cursorPosition.x,
         y: cursorPosition.y,
-        width: hoveredElementMeasurement
-          ? hoveredElementMeasurement.width
-          : config.width,
-        height: hoveredElementMeasurement
-          ? hoveredElementMeasurement.height
-          : config.width,
+        // width: hoveredElementMeasurement
+        //   ? hoveredElementMeasurement.width
+        //   : config.width,
+        // height: hoveredElementMeasurement
+        //   ? hoveredElementMeasurement.height
+        //   : config.width,
         border: `2px solid ${config.normalColor}`,
         zIndex: 100000,
         // mixBlendMode: 'difference',
@@ -271,7 +293,7 @@ export default function Cursor() {
         // x: hoveredElementMeasurement ? cursorPosition.x : null,
         // y: hoveredElementMeasurement ? cursorPosition.y : null,
 
-        borderRadius: hoveredElementMeasurement ? 4 : config.width,
+        borderRadius: textSelectCursorAppearence.borderRadius,
         opacity: hidden ? 0 : 1,
         scale: getScale(),
         borderColor: hoveredElementMeasurement
@@ -280,8 +302,8 @@ export default function Cursor() {
         backgroundColor: mousedown
           ? config.pressedColor
           : 'rgba(255,255,255,0)',
-
-        ...(textSelectCursorAppearence !== null && textSelectCursorAppearence),
+        width: textSelectCursorAppearence.width,
+        height: textSelectCursorAppearence.height,
       }}
       transition={{
         duration: AnimationConfig.VERY_FAST,
