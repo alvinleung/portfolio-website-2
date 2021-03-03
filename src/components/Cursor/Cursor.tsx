@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 
 import { useLocation } from '@reach/router';
@@ -9,8 +9,9 @@ import measureElement from '@/hooks/measureElement';
 
 const config = {
   width: 20,
-  hoverColor: 'rgba(0,0,255, .8)',
+  hoverColor: 'rgba(0,0,255, .9)',
   normalColor: 'rgba(0,0,255, .9)',
+  pressedColor: 'rgba(0,0,255, .2)',
 };
 
 interface elmMeasurement {
@@ -105,6 +106,9 @@ export default function Cursor() {
   // for link effect
   useEffect(() => {
     const allAnchorElements = document.querySelectorAll('a');
+
+    let sourceInitialColor = '';
+
     const handleLinkMouseOver = (e: MouseEvent) => {
       setLinkHovered(true);
 
@@ -113,18 +117,27 @@ export default function Cursor() {
 
       const source = e.target as HTMLAnchorElement;
       const measurement = source.getBoundingClientRect();
+
+      // update the initial source color
+      sourceInitialColor = source.style.color;
+
       setHoveredElementMeasurement({
         x: measurement.x,
         y: measurement.y,
         width: measurement.width,
         height: measurement.height,
       });
+
+      source.style.color = config.hoverColor;
       // e.preventDefault();
       // e.stopPropagation();
     };
     const handleLinkMouseOut = (e: MouseEvent) => {
       setLinkHovered(false);
       setHoveredElementMeasurement(null);
+
+      const source = e.target as HTMLAnchorElement;
+      source.style.color = sourceInitialColor;
     };
     allAnchorElements.forEach((el) => {
       el.addEventListener('mouseover', handleLinkMouseOver);
@@ -134,6 +147,36 @@ export default function Cursor() {
       allAnchorElements.forEach((el) => {
         el.removeEventListener('mouseover', handleLinkMouseOver);
         el.removeEventListener('mouseout', handleLinkMouseOut);
+      });
+    };
+  }, [location]);
+
+  // for hovering paragraph effect
+  const [isHoveringParagraph, setIsHoveringParagraph] = useState(false);
+  const [targetParagraphFontSize, setTargetParagraphFontSize] = useState('');
+  useEffect(() => {
+    const allParagraphElements = document.querySelectorAll(
+      'p, h1, h2, h3, h4, h5',
+    );
+
+    const handleParagraphMouseOver = (e: MouseEvent) => {
+      setIsHoveringParagraph(true);
+      const style = window.getComputedStyle(e.target as HTMLParagraphElement);
+      setTargetParagraphFontSize(style.fontSize);
+    };
+    const handleParagraphMouseOut = (e: MouseEvent) => {
+      setIsHoveringParagraph(false);
+    };
+
+    allParagraphElements.forEach((el) => {
+      el.addEventListener('mouseover', handleParagraphMouseOver);
+      el.addEventListener('mouseout', handleParagraphMouseOut);
+    });
+
+    return () => {
+      allParagraphElements.forEach((el) => {
+        el.removeEventListener('mouseover', handleParagraphMouseOver);
+        el.removeEventListener('mouseout', handleParagraphMouseOut);
       });
     };
   }, [location]);
@@ -152,6 +195,27 @@ export default function Cursor() {
     if (mousedown) return MOUSEDOWN_SCALE;
     return DEFAULT_SCALE;
   };
+
+  // determine the dimension of the cursor
+  const textSelectCursorAppearence = (() => {
+    if (hoveredElementMeasurement)
+      return {
+        width: hoveredElementMeasurement.width,
+        height: hoveredElementMeasurement.height,
+      };
+
+    if (!isHoveringParagraph)
+      return {
+        width: config.width,
+        height: config.width,
+      };
+
+    return {
+      width: 4,
+      height: parseInt(targetParagraphFontSize),
+      borderRadius: 4,
+    };
+  })();
 
   // calculate the appropriate cursor position every update
   const cursorPosition = (() => {
@@ -174,14 +238,16 @@ export default function Cursor() {
     }
 
     return {
-      x: mousePos.x - config.width / 2,
-      y: mousePos.y - config.width / 2,
+      x: mousePos.x - textSelectCursorAppearence.width / 2,
+      y: mousePos.y - textSelectCursorAppearence.height / 2,
     };
   })();
 
   return (
     <motion.div
       style={{
+        originX: 0.5,
+        originY: 0.5,
         position: 'fixed',
         pointerEvents: 'none',
         x: cursorPosition.x,
@@ -192,9 +258,9 @@ export default function Cursor() {
         height: hoveredElementMeasurement
           ? hoveredElementMeasurement.height
           : config.width,
-        // border: '2px solid #000',
+        border: `2px solid ${config.normalColor}`,
         zIndex: 100000,
-        mixBlendMode: 'difference',
+        // mixBlendMode: 'difference',
       }}
       initial={{
         borderRadius: config.width,
@@ -206,7 +272,14 @@ export default function Cursor() {
         borderRadius: hoveredElementMeasurement ? 4 : config.width,
         opacity: hidden ? 0 : 1,
         scale: getScale(),
-        backgroundColor: linkHovered ? config.hoverColor : config.normalColor,
+        borderColor: hoveredElementMeasurement
+          ? config.hoverColor
+          : config.normalColor,
+        backgroundColor: mousedown
+          ? config.pressedColor
+          : 'rgba(255,255,255,0)',
+
+        ...(textSelectCursorAppearence !== null && textSelectCursorAppearence),
       }}
       transition={{
         duration: AnimationConfig.VERY_FAST,
