@@ -27,6 +27,8 @@ export default function Cursor() {
   const isUsingTouch = useRef(false);
   const [mousedown, setMouseDown] = useState(false);
 
+  const [customState, useCustomState] = useState();
+
   const handleMouseMove = (e: MouseEvent) => {
     if (!isUsingTouch.current) setHidden(false);
     setMousePos({
@@ -285,6 +287,6 @@ export default function Cursor() {
         duration: AnimationConfig.VERY_FAST,
         easing: AnimationConfig.EASING,
       }}
-    />
+    ></motion.div>
   );
 }

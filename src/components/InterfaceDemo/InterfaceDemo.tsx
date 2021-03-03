@@ -49,10 +49,11 @@ export const InterfaceDemo = (props: Props) => {
   useEffect(() => {
     const options = {
       rootMargin: '0px 0px 0px 0px',
-      threshold: [
-        (1 - INTERSECTION_RATIO_THRESHOLD) / 2 + 0.01,
-        1 - (1 - INTERSECTION_RATIO_THRESHOLD) / 2 - 0.01,
-      ],
+      threshold: [0, 0.5, 1],
+      // threshold: [
+      //   (1 - INTERSECTION_RATIO_THRESHOLD) / 2 + 0.01,
+      //   1 - (1 - INTERSECTION_RATIO_THRESHOLD) / 2 - 0.01,
+      // ],
     };
 
     const observationStatusChange: IntersectionObserverCallback = (
