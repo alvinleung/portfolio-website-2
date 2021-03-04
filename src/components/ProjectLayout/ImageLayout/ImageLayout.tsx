@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import useForceUpdate from '../../../hooks/useForceUpdate';
 import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 import { useCursorHoverState, CustomStates } from '../../Cursor/Cursor';
 import { AnimationConfig } from '@/components/AnimationConfig';
@@ -41,6 +42,7 @@ const HalfImage = (props) => {
 
 const ExpandableImage = ({ className, src, alt, caption }) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const forceUpdate = useForceUpdate();
   const imgRef = useRef();
   const expandedImagePresent = useRef(false);
   const customStatesEventHandlers = useCursorHoverState(
@@ -63,6 +65,7 @@ const ExpandableImage = ({ className, src, alt, caption }) => {
 
   const handleExitAnimationComplete = () => {
     expandedImagePresent.current = false;
+    forceUpdate();
   };
 
   return (
