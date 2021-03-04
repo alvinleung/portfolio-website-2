@@ -20,6 +20,11 @@ import {
 import InterfaceDemo from '../components/InterfaceDemo';
 
 import {
+  HalfImage,
+  FullImage,
+} from '../components/ProjectLayout/ImageLayout/ImageLayout';
+
+import {
   SectionDescription,
   SectionNumber,
   SectionTitle,
@@ -225,39 +230,6 @@ const ImageSub = (props) => (
     style={{ width: '100%' }}
   />
 );
-
-const FullImage = (props) => {
-  const withPadding = 'main-grid__full-content display-figure';
-  const noPadding =
-    'main-grid__full-content display-figure display-figure--no-padding';
-
-  return (
-    <figure className={props.noPadding ? noPadding : withPadding}>
-      <img src={props.src} alt={props.alt} loading="lazy" />
-      {props.caption && <figcaption>{props.caption}</figcaption>}
-    </figure>
-  );
-};
-
-const HalfImage = (props) => {
-  const primaryClass = 'main-grid__primary-col display-figure';
-  const secondaryClass = 'main-grid__secondary-col display-figure';
-
-  const withPadding = '';
-  const noPadding = ' display-figure--no-padding';
-
-  return (
-    <figure
-      className={
-        (props.secondary ? secondaryClass : primaryClass) +
-        (props.noPadding ? noPadding : withPadding)
-      }
-    >
-      <img src={props.src} alt={props.alt} loading="lazy" />
-      {props.caption && <figcaption>{props.caption}</figcaption>}
-    </figure>
-  );
-};
 
 const Pill = (props) => {
   return (

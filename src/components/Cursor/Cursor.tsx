@@ -36,6 +36,10 @@ export enum CustomStates {
   HORIZONTAL_SLIDE,
   PLAY,
   STOP,
+  OPEN_FULLSCREEN,
+  CLOSE_FULLSCREEN,
+  ZOOM_IN,
+  ZOOM_OUT,
 }
 
 const CustomStateIcons = {
@@ -43,6 +47,10 @@ const CustomStateIcons = {
   [CustomStates.HORIZONTAL_SLIDE]: '/img/icons/slide-horizontal.svg',
   [CustomStates.PLAY]: '/img/icons/play.svg',
   [CustomStates.STOP]: '/img/icons/stop.svg',
+  [CustomStates.OPEN_FULLSCREEN]: '/img/icons/fullscreen-open.svg',
+  [CustomStates.CLOSE_FULLSCREEN]: '/img/icons/fullscreen-close.svg',
+  [CustomStates.ZOOM_IN]: '/img/icons/zoom-in.svg',
+  [CustomStates.ZOOM_OUT]: '/img/icons/zoom-out.svg',
 };
 
 export const CursorContext = React.createContext<
@@ -67,6 +75,33 @@ export const CursorContextProvider = ({ children }) => {
       {children}
     </CursorContext.Provider>
   );
+};
+
+// utility for setting hover state in mouse
+export const useCursorHoverState = (hoveredCustomState: CustomStates) => {
+  const [, , setCustomState] = useCursorCustomState();
+  const [isHovering, setIsHovering] = useState(false);
+
+  // to when the hoveredCustomState chances, make sure the change
+  // is reflected on the cursor when hovering
+  useEffect(() => {
+    if (isHovering) setCustomState(hoveredCustomState);
+  }, [hoveredCustomState]);
+
+  const handleMouseEnter = () => {
+    setCustomState(hoveredCustomState);
+    setIsHovering(true);
+  };
+
+  const handleMouseOut = () => {
+    setCustomState(CustomStates.NONE);
+    setIsHovering(false);
+  };
+
+  return {
+    onMouseEnter: handleMouseEnter,
+    onMouseOut: handleMouseOut,
+  };
 };
 
 interface elmMeasurement {
