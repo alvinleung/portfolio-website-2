@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import useForceUpdate from '../../../hooks/useForceUpdate';
-import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion';
+import { motion, AnimatePresence, useIsPresent } from 'framer-motion';
 import { useCursorHoverState, CustomStates } from '../../Cursor/Cursor';
 import { AnimationConfig } from '@/components/AnimationConfig';
 import { Animation } from 'framer-motion/types/motion/features/animation';
@@ -44,6 +44,7 @@ const ExpandableImage = ({ className, src, alt, caption }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const forceUpdate = useForceUpdate();
   const imgRef = useRef();
+  const mousePos = useRef({ x: 0, y: 0 });
   const expandedImagePresent = useRef(false);
   const customStatesEventHandlers = useCursorHoverState(
     isExpanded ? CustomStates.CLOSE : CustomStates.ZOOM_IN,
@@ -55,48 +56,91 @@ const ExpandableImage = ({ className, src, alt, caption }) => {
     if (!isExpanded) return;
 
     const scrollHandler = () => {
-      if (isExpanded) setIsExpanded(false);
+      if (isExpanded) {
+        setIsExpanded(false);
+        checkMouseOutsideImage();
+      }
     };
+    const mouseMoveHandler = (e: MouseEvent) => {
+      mousePos.current = {
+        x: e.clientX,
+        y: e.clientY,
+      };
+    };
+
     window.addEventListener('scroll', scrollHandler);
+    window.addEventListener('mousemove', mouseMoveHandler);
     return () => {
       window.removeEventListener('scroll', scrollHandler);
+      window.removeEventListener('mousemove', mouseMoveHandler);
     };
+  }, [isExpanded]);
+
+  const checkMouseOutsideImage = () => {
+    const imgbb = (imgRef.current as HTMLElement).getBoundingClientRect();
+
+    if (
+      mousePos.current.x < imgbb.left ||
+      mousePos.current.x > imgbb.right ||
+      mousePos.current.y < imgbb.top ||
+      mousePos.current.y > imgbb.bottom
+    ) {
+      // intersection doesn't occur
+      // the user is out of the area, can cancel the cursor style manually
+      customStatesEventHandlers.onMouseLeave();
+    }
+  };
+
+  useEffect(() => {
+    if (!isExpanded) {
+      checkMouseOutsideImage();
+    }
   }, [isExpanded]);
 
   const handleExitAnimationComplete = () => {
     expandedImagePresent.current = false;
     forceUpdate();
+    // check if the mouse is still within bounds
+    checkMouseOutsideImage();
   };
 
   return (
     <figure
       className={className}
       // for hover cursor effects
-      {...customStatesEventHandlers}
       style={{ position: 'relative' }}
       // toggle expanded
       onClick={() => {
         setIsExpanded(!isExpanded);
       }}
     >
-      <motion.img
-        src={src}
-        alt={alt}
-        loading="lazy"
-        ref={imgRef}
-        style={{
-          visibility: expandedImagePresent.current ? 'hidden' : 'visible',
-        }}
-      />
-      <AnimatePresence onExitComplete={handleExitAnimationComplete}>
-        {isExpanded && ExpandedImage(imgRef, src, alt, expandedImagePresent)}
-      </AnimatePresence>
+      <div {...customStatesEventHandlers}>
+        <motion.img
+          src={src}
+          alt={alt}
+          loading="lazy"
+          ref={imgRef}
+          style={{
+            visibility: expandedImagePresent.current ? 'hidden' : 'visible',
+          }}
+        />
+        <AnimatePresence onExitComplete={handleExitAnimationComplete}>
+          {isExpanded && (
+            <ExpandedImage
+              imgRef={imgRef}
+              src={src}
+              alt={alt}
+              expandedImagePresent={expandedImagePresent}
+            />
+          )}
+        </AnimatePresence>
+      </div>
       {caption && <figcaption>{caption}</figcaption>}
     </figure>
   );
 };
 
-const ExpandedImage = (imgRef, src, alt, expandedImagePresent) => {
+const ExpandedImage = ({ imgRef, src, alt, expandedImagePresent }) => {
   expandedImagePresent.current = true;
 
   const imgBounds = (imgRef.current as HTMLImageElement).getBoundingClientRect();
@@ -104,6 +148,8 @@ const ExpandedImage = (imgRef, src, alt, expandedImagePresent) => {
 
   const expandedWidth = window.innerWidth;
   const expandedHeight = window.innerWidth * imgBoundsAspectRatio;
+
+  const isPresent = useIsPresent();
 
   return (
     <>
@@ -117,6 +163,7 @@ const ExpandedImage = (imgRef, src, alt, expandedImagePresent) => {
           right: 0,
           bottom: 0,
           zIndex: 10000,
+          pointerEvents: isPresent ? 'auto' : 'none',
         }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -140,10 +187,12 @@ const ExpandedImage = (imgRef, src, alt, expandedImagePresent) => {
           height: imgBounds.height,
         }}
         animate={{
-          top: -imgBounds.top + (window.innerHeight - expandedHeight) / 2, // move to the middle of the screen
-          left: -imgBounds.left, // go stright to the left end of the screen
-          width: expandedWidth,
-          height: expandedHeight,
+          top:
+            isPresent &&
+            -imgBounds.top + (window.innerHeight - expandedHeight) / 2, // move to the middle of the screen
+          left: isPresent && -imgBounds.left, // go stright to the left end of the screen
+          width: isPresent && expandedWidth,
+          height: isPresent && expandedHeight,
         }}
         exit={{
           top: 0,

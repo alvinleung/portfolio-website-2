@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useContext,
+  useCallback,
+} from 'react';
 import { motion } from 'framer-motion';
 
 import './Cursor.scss';
@@ -91,19 +97,19 @@ export const useCursorHoverState = (hoveredCustomState: CustomStates) => {
     if (isHovering) setCustomState(hoveredCustomState);
   }, [hoveredCustomState]);
 
-  const handleMouseEnter = () => {
+  const onMouseOver = () => {
     setCustomState(hoveredCustomState);
     setIsHovering(true);
   };
 
-  const handleMouseOut = () => {
+  const onMouseLeave = () => {
     setCustomState(CustomStates.NONE);
     setIsHovering(false);
   };
 
   return {
-    onMouseOver: handleMouseEnter,
-    onMouseLeave: handleMouseOut,
+    onMouseOver: onMouseOver,
+    onMouseLeave: onMouseLeave,
   };
 };
 
