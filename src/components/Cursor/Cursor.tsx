@@ -51,7 +51,7 @@ export const CursorContext = React.createContext<
     CustomStates, // previous
     React.Dispatch<React.SetStateAction<CustomStates>>,
   ]
->([null, null, () => {}]);
+>([CustomStates.NONE, CustomStates.NONE, () => {}]);
 
 export const useCursorCustomState = () => useContext(CursorContext);
 

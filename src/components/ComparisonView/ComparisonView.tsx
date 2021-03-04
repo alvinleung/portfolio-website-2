@@ -13,12 +13,18 @@ interface Props {
   children: Array<React.ReactElement>;
 }
 
+enum InputMode {
+  MOUSE,
+  TOUCH,
+}
+
 const ComparisonView: React.FC = ({ children }: Props) => {
   const containerRef = useRef(null);
   const dragHandleRef = useRef(null);
   const [containerWidth, setContainerWidth] = useState();
   const [containerBoundingRect, setContainerBoundingRect] = useState();
   const [allowDrag, setAllowDrag] = useState(false);
+  const [inputMode, setInputMode] = useState(InputMode.MOUSE);
 
   const [, , setCursorCustomState] = useCursorCustomState();
 
@@ -49,9 +55,9 @@ const ComparisonView: React.FC = ({ children }: Props) => {
     };
   }, [containerRef]);
 
-  const setSplitPosition = (event: React.MouseEvent) => {
+  const setSplitPosition = (posX) => {
     const boundingRect = containerBoundingRect || { left: 0 };
-    x.set(event.clientX - boundingRect.left);
+    x.set(posX - boundingRect.left);
   };
 
   const onBeginDrag = (event: React.MouseEvent) => {
@@ -60,7 +66,7 @@ const ComparisonView: React.FC = ({ children }: Props) => {
 
   const onDragUpdate = (event: React.MouseEvent) => {
     if (!allowDrag) return;
-    setSplitPosition(event);
+    setSplitPosition(event.clientX);
   };
 
   const onMouseOver = () => {
@@ -74,9 +80,26 @@ const ComparisonView: React.FC = ({ children }: Props) => {
     setAllowDrag(false);
   };
   const onMouseDown = (event: React.MouseEvent) => {
+    if (inputMode !== InputMode.MOUSE) return;
+
     setAllowDrag(true);
     setInitialDragOffset(event.clientX);
-    setSplitPosition(event);
+    setSplitPosition(event.clientX);
+  };
+
+  // Touch equivilant of the mouse interaction
+  const onTouchMove = (event: React.TouchEvent) => {
+    if (!allowDrag) return;
+    setSplitPosition(event.touches[0].clientX);
+  };
+  const onTouchStart = (event: React.TouchEvent) => {
+    setInputMode(InputMode.TOUCH);
+    setAllowDrag(true);
+    setInitialDragOffset(event.touches[0].clientX);
+    setSplitPosition(event.touches[0].clientX);
+  };
+  const onTouchEnd = (event: React.TouchEvent) => {
+    setAllowDrag(false);
   };
 
   return (
@@ -84,8 +107,11 @@ const ComparisonView: React.FC = ({ children }: Props) => {
       ref={containerRef}
       className="comparison-view main-grid__full-content"
       draggable="true"
-      onDragStart={onBeginDrag}
       onMouseMove={onDragUpdate}
+      onTouchMove={onTouchMove}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+      onDragStart={onBeginDrag}
       onMouseOver={onMouseOver}
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
