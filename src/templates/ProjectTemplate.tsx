@@ -31,6 +31,7 @@ import {
 } from '@/components/ProjectLayout/ProjectSectionHeader/ProjectSectionHeader';
 import ProjectSectionSeperator from '@/components/ProjectLayout/ProjectSectionSeperator/ProjectSectionSeperator';
 import { AnimationConfig } from '@/components/AnimationConfig';
+import SEOHeader from '@/components/SEOHeader';
 
 const variants = {
   initial: {
@@ -78,6 +79,7 @@ export default function Template({
 
   return (
     <>
+      <SEOHeader pageTitle={frontmatter.title} />
       <motion.header className="nav-padding">
         <ProjectTitle
           title={frontmatter.title}

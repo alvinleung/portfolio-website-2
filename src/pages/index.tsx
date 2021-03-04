@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
 import { PageProps, graphql } from 'gatsby';
+
+import SEOHeader from '../components/SEOHeader';
+
 import '../style/typography.scss';
 import '../style/layout.scss';
 import '../style/variables.scss';
@@ -51,6 +54,7 @@ const Home: React.FC<Props> = ({ data }: Props) => {
 
   return (
     <>
+      <SEOHeader pageTitle="Works" />
       {/* <Cursor /> */}
       <main className="full-width nav-padding">
         {/* <Title /> */}
