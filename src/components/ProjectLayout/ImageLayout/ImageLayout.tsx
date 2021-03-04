@@ -46,7 +46,7 @@ const ExpandableImage = ({ className, src, alt, caption }) => {
   const imgRef = useRef();
   const expandedImagePresent = useRef(false);
   const customStatesEventHandlers = useCursorHoverState(
-    isExpanded ? CustomStates.ZOOM_OUT : CustomStates.ZOOM_IN,
+    isExpanded ? CustomStates.CLOSE : CustomStates.ZOOM_IN,
   );
 
   // collapse the photo on scroll
@@ -75,7 +75,9 @@ const ExpandableImage = ({ className, src, alt, caption }) => {
       {...customStatesEventHandlers}
       style={{ position: 'relative' }}
       // toggle expanded
-      onClick={() => setIsExpanded(!isExpanded)}
+      onClick={() => {
+        setIsExpanded(!isExpanded);
+      }}
     >
       <motion.img
         src={src}

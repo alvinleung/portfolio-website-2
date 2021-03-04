@@ -40,6 +40,7 @@ export enum CustomStates {
   CLOSE_FULLSCREEN,
   ZOOM_IN,
   ZOOM_OUT,
+  CLOSE,
 }
 
 const CustomStateIcons = {
@@ -51,6 +52,7 @@ const CustomStateIcons = {
   [CustomStates.CLOSE_FULLSCREEN]: '/img/icons/fullscreen-close.svg',
   [CustomStates.ZOOM_IN]: '/img/icons/zoom-in.svg',
   [CustomStates.ZOOM_OUT]: '/img/icons/zoom-out.svg',
+  [CustomStates.CLOSE]: '/img/icons/close.svg',
 };
 
 export const CursorContext = React.createContext<
@@ -84,6 +86,7 @@ export const useCursorHoverState = (hoveredCustomState: CustomStates) => {
 
   // to when the hoveredCustomState chances, make sure the change
   // is reflected on the cursor when hovering
+
   useEffect(() => {
     if (isHovering) setCustomState(hoveredCustomState);
   }, [hoveredCustomState]);
@@ -99,8 +102,8 @@ export const useCursorHoverState = (hoveredCustomState: CustomStates) => {
   };
 
   return {
-    onMouseEnter: handleMouseEnter,
-    onMouseOut: handleMouseOut,
+    onMouseOver: handleMouseEnter,
+    onMouseLeave: handleMouseOut,
   };
 };
 
