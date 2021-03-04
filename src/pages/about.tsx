@@ -13,6 +13,11 @@ import {
 } from '@/components/AnimationConfig';
 
 const About: React.FC = () => {
+  // force scroll to top to create seemless transition
+  if (typeof window !== 'undefined') {
+    window.scrollTo(0, 0);
+  }
+
   return (
     <>
       <main id="about" className="full-width nav-padding main-grid">
