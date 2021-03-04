@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
 
 import { motion } from 'framer-motion';
 
@@ -106,6 +106,7 @@ export default function Template({
             p: customParagraphProcessor,
             hr: ThematicBreak,
             img: ImageSub,
+            a: LinkElement,
             // context for custom react component layout
             ProjectInfo,
             ProjectInfoItem,
@@ -205,6 +206,14 @@ const createParagraphProcessor = (
     return result;
   };
   return combinedProcessor;
+};
+
+const LinkElement = (props) => {
+  return (
+    <Link to={props.href} target={'blank'}>
+      {props.children}
+    </Link>
+  );
 };
 
 const ImageSub = (props) => (
