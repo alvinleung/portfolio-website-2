@@ -18,6 +18,7 @@ import {
 } from '@/components/ProjectLayout/ProjectInfo/ProjectInfo';
 
 import InterfaceDemo from '../components/InterfaceDemo';
+import ResourceLink from '../components/ResourceLink';
 
 import {
   HalfImage,
@@ -123,6 +124,7 @@ export default function Template({
             HalfImage,
             Pill,
             InterfaceDemo,
+            ResourceLink,
           }}
         >
           <MDXRenderer>{body}</MDXRenderer>
@@ -233,24 +235,24 @@ const ImageSub = (props) => (
   />
 );
 
-const Pill = (props) => {
+const Pill = ({ color, round, children }) => {
   return (
     <span className="main-grid__col">
       <span
         style={{
-          display: 'inline-block',
+          display: 'inline',
           fontSize: '.75rem',
           textTransform: 'uppercase',
           letterSpacing: '.07em',
           fontWeight: 500,
-          backgroundColor: props.color,
+          backgroundColor: color,
           color: '#FFF',
-          borderRadius: props.round ? '5em' : '0rem',
+          borderRadius: round ? '5em' : '0rem',
           paddingLeft: '.5rem',
           paddingRight: '.5rem',
         }}
       >
-        {props.children}
+        {children}
       </span>
     </span>
   );
