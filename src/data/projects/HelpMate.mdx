@@ -27,7 +27,7 @@ description: A community-based task finding application that allows users to hel
 
 ## 02 Key Contributions
 
--- Here are my major contributions that helped driving the project forward.
+-- Here are highlights of my contributions that helped driving the project forward.
 
 <FullImage
   src="/img/helpmate/contribution-ui-pattern.jpg"
@@ -108,13 +108,77 @@ From our research, we found that existing solutions like Craiglist allows more c
 
 ## 07 Design Principles
 
--- A set of design principles was established to guide our design process.
+-- With our target audience in mind, a set of design principles was established to guide our design process.
 
 <FullImage src="/img/helpmate/design-principles.jpg" alt="Joy's Persona" />
 
 ---
 
-## 08 User Testing and Fixes
+## 08 Features Overview
+
+--
+
+#### Reschedule Appointment
+
+If the original appointment time conflicts with other commitments, the Helper or Client can request to reschedule the appointment. The rescheduled time needs to be confirmed by both parties before it becomes official.
+
+<FullImage
+  src="/img/helpmate/feature-reschedule-1.jpg"
+  alt="Reschedule Appointment Feature"
+  noPadding
+/>
+
+---
+
+#### Cancel Appointment
+
+Cancellations don’t need a confirmation from the other party, but a cancellation within 24 hours of the originally scheduled appointment will result in a slight penalty to a Helper or Client’s rating.
+
+<FullImage
+  src="/img/helpmate/feature-cancel-1.jpg"
+  alt="Cancel Appointment Feature"
+  noPadding
+/>
+
+---
+
+#### Appeal Cancellations
+
+Users can avoid the cancellation penalty to their rating if they have documentation of their emergency. By having an appeal process, we can prevent one user from taking advantage of another user, but still allow for penalties to be waived for legitimate cancellations.
+
+<FullImage
+  src="/img/helpmate/feature-appeal.jpg"
+  alt="Appeal Cancellations Feature"
+  noPadding
+/>
+
+---
+
+#### Urgent Tasks
+
+Clients who have a Helper cancel their task can choose to re-list their task. The re-listed task will automatically be tagged as an urgent task on the Taskboard, giving the Client a better chance of finding a Helper within the timeframe they originally posted the task for.
+
+<FullImage
+  src="/img/helpmate/feature-urgent.jpg"
+  alt="Urgent Tasks Feature"
+  noPadding
+/>
+
+---
+
+#### User Identity Verification
+
+Users are prompted to provide ID verification after they sign up, to ensure the safety of the HelpMate community. While the verification is in process, users will be able to browse the app but will not be able to see details like specific tasks.
+
+<FullImage
+  src="/img/helpmate/feature-verification.jpg"
+  alt="Verification Feature"
+  noPadding
+/>
+
+---
+
+## 09 User Testing and Fixes
 
 -- The prototype was tested on 5 participants. The collected insights were then feed back into the design process.
 
@@ -178,51 +242,87 @@ From our research, we found that existing solutions like Craiglist allows more c
 
 ---
 
-_Note: These are few of the major fixes, this presentation slide deck provide detail breakdown and solutions of all the issues we found._
+<ResourceLink url="/HelpMate-User-Testing-Slides.pdf">
+  User Testing Slideck (PDF)
+</ResourceLink>
+
+_Note: What highlighted above were few of the major fixes that, this presentation slide deck provide detail breakdown and solutions of all the issues we found._
 
 ---
 
-## 09 Outcome - The Final User Flow
+## 10 Outcome — The Final User Flows
 
-<InterfaceDemo url="https://www.sfu.ca/~kkl64/videos/helpmate/1-create-task.mp4" />
+-- Here is a demostration of the client & helper experience.
 
-##### Create a task [CLIENT]
+---
+
+#### Create a task [CLIENT]
+
+<InterfaceDemo
+  url="https://www.sfu.ca/~kkl64/videos/helpmate/1-create-task.mp4"
+  noPadding
+/>
 
 -> To find help with chores, client can create a task under _My Tasks_. Task catagory and details like location, description, date, amount of helpers are customisable in the task creation modal. After the form is completed, an entry of task will be added to the community taskboard.
 
-<InterfaceDemo url="https://www.sfu.ca/~kkl64/videos/helpmate/2-find-task.mp4" />
+---
 
-##### Find and Request for a task [HELPER]
+#### Find and Request for a task [HELPER]
+
+<InterfaceDemo
+  url="https://www.sfu.ca/~kkl64/videos/helpmate/2-find-task.mp4"
+  noPadding
+/>
 
 -> Helpers can find a task nearby using the _Taskboard_. Tasks can be filtered out by the helper's preference. When the helper found a choice, he/she can send a request to the client under the task screen.
 
-<InterfaceDemo url="https://www.sfu.ca/~kkl64/videos/helpmate/3-receive-request.mp4" />
+---
 
-##### Receive Task Request [CLIENT]
+#### Receive Task Request [CLIENT]
+
+<InterfaceDemo
+  url="https://www.sfu.ca/~kkl64/videos/helpmate/3-receive-request.mp4"
+  noPadding
+/>
 
 -> The client will receive a notification when a Helper send a task request. They can now chat and confirm the task details under the in app messaging system which was tailored for the scenario.
 
-<InterfaceDemo url="https://www.sfu.ca/~kkl64/videos/helpmate/4-check-in.mp4" />
+---
 
-##### Appointment confirmation [CLIENT & HELPER]
+#### Appointment confirmation [CLIENT & HELPER]
+
+<InterfaceDemo
+  url="https://www.sfu.ca/~kkl64/videos/helpmate/4-check-in.mp4"
+  noPadding
+/>
 
 -> Before the appointment, the helper will be asked to confirm the arrival time.
 
-<InterfaceDemo url="https://www.sfu.ca/~kkl64/videos/helpmate/5-task-done.mp4" />
+---
 
-##### Check in and Payment [CLIENT & HELPER]
+#### Check in and Payment [CLIENT & HELPER]
+
+<InterfaceDemo
+  url="https://www.sfu.ca/~kkl64/videos/helpmate/5-task-done.mp4"
+  noPadding
+/>
 
 -> In order to allow clients to a peace of mind, they will be informed as the task progress status updates. Some check in feature might be opted out if the client is present during the task.
 
-<InterfaceDemo url="https://www.sfu.ca/~kkl64/videos/helpmate/6-review.mp4" />
+---
 
-##### [CLIENT & HELPER] Leave a Review
+#### Leave a Review [CLIENT & HELPER]
+
+<InterfaceDemo
+  url="https://www.sfu.ca/~kkl64/videos/helpmate/6-review.mp4"
+  noPadding
+/>
 
 -> Upon finishing the task, clients and Helpers can leave ratings and review for each other. This step is crucial for the HelpMate concept as user's peer review is the fundamental building block of safty and trust.
 
 ---
 
-## 10 Reflection
+## 11 Reflection
 
 ### Working with these experienced teammates, this project has taught me an important lesson on the attitude of team collaboration and the importance of sharing ideas with the team.
 
