@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  useContext,
-  useCallback,
-} from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { motion } from 'framer-motion';
 
 import './Cursor.scss';
@@ -59,6 +53,7 @@ const CustomStateIcons = {
   [CustomStates.ZOOM_IN]: '/img/icons/zoom-in.svg',
   [CustomStates.ZOOM_OUT]: '/img/icons/zoom-out.svg',
   [CustomStates.CLOSE]: '/img/icons/close.svg',
+  [CustomStates.NONE]: '/img/icons/empty.png',
 };
 
 export const CursorContext = React.createContext<
