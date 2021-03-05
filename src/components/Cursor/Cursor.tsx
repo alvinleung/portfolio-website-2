@@ -266,7 +266,9 @@ export default function Cursor() {
 
   // for hovering paragraph effect
   const [isHoveringParagraph, setIsHoveringParagraph] = useState(false);
-  const [targetParagraphFontSize, setTargetParagraphFontSize] = useState('');
+  const [targetParagraphFontSize, setTargetParagraphFontSize] = useState(
+    '16px',
+  );
   useEffect(() => {
     const handleParagraphMouseOver = (e: MouseEvent) => {
       setIsHoveringParagraph(true);
@@ -337,6 +339,7 @@ export default function Cursor() {
         height: config.width * CUSTOM_STATE_SCALE,
         borderRadius: config.width * CUSTOM_STATE_SCALE,
       };
+
     if (!isHoveringParagraph)
       return {
         width: config.width,
