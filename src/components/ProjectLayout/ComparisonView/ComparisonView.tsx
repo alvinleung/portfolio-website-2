@@ -5,7 +5,7 @@ import {
   useMotionValue,
   useTransform,
 } from 'framer-motion';
-import { useCursorCustomState, CustomStates } from '../Cursor/Cursor';
+import { useCursorCustomState, CustomStates } from '../../Cursor/Cursor';
 import { AnimationVariants } from '@/components/AnimationConfig';
 import './ComparisonView.scss';
 

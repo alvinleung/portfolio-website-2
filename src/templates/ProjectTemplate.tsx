@@ -6,8 +6,8 @@ import { motion } from 'framer-motion';
 // imports for custom react component in the article
 import ProjectTitle from '@/components/ProjectLayout/ProjectTitle/ProjectTitle';
 import ProjectCardCover from '@/components/ProjectCard/ProjectCardCover';
-import ComparisonView from '@/components/ComparisonView/ComparisonView';
-import ComparisonItem from '@/components/ComparisonView/ComparisonItem';
+import ComparisonView from '@/components/ProjectLayout/ComparisonView/ComparisonView';
+import ComparisonItem from '@/components/ProjectLayout/ComparisonView/ComparisonItem';
 
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { MDXProvider } from '@mdx-js/react';
@@ -17,7 +17,7 @@ import {
   ProjectInfoItem,
 } from '@/components/ProjectLayout/ProjectInfo/ProjectInfo';
 
-import InterfaceDemo from '../components/InterfaceDemo';
+import InterfaceDemo from '../components/ProjectLayout/InterfaceDemo';
 import ResourceLink from '../components/ResourceLink';
 
 import {

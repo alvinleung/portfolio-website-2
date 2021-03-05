@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import ProgressRing from '../ProgressRing';
-import { useCursorCustomState, CustomStates } from '../Cursor/Cursor';
+import ProgressRing from '../../ProgressRing';
+import { useCursorCustomState, CustomStates } from '../../Cursor/Cursor';
 import './InterfaceDemo.scss';
-import { AnimationConfig } from '../AnimationConfig';
+import { AnimationConfig } from '../../AnimationConfig';
 
 interface Props {
   url: string;
