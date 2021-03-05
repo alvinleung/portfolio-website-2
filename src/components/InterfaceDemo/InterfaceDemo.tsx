@@ -134,7 +134,7 @@ export const InterfaceDemo = (props: Props) => {
     >
       <div className="progress-ring-container">
         <ProgressRing progress={videoProgress} strokeColor="rgba(0,0,0,.2)" />
-        <motion.a
+        <motion.button
           onClick={handleRestartClick}
           style={{ filter: 'grayscale(100%)' }}
           initial={{ opacity: 0 }}
@@ -147,7 +147,7 @@ export const InterfaceDemo = (props: Props) => {
             duration: AnimationConfig.FAST,
             easings: AnimationConfig.EASING,
           }}
-        ></motion.a>
+        />
       </div>
       <video
         src={props.url}

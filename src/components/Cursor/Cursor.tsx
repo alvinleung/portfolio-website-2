@@ -217,7 +217,7 @@ export default function Cursor() {
 
   // for link effect
   useEffect(() => {
-    const allAnchorElements = document.querySelectorAll('a');
+    const allAnchorElements = document.querySelectorAll('a, button');
 
     let sourceInitialColor = '';
 
@@ -225,7 +225,11 @@ export default function Cursor() {
       setLinkHovered(true);
 
       // only use the hover effect links
-      if (!(e.target instanceof HTMLAnchorElement)) return;
+      if (
+        !(e.target instanceof HTMLAnchorElement) &&
+        !(e.target instanceof HTMLButtonElement)
+      )
+        return;
 
       const source = e.target as HTMLAnchorElement;
       const measurement = source.getBoundingClientRect();
