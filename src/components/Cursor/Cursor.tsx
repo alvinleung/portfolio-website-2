@@ -231,7 +231,7 @@ export default function Cursor() {
       )
         return;
 
-      const source = e.target as HTMLAnchorElement;
+      const source = e.target as HTMLElement;
       const measurement = source.getBoundingClientRect();
 
       // update the initial source color
@@ -252,7 +252,7 @@ export default function Cursor() {
       setLinkHovered(false);
       setHoveredElementMeasurement(null);
 
-      const source = e.target as HTMLAnchorElement;
+      const source = e.target as HTMLElement;
       source.style.color = sourceInitialColor;
     };
 

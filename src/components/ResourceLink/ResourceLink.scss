@@ -1,0 +1,35 @@
+a.resource-link {
+  // layout
+  display: flex;
+  flex-direction: row;
+
+  float: left;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+
+  min-width: 10rem;
+  // min-height: 6rem;
+
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.9);
+
+  border-radius: 4px;
+
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: bold;
+
+  &:hover {
+    background-color: rgba(200, 200, 200, 0.3);
+    img {
+      filter: invert(0);
+    }
+  }
+
+  img {
+    max-width: 1.5rem;
+    margin-left: 1rem;
+    filter: invert(100);
+  }
+}

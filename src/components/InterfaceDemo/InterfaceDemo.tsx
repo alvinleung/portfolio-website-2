@@ -7,11 +7,13 @@ import { AnimationConfig } from '../AnimationConfig';
 
 interface Props {
   url: string;
+  autoplay?: boolean;
+  noPadding?: boolean;
 }
 
 const INTERSECTION_RATIO_THRESHOLD = 0.5;
 
-export const InterfaceDemo = (props: Props) => {
+export const InterfaceDemo = ({ url, autoplay, noPadding }) => {
   const playerRef = useRef<HTMLVideoElement>();
   const [isViewing, setIsViewing] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -36,6 +38,10 @@ export const InterfaceDemo = (props: Props) => {
   useEffect(() => {
     if (!isViewing) {
       pauseVideo();
+    } else {
+      if (autoplay !== false) {
+        replayFromBeginning();
+      }
     }
   }, [isViewing]);
 
@@ -124,9 +130,16 @@ export const InterfaceDemo = (props: Props) => {
   const hasPlayerPlayed =
     playerRef.current && playerRef.current.currentTime !== 0 ? true : false;
 
+  const containerWithPadding =
+    'interface-demo display-figure main-grid__full-width';
+  const containerWithoutPadding =
+    'interface-demo display-figure display-figure--no-padding main-grid__full-width';
+
   return (
     <motion.div
-      className="interface-demo display-figure  main-grid__full-width"
+      className={
+        noPadding === true ? containerWithoutPadding : containerWithPadding
+      }
       initial={{ opacity: 0.1 }}
       animate={{ opacity: isViewing ? 1 : 0.1 }}
       onMouseOver={handleMouseOver}
@@ -150,7 +163,7 @@ export const InterfaceDemo = (props: Props) => {
         />
       </div>
       <video
-        src={props.url}
+        src={url}
         autoPlay={true}
         muted={true}
         preload="auto"
