@@ -138,10 +138,24 @@ export default function Template({
   );
 }
 
+const trimTextLeadingToken = (children, token) => {
+  if (Array.isArray(children)) {
+    let newChildren = [...children];
+    newChildren[0] = children[0].substring(token.length);
+    return newChildren;
+  }
+
+  if (typeof children === 'string') return children.substring(token.length);
+};
+
 // hack to automatically generate an incrementing section text
 const SectionHead = ({ children, key }) => {
-  const headingText = children.substring(3);
-  const headingNumber = children.substring(0, 3);
+  const childrenContent = typeof children === 'string' ? children : children[0];
+
+  // const headingText = childrenContent.substring(3);
+  const headingNumber = childrenContent.substring(0, 3);
+  const headingText = trimTextLeadingToken(children, headingNumber);
+
   // get the
   return (
     <>
@@ -186,17 +200,6 @@ const createParagraphProcessor = (
     if (typeof paragraphHeadingChunk !== 'string')
       return defaultParagraphFormat(children);
 
-    const trimParagraphToken = (children, token) => {
-      console.log(typeof children);
-      if (Array.isArray(children)) {
-        let newChildren = [...children];
-        newChildren[0] = paragraphHeadingChunk.substring(token.length);
-        return newChildren;
-      }
-
-      if (isChildrenString) return children.substring(token.length);
-    };
-
     const reducerFunction = (
       accumulator: IParagraphProcessor,
       { token, output }: IParagraphProcessor,
@@ -204,7 +207,7 @@ const createParagraphProcessor = (
       const isMatchingToken =
         paragraphHeadingChunk.substring(0, token.length) === token;
       if (isMatchingToken) {
-        return output(trimParagraphToken(children, token));
+        return output(trimTextLeadingToken(children, token));
       }
       return accumulator;
     };
