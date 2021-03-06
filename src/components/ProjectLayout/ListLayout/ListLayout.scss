@@ -13,11 +13,16 @@
     border-top: 1px solid #ccc;
   }
 
+  &__label {
+    margin-bottom: 0.5rem;
+  }
+
   &__numbering {
     flex: 1 1;
+    float: left;
   }
   &__heading {
-    flex: 1 1;
+    flex: 3 1;
   }
   &__content {
     flex: 3 1;

@@ -6,6 +6,7 @@ const ListLayout = (props) => {
   return (
     <FigureWrapper {...props}>
       <ul className="list-layout">
+        <div className="label list-layout__label">{props.label}</div>
         {props.children.map((val, index) =>
           React.cloneElement(val, { itemNumber: index + 1 }),
         )}
