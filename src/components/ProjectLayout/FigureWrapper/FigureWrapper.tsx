@@ -8,7 +8,7 @@ export const FigureWrapper = ({ secondary, full, noPadding, children }) => {
   const gridColumnDispalyMode = (() => {
     if (secondarySelected) return 'main-grid__secondary-col';
     if (fullSelected) return 'main-grid__full-width';
-    return 'main-grid__secondary-col';
+    return 'main-grid__primary-col';
   })();
 
   const paddingSetting = (() => {
