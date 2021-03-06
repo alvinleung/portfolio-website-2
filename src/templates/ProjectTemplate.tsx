@@ -12,6 +12,8 @@ import ComparisonItem from '@/components/ProjectLayout/ComparisonView/Comparison
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { MDXProvider } from '@mdx-js/react';
 
+import { ListItem, ListLayout } from '@/components/ProjectLayout/ListLayout';
+
 import {
   ProjectInfo,
   ProjectInfoItem,
@@ -125,6 +127,8 @@ export default function Template({
             Pill,
             InterfaceDemo,
             ResourceLink,
+            ListItem,
+            ListLayout,
           }}
         >
           <MDXRenderer>{body}</MDXRenderer>

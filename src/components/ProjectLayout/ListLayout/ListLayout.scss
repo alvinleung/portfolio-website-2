@@ -1,0 +1,25 @@
+.list-layout {
+  &__item {
+    margin-left: 0rem;
+    list-style: none;
+
+    // layout
+    display: flex;
+    flex-direction: row;
+
+    padding-top: 0.5rem;
+
+    // border
+    border-top: 1px solid #ccc;
+  }
+
+  &__numbering {
+    flex: 1 1;
+  }
+  &__heading {
+    flex: 1 1;
+  }
+  &__content {
+    flex: 3 1;
+  }
+}
