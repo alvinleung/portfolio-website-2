@@ -8,7 +8,7 @@ const ListLayout = (props) => {
       <ul className="list-layout">
         <div className="label list-layout__label">{props.label}</div>
         {props.children.map((val, index) =>
-          React.cloneElement(val, { itemNumber: index + 1 }),
+          React.cloneElement(val, { itemNumber: index + 1, key: index }),
         )}
       </ul>
     </FigureWrapper>

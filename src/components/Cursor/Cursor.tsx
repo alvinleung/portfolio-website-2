@@ -271,7 +271,7 @@ export default function Cursor() {
   useEffect(() => {
     const handleParagraphMouseOver = (e: MouseEvent) => {
       setIsHoveringParagraph(true);
-      const style = window.getComputedStyle(e.target as HTMLParagraphElement);
+      const style = window.getComputedStyle(e.target as HTMLElement);
       setTargetParagraphFontSize(style.fontSize);
     };
     const handleParagraphMouseOut = (e: MouseEvent) => {
@@ -279,20 +279,28 @@ export default function Cursor() {
     };
 
     const handleWindowMouseOver = (e: MouseEvent) => {
+      const tagName = (e.target as HTMLElement).tagName;
+
       if (
         !(e.target instanceof HTMLSpanElement) &&
         !(e.target instanceof HTMLParagraphElement) &&
-        !(e.target instanceof HTMLHeadingElement)
+        !(e.target instanceof HTMLHeadingElement) &&
+        !(tagName === 'EM') &&
+        !(tagName === 'STRONG')
       )
         return;
 
       handleParagraphMouseOver(e);
     };
     const handleWindowMouseOut = (e: MouseEvent) => {
+      const tagName = (e.target as HTMLElement).tagName;
+
       if (
         !(e.target instanceof HTMLSpanElement) &&
         !(e.target instanceof HTMLParagraphElement) &&
-        !(e.target instanceof HTMLHeadingElement)
+        !(e.target instanceof HTMLHeadingElement) &&
+        !(tagName === 'EM') &&
+        !(tagName === 'STRONG')
       )
         return;
 
