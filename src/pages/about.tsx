@@ -11,6 +11,7 @@ import {
   AnimationConfig,
   AnimationVariants,
 } from '@/components/AnimationConfig';
+import ResourceLink from '@/components/ResourceLink';
 
 const About: React.FC = () => {
   // force scroll to top to create seemless transition
@@ -47,6 +48,10 @@ const About: React.FC = () => {
           things, things which are built with intention, things which are
           memorable.
         </SlideInParagraph> */}
+
+        <SlideInParagraph>
+          <ResourceLink url="/resume.pdf">Resumé</ResourceLink>
+        </SlideInParagraph>
 
         <motion.img
           src="/img/portrait-small.jpg"

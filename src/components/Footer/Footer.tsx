@@ -22,7 +22,7 @@ export const Footer: React.FC<Props> = () => {
         </p>
         <div className={style.footerGroup}>
           <a href="resume.pdf" target="blank">
-            Resume
+            Resumé
           </a>
         </div>
       </div>
