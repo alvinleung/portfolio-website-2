@@ -2,10 +2,18 @@ import React from 'react';
 import style from './Footer.module.scss';
 import { motion } from 'framer-motion';
 import { AnimationConfig, AnimationVariants } from '../AnimationConfig';
+import useGoogleAnalyticsEvent from '@/hooks/useGoogleAnalyticsEvent';
 
 interface Props {}
 
 export const Footer: React.FC<Props> = () => {
+  const logResourceEvent = useGoogleAnalyticsEvent('resource-link-click');
+  const handleResourceLinkClick = () => {
+    logResourceEvent({
+      resourceName: 'resume',
+    });
+  };
+
   return (
     <motion.footer
       variants={AnimationVariants.PRIMARY}
@@ -23,7 +31,7 @@ export const Footer: React.FC<Props> = () => {
         </p>
       </div>
       <div className={style.footerGroup + ' main-grid__full-content'}>
-        <a href="resume.pdf" target="blank">
+        <a href="resume.pdf" target="blank" onClick={handleResourceLinkClick}>
           Résumé
         </a>
       </div>
