@@ -40,8 +40,8 @@ const About: React.FC = () => {
         </SlideInParagraph>
         <SlideInParagraph>
           My design practice include visual design, art direction, ux/ui design,
-          design researches, suprising buch of web development and a *healthy*
-          daily doses of coffee.
+          design researches, suprising buch of web development and a daily
+          *healthy* doses of coffee.
         </SlideInParagraph>
         {/* <SlideInParagraph>
           I am always looking forward to play a role in the making of cool
