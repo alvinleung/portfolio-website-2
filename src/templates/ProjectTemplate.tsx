@@ -3,6 +3,8 @@ import { graphql, Link } from 'gatsby';
 
 import { motion } from 'framer-motion';
 
+import usePageReadTimer from '../hooks/usePageReadTimer';
+
 // imports for custom react component in the article
 import ProjectTitle from '@/components/ProjectLayout/ProjectTitle/ProjectTitle';
 import ProjectCardCover from '@/components/ProjectCard/ProjectCardCover';

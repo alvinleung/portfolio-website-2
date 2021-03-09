@@ -13410,6 +13410,11 @@ react-remove-scroll@^2.3.0:
     use-callback-ref "^1.2.3"
     use-sidecar "^1.0.1"
 
+react-scroll-tracker@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/react-scroll-tracker/-/react-scroll-tracker-1.4.0.tgz#bd68bbdf9f49ea74d51edc949202dd10b862cfeb"
+  integrity sha512-rMkynQfdZk500JsPbiPH41M+xSyeIrm0sH7ZwAfWcUoPenH+4okA1MJwQqgHjWriM3cwF4Xq4mCxWF+3QXREGw==
+
 react-side-effect@^2.1.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/react-side-effect/-/react-side-effect-2.1.1.tgz#66c5701c3e7560ab4822a4ee2742dee215d72eb3"
