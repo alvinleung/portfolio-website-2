@@ -24,7 +24,7 @@ export const Footer: React.FC<Props> = () => {
       </div>
       <div className={style.footerGroup + ' main-grid__full-content'}>
         <a href="resume.pdf" target="blank">
-          Resumé
+          Résumé
         </a>
       </div>
     </motion.footer>

@@ -50,7 +50,7 @@ const About: React.FC = () => {
         </SlideInParagraph> */}
 
         <SlideInParagraph>
-          <ResourceLink url="/resume.pdf">Resumé</ResourceLink>
+          <ResourceLink url="/resume.pdf">Résumé</ResourceLink>
         </SlideInParagraph>
 
         <motion.img
