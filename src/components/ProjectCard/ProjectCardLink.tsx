@@ -45,6 +45,9 @@ const ProjectCardLink: React.FC<Props> = (props: Props) => {
   // Mouse Interaction
   const [isMouseOver, setIsMouseOver] = useState(false);
 
+  // is present
+  const isPresent = useIsPresent();
+
   // determine whether the card will do outgoing transition
   const [willPresist, setWillPresist] = useState(false);
 
@@ -78,7 +81,35 @@ const ProjectCardLink: React.FC<Props> = (props: Props) => {
         onTransitionComplete={handleTransitionComplete}
       >
         <div className={style.projectCardContent}>
+          {/* the colour background overlay */}
           <motion.div
+            initial={{
+              position: 'absolute',
+              backgroundColor: 'rgba(0,0,0,1)',
+              left: '0rem',
+              top: '0rem',
+              width: '100%',
+              height: '100%',
+              scaleX: 0,
+              transformOrigin: 'top left',
+              zIndex: 1,
+            }}
+            animate={{
+              scaleX: isMouseOver && isPresent ? 1 : 0,
+            }}
+            exit={{
+              transformOrigin: 'top right',
+              scaleX: 0,
+              transition: { duration: AnimationConfig.FAST },
+            }}
+            transition={{
+              ease: AnimationConfig.EASING,
+              duration: AnimationConfig.NORMAL,
+            }}
+          />
+          {/* Card content */}
+          <motion.div
+            style={{ zIndex: 1 }}
             className={style.projectType}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -89,6 +120,7 @@ const ProjectCardLink: React.FC<Props> = (props: Props) => {
             {props.catagory}
           </motion.div>
           <motion.h3
+            style={{ zIndex: 1 }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -99,6 +131,7 @@ const ProjectCardLink: React.FC<Props> = (props: Props) => {
             </SlideInText>
           </motion.h3>
           <motion.p
+            style={{ zIndex: 1 }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
