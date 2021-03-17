@@ -95,7 +95,7 @@ const ProjectCardLink: React.FC<Props> = (props: Props) => {
               zIndex: 1,
             }}
             animate={{
-              scaleX: isMouseOver && isPresent ? 1 : 0,
+              scaleX: isMouseOver && isPresent && hasTransitionDone ? 1 : 0,
             }}
             exit={{
               transformOrigin: 'top right',
