@@ -6,6 +6,7 @@ const transitionConfig = { duration: 0.05, ease: 'easeOut' };
 interface Props {
   children?: React.ReactNode;
   reactive?: boolean;
+  followMouse?: boolean;
   style?;
 }
 
@@ -17,7 +18,7 @@ const ReactiveCard: React.FC<Props> = (props) => {
   const handleMouseMove = (e: React.MouseEvent) => {
     // null check for the container bounds, for rare cases when the event listener
     // fires before the page loaded
-    if (!containerBounds) return;
+    if (!containerBounds || props.followMouse === false) return;
 
     const maxDistFactor = 0.015;
     const maxDistFactorHeight =

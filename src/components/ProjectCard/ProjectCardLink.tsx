@@ -69,7 +69,7 @@ const ProjectCardLink: React.FC<Props> = (props: Props) => {
   }, []);
 
   const cardContent = (
-    <ReactiveCard reactive={hasTransitionDone}>
+    <ReactiveCard reactive={hasTransitionDone} followMouse={false}>
       <CoverImage
         cover={props.cover}
         slug={props.slug}
