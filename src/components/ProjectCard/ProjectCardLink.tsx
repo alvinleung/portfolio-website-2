@@ -100,7 +100,10 @@ const ProjectCardLink: React.FC<Props> = (props: Props) => {
             exit={{
               transformOrigin: 'top right',
               scaleX: 0,
-              transition: { duration: AnimationConfig.FAST },
+              transition: {
+                duration: AnimationConfig.FAST,
+                ease: AnimationConfig.EASING_INVERTED,
+              },
             }}
             transition={{
               ease: AnimationConfig.EASING,
