@@ -41,7 +41,7 @@ const About: React.FC = () => {
         <SlideInParagraph>
           Recently, I have been playing around in the field of creative coding,
           trying to sythesise my visual design and programming skills into this
-          exciting interactive art form. (Demo playground WIP!)
+          exciting interactive art form. (Demo playground work in progress!)
         </SlideInParagraph>
         {/* <SlideInParagraph>
           I am always looking forward to play a role in the making of cool
