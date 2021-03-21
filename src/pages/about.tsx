@@ -39,9 +39,9 @@ const About: React.FC = () => {
           needed to create an impressive experience.
         </SlideInParagraph>
         <SlideInParagraph>
-          My design practice include visual design, art direction, ux/ui design,
-          design researches, suprising buch of web development and a daily
-          *healthy* doses of coffee.
+          Recently, I have been playing around in the field of creative coding,
+          trying to sythesise my visual design and programming skills into this
+          exciting interactive art form. (Demo playground WIP!)
         </SlideInParagraph>
         {/* <SlideInParagraph>
           I am always looking forward to play a role in the making of cool
