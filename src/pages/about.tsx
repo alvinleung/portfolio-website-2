@@ -41,7 +41,7 @@ const About: React.FC = () => {
           Thoughout my school years, I often find myself wearing different hats
           in various type of projects, doing works that are needed to create an
           impressive experience. I treat every project as an opportunity learn
-          and my skillset.
+          and improve my skillset.
         </SlideInParagraph>
         <SlideInParagraph>
           Recently, I have been playing around in the field of creative coding,
