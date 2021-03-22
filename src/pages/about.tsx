@@ -12,6 +12,7 @@ import {
   AnimationVariants,
 } from '@/components/AnimationConfig';
 import ResourceLink from '@/components/ResourceLink';
+import SEOHeader from '@/components/SEOHeader';
 
 const About: React.FC = () => {
   // force scroll to top to create seemless transition
@@ -21,6 +22,7 @@ const About: React.FC = () => {
 
   return (
     <>
+      <SEOHeader pageTitle="About" />
       <main id="about" className="full-width nav-padding main-grid">
         {/* Require framer motion for the page change to work */}
         <motion.h1
