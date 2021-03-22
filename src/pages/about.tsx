@@ -24,19 +24,22 @@ const About: React.FC = () => {
       <main id="about" className="full-width nav-padding main-grid">
         {/* Require framer motion for the page change to work */}
         <motion.h1
-          className="main-grid__full-content"
+          className="main-grid__primary-col"
           variants={AnimationVariants.PRIMARY}
           // initial="initial"
           animate="enter"
           exit="exit"
         >
-          <SlideInText delayBase={0}>Hellloooo</SlideInText>
+          <SlideInText delayBase={0}>
+            I am currently a 4th-year student at Simon Fraser University,
+            studying Interactive Art and Technology.
+          </SlideInText>
         </motion.h1>
         <SlideInParagraph>
-          I am currently a 4th-year student at Simon Fraser University, studying
-          Interactive Art and Technology. Thoughout my school years, I often
-          find myself wearing different hats in projects, doing works that are
-          needed to create an impressive experience.
+          Thoughout my school years, I often find myself wearing different hats
+          in various type of projects, doing works that are needed to create an
+          impressive experience. I treat every project as an opportunity learn
+          and my skillset.
         </SlideInParagraph>
         <SlideInParagraph>
           Recently, I have been playing around in the field of creative coding,
@@ -72,7 +75,7 @@ const About: React.FC = () => {
 
 const SlideInParagraph = ({ children }) => (
   <motion.p
-    className="main-grid__primary-col"
+    className={'main-grid__primary-col '}
     variants={AnimationVariants.PRIMARY}
     initial="initial"
     animate="enter"
