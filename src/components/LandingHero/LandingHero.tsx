@@ -45,15 +45,15 @@ export default () => {
         exit={AnimationVariants.PRIMARY.exit}
       >
         <SlideInText>
-          {/* Hi, this is Alvin! A UX/UI Designer who is obsessed in creating
+          {/* Hi, this is Alvin! A UI/UX Designer who is obsessed in creating
           functional yet aesthetic experiences. */}
           {/* Hi, this is Alvin! A technologically supercharged Visual Designer who
           is obsessed in creating functional yet aesthetic experiences. */}
-          {/* Hi, this is Alvin! A UX/UI designer with an eye for aesthetic, a mind
+          {/* Hi, this is Alvin! A UI/UX designer with an eye for aesthetic, a mind
           for code and a passion for coffee. */}
-          {/* Hi, this is Alvin! A UX/UI designer with an eye for aesthetic, a hand
+          {/* Hi, this is Alvin! A UI/UX designer with an eye for aesthetic, a hand
           for code and a passion for coffee. */}
-          Hi, this is Alvin! A UX/UI and Visual Designer who is passionate to
+          Hi, this is Alvin! A UI/UX and Visual Designer who is passionate to
           tackle meaningful design problems with coffee grinds and a
           user-oriented mind.
         </SlideInText>

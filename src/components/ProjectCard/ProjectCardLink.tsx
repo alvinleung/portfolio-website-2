@@ -119,7 +119,6 @@ const ProjectCardLink: React.FC<Props> = (props: Props) => {
             exit={{ opacity: 0 }}
             transition={{ duration: AnimationConfig.FAST }}
           >
-            {/* UX/UI Design */}
             {props.catagory}
           </motion.div>
           <motion.h3
