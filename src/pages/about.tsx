@@ -33,15 +33,15 @@ const About: React.FC = () => {
           exit="exit"
         >
           <SlideInText delayBase={0}>
-            I am currently a 4th-year student at Simon Fraser University,
-            studying Interactive Art and Technology.
+            I am a 4th-year student at Simon Fraser University, studying
+            Interactive Art and Technology.
           </SlideInText>
         </motion.h1>
         <SlideInParagraph>
           Thoughout my school years, I often find myself wearing different hats
           in various type of projects, doing works that are needed to create an
-          impressive experience. I treat every project as an opportunity learn
-          and improve my skillset.
+          impressive experience. I treat every project as an opportunity to
+          learn and improve my skillset.
         </SlideInParagraph>
         <SlideInParagraph>
           Recently, I have been playing around in the field of creative coding,
