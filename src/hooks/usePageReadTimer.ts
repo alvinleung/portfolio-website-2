@@ -24,6 +24,7 @@ function usePageReadTimer() {
       logGAEvent({
         readTime: millSecToMinuteString(getElapsedTime()),
         scrollDepth: maxScrollDepth,
+        pageURL: window.location.pathname,
       });
     };
   }, []);
