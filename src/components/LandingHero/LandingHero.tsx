@@ -53,8 +53,8 @@ export default () => {
           for code and a passion for coffee. */}
           {/* Hi, this is Alvin! A UI/UX designer with an eye for aesthetic, a hand
           for code and a passion for coffee. */}
-          Hi, this is Alvin! A UI/UX and Visual Designer who is passionate about
-          tackling meaningful design problems with coffee grinds and a
+          Hi, this is Alvin! I am a UI/UX and Visual Designer who is passionate
+          about tackling meaningful design problems with coffee grinds & a
           user-oriented mind.
         </SlideInText>
         {/* by combining function with aesthetics. */}
