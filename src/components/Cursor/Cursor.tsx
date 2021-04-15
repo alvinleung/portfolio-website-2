@@ -56,6 +56,13 @@ const CustomStateIcons = {
   [CustomStates.NONE]: '/img/icons/empty.png',
 };
 
+function preloadCustomStateIcons() {
+  Object.values(CustomStateIcons).forEach((src) => {
+    const img = new Image();
+    img.src = src;
+  });
+}
+
 export const CursorContext = React.createContext<
   [
     CustomStates, // current
@@ -188,6 +195,11 @@ export default function Cursor() {
     return () => {
       setCustomState(CustomStates.NONE);
     };
+  }, []);
+
+  // preload cursor icons when page load
+  useEffect(() => {
+    preloadCustomStateIcons();
   }, []);
 
   useEffect(() => {
