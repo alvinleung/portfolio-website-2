@@ -85,21 +85,26 @@ const ProjectCardLink: React.FC<Props> = (props: Props) => {
           <motion.div
             initial={{
               position: 'absolute',
-              backgroundColor: 'rgba(0,0,0,1)',
+              backgroundColor: 'rgba(0,0,0,0)',
               left: '0rem',
               top: '0rem',
               width: '100%',
               height: '100%',
-              scaleX: 0,
+              // scaleX: 0,
               transformOrigin: 'top left',
               zIndex: 1,
             }}
             animate={{
-              scaleX: isMouseOver && isPresent && hasTransitionDone ? 1 : 0,
+              backgroundColor:
+                isMouseOver && isPresent && hasTransitionDone
+                  ? 'rgba(0,0,0,.8)'
+                  : 'rgba(0,0,0,0)',
+              // scaleX: isMouseOver && isPresent && hasTransitionDone ? 1 : 0,
             }}
             exit={{
-              transformOrigin: 'top right',
-              scaleX: 0,
+              transformOrigin: 'top left',
+              // scaleY: 0,
+              backgroundColor: 'rgba(0,0,0,.0)',
               transition: {
                 duration: AnimationConfig.FAST,
                 ease: AnimationConfig.EASING_INVERTED,
@@ -111,7 +116,7 @@ const ProjectCardLink: React.FC<Props> = (props: Props) => {
             }}
           />
           {/* Card content */}
-          <motion.div
+          {/* <motion.div
             style={{ zIndex: 1 }}
             className={style.projectType}
             initial={{ opacity: 0 }}
@@ -120,7 +125,7 @@ const ProjectCardLink: React.FC<Props> = (props: Props) => {
             transition={{ duration: AnimationConfig.FAST }}
           >
             {props.catagory}
-          </motion.div>
+          </motion.div> */}
           <motion.h3
             style={{ zIndex: 1 }}
             initial={{ opacity: 0 }}
