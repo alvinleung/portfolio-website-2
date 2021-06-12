@@ -43,6 +43,12 @@ const About: React.FC = () => {
           impressive experience. I treat every project as an opportunity to
           learn and improve my skillset.
         </SlideInParagraph>
+        {/* <SlideInParagraph>
+          As a visual communicator, I see myself as a stylist for ideas. I using
+          my whatever is in my creative toolbox to deliver an idea in it's most
+          potent form. In my past projects, I strive to create designs that are
+          subtle yet emotionally impactful.
+        </SlideInParagraph> */}
         <SlideInParagraph>
           Recently, I have been playing around in the field of creative coding,
           trying to sythesise my visual design and programming skills into this

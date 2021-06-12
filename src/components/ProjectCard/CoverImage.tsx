@@ -12,7 +12,7 @@
 import measureElement from '@/hooks/measureElement';
 import useMeasurement from '@/hooks/useMeasurement';
 import { motion, useAnimation, usePresence } from 'framer-motion';
-import React, { useRef, useEffect, useLayoutEffect } from 'react';
+import React, { useRef, useEffect, useLayoutEffect, useState } from 'react';
 import { AnimationConfig } from '../AnimationConfig';
 import {
   TransitionState,
@@ -57,6 +57,7 @@ interface CoverImageProps extends React.HTMLAttributes<HTMLDivElement> {
   scrollToOnEnter?: boolean;
   onTransitionComplete?: Function;
   onEnterPage?: Function;
+  isViewOnly?: boolean;
 }
 
 const CoverImage = ({
@@ -67,6 +68,7 @@ const CoverImage = ({
   onTransitionComplete,
   onEnterPage,
   scrollToOnEnter,
+  isViewOnly,
   ...props
 }: CoverImageProps) => {
   const [placeholderMeasurement, placeholderRef] = measureElement<
@@ -75,12 +77,14 @@ const CoverImage = ({
   const [transitionState, setTransitionState] = useTransitionState();
   const [transformSnapshot, setTransformSnapshot] = useTransformSnapshot();
 
+  const [isHovering, setIsHovering] = useState(false);
+
   // framer motion uses
   const [isPresent, safeToRemove] = usePresence();
   const control = useAnimation();
 
   // for measuring interrupted transition
-  const [measureCoverImage, coverImageRef] = useMeasurement();
+  const [measureCoverImage, coverImageRef] = useMeasurement<HTMLDivElement>();
 
   // const hasPreviousTransitionState = transitionState !== null;
   const shouldPerformEnteringTransition =
@@ -245,6 +249,29 @@ const CoverImage = ({
     };
   };
 
+  useEffect(() => {
+    if (!placeholderMeasurement || isViewOnly) return;
+    if (isHovering) {
+      control.start({
+        backgroundSize: `100%`,
+        transition: {
+          ease: AnimationConfig.EASING,
+          duration: DEBUG ? AnimationConfig.DEBUG : AnimationConfig.NORMAL,
+          // "anticipation effect to make the animation more vivid/forceful"
+        },
+      });
+    } else {
+      control.start({
+        backgroundSize: `105%`,
+        transition: {
+          ease: AnimationConfig.EASING,
+          duration: DEBUG ? AnimationConfig.DEBUG : AnimationConfig.NORMAL,
+          // "anticipation effect to make the animation more vivid/forceful"
+        },
+      });
+    }
+  }, [isHovering]);
+
   return (
     <div
       // wrapper dimensions
@@ -252,6 +279,8 @@ const CoverImage = ({
       ref={placeholderRef}
       style={{ width: '100%' }}
       {...props}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
     >
       <motion.div
         ref={coverImageRef}
@@ -259,7 +288,9 @@ const CoverImage = ({
           backgroundImage: `url(${cover})`,
           // backgroundPosition: '20% 50%',
           backgroundPosition: 'center',
-          backgroundSize: 'cover',
+          // backgroundSize: 'cover',
+          backgroundSize: '105%',
+          backgroundRepeat: 'no-repeat',
           // backgroundAttachment: 'scroll',
           // WebkitBackfaceVisibility: 'hidden',
           // backfaceVisibility: 'hidden',

@@ -47,6 +47,7 @@ const ProjectCardCover = ({ cover, slug, className, style }: CoverProps) => {
       onEnterPage={handleEnterPage}
       cover={cover}
       slug={slug}
+      isViewOnly={true}
       willPresist
     />
   );

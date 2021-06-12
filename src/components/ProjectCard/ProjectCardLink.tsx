@@ -77,6 +77,7 @@ const ProjectCardLink: React.FC<Props> = (props: Props) => {
         scrollToOnEnter={
           transformSnapshot && props.slug === transformSnapshot.slug
         }
+        isViewOnly={props.isViewOnly}
         className={style.projectCard}
         onTransitionComplete={handleTransitionComplete}
       >
@@ -97,8 +98,12 @@ const ProjectCardLink: React.FC<Props> = (props: Props) => {
             animate={{
               backgroundColor:
                 isMouseOver && isPresent && hasTransitionDone
-                  ? 'rgba(0,0,0,.8)'
+                  ? 'rgba(0,0,0,.75)'
                   : 'rgba(0,0,0,0)',
+              // backdropFilter:
+              //   isMouseOver && isPresent && hasTransitionDone
+              //     ? 'blur(5px)'
+              //     : 'none',
               // scaleX: isMouseOver && isPresent && hasTransitionDone ? 1 : 0,
             }}
             exit={{

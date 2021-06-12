@@ -15,7 +15,7 @@ const MainNav = () => {
           className="main-grid__primary-col--collapsable label"
           style={{ marginTop: 'auto', marginBottom: 'auto' }}
         >
-          UI/UX Designer
+          Visual + Experience Designer
         </div>
         <div
           className={
