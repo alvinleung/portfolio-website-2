@@ -35,7 +35,7 @@ const About: React.FC = () => {
           <SlideInText delayBase={0}>Alvin Leung</SlideInText>
         </motion.h1>
         <SlideInParagraph>
-          I am T-shaped designer with who work in both concept and{' '}
+          I am T-shaped designer with who can work in both concept and{' '}
           <a href="https://github.com/alvinleung" target="blank">
             code
           </a>
@@ -48,7 +48,7 @@ const About: React.FC = () => {
           side project with my brother.
         </SlideInParagraph>
         <SlideInParagraph>
-          As part-time type nerd, my party trick is to elegantly typeset comic
+          As a part-time type nerd, my party trick is to elegantly typeset comic
           sans.
         </SlideInParagraph>
         {/* <SlideInParagraph>
