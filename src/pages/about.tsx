@@ -42,14 +42,14 @@ const About: React.FC = () => {
           <SlideInText delayBase={0}>Alvin Leung</SlideInText>
         </motion.h1>
         <SlideInParagraph>
-          A T-shaped designer with who is fluent in both concept and{' '}
+          A T-shaped designer who is fluent in both concept and{' '}
           <a href="https://github.com/alvinleung" target="blank">
             code
           </a>
           . With proper research and craft, I like finding opportunities to go
-          beyond the functional and create moment that delights, moment that
-          moves. Outside of design, you can find me spending time with my
-          brother, working on a{' '}
+          beyond the functional and create moments that delight and resonate.
+          Outside of design, you can find me spending time with my brother,
+          working on a{' '}
           <a href="https://github.com/alvinleung/fnf-online" target="blank">
             video game
           </a>{' '}
