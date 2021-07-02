@@ -159,18 +159,29 @@ const ProjectCardLink: React.FC<Props> = (props: Props) => {
     </ReactiveCard>
   );
 
+  // console.log(willPresist ? 0 : 1);
+  // const [transformSnapshot,] = useTransformSnapshot();
+  console.log(props.isViewOnly);
+
   return (
-    <Link
-      to={!props.isViewOnly ? props.slug : null}
-      onClick={() => {
-        setWillPresist(true);
+    <motion.div
+      initial={{
+        opacity: transformSnapshot === null ? 0 : 1,
       }}
-      className={style.projectCardLink}
-      onMouseOver={() => setIsMouseOver(true)}
-      onMouseOut={() => setIsMouseOver(false)}
+      animate={{ transition: { delay: 0, duration: 0.5 }, opacity: 1 }}
     >
-      {cardContent}
-    </Link>
+      <Link
+        to={!props.isViewOnly ? props.slug : null}
+        onClick={() => {
+          setWillPresist(true);
+        }}
+        className={style.projectCardLink}
+        onMouseOver={() => setIsMouseOver(true)}
+        onMouseOut={() => setIsMouseOver(false)}
+      >
+        {cardContent}
+      </Link>
+    </motion.div>
   );
 };
 

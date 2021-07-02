@@ -13,8 +13,15 @@ import {
 } from '@/components/AnimationConfig';
 import ResourceLink from '@/components/ResourceLink';
 import SEOHeader from '@/components/SEOHeader';
+import { useTransformSnapshot } from '@/components/ProjectCard/ProjectCardTransition';
 
 const About: React.FC = () => {
+  // cancel any transition state
+  const [transitionSnapshot, setTransitionSnapshot] = useTransformSnapshot();
+  useEffect(() => {
+    setTransitionSnapshot(null);
+  }, []);
+
   // force scroll to top to create seemless transition
   if (typeof window !== 'undefined') {
     window.scrollTo(0, 0);
@@ -35,17 +42,18 @@ const About: React.FC = () => {
           <SlideInText delayBase={0}>Alvin Leung</SlideInText>
         </motion.h1>
         <SlideInParagraph>
-          I am T-shaped designer with who can work in both concept and{' '}
+          A T-shaped designer with who is fluent in both concept and{' '}
           <a href="https://github.com/alvinleung" target="blank">
             code
           </a>
           . With proper research and craft, I like finding opportunities to go
           beyond the functional and create moment that delights, moment that
-          moves. In my free time, you can find me working on a{' '}
+          moves. Outside of design, you can find me spending time with my
+          brother, working on a{' '}
           <a href="https://github.com/alvinleung/fnf-online" target="blank">
-            game
+            video game
           </a>{' '}
-          side project with my brother.
+          side project.
         </SlideInParagraph>
         <SlideInParagraph>
           As a part-time type nerd, my party trick is to elegantly typeset comic
