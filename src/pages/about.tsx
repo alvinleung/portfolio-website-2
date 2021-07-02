@@ -39,7 +39,7 @@ const About: React.FC = () => {
           <a href="https://github.com/alvinleung" target="blank">
             code
           </a>
-          . With proper research and craft, I strive to find opportunities to go
+          . With proper research and craft, I like finding opportunities to go
           beyond the functional and create moment that delights, moment that
           moves. In my free time, you can find me working on a{' '}
           <a href="https://github.com/alvinleung/fnf-online" target="blank">
@@ -111,6 +111,18 @@ const About: React.FC = () => {
           initial="initial"
           animate="enter"
           exit="exit"
+          // initial={{
+          //   opacity: 0,
+          // }}
+          // animate={{
+          //   opacity: 1,
+          //   transition: {
+          //     delay: 0.5,
+          //   },
+          // }}
+          // exit={{
+          //   opacity: 0,
+          // }}
         />
       </main>
     </>
