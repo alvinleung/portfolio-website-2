@@ -23,7 +23,7 @@ export const Footer: React.FC<Props> = () => {
       className={style.footer + ' full-width main-grid'}
     >
       <div className="main-grid__full-content">
-        <div>Designed and Coded by Alvin Leung </div>
+        <div>Designed and coded by Alvin Leung</div>
         <p>
           {/* <em>Seeking for 2021 Summer Internship</em> */}
           {/* <br /> */}

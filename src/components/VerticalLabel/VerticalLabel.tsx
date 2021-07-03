@@ -9,7 +9,7 @@ const labelVariants = {
   enter: {
     opacity: 1,
     transition: {
-      delay: 0.2,
+      delay: AnimationConfig.LANDING_TIMING.CATAGORY_LABEL,
       duration: AnimationConfig.NORMAL,
     },
   },

@@ -168,7 +168,13 @@ const ProjectCardLink: React.FC<Props> = (props: Props) => {
       initial={{
         opacity: transformSnapshot === null ? 0 : 1,
       }}
-      animate={{ transition: { delay: 0, duration: 0.5 }, opacity: 1 }}
+      animate={{
+        transition: {
+          delay: AnimationConfig.LANDING_TIMING.PROJECT_CARD,
+          duration: 0.5,
+        },
+        opacity: 1,
+      }}
     >
       <Link
         to={!props.isViewOnly ? props.slug : null}
