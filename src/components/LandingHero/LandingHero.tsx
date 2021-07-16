@@ -61,7 +61,9 @@ export default () => {
           {/* Hello, this is Alvin! I create delightful experiences from concept to
           code with coffee grinds and a user-oriented mind. */}
           Hi, this is Alvin! A technologically supercharged designer who is
-          obsessed in creating functional yet delightful experiences.
+          interested in creating functional yet delightful experiences.
+          {/* Hello, I am Alvin! I craft functional yet delightful experiences for
+          brands and users. */}
         </SlideInText>
         {/* by combining function with aesthetics. */}
         {/* I fight for my users against bad designs by combining
