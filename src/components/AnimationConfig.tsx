@@ -2,7 +2,7 @@ export const ANIMIATION_FAST = 0.2;
 export const ANIMIATION_NORMAL = 0.5;
 export const ANIMIATION_EASING = [0.16, 1, 0.3, 1];
 
-const landingBaseTimingOffset = 0.5;
+const landingBaseTimingOffset = 0;
 
 export const AnimationConfig = {
   VERY_FAST: 0.1,
@@ -14,8 +14,8 @@ export const AnimationConfig = {
   // EASING: [0.22, 1, 0.36, 1], // ease out quint
   LANDING_TIMING: {
     NAVIGATION: landingBaseTimingOffset + 0,
-    CATAGORY_LABEL: landingBaseTimingOffset + 0.25,
-    PROJECT_CARD: landingBaseTimingOffset + 0.5,
+    CATAGORY_LABEL: landingBaseTimingOffset + 0.5,
+    PROJECT_CARD: landingBaseTimingOffset + 0.75,
   },
 };
 
