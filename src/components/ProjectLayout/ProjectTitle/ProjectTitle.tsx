@@ -19,9 +19,13 @@ const ProjectTitle: React.FC<Props> = ({ title, description }: Props) => {
       animate="enter"
       exit="exit"
     >
-      <h1 className="ProjectTitle__title">{title}</h1>
+      <h1 className="ProjectTitle__title">
+        <SlideInText style={{ display: 'block' }} delayBase={0.5}>
+          {title}
+        </SlideInText>
+      </h1>
       <p className="ProjectTitle__description">
-        <SlideInText>{description}</SlideInText>
+        <SlideInText delayBase={0.5}>{description}</SlideInText>
       </p>
     </motion.div>
   );

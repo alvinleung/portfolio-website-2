@@ -447,7 +447,7 @@ export default function Cursor() {
         }}
         transition={{
           duration: AnimationConfig.VERY_FAST,
-          easing: AnimationConfig.EASING,
+          ease: AnimationConfig.EASING_SOFT,
         }}
       >
         <motion.img

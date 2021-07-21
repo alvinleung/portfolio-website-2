@@ -11,6 +11,8 @@ export const AnimationConfig = {
   DEBUG: 10,
   EASING: [0.16, 1, 0.3, 1], // ease out expo
   EASING_INVERTED: [0.7, 0, 0.84, 0], // ease out expo
+  EASING_TRANSITION: [0.87, 0, 0.13, 1],
+  EASING_SOFT: [0.61, 1, 0.88, 1],
   // EASING: [0.22, 1, 0.36, 1], // ease out quint
   LANDING_TIMING: {
     NAVIGATION: landingBaseTimingOffset + 0,
