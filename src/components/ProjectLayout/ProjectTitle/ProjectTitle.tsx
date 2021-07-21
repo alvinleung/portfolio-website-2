@@ -25,7 +25,7 @@ const ProjectTitle: React.FC<Props> = ({ title, description }: Props) => {
         </SlideInText>
       </h1>
       <p className="ProjectTitle__description">
-        <SlideInText delayBase={0.5}>{description}</SlideInText>
+        <SlideInText delayBase={0.65}>{description}</SlideInText>
       </p>
     </motion.div>
   );
