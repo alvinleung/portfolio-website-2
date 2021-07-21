@@ -21,3 +21,6 @@ public/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log\*
+
+# webp are generated automatically using the gatsby system
+*.webp

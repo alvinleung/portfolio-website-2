@@ -17,9 +17,6 @@ module.exports = {
           // id: process.env.TYPEKIT_ID,
           id: "sdz1siz",
         },
-        google: {
-          families: ["Roboto Mono"],
-        },
       },
     },
     // for sourcing and transforming the markdwon files
@@ -28,6 +25,14 @@ module.exports = {
       options: {
         name: `markdown-pages`,
         path: `${__dirname}/src/data/projects`,
+      },
+    },
+    // for sourcing the playground fiels
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `playground-pages`,
+        path: `${__dirname}/static/experiment`,
       },
     },
     // for sourcing and transforming the image files
