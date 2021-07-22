@@ -111,7 +111,7 @@ const About: React.FC = () => {
           </ul>
         </SlideInParagraph>
         <motion.img
-          src="/img/portrait-small.jpg"
+          src="/img/portrait-small.webp"
           alt="me!"
           className="main-grid__full-width display-figure"
           // animate in
