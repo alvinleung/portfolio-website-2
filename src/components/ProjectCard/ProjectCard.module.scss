@@ -3,7 +3,13 @@
 .projectCard {
   cursor: none;
   max-width: 100%;
-  min-height: 30rem;
+
+  // mobile card size
+  height: 60vw;
+  @include viewportLargerThan($breakpoint-m) {
+    // desktop card size
+    height: 40vw;
+  }
   // min-height: 50vmin;
   margin-bottom: 1.5rem;
 
@@ -41,6 +47,8 @@
 
   font-family: "source-sans-pro", sans-serif;
   color: #fff;
+
+  z-index: 1;
 
   .projectType {
     // margin-bottom: auto;

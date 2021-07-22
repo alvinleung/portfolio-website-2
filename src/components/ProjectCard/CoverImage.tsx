@@ -249,28 +249,28 @@ const CoverImage = ({
     };
   };
 
-  useEffect(() => {
-    if (!placeholderMeasurement || isViewOnly) return;
-    if (isHovering) {
-      control.start({
-        backgroundSize: `100%`,
-        transition: {
-          ease: AnimationConfig.EASING,
-          duration: DEBUG ? AnimationConfig.DEBUG : AnimationConfig.NORMAL,
-          // "anticipation effect to make the animation more vivid/forceful"
-        },
-      });
-    } else {
-      control.start({
-        backgroundSize: `105%`,
-        transition: {
-          ease: AnimationConfig.EASING,
-          duration: DEBUG ? AnimationConfig.DEBUG : AnimationConfig.NORMAL,
-          // "anticipation effect to make the animation more vivid/forceful"
-        },
-      });
-    }
-  }, [isHovering]);
+  // useEffect(() => {
+  //   if (!placeholderMeasurement || isViewOnly) return;
+  //   if (isHovering) {
+  //     control.start({
+  //       backgroundSize: `100%`,
+  //       transition: {
+  //         ease: AnimationConfig.EASING,
+  //         duration: DEBUG ? AnimationConfig.DEBUG : AnimationConfig.NORMAL,
+  //         // "anticipation effect to make the animation more vivid/forceful"
+  //       },
+  //     });
+  //   } else {
+  //     control.start({
+  //       backgroundSize: `105%`,
+  //       transition: {
+  //         ease: AnimationConfig.EASING,
+  //         duration: DEBUG ? AnimationConfig.DEBUG : AnimationConfig.NORMAL,
+  //         // "anticipation effect to make the animation more vivid/forceful"
+  //       },
+  //     });
+  //   }
+  // }, [isHovering]);
 
   return (
     <div
@@ -285,12 +285,15 @@ const CoverImage = ({
       <motion.div
         ref={coverImageRef}
         style={{
-          backgroundImage: `url(${cover})`,
+          // backgroundImage: `url(${cover})`,
           // backgroundPosition: '20% 50%',
-          backgroundPosition: 'center',
+          // backgroundPosition: 'center',
           // backgroundSize: 'cover',
-          backgroundSize: '105%',
-          backgroundRepeat: 'no-repeat',
+          // backgroundSize: '105%',
+          // backgroundRepeat: 'no-repeat',
+          height: '100%',
+          width: '100%',
+          overflow: 'hidden',
           // backgroundAttachment: 'scroll',
           // WebkitBackfaceVisibility: 'hidden',
           // backfaceVisibility: 'hidden',
@@ -302,7 +305,37 @@ const CoverImage = ({
         exit={getExitState()}
         onAnimationComplete={handleAnimationComplete}
       >
-        {children}
+        <motion.img
+          src={cover}
+          alt=""
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            zIndex: -1,
+            scale: 1.05,
+          }}
+          loading="lazy"
+          animate={{
+            scale: isViewOnly ? 1.05 : isHovering ? 1 : 1.05,
+            transition: {
+              ease: AnimationConfig.EASING,
+              duration: DEBUG ? AnimationConfig.DEBUG : AnimationConfig.NORMAL,
+            },
+          }}
+        />
+        <div
+          style={{
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            bottom: 0,
+            top: 0,
+            zIndex: 100,
+          }}
+        >
+          {children}
+        </div>
       </motion.div>
     </div>
   );
