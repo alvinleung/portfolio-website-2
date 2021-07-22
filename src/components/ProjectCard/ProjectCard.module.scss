@@ -10,6 +10,11 @@
     // desktop card size
     height: 40vw;
   }
+
+  @include viewportLargerThan($breakpoint-xl) {
+    // desktop card size
+    height: 42rem;
+  }
   // min-height: 50vmin;
   margin-bottom: 1.5rem;
 

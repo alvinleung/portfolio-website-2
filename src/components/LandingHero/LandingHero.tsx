@@ -5,27 +5,27 @@ import { AnimationConfig, AnimationVariants } from '../AnimationConfig';
 import SlideInText from '../SlideInText/SlideInText';
 
 export default () => {
-  const { scrollY } = useViewportScroll();
+  // const { scrollY } = useViewportScroll();
 
-  const [windowHeight, setWindowHeight] = useState(0);
-  const fullyHiddenPos = windowHeight * 0.25; // determine at which scroll position should it be hidden
+  // const [windowHeight, setWindowHeight] = useState(0);
+  // const fullyHiddenPos = windowHeight * 0.25; // determine at which scroll position should it be hidden
 
-  const headerOpacity = useTransform(scrollY, [0, fullyHiddenPos], [1, 0]);
-  const headerScale = useTransform(scrollY, [0, fullyHiddenPos], [1, 0.95]);
+  // const headerOpacity = useTransform(scrollY, [0, fullyHiddenPos], [1, 0]);
+  // const headerScale = useTransform(scrollY, [0, fullyHiddenPos], [1, 0.95]);
 
-  useEffect(() => {
-    // for SSR support
-    if (typeof window === 'undefined') return;
+  // useEffect(() => {
+  //   // for SSR support
+  //   if (typeof window === 'undefined') return;
 
-    const updateWindowHeight = () => {
-      setWindowHeight(window.innerHeight);
-    };
-    window.addEventListener('resize', updateWindowHeight);
-    updateWindowHeight();
-    return () => {
-      window.removeEventListener('resize', updateWindowHeight);
-    };
-  }, []);
+  //   const updateWindowHeight = () => {
+  //     setWindowHeight(window.innerHeight);
+  //   };
+  //   window.addEventListener('resize', updateWindowHeight);
+  //   updateWindowHeight();
+  //   return () => {
+  //     window.removeEventListener('resize', updateWindowHeight);
+  //   };
+  // }, []);
 
   return (
     <div className="LandingHero main-grid">

@@ -18,7 +18,7 @@
     font-family: "source-sans-pro";
     padding-top: 5vw;
     font-size: 7vw;
-    height: 70vh;
+    height: 50vh;
 
     @include viewportLargerThan($breakpoint-m) {
       height: auto;
