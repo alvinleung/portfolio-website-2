@@ -129,16 +129,23 @@ $grid-breakpoint-full: $breakpoint-m;
 // ++++++++++++++++++++++++++++++++++++++++++++
 .main-grid__vertical-label {
   // display: none;
-  font-size: 10vw;
-  letter-spacing: -0.048em;
-  color: #ccc;
+  // font-size: 10vw;
+  font-size: 18px;
+  // text-transform: uppercase;
+  // letter-spacing: 0.048em;
+  // letter-spacing: -0.048em;
+  margin-bottom: 1rem;
+  color: #999;
 
   grid-column: 1/-1;
 
-  transform: translateY(0.55em);
+  // transform: translateY(0.55em);
 
   @include viewportLargerThan($grid-breakpoint-full) {
-    font-size: 2.5vw;
+    // font-size: 2.5vw;
+    font-size: 2.5rem;
+    letter-spacing: -0.048em;
+    text-transform: initial;
     color: #ccc;
 
     transform: none;
