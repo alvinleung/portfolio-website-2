@@ -285,7 +285,6 @@ const CoverImage = ({
       <motion.div
         ref={coverImageRef}
         style={{
-          backgroundColor: '#EEE',
           backgroundImage: `url(${cover})`,
           // backgroundPosition: '20% 50%',
           backgroundPosition: 'center',
