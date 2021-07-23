@@ -315,7 +315,7 @@ const CoverImage = ({
             zIndex: -1,
             scale: 1.05,
           }}
-          loading="lazy"
+          loading={isViewOnly ? 'eager' : 'lazy'}
           animate={{
             scale: isViewOnly ? 1.05 : isHovering ? 1 : 1.05,
             transition: {
