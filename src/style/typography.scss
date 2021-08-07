@@ -3,7 +3,7 @@
 @import "./breakpoints.scss";
 
 * {
-  font-family: "source-sans-pro";
+  // font-family: "source-sans-3";
   text-rendering: geometricPrecision;
   -webkit-font-smoothing: antialiased;
 }
@@ -46,13 +46,11 @@ h5 {
 }
 
 p {
-  font-family: "source-sans-pro", sans-serif;
   margin-top: 0rem;
   margin-bottom: 1rem;
 }
 
 .callout {
-  font-family: "source-serif-pro", serif;
   font-variant-ligatures: common-ligatures;
   font-weight: 400;
 }
@@ -75,6 +73,7 @@ a:active {
 }
 
 body {
+  font-family: "source-sans-pro", sans-serif;
   color: #282828;
   font-size: 16px;
 }
