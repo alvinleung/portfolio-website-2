@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './Footer.module.scss';
+import * as style from './Footer.module.scss';
 import { motion } from 'framer-motion';
 import { AnimationConfig, AnimationVariants } from '../AnimationConfig';
 import useGoogleAnalyticsEvent from '@/hooks/useGoogleAnalyticsEvent';

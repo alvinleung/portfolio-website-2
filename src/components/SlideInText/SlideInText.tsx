@@ -1,7 +1,7 @@
 import React, { CSSProperties } from 'react';
 import { motion } from 'framer-motion';
 
-import _style from './SlideInText.module.scss';
+import * as _style from './SlideInText.module.scss';
 import { AnimationConfig } from '../AnimationConfig';
 
 interface Props {

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import style from './ProjectCard.module.scss';
+import * as style from './ProjectCard.module.scss';
 
 const transitionConfig = { duration: 0.05, ease: 'easeOut' };
 interface Props {

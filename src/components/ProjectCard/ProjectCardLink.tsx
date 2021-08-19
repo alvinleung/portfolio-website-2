@@ -9,7 +9,12 @@ import {
 
 import { Link } from 'gatsby';
 
-import style from './ProjectCard.module.scss';
+import {
+  projectCard,
+  projectCardContainer,
+  projectCardContent,
+  projectCardLink,
+} from './ProjectCard.module.scss';
 import ReactiveCard from './ReactiveCard';
 import { AnimationConfig } from '../AnimationConfig';
 import CoverImage from './CoverImage';
@@ -78,10 +83,10 @@ const ProjectCardLink: React.FC<Props> = (props: Props) => {
           transformSnapshot && props.slug === transformSnapshot.slug
         }
         isViewOnly={props.isViewOnly}
-        className={style.projectCard}
+        className={projectCard}
         onTransitionComplete={handleTransitionComplete}
       >
-        <div className={style.projectCardContent}>
+        <div className={projectCardContent}>
           {/* the colour background overlay */}
           <motion.div
             initial={{
@@ -181,7 +186,7 @@ const ProjectCardLink: React.FC<Props> = (props: Props) => {
         onClick={() => {
           setWillPresist(true);
         }}
-        className={style.projectCardLink}
+        className={projectCardLink}
         onMouseOver={() => setIsMouseOver(true)}
         onMouseOut={() => setIsMouseOver(false)}
       >

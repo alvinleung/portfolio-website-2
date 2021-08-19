@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import style from './MainNav.module.scss';
+import * as style from './MainNav.module.scss';
 import { motion } from 'framer-motion';
 import { AnimationConfig } from '../AnimationConfig';
 

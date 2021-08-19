@@ -55,7 +55,8 @@ export const InterfaceDemo = ({ url, autoplay, noPadding }) => {
     playerRef.current.addEventListener('timeupdate', handleTimeUpdate);
 
     return () => {
-      playerRef.current.removeEventListener('timeupdate', handleTimeUpdate);
+      if (playerRef.current)
+        playerRef.current.removeEventListener('timeupdate', handleTimeUpdate);
     };
   }, []);
 
@@ -86,7 +87,7 @@ export const InterfaceDemo = ({ url, autoplay, noPadding }) => {
     observer.observe(playerRef.current);
 
     return () => {
-      observer.unobserve(playerRef.current);
+      if (playerRef.current) observer.unobserve(playerRef.current);
     };
   }, [playerRef.current]);
 

@@ -17,6 +17,9 @@ module.exports = {
           // id: process.env.TYPEKIT_ID,
           id: "sdz1siz",
         },
+        // google: {
+        //   families: ["Source Sans Pro"],
+        // },
       },
     },
     // for sourcing and transforming the markdwon files
