@@ -71,9 +71,8 @@ const CoverImage = ({
   isViewOnly,
   ...props
 }: CoverImageProps) => {
-  const [placeholderMeasurement, placeholderRef] = measureElement<
-    HTMLDivElement
-  >([]);
+  const [placeholderMeasurement, placeholderRef] =
+    measureElement<HTMLDivElement>([]);
   const [transitionState, setTransitionState] = useTransitionState();
   const [transformSnapshot, setTransformSnapshot] = useTransformSnapshot();
 

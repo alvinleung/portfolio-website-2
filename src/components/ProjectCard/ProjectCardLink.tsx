@@ -44,6 +44,7 @@ interface Props {
   tagline: string;
   children?: React.ReactNode;
   isViewOnly?: boolean;
+  scrollToOnEnter?: boolean;
 }
 
 const ProjectCardLink: React.FC<Props> = (props: Props) => {
@@ -80,7 +81,9 @@ const ProjectCardLink: React.FC<Props> = (props: Props) => {
         slug={props.slug}
         willPresist={willPresist}
         scrollToOnEnter={
-          transformSnapshot && props.slug === transformSnapshot.slug
+          transformSnapshot &&
+          props.slug === transformSnapshot.slug &&
+          props.scrollToOnEnter !== false
         }
         isViewOnly={props.isViewOnly}
         className={projectCard}
@@ -166,7 +169,7 @@ const ProjectCardLink: React.FC<Props> = (props: Props) => {
 
   // console.log(willPresist ? 0 : 1);
   // const [transformSnapshot,] = useTransformSnapshot();
-  console.log(props.isViewOnly);
+  // console.log(props.isViewOnly);
 
   return (
     <motion.div

@@ -37,6 +37,7 @@ import {
 import ProjectSectionSeperator from '@/components/ProjectLayout/ProjectSectionSeperator/ProjectSectionSeperator';
 import { AnimationConfig } from '@/components/AnimationConfig';
 import SEOHeader from '@/components/SEOHeader';
+import ProjectCardLink from '@/components/ProjectCard';
 
 const variants = {
   initial: {
@@ -136,6 +137,22 @@ export default function Template({
           <MDXRenderer>{body}</MDXRenderer>
         </MDXProvider>
       </motion.main>
+      {/* <div className="full-width main-grid" style={{ paddingTop: '6rem' }}>
+        <h4>Next Project</h4>
+        <div className="main-grid__full-width">
+          <ProjectCardLink
+            title={'HelpMate'}
+            slug={'/projects/HelpMate'}
+            catagory={'UI/UX Design'}
+            tagline={
+              'App concept of a community-based task finding platform for household chores.'
+            }
+            cover={'/img/helpmate-cover.webp'}
+            isViewOnly={false}
+            scrollToOnEnter={false}
+          />
+        </div>
+      </div> */}
     </>
   );
 }
@@ -268,7 +285,7 @@ const Pill = ({ color, round, children }) => {
 };
 
 export const pageQuery = graphql`
-  query($slug: String!) {
+  query ($slug: String!) {
     mdx(frontmatter: { slug: { eq: $slug } }) {
       body
       frontmatter {
