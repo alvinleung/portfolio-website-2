@@ -34,9 +34,27 @@ const SlideInText: React.FC<Props> = ({
   style,
 }: Props) => {
   // make sure that we are working with text
-  if (typeof children !== 'string') return children;
+  // if (typeof children !== 'string') return children;
 
-  const words = (children as string).split(' ');
+  const words = React.useMemo(() => {
+    if (typeof children !== 'string') {
+      // split it
+      let words = [];
+      React.Children.forEach(children, (child) => {
+        // either split the string into words or make it a word of itself
+        if (typeof child === 'string') {
+          const withoutTrailingSpace = (child as string).replace(/\s+$/, '');
+          words = [...words, ...withoutTrailingSpace.split(' ')];
+        } else {
+          words = [...words, child];
+        }
+      });
+      return words;
+    }
+    return (children as string).split(' ');
+  }, [children]);
+
+  // const words = (children as string).split(' ');
 
   return (
     <span className={_style.wordContainer} style={style}>
@@ -58,7 +76,10 @@ const SlideInText: React.FC<Props> = ({
                   : AnimationConfig.FAST,
                 // duration: duration || AnimationConfig.NORMAL,
               }}
-            >{`${word} `}</motion.span>
+            >
+              {word}
+              {` `}
+            </motion.span>
           </span>
         );
       })}
