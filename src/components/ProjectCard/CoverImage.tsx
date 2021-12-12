@@ -282,7 +282,7 @@ const CoverImage = ({
   const handleMouseMove = (e: React.MouseEvent) => {
     if (isViewOnly || !placeholderMeasurement) return;
 
-    const maxOffset = 30;
+    const maxOffset = 20;
 
     setOffset({
       x:
