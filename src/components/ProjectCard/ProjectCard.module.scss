@@ -1,24 +1,42 @@
 @import "../../style/breakpoints.scss";
 
+$fluidHeightMobile: 60vw;
+$fluidHeightDesktop: 40vw;
+$fixedHeight: 42rem;
+
 .projectCard {
   cursor: none;
   max-width: 100%;
 
   // mobile card size
-  height: 60vw;
+  height: $fluidHeightMobile;
   @include viewportLargerThan($breakpoint-m) {
     // desktop card size
-    height: 40vw;
+    max-height: $fluidHeightDesktop;
   }
 
   @include viewportLargerThan($breakpoint-xl) {
     // desktop card size
-    height: 42rem;
+    max-height: $fixedHeight;
   }
   // min-height: 50vmin;
   margin-bottom: 1.5rem;
 
   // z-index: 10;
+}
+
+.projectCardMedium {
+  @include viewportLargerThan($breakpoint-xl) {
+    // desktop card size
+    max-height: $fixedHeight / 1.2;
+  }
+}
+
+.projectCardSmall {
+  @include viewportLargerThan($breakpoint-xl) {
+    // desktop card size
+    max-height: $fixedHeight / 2;
+  }
 }
 
 // .projectCard:hover {

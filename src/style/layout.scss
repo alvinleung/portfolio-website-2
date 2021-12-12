@@ -48,6 +48,7 @@ $full-width-size: 90em;
 $grid-col-primary--collapsed: 1;
 $grid-col-primary--full: 3;
 $grid-breakpoint-full: $breakpoint-m;
+$grid-breakpoint-wide: $breakpoint-xl;
 
 .main-grid {
   display: grid;
@@ -90,6 +91,44 @@ $grid-breakpoint-full: $breakpoint-m;
   grid-column: 1/-1;
   @include viewportLargerThan($grid-breakpoint-full) {
     grid-column: 3/8;
+  }
+}
+
+.main-grid__primary-col-large {
+  grid-column: 1/-1;
+  @include viewportLargerThan($grid-breakpoint-full) {
+    grid-column: 3/-1;
+  }
+  @include viewportLargerThan($grid-breakpoint-wide) {
+    grid-column: 3/10;
+  }
+}
+.main-grid__primary-col-small {
+  grid-column: 1/-1;
+  @include viewportLargerThan($grid-breakpoint-full) {
+    grid-column: 3/-1;
+  }
+  @include viewportLargerThan($grid-breakpoint-wide) {
+    grid-column: 3/6;
+  }
+}
+
+.main-grid__secondary-col-small {
+  grid-column: 1/-1;
+  @include viewportLargerThan($grid-breakpoint-full) {
+    grid-column: 3/-1;
+  }
+  @include viewportLargerThan($grid-breakpoint-wide) {
+    grid-column: 10/13;
+  }
+}
+.main-grid__secondary-col-large {
+  grid-column: 1/-1;
+  @include viewportLargerThan($grid-breakpoint-full) {
+    grid-column: 3/-1;
+  }
+  @include viewportLargerThan($grid-breakpoint-wide) {
+    grid-column: 6/13;
   }
 }
 

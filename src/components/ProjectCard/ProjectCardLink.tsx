@@ -11,6 +11,7 @@ import { Link } from 'gatsby';
 
 import {
   projectCard,
+  projectCardSmall,
   projectCardContainer,
   projectCardContent,
   projectCardLink,
@@ -45,6 +46,8 @@ interface Props {
   children?: React.ReactNode;
   isViewOnly?: boolean;
   scrollToOnEnter?: boolean;
+  large?: boolean;
+  small?: boolean;
 }
 
 const ProjectCardLink: React.FC<Props> = (props: Props) => {
@@ -86,7 +89,7 @@ const ProjectCardLink: React.FC<Props> = (props: Props) => {
           props.scrollToOnEnter !== false
         }
         isViewOnly={props.isViewOnly}
-        className={projectCard}
+        className={`${projectCard} ${props.small ? projectCardSmall : ''}`}
         onTransitionComplete={handleTransitionComplete}
       >
         <div className={projectCardContent}>
