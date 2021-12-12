@@ -18,9 +18,9 @@ import { AnimationConfig } from '../AnimationConfig';
 
 const config = {
   width: 20,
-  hoverColor: 'rgba(0,0,0, .9)',
-  normalColor: 'rgba(0,0,0, .9)',
-  pressedColor: 'rgba(0,0,0, .2)',
+  hoverColor: 'rgba(40,40,40, 1)',
+  normalColor: 'rgba(40,40,40, 1)',
+  pressedColor: 'rgba(40,40,40, .2)',
 };
 
 /*
