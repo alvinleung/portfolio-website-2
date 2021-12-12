@@ -22,7 +22,7 @@ const measureElement = <T extends HTMLElement>(
   const computeClientRect = () => {
     const boundingRect = nodeRef.current.getBoundingClientRect();
     const x = boundingRect.left;
-    const y = nodeRef.current.offsetTop;
+    const y = boundingRect.top + window.scrollY;
     const width = boundingRect.width;
     const height = boundingRect.height;
     // const width = nodeRef.current.clientWidth;

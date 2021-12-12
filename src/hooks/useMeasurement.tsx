@@ -4,6 +4,7 @@ import React, { useRef, useState, useEffect } from 'react';
 
 // [bounds, nodeRef]
 import { ElementMeasurement } from './measureElement';
+import useForceUpdate from './useForceUpdate';
 
 const useMeasurement = <T extends HTMLElement>(): [
   Function,

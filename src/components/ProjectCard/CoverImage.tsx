@@ -299,7 +299,7 @@ const CoverImage = ({
         y: 0,
       });
     }
-  }, [isHovering]);
+  }, [isHovering, placeholderMeasurement]);
 
   return (
     <div
