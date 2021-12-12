@@ -19,6 +19,7 @@ import {
 } from 'framer-motion';
 import React, { useRef, useEffect, useLayoutEffect, useState } from 'react';
 import { AnimationConfig } from '../AnimationConfig';
+import { CustomStates, useCursorCustomState } from '../Cursor/Cursor';
 import {
   TransitionState,
   useTransformSnapshot,
@@ -82,6 +83,7 @@ const CoverImage = ({
   const [transformSnapshot, setTransformSnapshot] = useTransformSnapshot();
 
   const [isHovering, setIsHovering] = useState(false);
+  const [cursorCustomState, , setCursorCustomState] = useCursorCustomState();
 
   // framer motion uses
   const [isPresent, safeToRemove] = usePresence();
@@ -278,17 +280,19 @@ const CoverImage = ({
 
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (isViewOnly) return;
+    if (isViewOnly || !placeholderMeasurement) return;
 
-    const maxOffset = 10;
+    const maxOffset = 20;
 
     setOffset({
       x:
         (maxOffset * (e.pageX - placeholderMeasurement.x)) /
-        placeholderMeasurement.width,
+          placeholderMeasurement.width -
+        maxOffset / 2,
       y:
         (maxOffset * (e.pageY - placeholderMeasurement.y)) /
-        placeholderMeasurement.height,
+          placeholderMeasurement.height -
+        maxOffset / 2,
     });
   };
   // reset hovering
@@ -298,6 +302,9 @@ const CoverImage = ({
         x: 0,
         y: 0,
       });
+      setCursorCustomState(CustomStates.NONE);
+    } else {
+      setCursorCustomState(CustomStates.HIDDEN);
     }
   }, [isHovering, placeholderMeasurement]);
 
@@ -308,7 +315,10 @@ const CoverImage = ({
       ref={placeholderRef}
       style={{ width: '100%' }}
       {...props}
-      onMouseEnter={() => setIsHovering(true)}
+      onMouseEnter={(e) => {
+        setIsHovering(true);
+        handleMouseMove(e);
+      }}
       onMouseLeave={() => setIsHovering(false)}
       onMouseMove={handleMouseMove}
     >
@@ -346,7 +356,7 @@ const CoverImage = ({
             scale: 1.05,
           }}
           animate={{
-            scale: isViewOnly ? 1.05 : isHovering ? 1.01 : 1.05,
+            scale: isViewOnly ? 1.05 : isHovering ? 1.02 : 1.05,
             x: offset.x,
             y: offset.y,
             transition: {

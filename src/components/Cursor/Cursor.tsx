@@ -18,9 +18,9 @@ import { AnimationConfig } from '../AnimationConfig';
 
 const config = {
   width: 20,
-  hoverColor: 'rgba(0,0,255, .9)',
-  normalColor: 'rgba(0,0,255, .9)',
-  pressedColor: 'rgba(0,0,255, .2)',
+  hoverColor: 'rgba(0,0,0, .9)',
+  normalColor: 'rgba(0,0,0, .9)',
+  pressedColor: 'rgba(0,0,0, .2)',
 };
 
 /*
@@ -41,6 +41,7 @@ export enum CustomStates {
   ZOOM_IN,
   ZOOM_OUT,
   CLOSE,
+  HIDDEN,
 }
 
 const CustomStateIcons = {
@@ -129,11 +130,8 @@ export default function Cursor() {
   const isUsingTouch = useRef(false);
   const [mousedown, setMouseDown] = useState(false);
 
-  const [
-    customState,
-    previousCustomState,
-    setCustomState,
-  ] = useCursorCustomState();
+  const [customState, previousCustomState, setCustomState] =
+    useCursorCustomState();
 
   const handleMouseMove = (e: MouseEvent) => {
     if (!isUsingTouch.current) setHidden(false);
@@ -218,9 +216,8 @@ export default function Cursor() {
 
   // for link hovering effect
   const [linkHovered, setLinkHovered] = useState(false);
-  const [hoveredElementMeasurement, setHoveredElementMeasurement] = useState<
-    elmMeasurement
-  >();
+  const [hoveredElementMeasurement, setHoveredElementMeasurement] =
+    useState<elmMeasurement>();
 
   // for link effect
   useEffect(() => {
@@ -277,9 +274,8 @@ export default function Cursor() {
 
   // for hovering paragraph effect
   const [isHoveringParagraph, setIsHoveringParagraph] = useState(false);
-  const [targetParagraphFontSize, setTargetParagraphFontSize] = useState(
-    '16px',
-  );
+  const [targetParagraphFontSize, setTargetParagraphFontSize] =
+    useState('16px');
   useEffect(() => {
     const handleParagraphMouseOver = (e: MouseEvent) => {
       setIsHoveringParagraph(true);
@@ -352,7 +348,10 @@ export default function Cursor() {
         borderRadius: 4,
       };
 
-    if (customState !== CustomStates.NONE)
+    if (
+      customState !== CustomStates.NONE &&
+      customState !== CustomStates.HIDDEN
+    )
       return {
         width: config.width * CUSTOM_STATE_SCALE,
         height: config.width * CUSTOM_STATE_SCALE,
@@ -436,7 +435,7 @@ export default function Cursor() {
           // y: hoveredElementMeasurement ? cursorPosition.y : null,
 
           borderRadius: textSelectCursorAppearence.borderRadius,
-          opacity: hidden ? 0 : 1,
+          opacity: hidden || customState === CustomStates.HIDDEN ? 0 : 1,
           scale: cursorScale,
           borderColor: hoveredElementMeasurement
             ? config.hoverColor
