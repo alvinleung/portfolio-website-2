@@ -11,7 +11,12 @@
 
 import measureElement from '@/hooks/measureElement';
 import useMeasurement from '@/hooks/useMeasurement';
-import { motion, useAnimation, usePresence } from 'framer-motion';
+import {
+  motion,
+  useAnimation,
+  useMotionValue,
+  usePresence,
+} from 'framer-motion';
 import React, { useRef, useEffect, useLayoutEffect, useState } from 'react';
 import { AnimationConfig } from '../AnimationConfig';
 import {
@@ -271,6 +276,31 @@ const CoverImage = ({
   //   }
   // }, [isHovering]);
 
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (isViewOnly) return;
+
+    const maxOffset = 10;
+
+    setOffset({
+      x:
+        (maxOffset * (e.pageX - placeholderMeasurement.x)) /
+        placeholderMeasurement.width,
+      y:
+        (maxOffset * (e.pageY - placeholderMeasurement.y)) /
+        placeholderMeasurement.height,
+    });
+  };
+  // reset hovering
+  useEffect(() => {
+    if (!isHovering) {
+      setOffset({
+        x: 0,
+        y: 0,
+      });
+    }
+  }, [isHovering]);
+
   return (
     <div
       // wrapper dimensions
@@ -280,6 +310,7 @@ const CoverImage = ({
       {...props}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
+      onMouseMove={handleMouseMove}
     >
       <motion.div
         ref={coverImageRef}
@@ -315,7 +346,9 @@ const CoverImage = ({
             scale: 1.05,
           }}
           animate={{
-            scale: isViewOnly ? 1.05 : isHovering ? 1 : 1.05,
+            scale: isViewOnly ? 1.05 : isHovering ? 1.01 : 1.05,
+            x: offset.x,
+            y: offset.y,
             transition: {
               ease: AnimationConfig.EASING,
               duration: DEBUG ? AnimationConfig.DEBUG : AnimationConfig.NORMAL,
