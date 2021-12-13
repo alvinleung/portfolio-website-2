@@ -142,17 +142,6 @@ const ProjectCardLink: React.FC<Props> = (props: Props) => {
           >
             {props.catagory}
           </motion.div> */}
-          <motion.h3
-            style={{ zIndex: 1 }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: AnimationConfig.FAST }}
-          >
-            <SlideInText visible={isMouseOver} delayBase={0}>
-              {props.title}
-            </SlideInText>
-          </motion.h3>
           <motion.p
             style={{ zIndex: 1 }}
             initial={{ opacity: 0 }}
@@ -165,6 +154,23 @@ const ProjectCardLink: React.FC<Props> = (props: Props) => {
               {props.tagline}
             </SlideInText>
           </motion.p>
+          <motion.h3
+            style={{ zIndex: 1 }}
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: isMouseOver ? 1 : 0,
+              transition: {
+                delay: isMouseOver ? 0.3 : 0,
+                duration: AnimationConfig.FAST,
+              },
+            }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: AnimationConfig.FAST }}
+          >
+            {/* <SlideInText visible={isMouseOver} delayBase={0}> */}
+            {props.title}
+            {/* </SlideInText> */}
+          </motion.h3>
         </div>
       </CoverImage>
     </ReactiveCard>
