@@ -79,17 +79,16 @@ $fixedHeight: 42rem;
 
   h3 {
     // font-size: 36px;
-    font-size: 14px;
-    // font-family: "roboto mono";
-    // font-family: "source serif pro";
-    // text-transform: lowercase;
-    // font-style: italic;
-    font-weight: bold;
-    letter-spacing: 0.02em;
+    font-size: 16px;
+    font-family: "source serif pro";
+    text-transform: lowercase;
+    font-style: italic;
+    font-weight: normal;
+    // letter-spacing: 0.0em;
     // letter-spacing: -0.04em;
     line-height: 1em;
     margin-bottom: var(--spacing-vertical);
-    max-width: 20rem;
+    max-width: 22rem;
   }
 
   p {
