@@ -199,8 +199,12 @@ const ProjectCardLink: React.FC<Props> = (props: Props) => {
           setWillPresist(true);
         }}
         className={projectCardLink}
-        onMouseOver={() => setIsMouseOver(true)}
-        onMouseOut={() => setIsMouseOver(false)}
+        onMouseEnter={() => {
+          setIsMouseOver(true);
+        }}
+        onMouseLeave={() => {
+          setIsMouseOver(false);
+        }}
       >
         {cardContent}
       </Link>
