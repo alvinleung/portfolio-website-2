@@ -62,8 +62,8 @@ export default () => {
           code with coffee grinds and a user-oriented mind. */}
           {/* Hi, this is Alvin! A technologically supercharged designer who is
           interested in creating functional yet delightful experiences. */}
-          This is <em>Alvin</em> — I craft thoughtful digital experiences with
-          compelling visuals.
+          This is <em>Alvin</em> — a designer who craft thoughtful digital
+          experiences with compelling visuals.
           {/* Hello, I am Alvin! I craft functional yet delightful experiences for
           brands and users. */}
         </SlideInText>

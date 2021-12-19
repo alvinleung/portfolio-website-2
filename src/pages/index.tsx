@@ -106,10 +106,12 @@ const Home: React.FC<Props> = ({ data }: Props) => {
       <main className="full-width nav-padding">
         {/* <Title /> */}
         <LandingHero />
-        <section id="works" className="main-grid">
-          <VerticalLabel>Featured</VerticalLabel>
+        <section id="featured" className="main-grid">
+          <VerticalLabel>Featured Works</VerticalLabel>
           {buildProjectList(featuredProjectList)}
-          <div className="main-grid__section-seperator"></div>
+        </section>
+        <div className="main-grid__section-seperator"></div>
+        <section id="visual-design" className="main-grid">
           <VerticalLabel>Visual Design</VerticalLabel>
           {buildProjectList(visualDesignProjectList)}
         </section>

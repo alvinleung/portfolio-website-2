@@ -1,4 +1,5 @@
 @import "../../style/breakpoints.scss";
+@import "../../style/typography.scss";
 
 $fluidHeightMobile: 60vw;
 $fluidHeightDesktop: 40vw;
@@ -79,12 +80,13 @@ $fixedHeight: 42rem;
   }
 
   h3 {
+    @extend .label;
     // font-size: 36px;
-    font-size: 16px;
+    // font-size: 16px;
     // font-family: "source serif pro";
     // text-transform: lowercase;
     // font-style: italic;
-    font-weight: normal;
+    // font-weight: normal;
     // letter-spacing: 0.0em;
     // letter-spacing: -0.04em;
     line-height: 1em;

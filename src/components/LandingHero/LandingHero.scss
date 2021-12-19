@@ -21,16 +21,25 @@
 
     @include viewportLargerThan($breakpoint-m) {
       height: auto;
-      padding-top: 20vh;
-      padding-bottom: 20vh;
+      padding-top: 10vh;
+      padding-bottom: 30vh;
       // font-size: 2.5vw;
       max-width: 40ch;
       font-size: 2.75rem;
       // font-size: 5vw;
+
+      padding-top: 5vh;
+      padding-bottom: 30vh;
+      max-width: 13em;
+      font-size: 4rem;
     }
     // lock maximum font size when screen scale up
     @include viewportLargerThan(100em) {
-      font-size: 2.75rem;
+      //OLD SIZE font-size: 2.75rem;
+      padding-top: 5vh;
+      padding-bottom: 30vh;
+      max-width: 13em;
+      font-size: 4rem;
     }
     letter-spacing: -0.048em;
     // max-width: 40rem;

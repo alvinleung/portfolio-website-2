@@ -51,9 +51,10 @@ p {
 }
 
 em {
-  font-family: "Source Serif Pro", serif;
+  font-family: "source-serif-pro", serif;
   font-style: italic;
   text-transform: lowercase;
+  line-height: 1rem;
 }
 
 .callout {
@@ -62,6 +63,7 @@ em {
 }
 
 .label {
+  font-family: "roboto-mono", monospace;
   text-transform: uppercase;
   font-size: 12px;
   letter-spacing: 0.1em;

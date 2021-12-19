@@ -6,7 +6,7 @@ body {
   margin: 0;
 }
 
-$full-width-size: 90em;
+$full-width-size: 96em;
 .full-width {
   // position: relative;
 
@@ -167,11 +167,13 @@ $grid-breakpoint-wide: $breakpoint-xl;
 //
 // ++++++++++++++++++++++++++++++++++++++++++++
 .main-grid__vertical-label {
+  align-items: start;
+
   // display: none;
   // font-size: 10vw;
   font-size: 18px;
   // text-transform: uppercase;
-  // letter-spacing: 0.048em;
+  letter-spacing: 0.048em;
   // letter-spacing: -0.048em;
   margin-bottom: 1rem;
   color: #999;
@@ -182,14 +184,17 @@ $grid-breakpoint-wide: $breakpoint-xl;
 
   @include viewportLargerThan($grid-breakpoint-full) {
     // font-size: 2.5vw;
-    font-size: 2.5rem;
+    font-size: 2rem;
     letter-spacing: -0.048em;
     text-transform: initial;
     color: #ccc;
 
     transform: none;
 
-    display: block;
+    display: inline-block;
+    position: sticky;
+    top: 76vh;
+
     margin-right: auto;
     grid-column: 2/3;
     writing-mode: vertical-rl;

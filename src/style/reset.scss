@@ -23,11 +23,12 @@ a {
 /* 
  * remove horizontal scrolling for mobile
  */
-html, body {
-  overflow-x: hidden;
+html,
+body {
+  // overflow-x: hidden;
 }
 body {
-  position: relative
+  position: relative;
 }
 
 /* 
@@ -101,7 +102,7 @@ body {
  *+++++++++++++++++++++
  */
 
-/* add "hand" cursor to non-disabled button elements. */ 
+/* add "hand" cursor to non-disabled button elements. */
 button,
 input[type="button"],
 input[type="reset"],
