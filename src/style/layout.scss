@@ -194,6 +194,7 @@ $grid-breakpoint-wide: $breakpoint-xl;
     display: inline-block;
     position: sticky;
     top: 76vh;
+    height: fit-content;
 
     margin-right: auto;
     grid-column: 2/3;
