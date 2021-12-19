@@ -304,7 +304,7 @@ const CoverImage = ({
       });
       setCursorCustomState(CustomStates.NONE);
     } else {
-      setCursorCustomState(CustomStates.HIDDEN);
+      !isViewOnly && setCursorCustomState(CustomStates.HIDDEN);
     }
   }, [isHovering, placeholderMeasurement]);
 
