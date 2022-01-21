@@ -1,2 +1,4 @@
 import { InterfaceDemo } from './InterfaceDemo';
-export default InterfaceDemo;
+import { InterfaceAnnotation } from './InterfaceAnnotation';
+
+export { InterfaceDemo, InterfaceAnnotation };

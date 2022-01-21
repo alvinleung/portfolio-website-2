@@ -38,6 +38,17 @@ export const ProgressRing = ({
         exit={{ opacity: 0, strokeDashoffset: 0 }}
         transition={{ easings: 'linear' }}
       />
+      <motion.circle
+        stroke={strokeColor}
+        fill="transparent"
+        strokeWidth={stroke}
+        strokeDasharray={circumference + ' ' + circumference}
+        stroke-width={stroke}
+        r={normalizedRadius}
+        cx={radius}
+        cy={radius}
+        opacity={0.2}
+      />
     </svg>
   );
 };

@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { createContext, useEffect, useRef, useState } from 'react';
+import { motion, useAnimation } from 'framer-motion';
 import ProgressRing from '../../ProgressRing';
 import { useCursorCustomState, CustomStates } from '../../Cursor/Cursor';
 import './InterfaceDemo.scss';
@@ -7,18 +7,82 @@ import { AnimationConfig } from '../../AnimationConfig';
 
 interface Props {
   url: string;
+  label?: string;
   autoplay?: boolean;
+  disableAutoPause?: boolean;
   noPadding?: boolean;
+  children: React.ReactChildren;
 }
 
 const INTERSECTION_RATIO_THRESHOLD = 0.5;
 
-export const InterfaceDemo = ({ url, autoplay, noPadding }) => {
+interface Position {
+  x: number;
+  y: number;
+}
+
+const InterfaceAnnotationContext = React.createContext({
+  showHighlight: (timecode: number, position: Position) => {},
+});
+export const useAnnotation = () => React.useContext(InterfaceAnnotationContext);
+
+export const InterfaceDemo = ({
+  label,
+  url,
+  autoplay,
+  noPadding,
+  children,
+  disableAutoPause,
+}: Props) => {
   const playerRef = useRef<HTMLVideoElement>();
   const [isViewing, setIsViewing] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
   const [videoProgress, setVideoProgress] = useState(0);
   const [cursorCustomState, , setCursorCustomState] = useCursorCustomState();
+
+  const annotationControl = useAnimation();
+
+  const showHighlight = (timecode: number, position: Position) => {
+    const playerWidth = playerRef.current.clientWidth;
+    const playerHeight = playerRef.current.clientHeight;
+    const vidWidth = playerRef.current.videoWidth;
+    const vidHeight = playerRef.current.videoHeight;
+
+    // scroll into view if out of view
+    const vidRect = playerRef.current.getBoundingClientRect();
+    const threshold = 0;
+    const offsetTop = 72;
+    if (vidRect.top < threshold)
+      window.scrollTo({
+        top: window.scrollY + vidRect.top - offsetTop,
+        behavior: 'smooth',
+      });
+
+    // jump to second
+    playVideo();
+    playerRef.current.currentTime = timecode;
+
+    // highlight portion
+    annotationControl.set({
+      opacity: 1,
+      // top: (playerHeight * box.top) / vidHeight,
+      // right: (playerWidth * box.right) / vidWidth,
+      // bottom: (playerHeight * box.bottom) / vidHeight,
+      // left: (playerWidth * box.left) / vidWidth,
+      background: `radial-gradient(circle at ${
+        (playerWidth * position.x) / vidWidth
+      }px ${
+        (playerHeight * position.y) / vidHeight
+      }px, rgba(255,255,255,0) 0%, rgba(255,255,255,.8) 50%, rgba(255,255,255,1) 100%`,
+    });
+    annotationControl.start({
+      opacity: 0,
+      transition: {
+        duration: 1,
+      },
+    });
+  };
 
   const replayFromBeginning = () => {
     playerRef.current.currentTime = 0;
@@ -26,7 +90,9 @@ export const InterfaceDemo = ({ url, autoplay, noPadding }) => {
   };
 
   const playVideo = () => {
-    playerRef.current.play();
+    playerRef.current
+      .play()
+      .catch(() => console.log(`interrupted play request for ${url}`));
     setIsPlaying(true);
   };
 
@@ -36,14 +102,14 @@ export const InterfaceDemo = ({ url, autoplay, noPadding }) => {
   };
 
   useEffect(() => {
-    if (!isViewing) {
+    if (!isViewing && !disableAutoPause) {
       pauseVideo();
     } else {
       if (autoplay !== false) {
         replayFromBeginning();
       }
     }
-  }, [isViewing]);
+  }, [isViewing, disableAutoPause]);
 
   // update the progress when the video is playing
   useEffect(() => {
@@ -92,7 +158,7 @@ export const InterfaceDemo = ({ url, autoplay, noPadding }) => {
   }, [playerRef.current]);
 
   const handlePlayerClick = () => {
-    if (!isViewing) return;
+    if (!disableAutoPause && !isViewing) return;
 
     if (!isPlaying) {
       playVideo();
@@ -105,10 +171,12 @@ export const InterfaceDemo = ({ url, autoplay, noPadding }) => {
     // show different cursor icon base on whether the video is playing
     const showCursorState = isPlaying ? CustomStates.STOP : CustomStates.PLAY;
     setCursorCustomState(showCursorState);
+    setIsHovering(true);
   };
 
   const handleMouseOut = () => {
     setCursorCustomState(CustomStates.NONE);
+    setIsHovering(false);
   };
 
   useEffect(() => {
@@ -137,41 +205,73 @@ export const InterfaceDemo = ({ url, autoplay, noPadding }) => {
     'interface-demo display-figure display-figure--no-padding main-grid__full-width';
 
   return (
-    <motion.div
-      className={
-        noPadding === true ? containerWithoutPadding : containerWithPadding
-      }
-      initial={{ opacity: 0.1 }}
-      animate={{ opacity: isViewing ? 1 : 0.1 }}
-      onMouseOver={handleMouseOver}
-      onMouseOut={handleMouseOut}
-    >
-      <div className="progress-ring-container">
-        <ProgressRing progress={videoProgress} strokeColor="rgba(0,0,0,.2)" />
-        <motion.button
-          onClick={handleRestartClick}
-          style={{ filter: 'grayscale(100%)' }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: hasPlayerPlayed ? 0.2 : 0 }}
-          whileHover={{
-            filter: 'grayscale(0%)',
-            opacity: 1,
-          }}
-          transition={{
-            duration: AnimationConfig.FAST,
-            easings: AnimationConfig.EASING,
-          }}
+    <>
+      <motion.div
+        className={
+          noPadding === true ? containerWithoutPadding : containerWithPadding
+        }
+        initial={{ opacity: 0.1 }}
+        animate={{ opacity: disableAutoPause || isViewing ? 1 : 0.1 }}
+        onMouseOver={handleMouseOver}
+        onMouseOut={handleMouseOut}
+      >
+        <div className="progress-ring-container">
+          <motion.div
+            style={{ marginRight: '.25rem' }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, x: isHovering ? 0 : '5.25rem' }}
+            transition={{
+              duration: AnimationConfig.FAST,
+              easings: AnimationConfig.EASING,
+            }}
+          >
+            <ProgressRing progress={videoProgress} strokeColor="#282828" />
+          </motion.div>
+          <motion.button
+            onClick={handleRestartClick}
+            className="disableCursorColorChange"
+            style={{ filter: 'grayscale(100%)' }}
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: isHovering ? 1 : 0,
+              x: isHovering ? 0 : '5rem',
+            }}
+            whileHover={{
+              filter: 'grayscale(0%)',
+              // opacity: 1,
+            }}
+            transition={{
+              duration: AnimationConfig.FAST,
+              easings: AnimationConfig.EASING,
+            }}
+          >
+            <img src="/img/icons/replay.svg" alt="replay icon" />
+            Replay
+          </motion.button>
+        </div>
+        <video
+          src={url}
+          autoPlay={true}
+          muted={true}
+          preload="auto"
+          loop
+          disablePictureInPicture
+          ref={playerRef}
+          onClick={handlePlayerClick}
         />
-      </div>
-      <video
-        src={url}
-        autoPlay={true}
-        muted={true}
-        preload="auto"
-        loop
-        ref={playerRef}
-        onClick={handlePlayerClick}
-      />
-    </motion.div>
+        <motion.div
+          className="interface-annotation-highlight"
+          animate={annotationControl}
+        />
+      </motion.div>
+      {children && label && (
+        <InterfaceAnnotationContext.Provider
+          value={{ showHighlight: showHighlight }}
+        >
+          <h5 className="main-grid__primary-col">{label}</h5>
+          <p className="main-grid__secondary-col">{children}</p>
+        </InterfaceAnnotationContext.Provider>
+      )}
+    </>
   );
 };

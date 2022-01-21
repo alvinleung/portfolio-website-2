@@ -1,10 +1,25 @@
+@import "../../../style/typography.scss";
+
 .interface-demo {
   position: relative;
+  overflow: hidden;
 
   video {
     width: 100%;
     display: block;
   }
+}
+
+.interface-annotation-highlight {
+  position: absolute;
+  left: 0rem;
+  right: 0rem;
+  top: 0rem;
+  bottom: 0rem;
+  // background-color: rgba(255, 255, 255, 0.6);
+  opacity: 0;
+  pointer-events: none;
+  // border-radius: 50%;
 }
 
 .progress-ring-container {
@@ -16,12 +31,20 @@
 
   // restart button
   button {
-    display: block;
-    background-color: transparent;
-    background-image: url("/img/icons/replay.svg");
-    background-size: 100% 100%;
-    width: 2rem;
+    @extend .label;
+
+    display: flex;
+    align-items: center;
+
+    // font-size: 14px;
+
+    border-radius: 4px;
+
+    background-color: #282828;
+    color: #fff;
     height: 2rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
 
     border: none;
 
@@ -29,6 +52,14 @@
     cursor: none;
 
     outline: none;
+
+    img {
+      height: 1rem;
+    }
+
+    &:hover {
+      color: #fff;
+    }
   }
 
   video {

@@ -3,7 +3,6 @@ import useForceUpdate from '../../../hooks/useForceUpdate';
 import { motion, AnimatePresence, useIsPresent } from 'framer-motion';
 import { useCursorHoverState, CustomStates } from '../../Cursor/Cursor';
 import { AnimationConfig } from '@/components/AnimationConfig';
-import { Animation } from 'framer-motion/types/motion/features/animation';
 
 const FullImage = (props) => {
   const withPadding = 'main-grid__full-content display-figure';
@@ -104,6 +103,8 @@ const ExpandableImage = ({ className, src, alt, caption }) => {
     checkMouseOutsideImage();
   };
 
+  const isVideo = getExtension(src) === 'mp4';
+
   return (
     <figure
       className={className}
@@ -115,15 +116,31 @@ const ExpandableImage = ({ className, src, alt, caption }) => {
       }}
     >
       <div {...customStatesEventHandlers}>
-        <motion.img
-          src={src}
-          alt={alt}
-          loading="lazy"
-          ref={imgRef}
-          style={{
-            visibility: expandedImagePresent.current ? 'hidden' : 'visible',
-          }}
-        />
+        {!isVideo && (
+          <motion.img
+            src={src}
+            alt={alt}
+            loading="lazy"
+            ref={imgRef}
+            style={{
+              visibility: expandedImagePresent.current ? 'hidden' : 'visible',
+            }}
+          />
+        )}
+        {isVideo && (
+          <motion.video
+            src={src}
+            ref={imgRef}
+            style={{
+              visibility: expandedImagePresent.current ? 'hidden' : 'visible',
+              width: '100%',
+            }}
+            autoPlay
+            muted
+            loop
+            disablePictureInPicture
+          />
+        )}
         <AnimatePresence onExitComplete={handleExitAnimationComplete}>
           {isExpanded && (
             <ExpandedImage
@@ -140,14 +157,22 @@ const ExpandableImage = ({ className, src, alt, caption }) => {
   );
 };
 
+function getExtension(filename) {
+  return filename.split('.').pop();
+}
+
 const ExpandedImage = ({ imgRef, src, alt, expandedImagePresent }) => {
   expandedImagePresent.current = true;
 
-  const imgBounds = (imgRef.current as HTMLImageElement).getBoundingClientRect();
+  const imgBounds = (
+    imgRef.current as HTMLImageElement | HTMLVideoElement
+  ).getBoundingClientRect();
   const imgBoundsAspectRatio = imgBounds.height / imgBounds.width;
 
   const expandedWidth = window.innerWidth;
   const expandedHeight = window.innerWidth * imgBoundsAspectRatio;
+
+  const isVideo = getExtension(src) === 'mp4';
 
   const isPresent = useIsPresent();
 
@@ -174,40 +199,80 @@ const ExpandedImage = ({ imgRef, src, alt, expandedImagePresent }) => {
         }}
       ></motion.div>
       {/* img */}
-      <motion.img
-        style={{
-          position: 'absolute',
-          zIndex: 10000,
-          maxWidth: '100vw',
-        }}
-        initial={{
-          top: 0,
-          left: 0,
-          width: imgBounds.width,
-          height: imgBounds.height,
-        }}
-        animate={{
-          top:
-            isPresent &&
-            -imgBounds.top + (window.innerHeight - expandedHeight) / 2, // move to the middle of the screen
-          left: isPresent && -imgBounds.left, // go stright to the left end of the screen
-          width: isPresent && expandedWidth,
-          height: isPresent && expandedHeight,
-        }}
-        exit={{
-          top: 0,
-          left: 0,
-          width: imgBounds.width,
-          height: imgBounds.height,
-        }}
-        src={src}
-        alt={alt}
-        loading="lazy"
-        transition={{
-          duration: AnimationConfig.NORMAL,
-          ease: AnimationConfig.EASING,
-        }}
-      />
+      {!isVideo && (
+        <motion.img
+          style={{
+            position: 'absolute',
+            zIndex: 10000,
+            maxWidth: '100vw',
+          }}
+          initial={{
+            top: 0,
+            left: 0,
+            width: imgBounds.width,
+            height: imgBounds.height,
+          }}
+          animate={{
+            top:
+              isPresent &&
+              -imgBounds.top + (window.innerHeight - expandedHeight) / 2, // move to the middle of the screen
+            left: isPresent && -imgBounds.left, // go stright to the left end of the screen
+            width: isPresent && expandedWidth,
+            height: isPresent && expandedHeight,
+          }}
+          exit={{
+            top: 0,
+            left: 0,
+            width: imgBounds.width,
+            height: imgBounds.height,
+          }}
+          src={src}
+          alt={alt}
+          loading="lazy"
+          transition={{
+            duration: AnimationConfig.NORMAL,
+            ease: AnimationConfig.EASING,
+          }}
+        />
+      )}
+      {isVideo && (
+        <motion.video
+          style={{
+            position: 'absolute',
+            zIndex: 10000,
+            maxWidth: '100vw',
+          }}
+          initial={{
+            top: 0,
+            left: 0,
+            width: imgBounds.width,
+            height: imgBounds.height,
+          }}
+          animate={{
+            top:
+              isPresent &&
+              -imgBounds.top + (window.innerHeight - expandedHeight) / 2, // move to the middle of the screen
+            left: isPresent && -imgBounds.left, // go stright to the left end of the screen
+            width: isPresent && expandedWidth,
+            height: isPresent && expandedHeight,
+          }}
+          exit={{
+            top: 0,
+            left: 0,
+            width: imgBounds.width,
+            height: imgBounds.height,
+          }}
+          transition={{
+            duration: AnimationConfig.NORMAL,
+            ease: AnimationConfig.EASING,
+          }}
+          autoPlay
+          muted
+          loop
+          disablePictureInPicture
+          src={src}
+        />
+      )}
     </>
   );
 };

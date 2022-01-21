@@ -248,7 +248,9 @@ export default function Cursor() {
         height: measurement.height,
       });
 
-      source.style.color = config.hoverColor;
+      // change source color if the colour is not inverted
+      if (!e.target.classList.contains('disableCursorColorChange'))
+        source.style.color = config.hoverColor;
       // e.preventDefault();
       // e.stopPropagation();
     };

@@ -43,6 +43,13 @@ h5 {
   letter-spacing: 0em;
   margin-top: 0rem;
   margin-bottom: 0.5rem;
+
+  // font-family: "roboto-mono", monospace;
+  // line-height: 22px;
+  // text-transform: uppercase;
+  // font-size: 12px;
+  // letter-spacing: 0.1em;
+  // font-weight: bold;
 }
 
 p {
@@ -84,6 +91,11 @@ body {
   font-family: "source-sans-pro", sans-serif;
   color: #282828;
   font-size: 16px;
+}
+
+blockquote {
+  font-family: "source-serif-pro", serif;
+  text-transform: lowercase;
 }
 
 // ===============================

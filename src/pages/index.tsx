@@ -51,39 +51,73 @@ const Home: React.FC<Props> = ({ data }: Props) => {
   );
 
   const buildProjectList = (projectList) => {
-    return projectList.map((project, index) => {
+    let indexOffset = 0;
+
+    return projectList.map((project, projetIndex) => {
+      // don't render anything if it's empty
+      if (project.node.frontmatter.hidden) {
+        indexOffset++;
+        return <></>;
+      }
+
+      // ignore the
+      const indexIgnoredHidden = projetIndex - indexOffset;
+      const isLastProject = projetIndex + 1 === projectList.length;
       // hero
-      if (index === 0)
+      if (indexIgnoredHidden === 0)
         return (
-          <div className="main-grid__full-content" key={index}>
+          <div className="main-grid__full-content" key={indexIgnoredHidden}>
             {buildProject(project, false)}
           </div>
         );
       // first row, second
-      else if (index % 4 === 2)
+      else if (indexIgnoredHidden % 4 === 2)
         return (
-          <div className="main-grid__secondary-col-small" key={index}>
+          <div
+            className="main-grid__secondary-col-small"
+            key={indexIgnoredHidden}
+          >
             {buildProject(project, true)}
           </div>
         );
       // first row, first
-      else if (index % 4 === 1)
+      else if (indexIgnoredHidden % 4 === 1)
         return (
-          <div className="main-grid__primary-col-large" key={index}>
+          <div
+            className="main-grid__primary-col-large"
+            key={indexIgnoredHidden}
+          >
             {buildProject(project, false)}
           </div>
         );
       // 2nd row, first
-      else if (index % 4 === 3)
+      else if (indexIgnoredHidden % 4 === 3) {
+        if (isLastProject) {
+          return (
+            <div
+              className="main-grid__secondary-col-large"
+              key={indexIgnoredHidden}
+            >
+              {buildProject(project, false)}
+            </div>
+          );
+        }
+
         return (
-          <div className="main-grid__primary-col-small" key={index}>
+          <div
+            className="main-grid__primary-col-small"
+            key={indexIgnoredHidden}
+          >
             {buildProject(project, true)}
           </div>
         );
-      // 2nd row, second
-      else
+        // 2nd row, second
+      } else
         return (
-          <div className="main-grid__secondary-col-large" key={index}>
+          <div
+            className="main-grid__secondary-col-large"
+            key={indexIgnoredHidden}
+          >
             {buildProject(project, false)}
           </div>
         );
@@ -138,6 +172,7 @@ interface PageQueryData {
           tagline: string;
           cover: string;
           tag: string;
+          hidden: boolean;
         };
       };
     }[];
@@ -161,6 +196,7 @@ export const pageQuery = graphql`
             catagory
             cover
             tag
+            hidden
           }
         }
       }

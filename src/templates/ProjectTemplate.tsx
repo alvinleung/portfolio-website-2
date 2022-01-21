@@ -21,7 +21,10 @@ import {
   ProjectInfoItem,
 } from '@/components/ProjectLayout/ProjectInfo/ProjectInfo';
 
-import InterfaceDemo from '../components/ProjectLayout/InterfaceDemo';
+import {
+  InterfaceDemo,
+  InterfaceAnnotation,
+} from '../components/ProjectLayout/InterfaceDemo';
 import ResourceLink from '../components/ResourceLink';
 
 import {
@@ -115,6 +118,7 @@ export default function Template({
             h3: SectionDescription,
             h4: SubSectionHead,
             h5: ParagraphHead,
+            blockquote: Blockquote,
             // p: ParagraphProcessor,
             p: customParagraphProcessor,
             hr: ThematicBreak,
@@ -129,6 +133,7 @@ export default function Template({
             HalfImage,
             Pill,
             InterfaceDemo,
+            InterfaceAnnotation,
             ResourceLink,
             ListItem,
             ListLayout,
@@ -156,6 +161,12 @@ export default function Template({
     </>
   );
 }
+
+const Blockquote = ({ children }) => (
+  <blockquote className="article__section-description main-grid__primary-col">
+    {children}
+  </blockquote>
+);
 
 const trimTextLeadingToken = (children, token) => {
   if (Array.isArray(children)) {
