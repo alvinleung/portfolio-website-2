@@ -264,14 +264,12 @@ export const InterfaceDemo = ({
           animate={annotationControl}
         />
       </motion.div>
-      {children && label && (
-        <InterfaceAnnotationContext.Provider
-          value={{ showHighlight: showHighlight }}
-        >
-          <h5 className="main-grid__primary-col">{label}</h5>
-          <p className="main-grid__secondary-col">{children}</p>
-        </InterfaceAnnotationContext.Provider>
-      )}
+      <InterfaceAnnotationContext.Provider
+        value={{ showHighlight: showHighlight }}
+      >
+        {label && <h5 className="main-grid__primary-col">{label}</h5>}
+        {children && <div className="main-grid__secondary-col">{children}</div>}
+      </InterfaceAnnotationContext.Provider>
     </>
   );
 };
