@@ -6,7 +6,7 @@ import ProgressBar from './ProgressBar';
 
 interface Props {
   url: string;
-  label?: string;
+  caption?: string;
   autoplay?: boolean;
   muted?: boolean;
   disableAutoPause?: boolean;
@@ -22,11 +22,11 @@ interface Position {
 }
 
 export const VideoPlayer = ({
-  label,
   url,
   autoplay,
   noPadding,
   children,
+  caption,
   muted,
   disableAutoPause,
 }: Props) => {
@@ -192,11 +192,13 @@ export const VideoPlayer = ({
     'interface-demo display-figure display-figure--no-padding main-grid__full-width';
 
   return (
-    <>
+    <figure
+      className={
+        noPadding === true ? containerWithoutPadding : containerWithPadding
+      }
+    >
       <motion.div
-        className={
-          noPadding === true ? containerWithoutPadding : containerWithPadding
-        }
+        className={'video-container'}
         initial={{ opacity: 0.1 }}
         animate={{ opacity: disableAutoPause || isViewing ? 1 : 0.1 }}
         onMouseEnter={handleMouseOver}
@@ -229,6 +231,7 @@ export const VideoPlayer = ({
           onClick={handlePlayerClick}
         />
       </motion.div>
-    </>
+      {caption && <figcaption>{caption}</figcaption>}
+    </figure>
   );
 };
