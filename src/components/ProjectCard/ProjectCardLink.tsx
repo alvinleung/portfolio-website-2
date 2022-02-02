@@ -15,6 +15,7 @@ import {
   projectCardContainer,
   projectCardContent,
   projectCardLink,
+  projectType,
 } from './ProjectCard.module.scss';
 import ReactiveCard from './ReactiveCard';
 import { AnimationConfig } from '../AnimationConfig';
@@ -46,6 +47,7 @@ interface Props {
   children?: React.ReactNode;
   isViewOnly?: boolean;
   scrollToOnEnter?: boolean;
+  darkBackground?: boolean;
   large?: boolean;
   small?: boolean;
 }
@@ -132,16 +134,43 @@ const ProjectCardLink: React.FC<Props> = (props: Props) => {
             }}
           />
           {/* Card content */}
-          {/* <motion.div
-            style={{ zIndex: 1 }}
-            className={style.projectType}
+          <motion.div
+            style={{
+              zIndex: 10,
+            }}
+            className={projectType}
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            animate={{
+              opacity: 1,
+              color: isMouseOver
+                ? '#FFF'
+                : props.darkBackground
+                ? 'rgba(255,255,255,.7)'
+                : 'rgba(40,40,40,.7)',
+            }}
             exit={{ opacity: 0 }}
             transition={{ duration: AnimationConfig.FAST }}
           >
             {props.catagory}
-          </motion.div> */}
+          </motion.div>
+
+          <motion.h3
+            style={{ zIndex: 1 }}
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: isMouseOver ? 1 : 0,
+              transition: {
+                // delay: isMouseOver ? 0 : 0,
+                duration: AnimationConfig.FAST,
+              },
+            }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: AnimationConfig.FAST }}
+          >
+            {/* <SlideInText visible={isMouseOver} delayBase={0}> */}
+            {props.title}
+            {/* </SlideInText> */}
+          </motion.h3>
           <motion.p
             style={{ zIndex: 1 }}
             initial={{ opacity: 0 }}
@@ -154,23 +183,6 @@ const ProjectCardLink: React.FC<Props> = (props: Props) => {
               {props.tagline}
             </SlideInText>
           </motion.p>
-          <motion.h3
-            style={{ zIndex: 1 }}
-            initial={{ opacity: 0 }}
-            animate={{
-              opacity: isMouseOver ? 1 : 0,
-              transition: {
-                delay: isMouseOver ? 0.3 : 0,
-                duration: AnimationConfig.FAST,
-              },
-            }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: AnimationConfig.FAST }}
-          >
-            {/* <SlideInText visible={isMouseOver} delayBase={0}> */}
-            {props.title}
-            {/* </SlideInText> */}
-          </motion.h3>
         </div>
       </CoverImage>
     </ReactiveCard>

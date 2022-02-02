@@ -27,8 +27,8 @@ const config = {
  Using context provider pattern to allow global access to the cursor state
 */
 
-const CUSTOM_STATE_SCALE = 3;
-const CUSTOM_STATE_ICON_SCALE = 0.33;
+const CUSTOM_STATE_SCALE = 2;
+const CUSTOM_STATE_ICON_SCALE = 0.5;
 
 export enum CustomStates {
   NONE,
@@ -327,7 +327,7 @@ export default function Cursor() {
 
   const DEFAULT_SCALE = 1;
   const MOUSEDOWN_SCALE = 0.9;
-  const LINK_HOVER_SCALE = 1.2;
+  const LINK_HOVER_SCALE = 1.25;
   const LINK_MOUSEDOWN_SCALE = 1.1;
 
   const cursorScale = (() => {

@@ -25,6 +25,9 @@ import {
   InterfaceDemo,
   InterfaceAnnotation,
 } from '../components/ProjectLayout/InterfaceDemo';
+
+import { VideoPlayer } from '../components/ProjectLayout/VideoPlayer';
+
 import ResourceLink from '../components/ResourceLink';
 
 import {
@@ -137,6 +140,7 @@ export default function Template({
             ResourceLink,
             ListItem,
             ListLayout,
+            VideoPlayer,
           }}
         >
           <MDXRenderer>{body}</MDXRenderer>

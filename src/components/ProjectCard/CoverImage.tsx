@@ -302,9 +302,9 @@ const CoverImage = ({
         x: 0,
         y: 0,
       });
-      setCursorCustomState(CustomStates.NONE);
+      // setCursorCustomState(CustomStates.NONE);
     } else {
-      !isViewOnly && setCursorCustomState(CustomStates.HIDDEN);
+      // !isViewOnly && setCursorCustomState(CustomStates.HIDDEN);
     }
   }, [isHovering, placeholderMeasurement]);
 

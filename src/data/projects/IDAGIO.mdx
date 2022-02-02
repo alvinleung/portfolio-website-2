@@ -1,35 +1,197 @@
 ---
 slug: "/projects/idagio"
-title: IDAGIO
-catagory: "Interaction Design"
-weight: 2
+title: iDAGIO Discovery
+catagory: "Experience Design"
+weight: 1
 tag: "featured"
-tagline: Expressive post-event microsite for a daring speculative art exhibition
-cover: /img/whatif-cover.webp
-description: Expressive post-event microsite for a daring speculative art exhibition
-hidden: true
+tagline: Engage online classical music community through browser extension
+cover: /img/idagio-cover.webp
+description: Engage online classical music community through browser extension
+hidden: false
 ---
 
 ## 01 Overview
 
--- This senior art direction + interaction design project imagines an expressive post-event microsite for the _what if?_ exhibition. Hosted by [fabrica](https://www.fabrica.it/), the event explores the infinite possibilities of our future, featuring works from 12 international artists who are at the end of their art residency.
+-- In this senior experience design project, we are tasked with framing a problem and deliver an experience design solution for a client we choose. After research, exploration and design sprint, the project took form as a browser extension for classical music discovery.
 
 <ProjectInfo>
   <ProjectInfoItem
     fieldName="My Contribution"
-    value="Interaction Design, Art Direction, Visual Design"
+    value="Research, User Testing, Visual Design, Prototyping"
   />
-  <ProjectInfoItem fieldName="Project Scope" value="8 Weeks Academic Project" />
-  <ProjectInfoItem
-    fieldName="Tools"
-    value="Figma, Illustrator, Photoshop, After Effects"
-  />
+  <ProjectInfoItem fieldName="Project Scope" value="6 Weeks Academic Project" />
+  <ProjectInfoItem fieldName="Tools" value="Figma, After Effects" />
   <ProjectInfoItem
     fieldName="Team"
-    value="Aamir Ali, Rhees Kennedy, Samyak Sah, Krista Mcdiarmid"
+    value="Alvin Leung, Aamir Ali, Rhees Kennedy, Samyak Sah, Krista Mcdiarmid"
   />
 </ProjectInfo>
 
 ---
 
-## 02 Microsite Design
+## 02 About iDAGIO
+
+-- _iDAGIO_ is a streaming service developed specifically for classical music. By providing an extensive library and methods of discovering new music within it, IDAGIO intends to establish itself as “the [_digital_] home for classical music", in order to secure its future.
+
+<FullImage
+  src="/img/idagio/brand-pillars.webp"
+  alt="discovery problem"
+  caption="We analysed and captured how the iDAGIO brand deliver value through brand pillars, they are consolidated through a thorough observation and public available CEO interview."
+/>
+
+<!-- ##### Servicing the aficionado
+
+-> It’s no question that the core audience of IDAGIO are classical music die hard fans. From their niche library to the unique comparison, it is crafted for the tough demand of classical music audience in mind. -->
+
+---
+
+## 03 Why we focus on music discovery? A tale of two experiences
+
+-- IDAGIO's indecisiveness in targeting an audience, has created created a fragmented experience between aficionado and new comer.
+
+While the mood-ring is appreciated for the genre's new comers, our research suggest that aficionado tend to find the interaction "gimmicky" as it lack nuance, and don't find much use out of it.
+
+Given new comers and aficionado both experience diminishing return of enjoyment for repeated listen (research), we believed that it will be very fruitful place to explore and seek alternatives.
+
+<FullImage src="/img/idagio/discovery-problem.webp" alt="discovery problem" />
+
+---
+
+## 04 Investigation and Insight
+
+-- We took a step back and ask: _how do people actually discover new classical music?_ Through our own survey, forum browsing, interview with classical music aficionados and literary review, we surfaced the following insights:
+
+<ListLayout full label="Insights">
+  <ListItem heading="Discovery generally happens socially, outside of streaming app">
+    In our literary review, we found previous academic studies on the subject of
+    music streaming and discovery agreed that listeners are more likely to
+    discover music through social interaction (eg. friend's/opinion leader's
+    recommendation) rather than in app suggestion. Our survey support the idea,
+    at least 50% more respondants indicated that they discover music through
+    other online means(blog, websites) compare to music streaming services.
+  </ListItem>
+  <ListItem heading="Listeners don’t trust generated playlist, they trust human">
+    Multiple interviewee have mentioned that algorithmically generated playlist
+    is off-putting because the system don’t understand the genre and their taste
+    well enough, unlike their peers in forums.
+  </ListItem>
+  <ListItem heading="No current solution for saving interesting discovery">
+    Multiple interviewee have reported that they often have to hunt down the
+    music again after their initial encounter, or worse, the discovery being
+    lost forever.
+  </ListItem>
+  <ListItem heading="Repeated exposure develops preference to new music">
+    New music is not necessarily love at first sight, preference develops over
+    time as they familiarise with the sound. Especially when the user is new to
+    the genre. (Reference article)
+  </ListItem>
+</ListLayout>
+
+---
+
+## 05 Discussion Based Discovery — Framing and Reframing
+
+> "it’s (classical music) about opinions. It’s about being right, everybody is right. Everybody knows everything, it’s very controversially, very ego driven also."
+> — Till Janczukowicz, Founder & CEO of iDAGIO
+
+From our insights, we notice the theme of hearing other people's voices and opinions being an integral part to the classical genre and music discovery. That made us wonder how can we leverage these voices to create a new method of discovery.
+
+The idea of an IDAGIO powered, community-driven discovery was subsequently explored. It intended to bring aficionado and new comer together and facilitate music their discovery through community discussion.
+
+However, we soon notice there is a problem with this idea: we are competing with reddit and other classical music forum who already have a well established audience
+base, **it will be a tremendous task to ask the dedicated users to switch over**.
+
+<VideoPlayer url="https://www.sfu.ca/~kkl64/videos/idagio/iteration-1.mp4" />
+
+<HalfImage
+  src="/img/idagio/reddit-classical.webp"
+  secondary
+  noPadding
+  caption="Large volume of r/classical users"
+/>
+
+---
+
+-- _This realisation led us to the pivot_ — Rather than asking listeners to come to iDAGIO, we should _reach them at their established venue of discovery._ By providing tools which assist the exploration of online resources, we support listeners where they are comfortable, and establish IDAGIO as the go-to tool for discovering classical music.
+
+---
+
+## 06 Sprint to the solution
+
+-- We then conducted a 2 weeks sprint to validate and refine our idea prototype. I was responsible for prototyping and user testing. The outcome was iDAGIO discovery — a three part intervention of _embed player_, _browser extension_, and _re-cap_.
+
+<VideoPlayer url="https://www.sfu.ca/~kkl64/videos/idagio/	idagio-walkthrough-light.mp4" />
+
+---
+
+#### Embed Player
+
+The Embed is the first step in bringing IDAGIO toward online forums or messaging services. If we intend for listeners to share IDAGIO links, we believe the embed is an important, first-impression touchpoint which should reflect the visual identity of the brand and its values clearly. Because of that, we've built the IDAGIO embed from the ground up to gear it specifically for classical music.
+
+<FullImage
+  noPadding
+  src="https://www.sfu.ca/~kkl64/videos/idagio/embed-demo.mp4"
+/>
+
+<FullImage src="/img/idagio/embed-breakdown-1.webp" noPadding />
+
+<FullImage src="/img/idagio/embed-breakdown-2.webp" noPadding />
+
+---
+
+#### Extension: Highlights & Sidebar
+
+Recognised music is linked through IDAGIO's service, allowing listeners to mark pieces to revisit later,
+save pieces to personal collections, or search IDAGIO's entire library.
+
+<FullImage
+  noPadding
+  src="https://www.sfu.ca/~kkl64/videos/idagio/sidebar.mp4"
+/>
+
+<HalfImage noPadding src="/img/idagio/intruisiveness.webp" />
+
+##### Intruisiveness
+
+In testing the automatic highlight feature of our proposed extension, we discovered that marking text too obviously was intrusive to our testers' reading experience, and that marking too subtly made the feature unnoticeable. Once this insight was discovered, a sweet spot between invisible and intrusive became a goal for our extension.
+
+---
+
+#### Extension: Link Menu
+
+The Link Menu allows for seamless, rapid generation of hyperlinks to IDAGIO's music library. Listeners may find the music they wish to link immediately by typing its name, or locate music by narrowing results. Controlled entirely by keyboard interactions, the Link Menu brings IDAGIO's extensive library to a listener's fingertips.
+
+<FullImage noPadding src="https://www.sfu.ca/~kkl64/videos/idagio/notion.mp4" />
+
+---
+
+#### Discovery Recap
+
+The Discovery Recap presents listeners with an overview of all the music they have explored on various online resources through IDAGIO embeds, links, or extension-created interactions.
+
+<FullImage noPadding src="https://www.sfu.ca/~kkl64/videos/idagio/recap.mp4" />
+
+-> By doing so, it gives listeners a reason to create an IDAGIO account and more comfortably make use of their service.
+
+---
+
+## 07 Encourage subscription through pre-purchase value delivery
+
+-- Through a the _embed player_ and _browser extension_, iDAGIO engage their potential user in the awareness and consideration phase of the customer journey. These helpful, non-intrusive touchpoints build positive relationship with listeners, increasing their trust and, subsequently, likelihood of subscription to the service.
+
+<ListLayout full label="Value Proposition">
+  <ListItem heading="For Aficionado">
+    Quick and easy access to iDAGIO library, which facilitate their online forum
+    discussion.
+  </ListItem>
+  <ListItem heading="For New Comer">
+    The extension provide the contextual sound reference to online
+    conversations, which help following the curious new comers navigate the
+    genre.
+  </ListItem>
+  <ListItem heading="For iDAGIO">
+    The free service acts as a venue for usage data collection to improve in-app
+    recommendation algorithm. It also establish an expert presence in online
+    forum, expanding their target audience.
+  </ListItem>
+</ListLayout>

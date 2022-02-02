@@ -45,6 +45,7 @@ const Home: React.FC<Props> = ({ data }: Props) => {
       catagory={project.node.frontmatter.catagory}
       tagline={project.node.frontmatter.tagline}
       cover={project.node.frontmatter.cover}
+      darkBackground={project.node.frontmatter.darkBackground}
       isViewOnly={false}
       small={isSmall}
     />
@@ -173,6 +174,7 @@ interface PageQueryData {
           cover: string;
           tag: string;
           hidden: boolean;
+          darkBackground: boolean;
         };
       };
     }[];
@@ -197,6 +199,7 @@ export const pageQuery = graphql`
             cover
             tag
             hidden
+            darkBackground
           }
         }
       }
