@@ -37,6 +37,8 @@ export const VideoPlayer = ({
   const [videoProgress, setVideoProgress] = useState(0);
   const [cursorCustomState, , setCursorCustomState] = useCursorCustomState();
 
+  const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
+
   // auto hide player bar
   const [isActive, setIsActive] = useState(true);
   const mouseInactiveTimeout = 1; // 1 second
@@ -183,6 +185,25 @@ export const VideoPlayer = ({
     replayFromBeginning();
   };
 
+  // reveal hovering play hint
+  useEffect(() => {
+    // only show hover as an hint for play
+    if (!isHovering) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const bounds = playerRef.current.getBoundingClientRect();
+      setMouseOffset({
+        x: e.clientX - bounds.x,
+        y: e.clientY - bounds.y,
+      });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, [isHovering]);
+
   const hasPlayerPlayed =
     playerRef.current && playerRef.current.currentTime !== 0 ? true : false;
 
@@ -232,6 +253,29 @@ export const VideoPlayer = ({
         />
       </motion.div>
       {caption && <figcaption>{caption}</figcaption>}
+      <motion.div
+        className="label"
+        style={{
+          pointerEvents: 'none',
+          zIndex: 1000,
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          color: '#FFF',
+        }}
+        animate={{
+          x: mouseOffset.x - 55,
+          y: mouseOffset.y + 40,
+          opacity: isHovering && !isPlaying ? 1 : 0,
+
+          transition: {
+            duration: 0.4,
+            ease: AnimationConfig.EASING,
+          },
+        }}
+      >
+        Play with Audio
+      </motion.div>
     </figure>
   );
 };
