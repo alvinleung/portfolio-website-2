@@ -102,8 +102,12 @@ export const CursorContextProvider = ({ children }) => {
 };
 
 // utility for setting hover state in mouse
-export const useCursorHoverState = (hoveredCustomState: CustomStates) => {
-  const { setCursorCustomState } = useCursorCustomState();
+export const useCursorHoverState = (
+  hoveredCustomState: CustomStates,
+  isDarkContext: boolean = false,
+) => {
+  const { setCursorCustomState, setIsDarkCursorContext } =
+    useCursorCustomState();
   const [isHovering, setIsHovering] = useState(false);
 
   // to when the hoveredCustomState chances, make sure the change
@@ -115,11 +119,13 @@ export const useCursorHoverState = (hoveredCustomState: CustomStates) => {
 
   const onMouseOver = () => {
     setCursorCustomState(hoveredCustomState);
+    setIsDarkCursorContext(isDarkContext);
     setIsHovering(true);
   };
 
   const onMouseLeave = () => {
     setCursorCustomState(CustomStates.NONE);
+    setIsDarkCursorContext(false);
     setIsHovering(false);
   };
 
@@ -143,8 +149,12 @@ export default function Cursor() {
   const isUsingTouch = useRef(false);
   const [mousedown, setMouseDown] = useState(false);
 
-  const { cursorCustomState, prevCursorCustomState, setCursorCustomState } =
-    useCursorCustomState();
+  const {
+    cursorCustomState,
+    prevCursorCustomState,
+    setCursorCustomState,
+    isDarkCursorContext,
+  } = useCursorCustomState();
 
   const handleMouseMove = (e: MouseEvent) => {
     if (!isUsingTouch.current) setHidden(false);
@@ -417,7 +427,6 @@ export default function Cursor() {
     // if (customState === CustomStates.REPLAY) {
     //   return config.hoverColor;
     // }
-
     return mousedown ? config.pressedColor : 'rgba(255,255,255,0)';
   })();
 
@@ -441,6 +450,7 @@ export default function Cursor() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
+          filter: `invert(${isDarkCursorContext ? 100 : 0}%)`,
         }}
         initial={{
           borderRadius: config.width,

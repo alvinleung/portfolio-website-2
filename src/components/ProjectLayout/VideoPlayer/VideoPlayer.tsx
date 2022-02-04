@@ -12,6 +12,7 @@ interface Props {
   disableAutoPause?: boolean;
   noPadding?: boolean;
   children: React.ReactChildren;
+  isDarkContent?: boolean;
 }
 
 const INTERSECTION_RATIO_THRESHOLD = 0.5;
@@ -29,13 +30,15 @@ export const VideoPlayer = ({
   caption,
   muted,
   disableAutoPause,
+  isDarkContent = true,
 }: Props) => {
   const playerRef = useRef<HTMLVideoElement>();
   const [isViewing, setIsViewing] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const [videoProgress, setVideoProgress] = useState(0);
-  const { cursorCustomState, setCursorCustomState } = useCursorCustomState();
+  const { cursorCustomState, setCursorCustomState, setIsDarkCursorContext } =
+    useCursorCustomState();
 
   const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
 
@@ -146,11 +149,13 @@ export const VideoPlayer = ({
   const handleMouseOver = () => {
     // show different cursor icon base on whether the video is playing
     setCursorCustomState(getPlayingCursorState());
+    setIsDarkCursorContext(isDarkContent);
     setIsHovering(true);
   };
 
   const handleMouseOut = () => {
     setCursorCustomState(CustomStates.NONE);
+    setIsDarkCursorContext(false);
     setIsHovering(false);
   };
 

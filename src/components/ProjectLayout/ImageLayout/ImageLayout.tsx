@@ -15,6 +15,7 @@ const FullImage = (props) => {
       src={props.src}
       alt={props.alt}
       caption={props.caption}
+      isDark={props.darkImage}
     />
   );
 };
@@ -35,11 +36,12 @@ const HalfImage = (props) => {
       src={props.src}
       alt={props.alt}
       caption={props.caption}
+      isDark={props.darkImage}
     />
   );
 };
 
-const ExpandableImage = ({ className, src, alt, caption }) => {
+const ExpandableImage = ({ className, src, alt, caption, isDark = false }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const forceUpdate = useForceUpdate();
   const imgRef = useRef();
@@ -47,6 +49,7 @@ const ExpandableImage = ({ className, src, alt, caption }) => {
   const expandedImagePresent = useRef(false);
   const customStatesEventHandlers = useCursorHoverState(
     isExpanded ? CustomStates.CLOSE : CustomStates.ZOOM_IN,
+    isDark,
   );
 
   // collapse the photo on scroll
