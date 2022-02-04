@@ -12,7 +12,7 @@ hidden: false
 
 ## 01 Overview
 
--- In this senior experience design project, we are tasked with framing a problem and deliver an experience design solution for a client we choose. After research, exploration and design sprint, the final solution took form as a browser extension for classical music discovery.
+-- In this senior experience design project, we were tasked with framing a design problem and delivering an experience design solution. After research, exploration, and design sprint, the final solution took form as a browser extension for classical music discovery.
 
 <ProjectInfo>
   <ProjectInfoItem
@@ -29,7 +29,7 @@ hidden: false
 
 <VideoPlayer
   url="https://www.sfu.ca/~kkl64/videos/idagio/	idagio-walkthrough-light.mp4"
-  caption="Short concept video"
+  caption="A short 2 minutes feature demostration video"
 />
 
 ---
@@ -52,38 +52,39 @@ hidden: false
 
 ## 03 Why do we focus on music discovery
 
--- IDAGIO's indecisiveness in targeting an audience, has created a fragmented experience between aficionado and new comer.
+-- IDAGIO's indecisiveness in targeting an audience has created a fragmented experience between aficionados and newcomers.
 
 <FullImage src="/img/idagio/discovery-problem.webp" alt="discovery problem" />
 
 ##### A tale of two experiences
 
--> While the mood-ring is appreciated for the genre's new comers, preliminary research suggested that aficionado tend to find the interaction "gimmicky" as it lack nuance, and don't find much use out of it.
+-> While the mood-ring is appreciated for the genre's newcomers, preliminary research suggested that aficionados tend to find the interaction "gimmicky" as it lacks nuance, and don't find much use out of it.
 
--> Given new comers and aficionado both experience diminishing return of enjoyment for repeated listen (research), we believed that it will be very fruitful place to explore and seek alternatives.
+-> Given newcomers and aficionados, both experience a diminishing return of enjoyment for repeated listening (research), we believed that it will be a very fruitful place to explore and seek alternatives.
 
 ---
 
 ## 04 Investigation and Insight
 
--- We took a step back and ask: _how do people actually discover new classical music?_ Through our own survey, forum browsing, interview with classical music aficionados and literary review, we surfaced the following insights:
+-- We took a step back and ask: _how do people actually discover new classical music?_ Through our survey, forum browsing, interview with classical music aficionados, and literary review, we surfaced the following insights:
 
 <ListLayout full label="Insights">
   <ListItem heading="Discovery generally happens socially, outside of streaming app">
     In our literary review, we found previous academic studies on the subject of
     music streaming and discovery agreed that listeners are more likely to
     discover music through social interaction (eg. friend's/opinion leader's
-    recommendation) rather than in app suggestion. Our survey support the idea,
-    at least 50% more respondants indicated that they discover music through
-    other online means(blog, websites) compare to music streaming services.
+    recommendation) rather than an in-app suggestion. Our survey supports the
+    idea, at least 50% more respondents indicated that they discover music
+    through other online means(blogs, websites) compare to music streaming
+    services.
   </ListItem>
   <ListItem heading="Listeners don’t trust generated playlist, they trust human">
-    Multiple interviewee have mentioned that algorithmically generated playlist
-    is off-putting because the system don’t understand the genre and their taste
-    well enough, unlike their peers in forums.
+    Multiple interviewees have mentioned that algorithmically generated playlist
+    is off-putting because the system doesn’t understand the genre and their
+    taste well enough, unlike their peers in forums.
   </ListItem>
   <ListItem heading="No current solution for saving interesting discovery">
-    Multiple interviewee have reported that they often have to hunt down the
+    Multiple interviewees have reported that they often have to hunt down the
     music again after their initial encounter, or worse, the discovery being
     lost forever.
   </ListItem>
@@ -101,14 +102,16 @@ hidden: false
 > "it’s (classical music) about opinions. It’s about being right, everybody is right. Everybody knows everything, it’s very controversially, very ego driven also."
 > — Till Janczukowicz, Founder & CEO of iDAGIO
 
-From our insights, we notice the theme of hearing other people's voices and opinions being an integral part to the classical genre and music discovery. That made us wonder how can we leverage these voices to create a new method of discovery.
+From our insights, we notice the theme of hearing other people's voices and opinions being an integral part of the classical genre and music discovery. That made us wonder how can we leverage these voices to create a new method of discovery.
 
-The idea of an IDAGIO powered, community-driven discovery was subsequently explored. It intended to bring aficionado and new comer together and facilitate music their discovery through community discussion.
+The idea of an IDAGIO powered, community-driven discovery space was subsequently explored. It was intended to bring aficionados and newcomers together and facilitate music discovery through discussion.
 
-However, we soon notice there is a problem with this idea: we are competing with reddit and other classical music forum who already have a well established audience
-base, **it will be a tremendous task to ask the dedicated users to switch over**.
+However, we soon notice there is a problem with this idea: we are competing with Reddit and other classical music forums which already have a well-established audience base. **It will be a tremendous task to ask the dedicated users to switch over.**
 
-<VideoPlayer url="https://www.sfu.ca/~kkl64/videos/idagio/iteration-1.mp4" />
+<VideoPlayer
+  url="https://www.sfu.ca/~kkl64/videos/idagio/iteration-1.mp4"
+  caption="A concept prototype of the the iDAGIO community driven discovery forum"
+/>
 
 <HalfImage
   src="/img/idagio/reddit-classical.webp"
@@ -119,13 +122,13 @@ base, **it will be a tremendous task to ask the dedicated users to switch over**
 
 ---
 
--- _This realisation led us to the pivot_ — Rather than asking listeners to come to iDAGIO, we should _reach them at their established venue of discovery._ By providing tools which assist the exploration of online resources, we support listeners where they are comfortable, and establish IDAGIO as the go-to tool for discovering classical music.
+-- _This realisation led us to the pivot_ — Rather than asking listeners to come to iDAGIO, we should _reach them at their established venue of discovery._ By providing tools that assist the exploration of online resources, we support listeners where they are comfortable, and establish IDAGIO as the go-to tool for discovering classical music.
 
 ---
 
 ## 06 Sprint to the solution
 
--- We then conducted a 2 weeks sprint to validate and refine our idea prototype. I was responsible for prototyping and user testing. The outcome was iDAGIO discovery — a three part intervention of _embed player_, _browser extension_, and _re-cap_.
+-- We then conducted a 2 weeks sprint to validate and refine our idea prototype. I was responsible for prototyping and user testing. The outcome was iDAGIO discovery — a three-part intervention of _embed player_, _browser extension_, and _re-cap_.
 
 ---
 
@@ -154,12 +157,6 @@ save pieces to personal collections, or search IDAGIO's entire library.
   src="https://www.sfu.ca/~kkl64/videos/idagio/sidebar.mp4"
 />
 
-<HalfImage noPadding src="/img/idagio/intruisiveness.webp" />
-
-##### Intruisiveness
-
-In testing the automatic highlight feature of our proposed extension, we discovered that marking text too obviously was intrusive to our testers' reading experience, and that marking too subtly made the feature unnoticeable. Once this insight was discovered, a sweet spot between invisible and intrusive became a goal for our extension.
-
 ---
 
 #### Extension: Link Menu
@@ -182,21 +179,32 @@ The Discovery Recap presents listeners with an overview of all the music they ha
 
 ## 07 Encourage subscription through pre-purchase value delivery
 
--- Through a the _embed player_ and _browser extension_, iDAGIO engage their potential user in the awareness and consideration phase of the customer journey. These helpful, non-intrusive touchpoints build positive relationship with listeners, increasing their trust and, subsequently, the likelihood of subscription to the service.
+-- Through the _embed player_ and _browser extension_, iDAGIO engages its potential user in the awareness and consideration phase of the customer journey. These helpful, non-intrusive touchpoints build a positive relationship with listeners, increasing their trust and, subsequently, the likelihood of subscription to the service.
 
 <ListLayout full label="Value Proposition">
   <ListItem heading="For Aficionado">
-    Quick and easy access to iDAGIO library, which facilitate their online forum
-    discussion.
+    Quick and easy access to iDAGIO library, which facilitates their online
+    forum discussion.
   </ListItem>
   <ListItem heading="For New Comer">
-    The extension provide the contextual sound reference to online
-    conversations, which help following the curious new comers navigate the
+    The extension provides the contextual sound reference to online
+    conversations, which help following the curious newcomers navigate the
     genre.
   </ListItem>
   <ListItem heading="For iDAGIO">
     The free service acts as a venue for usage data collection to improve in-app
-    recommendation algorithm. It also establish an expert presence in online
-    forum, expanding their target audience.
+    recommendation algorithms. It also establishes an expert presence in an
+    online forum, expanding its target audience.
   </ListItem>
 </ListLayout>
+
+---
+
+## 08 Reflection
+
+-- Because of the limited time and resources, the solution's merit mainly was based on participant self-report under a controlled environment. To fully evaluate it in the field, we need to build out the extension and gather usage data over time in a beta test.
+
+<HalfImage
+  src="/img/idagio/studio-b-2.webp"
+  caption="Powered by Simon Fraser University Studio B cafe #since2021"
+/>
