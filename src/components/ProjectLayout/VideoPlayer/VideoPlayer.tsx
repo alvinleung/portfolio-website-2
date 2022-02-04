@@ -36,6 +36,7 @@ export const VideoPlayer = ({
   const [isViewing, setIsViewing] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
+  const [isHoveringProgress, setIsHoveringProgress] = useState(false);
   const [videoProgress, setVideoProgress] = useState(0);
   const { cursorCustomState, setCursorCustomState, setIsDarkCursorContext } =
     useCursorCustomState();
@@ -146,32 +147,25 @@ export const VideoPlayer = ({
   const getPlayingCursorState = () =>
     isPlaying ? CustomStates.STOP : CustomStates.PLAY;
 
-  const handleMouseOver = () => {
-    // show different cursor icon base on whether the video is playing
-    setCursorCustomState(getPlayingCursorState());
-    setIsDarkCursorContext(isDarkContent);
-    setIsHovering(true);
-  };
+  useEffect(() => {
+    if (!isViewing) return;
 
-  const handleMouseOut = () => {
-    setCursorCustomState(CustomStates.NONE);
-    setIsDarkCursorContext(false);
-    setIsHovering(false);
-  };
-
-  // progress bar reactive cursor
-  const handleProgressMouseEnter = (e: React.MouseEvent) => {
-    // display the scrubbing cursor state
-    setCursorCustomState(CustomStates.HORIZONTAL_SLIDE);
-  };
-  const handleProgressMouseLeave = (e: React.MouseEvent) => {
-    // auto detect which cursor to set back to
-    if (!isHovering) {
-      setCursorCustomState(CustomStates.NONE);
+    if (isHoveringProgress) {
+      setCursorCustomState(CustomStates.HORIZONTAL_SLIDE);
+      setIsDarkCursorContext(isDarkContent);
       return;
     }
-    setCursorCustomState(getPlayingCursorState());
-  };
+
+    if (isHovering) {
+      setCursorCustomState(getPlayingCursorState());
+      setIsDarkCursorContext(isDarkContent);
+      return;
+    }
+
+    // default, reset to default state
+    setCursorCustomState(CustomStates.NONE);
+    setIsDarkCursorContext(false);
+  }, [isViewing, isHovering, isHoveringProgress]);
 
   useEffect(() => {
     // only change the cursor custom state when the user is hovering
@@ -227,8 +221,8 @@ export const VideoPlayer = ({
         className={'video-container'}
         initial={{ opacity: 0.1 }}
         animate={{ opacity: disableAutoPause || isViewing ? 1 : 0.1 }}
-        onMouseEnter={handleMouseOver}
-        onMouseLeave={handleMouseOut}
+        onMouseEnter={() => setIsHovering(true)}
+        onMouseLeave={() => setIsHovering(false)}
         onMouseMove={handleMouseMove}
       >
         <motion.div
@@ -244,8 +238,8 @@ export const VideoPlayer = ({
           <ProgressBar
             currentProgress={videoProgress}
             onScrub={handleUserScrub}
-            onMouseEnter={handleProgressMouseEnter}
-            onMouseLeave={handleProgressMouseLeave}
+            onMouseEnter={() => setIsHoveringProgress(true)}
+            onMouseLeave={() => setIsHoveringProgress(false)}
           />
         </motion.div>
         <video
@@ -269,9 +263,12 @@ export const VideoPlayer = ({
           color: '#FFF',
         }}
         animate={{
-          x: mouseOffset.x - 55,
+          x: mouseOffset.x - 60,
           y: mouseOffset.y + 40,
-          opacity: isHovering && !isPlaying ? 1 : 0,
+          opacity:
+            isHovering && !isPlaying && isViewing && !isHoveringProgress
+              ? 1
+              : 0,
 
           transition: {
             duration: 0.4,
