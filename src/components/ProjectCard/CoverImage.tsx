@@ -83,7 +83,6 @@ const CoverImage = ({
   const [transformSnapshot, setTransformSnapshot] = useTransformSnapshot();
 
   const [isHovering, setIsHovering] = useState(false);
-  const [cursorCustomState, , setCursorCustomState] = useCursorCustomState();
 
   // framer motion uses
   const [isPresent, safeToRemove] = usePresence();
@@ -340,6 +339,7 @@ const CoverImage = ({
           // willChange: 'backgroundImage',
         }}
         variants={variants}
+        //@ts-ignore
         initial={getInitialState()}
         animate={control}
         exit={getExitState()}

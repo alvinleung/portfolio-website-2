@@ -35,7 +35,7 @@ export const VideoPlayer = ({
   const [isPlaying, setIsPlaying] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const [videoProgress, setVideoProgress] = useState(0);
-  const [cursorCustomState, , setCursorCustomState] = useCursorCustomState();
+  const { cursorCustomState, setCursorCustomState } = useCursorCustomState();
 
   const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
 

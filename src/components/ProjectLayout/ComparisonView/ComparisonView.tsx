@@ -26,7 +26,7 @@ const ComparisonView: React.FC = ({ children }: Props) => {
   const [allowDrag, setAllowDrag] = useState(false);
   const [inputMode, setInputMode] = useState(InputMode.MOUSE);
 
-  const [, , setCursorCustomState] = useCursorCustomState();
+  const { setCursorCustomState } = useCursorCustomState();
 
   const [initialDragOffset, setInitialDragOffset] = useState(0);
   const x = useMotionValue(0);

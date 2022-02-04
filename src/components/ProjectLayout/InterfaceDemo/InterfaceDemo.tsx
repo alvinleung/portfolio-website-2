@@ -39,7 +39,7 @@ export const InterfaceDemo = ({
   const [isPlaying, setIsPlaying] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const [videoProgress, setVideoProgress] = useState(0);
-  const [cursorCustomState, , setCursorCustomState] = useCursorCustomState();
+  const { cursorCustomState, setCursorCustomState } = useCursorCustomState();
 
   const annotationControl = useAnimation();
 

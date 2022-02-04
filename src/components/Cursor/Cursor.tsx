@@ -64,24 +64,37 @@ function preloadCustomStateIcons() {
   });
 }
 
-export const CursorContext = React.createContext<
-  [
-    CustomStates, // current
-    CustomStates, // previous
-    React.Dispatch<React.SetStateAction<CustomStates>>,
-  ]
->([CustomStates.NONE, CustomStates.NONE, () => {}]);
+export const CursorContext = React.createContext<{
+  cursorCustomState: CustomStates; // current
+  prevCursorCustomState: CustomStates; // previous
+  setCursorCustomState: React.Dispatch<React.SetStateAction<CustomStates>>; // set cursor icon aka custom state
+  isDarkCursorContext: boolean; // set dark mode
+  setIsDarkCursorContext: React.Dispatch<React.SetStateAction<boolean>>;
+}>({
+  cursorCustomState: CustomStates.NONE,
+  prevCursorCustomState: CustomStates.NONE,
+  setCursorCustomState: () => {},
+  isDarkCursorContext: false,
+  setIsDarkCursorContext: () => {},
+});
 
 export const useCursorCustomState = () => useContext(CursorContext);
 
 export const CursorContextProvider = ({ children }) => {
   const [customState, setCustomState] = useState(CustomStates.NONE);
+  const [isDarkContext, setIsDarkContext] = useState(false);
   const previousState = useRef(customState);
   const previousStateCopy = previousState.current;
   if (previousState.current != customState) previousState.current = customState;
   return (
     <CursorContext.Provider
-      value={[customState, previousStateCopy, setCustomState]}
+      value={{
+        cursorCustomState: customState,
+        prevCursorCustomState: previousStateCopy,
+        setCursorCustomState: setCustomState,
+        isDarkCursorContext: isDarkContext,
+        setIsDarkCursorContext: setIsDarkContext,
+      }}
     >
       {children}
     </CursorContext.Provider>
@@ -90,23 +103,23 @@ export const CursorContextProvider = ({ children }) => {
 
 // utility for setting hover state in mouse
 export const useCursorHoverState = (hoveredCustomState: CustomStates) => {
-  const [, , setCustomState] = useCursorCustomState();
+  const { setCursorCustomState } = useCursorCustomState();
   const [isHovering, setIsHovering] = useState(false);
 
   // to when the hoveredCustomState chances, make sure the change
   // is reflected on the cursor when hovering
 
   useEffect(() => {
-    if (isHovering) setCustomState(hoveredCustomState);
+    if (isHovering) setCursorCustomState(hoveredCustomState);
   }, [hoveredCustomState]);
 
   const onMouseOver = () => {
-    setCustomState(hoveredCustomState);
+    setCursorCustomState(hoveredCustomState);
     setIsHovering(true);
   };
 
   const onMouseLeave = () => {
-    setCustomState(CustomStates.NONE);
+    setCursorCustomState(CustomStates.NONE);
     setIsHovering(false);
   };
 
@@ -130,7 +143,7 @@ export default function Cursor() {
   const isUsingTouch = useRef(false);
   const [mousedown, setMouseDown] = useState(false);
 
-  const [customState, previousCustomState, setCustomState] =
+  const { cursorCustomState, prevCursorCustomState, setCursorCustomState } =
     useCursorCustomState();
 
   const handleMouseMove = (e: MouseEvent) => {
@@ -191,7 +204,7 @@ export default function Cursor() {
   // reset the custom state when page change
   useEffect(() => {
     return () => {
-      setCustomState(CustomStates.NONE);
+      setCursorCustomState(CustomStates.NONE);
     };
   }, []);
 
@@ -351,8 +364,8 @@ export default function Cursor() {
       };
 
     if (
-      customState !== CustomStates.NONE &&
-      customState !== CustomStates.HIDDEN
+      cursorCustomState !== CustomStates.NONE &&
+      cursorCustomState !== CustomStates.HIDDEN
     )
       return {
         width: config.width * CUSTOM_STATE_SCALE,
@@ -437,7 +450,7 @@ export default function Cursor() {
           // y: hoveredElementMeasurement ? cursorPosition.y : null,
 
           borderRadius: textSelectCursorAppearence.borderRadius,
-          opacity: hidden || customState === CustomStates.HIDDEN ? 0 : 1,
+          opacity: hidden || cursorCustomState === CustomStates.HIDDEN ? 0 : 1,
           scale: cursorScale,
           borderColor: hoveredElementMeasurement
             ? config.hoverColor
@@ -454,8 +467,8 @@ export default function Cursor() {
         <motion.img
           // src="/img/cursor/replay-white-18dp.svg"
           src={
-            CustomStateIcons[customState] ||
-            CustomStateIcons[previousCustomState] ||
+            CustomStateIcons[cursorCustomState] ||
+            CustomStateIcons[prevCursorCustomState] ||
             '/img/cursor/empty.png'
           }
           style={{
@@ -465,11 +478,13 @@ export default function Cursor() {
           alt="Cursor icon"
           animate={{
             opacity:
-              customState === CustomStates.NONE || hoveredElementMeasurement
+              cursorCustomState === CustomStates.NONE ||
+              hoveredElementMeasurement
                 ? 0
                 : 1,
             scale:
-              customState === CustomStates.NONE || hoveredElementMeasurement
+              cursorCustomState === CustomStates.NONE ||
+              hoveredElementMeasurement
                 ? 0
                 : 1,
           }}
