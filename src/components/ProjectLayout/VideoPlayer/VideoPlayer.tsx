@@ -148,10 +148,15 @@ export const VideoPlayer = ({
     isPlaying ? CustomStates.STOP : CustomStates.PLAY;
 
   useEffect(() => {
-    if (!isViewing) return;
+    if (!isViewing || !isHovering) {
+      // default, reset to default state
+      setCursorCustomState(CustomStates.NONE);
+      setIsDarkCursorContext(false);
+      return;
+    }
 
     if (isHoveringProgress) {
-      setCursorCustomState(CustomStates.HORIZONTAL_SLIDE);
+      setCursorCustomState(CustomStates.HIDDEN);
       setIsDarkCursorContext(isDarkContent);
       return;
     }
@@ -161,10 +166,6 @@ export const VideoPlayer = ({
       setIsDarkCursorContext(isDarkContent);
       return;
     }
-
-    // default, reset to default state
-    setCursorCustomState(CustomStates.NONE);
-    setIsDarkCursorContext(false);
   }, [isViewing, isHovering, isHoveringProgress]);
 
   useEffect(() => {

@@ -44,7 +44,7 @@ export default function ProgressBar({
       const currentProgress = calculateMouseProgress(e);
       setPreviewProgress(currentProgress);
 
-      if (isScrubbing) onScrub(calculateMouseProgress(e));
+      if (isScrubbing) onScrub(currentProgress);
     }
 
     const handleScrubEnd = (e: MouseEvent) => {
@@ -57,7 +57,7 @@ export default function ProgressBar({
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseup', handleScrubEnd);
     };
-  }, [isScrubbing]);
+  }, [isScrubbing, isHovering]);
 
   const handleScrubBegin = (e: React.MouseEvent) => {
     setIsScrubbing(true);
@@ -110,7 +110,18 @@ export default function ProgressBar({
                 duration: 0.03,
               },
             }}
-          />
+          >
+            <motion.div
+              className="video-progress__preview-head"
+              animate={{
+                scale: isHovering ? 3 : 0,
+                transition: {
+                  ease: AnimationConfig.EASING,
+                  duration: AnimationConfig.NORMAL,
+                },
+              }}
+            ></motion.div>
+          </motion.div>
         </motion.div>
       </div>
     </>
