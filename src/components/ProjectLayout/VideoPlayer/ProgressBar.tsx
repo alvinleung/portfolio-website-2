@@ -7,6 +7,7 @@ import measureElement from '@/hooks/measureElement';
 
 interface Props {
   // 0 to 1
+  duration: number;
   currentProgress: number;
   onScrub: (progress: number) => void;
   onMouseEnter?: (e: React.MouseEvent) => void;
@@ -15,7 +16,26 @@ interface Props {
 
 const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
 
+function formatTime(duration) {
+  // Hours, minutes and seconds
+  var hrs = ~~(duration / 3600);
+  var mins = ~~((duration % 3600) / 60);
+  var secs = ~~duration % 60;
+
+  // Output like "1:01" or "4:03:59" or "123:03:59"
+  var ret = '';
+
+  if (hrs > 0) {
+    ret += '' + hrs + ':' + (mins < 10 ? '0' : '');
+  }
+
+  ret += '' + mins + ':' + (secs < 10 ? '0' : '');
+  ret += '' + secs;
+  return ret;
+}
+
 export default function ProgressBar({
+  duration,
   onScrub,
   currentProgress,
   onMouseEnter,
@@ -114,13 +134,35 @@ export default function ProgressBar({
             <motion.div
               className="video-progress__preview-head"
               animate={{
-                scale: isHovering ? 3 : 0,
+                scale: isHovering ? (isScrubbing ? 2 : 3) : 0,
+                transition: {
+                  ease: AnimationConfig.EASING,
+                  duration: isScrubbing
+                    ? AnimationConfig.FAST
+                    : AnimationConfig.NORMAL,
+                },
+              }}
+            ></motion.div>
+            <motion.div
+              className="label"
+              style={{
+                userSelect: 'none',
+                color: '#FFF',
+                position: 'absolute',
+                top: '-2em',
+                right: '-1.12em',
+              }}
+              animate={{
+                opacity: isHovering ? 1 : 0,
+                y: isHovering ? 0 : '2em',
                 transition: {
                   ease: AnimationConfig.EASING,
                   duration: AnimationConfig.NORMAL,
                 },
               }}
-            ></motion.div>
+            >
+              {formatTime(duration * previewProgress)}
+            </motion.div>
           </motion.div>
         </motion.div>
       </div>

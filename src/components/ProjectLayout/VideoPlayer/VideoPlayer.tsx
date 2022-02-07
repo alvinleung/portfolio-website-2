@@ -237,6 +237,7 @@ export const VideoPlayer = ({
           }}
         >
           <ProgressBar
+            duration={playerRef.current && playerRef.current.duration}
             currentProgress={videoProgress}
             onScrub={handleUserScrub}
             onMouseEnter={() => setIsHoveringProgress(true)}
