@@ -33,7 +33,12 @@ hidden: false
   />
 </ProjectInfo>
 
-<FullImage src="https://www.sfu.ca/~kkl64/videos/whatif/exhibition-interaction.mp4" />
+<FullImage
+  src="https://www.sfu.ca/~kkl64/videos/whatif/exhibition-interaction.mp4"
+  muted
+  autoPlay
+  darkImage
+/>
 
 ---
 
@@ -48,92 +53,84 @@ hidden: false
   <ListItem>Create intrigue through denial & reward</ListItem>
 </ListLayout>
 
-<InterfaceDemo
-  url="https://www.sfu.ca/~kkl64/videos/whatif/intro.mp4"
-  label="1. Priming Unique Interaction Pattern"
->
-  The landing and introductory pages act as primers to get visitors accustomed
-  to our use of{" "}
-  <InterfaceAnnotation timecode={2} position={{ x: 300, y: 200 }}>
-    distortion to reveal content
-  </InterfaceAnnotation>
-  . As visitors click on it (or overcome a resistive scroll), they will undistort
-  and unveil information that contextualises Fabrica and What If?.
-</InterfaceDemo>
+<VideoPlayer
+  src="https://www.sfu.ca/~kkl64/videos/whatif/intro.mp4"
+  muted
+  autoPlay
+  isDarkContent={false}
+/>
 
-<InterfaceDemo
-  url="https://www.sfu.ca/~kkl64/videos/whatif/	selection-page.mp4"
-  label="2. Denial & Reward to Encourage Content Discovery"
->
-  Acting as the focal point of the microsite, the exhibit selection page reveals
-  just enough information that entices the visitor to investigate more. This is
-  achieved by{" "}
-  <InterfaceAnnotation timecode={0.5} position={{ x: 960, y: 540 }}>
-    tight image cropping
-  </InterfaceAnnotation>{" "}
-  and the{" "}
-  <InterfaceAnnotation timecode={0.5} position={{ x: 1500, y: 540 }}>
-    “what if” prompts
-  </InterfaceAnnotation>{" "}
-  .
-</InterfaceDemo>
+##### 1. Priming Unique Interaction Pattern
 
-<InterfaceDemo
-  url="https://www.sfu.ca/~kkl64/videos/whatif/homo-quantis.mp4"
-  label="3. Individual Voices for Each Exhibit"
->
-  Each exhibit page was given its own voice via art direction and interaction. Through the use of unique color, font pairing and custom <InterfaceAnnotation timecode={8} position={{ x: 500, y: 540 }}>interaction</InterfaceAnnotation>{" "} which is abstracted from the physical exhibit to elicit similar thoughts and emotions.
+-> The landing and introductory pages act as primers to get visitors accustomed
+to our use of distortion to reveal content. As visitors click on it (or overcome a resistive scroll), they will undistort
+and unveil information that contextualises Fabrica and What If?.
 
-</InterfaceDemo>
+<VideoPlayer
+  src="https://www.sfu.ca/~kkl64/videos/whatif/selection-page.mp4"
+  muted
+  autoPlay
+  isDarkContent={false}
+/>
 
-<InterfaceDemo
-  url="https://www.sfu.ca/~kkl64/videos/whatif/resistive-scroll.mp4"
-  label="4. Resistive Scroll as Puntuation"
->
+##### 2. Denial & Reward to Encourage Content Discovery
 
-On the exhibit page, <InterfaceAnnotation timecode={6000} position={{ x: 960, y: 540 }}>resistive scrolling</InterfaceAnnotation> connects one exhibition article to another. Working with the user expectation of scrolling on websites, it subtly draws attention to a page turn at the end of an exhibit article.
+-> Acting as the focal point of the microsite, the exhibit selection page reveals just enough information that entices the visitor to investigate more. This is achieved by tight image cropping and the “what if” prompts.
 
-</InterfaceDemo>
+<VideoPlayer
+  src="https://www.sfu.ca/~kkl64/videos/whatif/homo-quantis.mp4"
+  muted
+  autoPlay
+  isDarkContent={false}
+/>
 
-<InterfaceDemo
-  url="https://www.sfu.ca/~kkl64/videos/whatif/artist-page.mp4"
-  label="5. Draw to Reveal Artist"
->
-  Below the exhibit selection page is the artist page, which is an open space
-  where visitors can click & drag anywhere to reveal the name and portrait of
-  all the artists involved in the exhibition.
-</InterfaceDemo>
+##### 3. Individual Voices for Each Exhibit
 
-<InterfaceDemo
-  url="https://www.sfu.ca/~kkl64/videos/whatif/nav-bar-going-in.mp4"
-  label="6. Navigation: Adapting to Changing Viewing Modes"
->
-  The navigation bar{" "}
-  <InterfaceAnnotation timecode={1} position={{ x: 500, y: 540 }}>
-    mimics
-  </InterfaceAnnotation>{" "}
-  the content layout. As the visitor{" "}
-  <InterfaceAnnotation timecode={10} position={{ x: 500, y: 540 }}>
-    enters
-  </InterfaceAnnotation>{" "}
-  an exhibit, its visual form changes to signify a different viewing mode.
-</InterfaceDemo>
+-> Each exhibit page was given its own voice via art direction and interaction. Through the use of unique color, font pairing and custom interaction which is abstracted from the physical exhibit to elicit similar thoughts and emotions.
 
-<InterfaceDemo
-  url="https://www.sfu.ca/~kkl64/videos/whatif/nav-bar-going-out.mp4"
-  label="7. Navigation: Snapping Cursor & Back Button"
->
-  Inspired by the Apple iOS cursor, the cursor{" "}
-  <InterfaceAnnotation timecode={1} position={{ x: 500, y: 540 }}>
-    snaps
-  </InterfaceAnnotation>{" "}
-  to the closest item to reduce precision required for interacting with a small
-  clicking area. As the visitor{" "}
-  <InterfaceAnnotation timecode={6.7} position={{ x: 500, y: 540 }}>
-    hovers
-  </InterfaceAnnotation>{" "}
-  over the back button, it previews the main state of navigation.
-</InterfaceDemo>
+<VideoPlayer
+  src="https://www.sfu.ca/~kkl64/videos/whatif/resistive-scroll.mp4"
+  muted
+  autoPlay
+  isDarkContent={false}
+/>
+
+##### 4. Resistive Scroll as Puntuation
+
+-> On the exhibit page, resistive scrolling connects one exhibition article to another. Working with the user expectation of scrolling on websites, it subtly draws attention to a page turn at the end of an exhibit article.
+
+<VideoPlayer
+  src="https://www.sfu.ca/~kkl64/videos/whatif/artist-page.mp4"
+  muted
+  autoPlay
+  isDarkContent={false}
+/>
+
+##### 5. Draw to Reveal Artist
+
+-> Below the exhibit selection page is the artist page, which is an open space where visitors can click & drag anywhere to reveal the name and portrait of all the artists involved in the exhibition.
+
+<VideoPlayer
+  src="https://www.sfu.ca/~kkl64/videos/whatif/nav-bar-going-in.mp4"
+  muted
+  autoPlay
+  isDarkContent={false}
+/>
+
+##### 6. Navigation: Adapting to Changing Viewing Modes
+
+-> The navigation bar mimics the content layout. As the visitor enters an exhibit, its visual form changes to signify a different viewing mode.
+
+<VideoPlayer
+  src="https://www.sfu.ca/~kkl64/videos/whatif/nav-bar-going-out.mp4"
+  muted
+  autoPlay
+  isDarkContent={false}
+/>
+
+##### 7. Navigation: Adapting to Changing Viewing Modes
+
+-> Inspired by the Apple iOS cursor, the cursor snaps to the closest item to reduce precision required for interacting with a small clicking area. As the visitor hovers over the back button, it previews the main state of navigation.
 
 ---
 

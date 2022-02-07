@@ -5,12 +5,13 @@ import { AnimationConfig } from '@/components/AnimationConfig';
 import ProgressBar from './ProgressBar';
 
 interface Props {
-  url: string;
+  src: string;
   caption?: string;
-  autoplay?: boolean;
+  autoPlay?: boolean;
   muted?: boolean;
   disableAutoPause?: boolean;
   noPadding?: boolean;
+  loop?: boolean;
   children: React.ReactChildren;
   isDarkContent?: boolean;
 }
@@ -23,11 +24,12 @@ interface Position {
 }
 
 export const VideoPlayer = ({
-  url,
-  autoplay,
+  src,
   noPadding,
   children,
   caption,
+  autoPlay,
+  loop,
   muted,
   disableAutoPause,
   isDarkContent = true,
@@ -69,7 +71,7 @@ export const VideoPlayer = ({
   const playVideo = () => {
     playerRef.current
       .play()
-      .catch(() => console.log(`interrupted play request for ${url}`));
+      .catch(() => console.log(`interrupted play request for ${src}`));
     setIsPlaying(true);
   };
 
@@ -82,7 +84,7 @@ export const VideoPlayer = ({
     if (!isViewing && !disableAutoPause) {
       pauseVideo();
     } else {
-      if (autoplay !== false && muted) {
+      if (autoPlay !== false && muted) {
         replayFromBeginning();
       }
     }
@@ -245,41 +247,45 @@ export const VideoPlayer = ({
           />
         </motion.div>
         <video
-          src={url}
+          src={src}
           preload="auto"
-          loop
+          loop={loop}
           disablePictureInPicture={true}
           ref={playerRef}
           onClick={handlePlayerClick}
+          autoPlay={autoPlay}
+          muted={muted}
         />
       </motion.div>
       {caption && <figcaption>{caption}</figcaption>}
-      <motion.div
-        className="label"
-        style={{
-          pointerEvents: 'none',
-          zIndex: 1000,
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          color: '#FFF',
-        }}
-        animate={{
-          x: mouseOffset.x - 60,
-          y: mouseOffset.y + 40,
-          opacity:
-            isHovering && !isPlaying && isViewing && !isHoveringProgress
-              ? 1
-              : 0,
+      {!muted && (
+        <motion.div
+          className="label"
+          style={{
+            pointerEvents: 'none',
+            zIndex: 1000,
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            color: '#FFF',
+          }}
+          animate={{
+            x: mouseOffset.x - 60,
+            y: mouseOffset.y + 40,
+            opacity:
+              isHovering && !isPlaying && isViewing && !isHoveringProgress
+                ? 1
+                : 0,
 
-          transition: {
-            duration: 0.4,
-            ease: AnimationConfig.EASING,
-          },
-        }}
-      >
-        Play with Audio
-      </motion.div>
+            transition: {
+              duration: 0.4,
+              ease: AnimationConfig.EASING,
+            },
+          }}
+        >
+          Play with Audio
+        </motion.div>
+      )}
     </figure>
   );
 };
