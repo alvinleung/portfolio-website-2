@@ -25,6 +25,7 @@ import {
   useTransitionState,
 } from './ProjectCardTransition';
 import SlideInText from '../SlideInText/SlideInText';
+import { useCursorCustomState } from '../Cursor/Cursor';
 
 const DEBUG = false;
 const VERBOSE = false;
@@ -78,6 +79,12 @@ const ProjectCardLink: React.FC<Props> = (props: Props) => {
       window.removeEventListener('popstate', handleBackButton);
     };
   }, []);
+
+  // change cursor colour
+  const { setIsDarkCursorContext } = useCursorCustomState();
+  useEffect(() => {
+    setIsDarkCursorContext(isMouseOver);
+  }, [isMouseOver]);
 
   const cardContent = (
     <ReactiveCard reactive={hasTransitionDone} followMouse={false}>
@@ -211,7 +218,7 @@ const ProjectCardLink: React.FC<Props> = (props: Props) => {
           setWillPresist(true);
         }}
         className={projectCardLink}
-        onMouseEnter={() => {
+        onMouseOver={() => {
           setIsMouseOver(true);
         }}
         onMouseLeave={() => {

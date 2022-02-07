@@ -350,7 +350,7 @@ export default function Cursor() {
 
   const DEFAULT_SCALE = 1;
   const MOUSEDOWN_SCALE = 0.9;
-  const LINK_HOVER_SCALE = 1.25;
+  const LINK_HOVER_SCALE = 1.2;
   const LINK_MOUSEDOWN_SCALE = 1.1;
 
   const cursorScale = (() => {
