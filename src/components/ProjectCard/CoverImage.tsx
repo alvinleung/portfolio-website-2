@@ -31,7 +31,7 @@ const VERBOSE = true;
 
 const pageTransitionConfig = {
   duration: DEBUG ? AnimationConfig.DEBUG : AnimationConfig.NORMAL,
-  ease: AnimationConfig.EASING,
+  ease: AnimationConfig.EASING_TRANSITION,
 };
 
 const variants = {
