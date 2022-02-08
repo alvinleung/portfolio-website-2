@@ -115,10 +115,10 @@ const About: React.FC = () => {
           alt="me!"
           className="main-grid__full-width display-figure"
           // animate in
-          variants={AnimationVariants.PRIMARY}
-          initial="initial"
-          animate="enter"
-          exit="exit"
+          // variants={AnimationVariants.PRIMARY}
+          // initial="initial"
+          // animate="enter"
+          // exit="exit"
           // initial={{
           //   opacity: 0,
           // }}
@@ -140,10 +140,10 @@ const About: React.FC = () => {
 const SlideInParagraph = ({ children }) => (
   <motion.p
     className={'main-grid__secondary-col '}
-    variants={AnimationVariants.PRIMARY}
-    initial="initial"
-    animate="enter"
-    exit="exit"
+    // variants={AnimationVariants.PRIMARY}
+    // initial="initial"
+    // animate="enter"
+    // exit="exit"
   >
     {children}
   </motion.p>

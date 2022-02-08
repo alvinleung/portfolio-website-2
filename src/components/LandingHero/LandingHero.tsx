@@ -35,14 +35,14 @@ export default () => {
         //   opacity: [0, 1],
         // }}
         className="callout main-grid__full-content"
-        transition={{ ease: 'easeOut', duration: AnimationConfig.FAST }}
+        // transition={{ ease: 'easeOut', duration: AnimationConfig.FAST }}
         style={
           {
             // opacity: headerOpacity,
             // scale: headerScale,
           }
         }
-        exit={AnimationVariants.PRIMARY.exit}
+        // exit={AnimationVariants.PRIMARY.exit}
       >
         <SlideInText>
           {/* Hi, this is Alvin! A UI/UX Designer who is obsessed in creating
