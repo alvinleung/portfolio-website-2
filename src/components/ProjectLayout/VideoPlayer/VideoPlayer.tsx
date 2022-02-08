@@ -221,7 +221,9 @@ export const VideoPlayer = ({
           onScrub={handleUserScrub}
           onMouseEnter={() => setIsHoveringProgress(true)}
           onMouseLeave={() => setIsHoveringProgress(false)}
-          isShowing={(isHovering && isActive) || (isViewing && !isPlaying)}
+          isShowing={
+            isViewing && ((isHovering && isActive) || (isViewing && !isPlaying))
+          }
         />
         <video
           src={src}

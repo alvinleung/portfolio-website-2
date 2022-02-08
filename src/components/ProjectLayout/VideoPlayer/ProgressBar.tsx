@@ -96,7 +96,10 @@ export default function ProgressBar({
 
   return (
     <>
-      <div className="video-shade" />
+      <motion.div
+        className="video-shade"
+        animate={{ opacity: isShowing ? 1 : 0 }}
+      />
       <div
         className="video-progress-container"
         onMouseEnter={(e) => setIsHovering(true)}
