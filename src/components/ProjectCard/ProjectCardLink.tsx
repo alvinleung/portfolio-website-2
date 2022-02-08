@@ -127,7 +127,7 @@ const ProjectCardLink: React.FC<Props> = (props: Props) => {
               // scaleX: isMouseOver && isPresent && hasTransitionDone ? 1 : 0,
             }}
             exit={{
-              transformOrigin: 'top left',
+              // transformOrigin: 'top left',
               // scaleY: 0,
               backgroundColor: 'rgba(0,0,0,.0)',
               transition: {

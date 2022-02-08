@@ -48,7 +48,7 @@ const variants = {
   exit: {
     opacity: 0,
     transition: {
-      ease: AnimationConfig.EASING,
+      ease: AnimationConfig.EASING_SOFT,
       duration: DEBUG ? AnimationConfig.DEBUG : AnimationConfig.FAST,
       // "anticipation effect to make the animation more vivid/forceful"
     },
