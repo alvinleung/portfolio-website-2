@@ -37,7 +37,6 @@ const AboutPageTransition = ({ children, upcomingRoute, prevRoute }: Props) => {
     }
 
     if (!isPresent && isAboutPageTransition) {
-      console.log('exit');
       transitionAnimation.set({
         opacity: 1,
       });
@@ -81,16 +80,6 @@ const AboutPageTransition = ({ children, upcomingRoute, prevRoute }: Props) => {
           opacity: checkIsAboutPageTransition().isAboutPageTransition ? 0 : 1,
         }}
         animate={transitionAnimation}
-        // exit={
-        //   isAboutPageTransition && {
-        //     x: 100,
-        //     opacity: 0,
-        //     transition: {
-        //       duration: AnimationConfig.NORMAL,
-        //       ease: AnimationConfig.EASING_TRANSITION,
-        //     },
-        //   }
-        // }
         onAnimationComplete={handleAnimationComplete}
       >
         {children}
