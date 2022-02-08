@@ -10,8 +10,9 @@ interface Props {
   duration: number;
   currentProgress: number;
   onScrub: (progress: number) => void;
-  onMouseEnter?: (e: React.MouseEvent) => void;
-  onMouseLeave?: (e: React.MouseEvent) => void;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
+  isShowing?: boolean;
 }
 
 const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
@@ -40,6 +41,7 @@ export default function ProgressBar({
   currentProgress,
   onMouseEnter,
   onMouseLeave,
+  isShowing,
 }: Props) {
   const [scrubMeasurement, scrubRef] = measureElement<HTMLDivElement>([]);
 
@@ -84,19 +86,21 @@ export default function ProgressBar({
     onScrub(calculateMouseProgress(e));
   };
 
+  useEffect(() => {
+    if (isHovering) {
+      onMouseEnter && onMouseEnter();
+    } else {
+      onMouseLeave && onMouseLeave();
+    }
+  }, [isHovering]);
+
   return (
     <>
       <div className="video-shade" />
       <div
         className="video-progress-container"
-        onMouseEnter={(e) => {
-          setIsHovering(true);
-          onMouseEnter && onMouseEnter(e);
-        }}
-        onMouseLeave={(e) => {
-          setIsHovering(false);
-          onMouseLeave && onMouseLeave(e);
-        }}
+        onMouseEnter={(e) => setIsHovering(true)}
+        onMouseLeave={(e) => setIsHovering(false)}
         onMouseDown={handleScrubBegin}
       >
         <motion.div
@@ -104,6 +108,7 @@ export default function ProgressBar({
           ref={scrubRef}
           animate={{
             height: isHovering ? '0.3rem' : '0.1rem',
+            opacity: isShowing ? 1 : 0,
             transition: {
               ease: AnimationConfig.EASING,
               duration: AnimationConfig.NORMAL,

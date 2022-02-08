@@ -168,20 +168,7 @@ export const VideoPlayer = ({
       setIsDarkCursorContext(isDarkContent);
       return;
     }
-  }, [isViewing, isHovering, isHoveringProgress]);
-
-  useEffect(() => {
-    // only change the cursor custom state when the user is hovering
-    if (cursorCustomState === CustomStates.NONE) return;
-
-    // set icon to opposite staste of video play state
-    // to indicate what "will" happen after clicking on video
-    if (isPlaying) {
-      setCursorCustomState(CustomStates.STOP);
-    } else {
-      setCursorCustomState(CustomStates.PLAY);
-    }
-  }, [isPlaying]);
+  }, [isViewing, isHovering, isPlaying, isHoveringProgress]);
 
   const handleRestartClick = () => {
     replayFromBeginning();
@@ -228,24 +215,14 @@ export const VideoPlayer = ({
         onMouseLeave={() => setIsHovering(false)}
         onMouseMove={handleMouseMove}
       >
-        <motion.div
-          animate={{
-            opacity:
-              (isHovering && isActive) || (isViewing && !isPlaying) ? 1 : 0,
-            transition: {
-              ease: AnimationConfig.EASING,
-              duration: 1,
-            },
-          }}
-        >
-          <ProgressBar
-            duration={playerRef.current && playerRef.current.duration}
-            currentProgress={videoProgress}
-            onScrub={handleUserScrub}
-            onMouseEnter={() => setIsHoveringProgress(true)}
-            onMouseLeave={() => setIsHoveringProgress(false)}
-          />
-        </motion.div>
+        <ProgressBar
+          duration={playerRef.current && playerRef.current.duration}
+          currentProgress={videoProgress}
+          onScrub={handleUserScrub}
+          onMouseEnter={() => setIsHoveringProgress(true)}
+          onMouseLeave={() => setIsHoveringProgress(false)}
+          isShowing={(isHovering && isActive) || (isViewing && !isPlaying)}
+        />
         <video
           src={src}
           preload="auto"
