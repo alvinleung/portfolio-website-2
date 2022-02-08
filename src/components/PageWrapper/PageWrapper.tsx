@@ -10,6 +10,7 @@ import { Footer } from '../Footer/Footer';
 import { ProjectCardTransition } from '../ProjectCard/ProjectCardTransition';
 import TransitionContentWrapper from './TransitionContentWrapper';
 import AboutPageTransition from '../AboutPageTransition/AboutPageTransition';
+import PageAssetPreloader from '../PageAssetPreloader/PageAssetPreloader';
 
 const PageWrapper = ({ children, location }) => {
   // const [prevRoute, setPrevRoute] = useState();
@@ -21,7 +22,7 @@ const PageWrapper = ({ children, location }) => {
   }
 
   return (
-    <>
+    <PageAssetPreloader>
       <MainNav />
       <CursorContextProvider>
         {/* a context provider for the transitions need to be outside of Animate Presence in order to work */}
@@ -41,7 +42,7 @@ const PageWrapper = ({ children, location }) => {
           </AnimatePresence>
         </ProjectCardTransition>
       </CursorContextProvider>
-    </>
+    </PageAssetPreloader>
   );
 };
 

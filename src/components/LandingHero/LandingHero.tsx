@@ -3,6 +3,7 @@ import { motion, useViewportScroll, useTransform } from 'framer-motion';
 import './LandingHero.scss';
 import { AnimationConfig, AnimationVariants } from '../AnimationConfig';
 import SlideInText from '../SlideInText/SlideInText';
+import { useIsFinishLoading } from '../PageAssetPreloader/PageAssetPreloader';
 
 export default () => {
   // const { scrollY } = useViewportScroll();
@@ -27,6 +28,8 @@ export default () => {
   //   };
   // }, []);
 
+  const isLoaded = useIsFinishLoading();
+
   return (
     <div className="LandingHero main-grid">
       {/* <div className="main-grid__side-col label">Hello!</div> */}
@@ -44,7 +47,7 @@ export default () => {
         }
         // exit={AnimationVariants.PRIMARY.exit}
       >
-        <SlideInText>
+        <SlideInText visible={isLoaded}>
           {/* Hi, this is Alvin! A UI/UX Designer who is obsessed in creating
           functional yet aesthetic experiences. */}
           {/* Hi, this is Alvin! A technologically supercharged Visual Designer who

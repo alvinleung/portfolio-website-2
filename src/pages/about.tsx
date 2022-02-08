@@ -119,18 +119,21 @@ const About: React.FC = () => {
           // initial="initial"
           // animate="enter"
           // exit="exit"
-          // initial={{
-          //   opacity: 0,
-          // }}
-          // animate={{
-          //   opacity: 1,
-          //   transition: {
-          //     delay: 0.5,
-          //   },
-          // }}
-          // exit={{
-          //   opacity: 0,
-          // }}
+          initial={{
+            opacity: 0,
+          }}
+          animate={{
+            opacity: 1,
+            transition: {
+              delay: 0.1,
+            },
+          }}
+          exit={{
+            opacity: 0,
+          }}
+          width={1920}
+          height={1080}
+          style={{ backgroundColor: '#EEE' }}
         />
       </main>
     </>

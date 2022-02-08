@@ -44,7 +44,7 @@ export enum CustomStates {
   HIDDEN,
 }
 
-const CustomStateIcons = {
+export const CustomStateIcons = {
   [CustomStates.REPLAY]: '/img/icons/replay.svg',
   [CustomStates.HORIZONTAL_SLIDE]: '/img/icons/slide-horizontal.svg',
   [CustomStates.PLAY]: '/img/icons/play.svg',
@@ -56,13 +56,6 @@ const CustomStateIcons = {
   [CustomStates.CLOSE]: '/img/icons/close.svg',
   [CustomStates.NONE]: '/img/icons/empty.png',
 };
-
-function preloadCustomStateIcons() {
-  Object.values(CustomStateIcons).forEach((src) => {
-    const img = new Image();
-    img.src = src;
-  });
-}
 
 export const CursorContext = React.createContext<{
   cursorCustomState: CustomStates; // current
@@ -216,11 +209,6 @@ export default function Cursor() {
     return () => {
       setCursorCustomState(CustomStates.NONE);
     };
-  }, []);
-
-  // preload cursor icons when page load
-  useEffect(() => {
-    preloadCustomStateIcons();
   }, []);
 
   useEffect(() => {
