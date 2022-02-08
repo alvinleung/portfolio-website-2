@@ -64,6 +64,7 @@ const PageAssetPreloader = ({ children }: Props) => {
   useEffect(() => {
     preloadImages();
   }, []);
+  console.log(isLoaded);
 
   return (
     <>
@@ -78,10 +79,10 @@ const PageAssetPreloader = ({ children }: Props) => {
                 right: 0,
                 bottom: 0,
                 backgroundColor: '#FFF',
-                zIndex: 10000000000000,
+                zIndex: 100000,
               }}
               initial={{
-                opacity: 1,
+                opacity: isLoaded ? 0 : 1,
               }}
               animate={{
                 opacity: 1,

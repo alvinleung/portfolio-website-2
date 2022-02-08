@@ -84,7 +84,12 @@ module.exports = {
             "cache-control: max-age=0",
             "cache-control: must-revalidate",
           ],
-          "/static/img/*": [
+          "/**/*.svg": [
+            "cache-control: public",
+            "cache-control: max-age=31536000",
+            "cache-control: immutable",
+          ],
+          "/**/*.webp": [
             "cache-control: public",
             "cache-control: max-age=31536000",
             "cache-control: immutable",

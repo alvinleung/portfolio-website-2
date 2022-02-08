@@ -427,7 +427,7 @@ export default function Cursor() {
         pointerEvents: 'none',
         x: cursorPosition.x,
         y: cursorPosition.y,
-        zIndex: 100000,
+        zIndex: 1000000,
       }}
     >
       <motion.div
@@ -442,6 +442,7 @@ export default function Cursor() {
         }}
         initial={{
           borderRadius: config.width,
+          scale: cursorScale,
         }}
         animate={{
           // x: hoveredElementMeasurement ? cursorPosition.x : null,

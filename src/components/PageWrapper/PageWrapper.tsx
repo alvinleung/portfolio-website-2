@@ -22,27 +22,29 @@ const PageWrapper = ({ children, location }) => {
   }
 
   return (
-    <PageAssetPreloader>
-      <MainNav />
-      <CursorContextProvider>
-        {/* a context provider for the transitions need to be outside of Animate Presence in order to work */}
+    <>
+      <PageAssetPreloader>
+        <MainNav />
+        <CursorContextProvider>
+          {/* a context provider for the transitions need to be outside of Animate Presence in order to work */}
 
-        <ProjectCardTransition upcomingRoute={location.pathname}>
-          <AnimatePresence initial={true} exitBeforeEnter>
-            <TransitionContentWrapper key={location.pathname}>
-              <Cursor />
-              <AboutPageTransition
-                upcomingRoute={currentRoute}
-                prevRoute={prevRoute}
-              >
-                {children}
-                <Footer />
-              </AboutPageTransition>
-            </TransitionContentWrapper>
-          </AnimatePresence>
-        </ProjectCardTransition>
-      </CursorContextProvider>
-    </PageAssetPreloader>
+          <ProjectCardTransition upcomingRoute={location.pathname}>
+            <AnimatePresence initial={true} exitBeforeEnter>
+              <TransitionContentWrapper key={location.pathname}>
+                <Cursor />
+                <AboutPageTransition
+                  upcomingRoute={currentRoute}
+                  prevRoute={prevRoute}
+                >
+                  {children}
+                  <Footer />
+                </AboutPageTransition>
+              </TransitionContentWrapper>
+            </AnimatePresence>
+          </ProjectCardTransition>
+        </CursorContextProvider>
+      </PageAssetPreloader>
+    </>
   );
 };
 
