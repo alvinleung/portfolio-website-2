@@ -63,7 +63,7 @@ const variants = {
     // page transition exit after the children
     transition: {
       duration: AnimationConfig.FAST,
-      ease: AnimationConfig.EASING_INVERTED,
+      ease: AnimationConfig.EASING_SOFT,
     },
   },
 };
