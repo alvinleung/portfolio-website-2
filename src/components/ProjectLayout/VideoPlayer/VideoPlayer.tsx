@@ -249,7 +249,7 @@ export const VideoPlayer = ({
             color: '#FFF',
           }}
           animate={{
-            x: mouseOffset.x - 60,
+            x: mouseOffset.x - 55,
             y: mouseOffset.y + 40,
             opacity:
               isHovering && !isPlaying && isViewing && !isHoveringProgress
