@@ -59,9 +59,12 @@ const variants = {
   },
   exit: {
     opacity: 0,
-    y: 50,
+    y: 20,
     // page transition exit after the children
-    transition: { duration: AnimationConfig.FAST },
+    transition: {
+      duration: AnimationConfig.FAST,
+      ease: AnimationConfig.EASING_INVERTED,
+    },
   },
 };
 

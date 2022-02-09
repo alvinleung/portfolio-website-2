@@ -25,7 +25,7 @@ export const AnimationVariants = {
   PRIMARY: {
     initial: {
       opacity: 0,
-      y: 30,
+      y: 5,
     },
     enter: {
       opacity: 1,
@@ -34,7 +34,7 @@ export const AnimationVariants = {
     },
     exit: {
       opacity: 0,
-      y: 30,
+      y: 5,
       transition: { duration: AnimationConfig.VERY_FAST },
     },
   },
