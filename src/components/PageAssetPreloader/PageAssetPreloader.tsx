@@ -7,7 +7,6 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { CustomStateIcons } from '../Cursor/Cursor';
 
 type Props = {
   children: React.ReactNode;
@@ -20,18 +19,18 @@ const IMAGE_PRELOAD_LIST = [
   '/img/bump-cover.webp',
   '/img/helpmate-cover.webp',
   '/img/pivot-cover.webp',
-  ...Object.values(CustomStateIcons),
 ];
 
-const PageLoadContext = createContext(false);
+const PageLoadContext = createContext({ isLoaded: false, progress: 0 });
 
-export const useIsFinishLoading = () => useContext(PageLoadContext);
+export const useLoadingStatus = () => useContext(PageLoadContext);
 
 const PageAssetPreloader = ({ children }: Props) => {
   const sources = IMAGE_PRELOAD_LIST;
   const loadedImages = useRef([]);
 
   const [isLoaded, setIsLoaded] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   function handleImageLoad(e: Event) {
     const source = (e.target as HTMLImageElement).src;
@@ -49,6 +48,8 @@ const PageAssetPreloader = ({ children }: Props) => {
   function checkIsLoaded() {
     const pageAssetLoadedProgress =
       loadedImages.current.length / sources.length;
+    console.log(pageAssetLoadedProgress);
+    setProgress(pageAssetLoadedProgress);
     if (pageAssetLoadedProgress === 1) setIsLoaded(true);
   }
 
@@ -64,11 +65,12 @@ const PageAssetPreloader = ({ children }: Props) => {
   useEffect(() => {
     preloadImages();
   }, []);
-  console.log(isLoaded);
 
   return (
     <>
-      <PageLoadContext.Provider value={isLoaded}>
+      <PageLoadContext.Provider
+        value={{ isLoaded: isLoaded, progress: progress }}
+      >
         <AnimatePresence>
           {!isLoaded && (
             <motion.div

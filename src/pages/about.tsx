@@ -125,7 +125,8 @@ const About: React.FC = () => {
           animate={{
             opacity: 1,
             transition: {
-              delay: 0.1,
+              delay: 0.4,
+              duration: AnimationConfig.NORMAL,
             },
           }}
           exit={{
@@ -147,6 +148,19 @@ const SlideInParagraph = ({ children }) => (
     // initial="initial"
     // animate="enter"
     // exit="exit"
+    initial={{
+      opacity: 0,
+    }}
+    animate={{
+      opacity: 1,
+      transition: {
+        delay: 0.2,
+        duration: AnimationConfig.NORMAL,
+      },
+    }}
+    exit={{
+      opacity: 0,
+    }}
   >
     {children}
   </motion.p>

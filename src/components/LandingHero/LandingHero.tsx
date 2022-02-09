@@ -3,7 +3,7 @@ import { motion, useViewportScroll, useTransform } from 'framer-motion';
 import './LandingHero.scss';
 import { AnimationConfig, AnimationVariants } from '../AnimationConfig';
 import SlideInText from '../SlideInText/SlideInText';
-import { useIsFinishLoading } from '../PageAssetPreloader/PageAssetPreloader';
+import { useLoadingStatus } from '../PageAssetPreloader/PageAssetPreloader';
 
 export default () => {
   // const { scrollY } = useViewportScroll();
@@ -28,7 +28,7 @@ export default () => {
   //   };
   // }, []);
 
-  const isLoaded = useIsFinishLoading();
+  const { isLoaded } = useLoadingStatus();
 
   return (
     <div className="LandingHero main-grid">

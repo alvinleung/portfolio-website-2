@@ -3,6 +3,9 @@ import { motion } from 'framer-motion';
 
 import './Cursor.scss';
 import { AnimationConfig } from '../AnimationConfig';
+import CoverImage from '../ProjectCard/CoverImage';
+import ProgressRing from '../ProgressRing';
+import { useLoadingStatus } from '../PageAssetPreloader/PageAssetPreloader';
 
 /**
  *
@@ -418,81 +421,91 @@ export default function Cursor() {
     return mousedown ? config.pressedColor : 'rgba(255,255,255,0)';
   })();
 
+  const strokeWidth = 2;
+  const { isLoaded } = useLoadingStatus();
+
   return (
-    <motion.div
-      style={{
-        // originX: 0.5,
-        // originY: 0.5,
-        position: 'fixed',
-        pointerEvents: 'none',
-        x: cursorPosition.x,
-        y: cursorPosition.y,
-        zIndex: 1000000,
-      }}
-    >
+    <>
       <motion.div
         style={{
-          x: '-50%',
-          y: '-50%',
-          border: `2px solid ${config.normalColor}`,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          filter: `invert(${isDarkCursorContext ? 100 : 0}%)`,
-        }}
-        initial={{
-          borderRadius: config.width,
-          scale: cursorScale,
-        }}
-        animate={{
-          // x: hoveredElementMeasurement ? cursorPosition.x : null,
-          // y: hoveredElementMeasurement ? cursorPosition.y : null,
-
-          borderRadius: textSelectCursorAppearence.borderRadius,
-          opacity: hidden || cursorCustomState === CustomStates.HIDDEN ? 0 : 1,
-          scale: cursorScale,
-          borderColor: hoveredElementMeasurement
-            ? config.hoverColor
-            : config.normalColor,
-          backgroundColor: cursorFillColor,
-          width: textSelectCursorAppearence.width,
-          height: textSelectCursorAppearence.height,
-        }}
-        transition={{
-          duration: AnimationConfig.VERY_FAST,
-          ease: AnimationConfig.EASING_SOFT,
+          // originX: 0.5,
+          // originY: 0.5,
+          position: 'fixed',
+          pointerEvents: 'none',
+          x: cursorPosition.x,
+          y: cursorPosition.y,
+          zIndex: 1000000,
         }}
       >
-        <motion.img
-          // src="/img/cursor/replay-white-18dp.svg"
-          src={
-            CustomStateIcons[cursorCustomState] ||
-            CustomStateIcons[prevCursorCustomState] ||
-            '/img/cursor/empty.png'
-          }
+        <motion.div
           style={{
-            width: textSelectCursorAppearence.width * CUSTOM_STATE_ICON_SCALE,
-            height: textSelectCursorAppearence.height * CUSTOM_STATE_ICON_SCALE,
+            x: '-50%',
+            y: '-50%',
+            border: `2px solid ${config.normalColor}`,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            filter: `invert(${isDarkCursorContext ? 100 : 0}%)`,
           }}
-          alt="Cursor icon"
+          initial={{
+            borderRadius: config.width,
+            scale: cursorScale,
+          }}
           animate={{
-            opacity:
-              cursorCustomState === CustomStates.NONE ||
-              hoveredElementMeasurement
-                ? 0
-                : 1,
-            scale:
-              cursorCustomState === CustomStates.NONE ||
-              hoveredElementMeasurement
-                ? 0
-                : 1,
+            // x: hoveredElementMeasurement ? cursorPosition.x : null,
+            // y: hoveredElementMeasurement ? cursorPosition.y : null,
+
+            borderRadius: textSelectCursorAppearence.borderRadius,
+            opacity: !isLoaded
+              ? 0
+              : hidden || cursorCustomState === CustomStates.HIDDEN
+              ? 0
+              : 1,
+            scale: cursorScale,
+            borderColor: hoveredElementMeasurement
+              ? config.hoverColor
+              : config.normalColor,
+            backgroundColor: cursorFillColor,
+            width: textSelectCursorAppearence.width,
+            height: textSelectCursorAppearence.height,
           }}
           transition={{
-            duration: AnimationConfig.FAST,
-            easing: AnimationConfig.EASING,
+            duration: AnimationConfig.VERY_FAST,
+            ease: AnimationConfig.EASING_SOFT,
           }}
-        />
+        >
+          <motion.img
+            // src="/img/cursor/replay-white-18dp.svg"
+            src={
+              CustomStateIcons[cursorCustomState] ||
+              CustomStateIcons[prevCursorCustomState] ||
+              '/img/cursor/empty.png'
+            }
+            style={{
+              width: textSelectCursorAppearence.width * CUSTOM_STATE_ICON_SCALE,
+              height:
+                textSelectCursorAppearence.height * CUSTOM_STATE_ICON_SCALE,
+            }}
+            alt="Cursor icon"
+            animate={{
+              opacity:
+                cursorCustomState === CustomStates.NONE ||
+                hoveredElementMeasurement
+                  ? 0
+                  : 1,
+              scale:
+                cursorCustomState === CustomStates.NONE ||
+                hoveredElementMeasurement
+                  ? 0
+                  : 1,
+            }}
+            transition={{
+              duration: AnimationConfig.FAST,
+              easing: AnimationConfig.EASING,
+            }}
+          />
+        </motion.div>
       </motion.div>
-    </motion.div>
+    </>
   );
 }
