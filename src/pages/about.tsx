@@ -32,15 +32,9 @@ const About: React.FC = () => {
       <SEOHeader pageTitle="About" />
       <main id="about" className="full-width nav-padding main-grid">
         {/* Require framer motion for the page change to work */}
-        <motion.h1
-          className="main-grid__primary-col"
-          variants={AnimationVariants.PRIMARY}
-          // initial="initial"
-          animate="enter"
-          exit="exit"
-        >
+        <h1 className="main-grid__primary-col">
           <SlideInText delayBase={0}>Alvin Leung</SlideInText>
-        </motion.h1>
+        </h1>
         <SlideInParagraph>
           A T-shaped designer who is fluent in both concept and{' '}
           <a href="https://github.com/alvinleung" target="blank">
