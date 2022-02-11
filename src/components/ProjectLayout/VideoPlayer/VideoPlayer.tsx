@@ -8,7 +8,7 @@ interface Props {
   src: string;
   caption?: string;
   autoPlay?: boolean;
-  muted?: boolean;
+  hasSound?: boolean;
   disableAutoPause?: boolean;
   noPadding?: boolean;
   loop?: boolean;
@@ -30,13 +30,17 @@ export const VideoPlayer = ({
   caption,
   autoPlay,
   loop,
-  muted = true,
+  hasSound = false,
   disableAutoPause,
   isDarkContent = true,
 }: Props) => {
   const playerRef = useRef<HTMLVideoElement>();
-  const [hasUnmuted, setHasUnmuted] = useState(false);
-  const [isMuted, setIsMuted] = useState(muted);
+
+  const needUnmute = hasSound;
+  const [hasUnmuted, setHasUnmuted] = useState(!needUnmute);
+  console.log(needUnmute);
+
+  const [isMuted, setIsMuted] = useState(hasSound);
   const [isViewing, setIsViewing] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
@@ -293,14 +297,17 @@ export const VideoPlayer = ({
             muted={isMuted}
             animate={{
               x:
-                isHovering && (!hasUnmuted || !isPlaying)
+                isHovering && ((needUnmute && !hasUnmuted) || !isPlaying)
                   ? mouseOffset.fromCenterX * 0.03
                   : 0,
               y:
-                isHovering && (!hasUnmuted || !isPlaying)
+                isHovering && ((needUnmute && !hasUnmuted) || !isPlaying)
                   ? mouseOffset.fromCenterY * 0.03
                   : 0,
-              scale: isHovering && (!hasUnmuted || !isPlaying) ? 1.05 : 1,
+              scale:
+                isHovering && ((needUnmute && !hasUnmuted) || !isPlaying)
+                  ? 1.05
+                  : 1,
               transition: {
                 duration: 0.4,
                 ease: AnimationConfig.EASING,
@@ -310,7 +317,7 @@ export const VideoPlayer = ({
         </div>
       </motion.div>
       {caption && <figcaption>{caption}</figcaption>}
-      {isMuted && (
+      {needUnmute && (
         <motion.div
           className="label"
           style={{
@@ -324,7 +331,10 @@ export const VideoPlayer = ({
           animate={{
             x: mouseOffset.x - 20,
             y: mouseOffset.y + 30,
-            opacity: isHovering && isViewing && !isHoveringProgress ? 1 : 0,
+            opacity:
+              isHovering && isViewing && !hasUnmuted && !isHoveringProgress
+                ? 1
+                : 0,
 
             transition: {
               duration: 0.4,
