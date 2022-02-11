@@ -144,6 +144,7 @@ const ProjectCardLink: React.FC<Props> = (props: Props) => {
           <motion.div
             style={{
               zIndex: 10,
+              pointerEvents: 'none',
             }}
             className={projectType}
             initial={{ opacity: 0 }}
@@ -162,7 +163,7 @@ const ProjectCardLink: React.FC<Props> = (props: Props) => {
           </motion.div>
 
           <motion.h3
-            style={{ zIndex: 1 }}
+            style={{ zIndex: 1, pointerEvents: 'none' }}
             initial={{ opacity: 0 }}
             animate={{
               opacity: isMouseOver ? 1 : 0,
@@ -179,7 +180,7 @@ const ProjectCardLink: React.FC<Props> = (props: Props) => {
             {/* </SlideInText> */}
           </motion.h3>
           <motion.p
-            style={{ zIndex: 1 }}
+            style={{ zIndex: 1, pointerEvents: 'none' }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
