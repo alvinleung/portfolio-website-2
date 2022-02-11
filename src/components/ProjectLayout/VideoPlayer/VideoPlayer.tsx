@@ -30,11 +30,13 @@ export const VideoPlayer = ({
   caption,
   autoPlay,
   loop,
-  muted,
+  muted = true,
   disableAutoPause,
   isDarkContent = true,
 }: Props) => {
   const playerRef = useRef<HTMLVideoElement>();
+  const [hasUnmuted, setHasUnmuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(muted);
   const [isViewing, setIsViewing] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
@@ -43,7 +45,12 @@ export const VideoPlayer = ({
   const { cursorCustomState, setCursorCustomState, setIsDarkCursorContext } =
     useCursorCustomState();
 
-  const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
+  const [mouseOffset, setMouseOffset] = useState({
+    x: 0,
+    y: 0,
+    fromCenterX: 0,
+    fromCenterY: 0,
+  });
 
   // auto hide player bar
   const [isActive, setIsActive] = useState(true);
@@ -84,7 +91,7 @@ export const VideoPlayer = ({
     if (!isViewing && !disableAutoPause) {
       pauseVideo();
     } else {
-      if (autoPlay !== false && muted) {
+      if (autoPlay !== false) {
         replayFromBeginning();
       }
     }
@@ -137,17 +144,25 @@ export const VideoPlayer = ({
   }, [playerRef.current]);
 
   const handlePlayerClick = () => {
+    if (!hasUnmuted) {
+      setIsMuted(false);
+      setHasUnmuted(true);
+      replayFromBeginning();
+      return;
+    }
+
     if (!disableAutoPause && !isViewing) return;
 
     if (!isPlaying) {
       playVideo();
       return;
     }
+
     pauseVideo();
   };
 
   const getPlayingCursorState = () =>
-    isPlaying ? CustomStates.STOP : CustomStates.PLAY;
+    isPlaying && hasUnmuted ? CustomStates.STOP : CustomStates.PLAY;
 
   useEffect(() => {
     if (!isViewing || !isHovering) {
@@ -168,7 +183,7 @@ export const VideoPlayer = ({
       setIsDarkCursorContext(isDarkContent);
       return;
     }
-  }, [isViewing, isHovering, isPlaying, isHoveringProgress]);
+  }, [isViewing, isHovering, isPlaying, hasUnmuted, isHoveringProgress]);
 
   const handleRestartClick = () => {
     replayFromBeginning();
@@ -179,11 +194,25 @@ export const VideoPlayer = ({
     // only show hover as an hint for play
     if (!isHovering) return;
 
+    // capture the dimension on hover
+    const bounds = playerRef.current.getBoundingClientRect();
+    const initialScrollX = window.scrollX;
+    const initialScrollY = window.scrollY;
+
     const handleMouseMove = (e: MouseEvent) => {
-      const bounds = playerRef.current.getBoundingClientRect();
+      const playerPosX = bounds.x + (initialScrollX - window.scrollX);
+      const playerPosY = bounds.y + (initialScrollY - window.scrollY);
+
+      const centerX = e.clientX - (playerPosX + bounds.width / 2);
+      const centerY = e.clientY - (playerPosY + bounds.height / 2);
+      const x = e.clientX - playerPosX;
+      const y = e.clientY - playerPosY;
+
       setMouseOffset({
-        x: e.clientX - bounds.x,
-        y: e.clientY - bounds.y,
+        x: x,
+        y: y,
+        fromCenterX: centerX,
+        fromCenterY: centerY,
       });
     };
 
@@ -200,6 +229,8 @@ export const VideoPlayer = ({
     'interface-demo display-figure main-grid__full-width';
   const containerWithoutPadding =
     'interface-demo display-figure display-figure--no-padding main-grid__full-width';
+
+  // console.log(hasUnmuted);
 
   return (
     <figure
@@ -222,22 +253,58 @@ export const VideoPlayer = ({
           onMouseEnter={() => setIsHoveringProgress(true)}
           onMouseLeave={() => setIsHoveringProgress(false)}
           isShowing={
-            isViewing && ((isHovering && isActive) || (isViewing && !isPlaying))
+            hasUnmuted &&
+            isViewing &&
+            ((isHovering && isActive) || (isViewing && !isPlaying))
           }
         />
-        <video
-          src={src}
-          preload="auto"
-          loop={loop}
-          disablePictureInPicture={true}
-          ref={playerRef}
-          onClick={handlePlayerClick}
-          autoPlay={autoPlay}
-          muted={muted}
-        />
+        <motion.div
+          style={{
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 0,
+            zIndex: 100,
+            pointerEvents: 'none',
+            backgroundColor: 'rgba(0,0,0,.6)',
+          }}
+          animate={{
+            opacity: isHovering && !hasUnmuted ? 1 : 0,
+            transition: {
+              duration: 0.4,
+              ease: AnimationConfig.EASING,
+            },
+          }}
+        ></motion.div>
+        <div
+          style={{
+            overflow: 'hidden',
+          }}
+        >
+          <motion.video
+            src={src}
+            preload="auto"
+            loop={loop}
+            disablePictureInPicture={true}
+            ref={playerRef}
+            onClick={handlePlayerClick}
+            autoPlay={autoPlay}
+            muted={isMuted}
+            animate={{
+              x: isHovering && !hasUnmuted ? mouseOffset.fromCenterX * 0.03 : 0,
+              y: isHovering && !hasUnmuted ? mouseOffset.fromCenterY * 0.03 : 0,
+              scale: isHovering && !hasUnmuted ? 1.05 : 1,
+              transition: {
+                duration: 0.4,
+                ease: AnimationConfig.EASING,
+              },
+            }}
+          />
+        </div>
       </motion.div>
       {caption && <figcaption>{caption}</figcaption>}
-      {!muted && (
+      {isMuted && (
         <motion.div
           className="label"
           style={{
@@ -249,12 +316,9 @@ export const VideoPlayer = ({
             color: '#FFF',
           }}
           animate={{
-            x: mouseOffset.x - 55,
-            y: mouseOffset.y + 40,
-            opacity:
-              isHovering && !isPlaying && isViewing && !isHoveringProgress
-                ? 1
-                : 0,
+            x: mouseOffset.x - 20,
+            y: mouseOffset.y + 30,
+            opacity: isHovering && isViewing && !isHoveringProgress ? 1 : 0,
 
             transition: {
               duration: 0.4,
@@ -262,7 +326,7 @@ export const VideoPlayer = ({
             },
           }}
         >
-          Play with Audio
+          Watch
         </motion.div>
       )}
     </figure>

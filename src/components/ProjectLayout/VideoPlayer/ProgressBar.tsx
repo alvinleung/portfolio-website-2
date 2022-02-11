@@ -87,12 +87,12 @@ export default function ProgressBar({
   };
 
   useEffect(() => {
-    if (isHovering) {
+    if (isHovering && isShowing) {
       onMouseEnter && onMouseEnter();
     } else {
       onMouseLeave && onMouseLeave();
     }
-  }, [isHovering]);
+  }, [isHovering, isShowing]);
 
   return (
     <>
