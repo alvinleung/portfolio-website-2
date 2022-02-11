@@ -292,9 +292,15 @@ export const VideoPlayer = ({
             autoPlay={autoPlay}
             muted={isMuted}
             animate={{
-              x: isHovering && !hasUnmuted ? mouseOffset.fromCenterX * 0.03 : 0,
-              y: isHovering && !hasUnmuted ? mouseOffset.fromCenterY * 0.03 : 0,
-              scale: isHovering && !hasUnmuted ? 1.05 : 1,
+              x:
+                isHovering && (!hasUnmuted || !isPlaying)
+                  ? mouseOffset.fromCenterX * 0.03
+                  : 0,
+              y:
+                isHovering && (!hasUnmuted || !isPlaying)
+                  ? mouseOffset.fromCenterY * 0.03
+                  : 0,
+              scale: isHovering && (!hasUnmuted || !isPlaying) ? 1.05 : 1,
               transition: {
                 duration: 0.4,
                 ease: AnimationConfig.EASING,
