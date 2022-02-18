@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
 import { graphql, Link } from 'gatsby';
 
 import { motion } from 'framer-motion';
@@ -57,14 +57,16 @@ const variants = {
       when: 'beforeChildren',
     },
   },
-  exit: {
-    opacity: 0,
-    y: 20,
-    // page transition exit after the children
-    transition: {
-      duration: AnimationConfig.FAST,
-      ease: AnimationConfig.EASING_SOFT,
-    },
+  exit: () => {
+    return {
+      opacity: 0,
+      scale: 0.9,
+      // page transition exit after the children
+      transition: {
+        duration: AnimationConfig.FAST,
+        ease: AnimationConfig.EASING_INVERTED,
+      },
+    };
   },
 };
 
@@ -73,6 +75,22 @@ export default function Template({
 }) {
   // const { markdownRemark } = data; // data.markdownRemark holds your post data
   const { frontmatter, body } = data.mdx;
+
+  const contentRef = useRef() as MutableRefObject<HTMLDivElement>;
+  const [originOffset, setOriginOffset] = useState(0);
+
+  useEffect(() => {
+    let elmOffsetTop = contentRef.current.getBoundingClientRect().y;
+
+    const handleScroll = () => {
+      setOriginOffset(window.scrollY - elmOffsetTop + window.innerHeight / 2);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   // creating a custom paragraph processor for the functions
   const customParagraphProcessor = createParagraphProcessor([
@@ -110,12 +128,17 @@ export default function Template({
           }}
         ></ProjectCardCover>
       </motion.header>
+
       <motion.main
         className="full-width main-grid"
+        ref={contentRef}
         variants={variants}
         initial="initial"
         animate="enter"
         exit="exit"
+        style={{
+          originY: `${originOffset}px`,
+        }}
       >
         <MDXProvider
           components={{

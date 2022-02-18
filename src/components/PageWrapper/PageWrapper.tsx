@@ -37,7 +37,6 @@ const PageWrapper = ({ children, location }) => {
                   prevRoute={prevRoute}
                 >
                   {children}
-                  <Footer />
                 </AboutPageTransition>
               </TransitionContentWrapper>
             </AnimatePresence>

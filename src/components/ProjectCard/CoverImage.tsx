@@ -165,8 +165,30 @@ const CoverImage = ({
       return;
     }
 
+    const isOutOfScreen = transformSnapshot.y + transformSnapshot.height < 0;
+
     if (shouldPerformEnteringTransition) {
       if (scrollToOnEnter) scrollToCardPosition();
+
+      if (isOutOfScreen) {
+        control.set({
+          x: placeholderMeasurement.x,
+          y: placeholderMeasurement.y - window.scrollY,
+          width: placeholderMeasurement.width,
+          height: placeholderMeasurement.height,
+          scale: 1.3,
+          opacity: 0,
+        });
+        control.start({
+          scale: 1,
+          opacity: 1,
+          transition: {
+            duration: AnimationConfig.NORMAL,
+            ease: AnimationConfig.EASING,
+          },
+        });
+        return;
+      }
 
       // when measurement ready, nudge the animation to the target position
       control.start({

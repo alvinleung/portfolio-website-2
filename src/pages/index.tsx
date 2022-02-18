@@ -11,6 +11,7 @@ import '../style/reset.scss';
 import LandingHero from '@/components/LandingHero';
 import ProjectCardLink from '@/components/ProjectCard/ProjectCardLink';
 import VerticalLabel from '@/components/VerticalLabel/VerticalLabel';
+import { Footer } from '@/components/Footer/Footer';
 
 interface Props {
   readonly data: PageQueryData;
@@ -151,6 +152,7 @@ const Home: React.FC<Props> = ({ data }: Props) => {
           {buildProjectList(visualDesignProjectList)}
         </section>
       </main>
+      <Footer />
     </>
   );
 };

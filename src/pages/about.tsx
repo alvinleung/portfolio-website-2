@@ -14,6 +14,7 @@ import {
 import ResourceLink from '@/components/ResourceLink';
 import SEOHeader from '@/components/SEOHeader';
 import { useTransformSnapshot } from '@/components/ProjectCard/ProjectCardTransition';
+import { Footer } from '@/components/Footer/Footer';
 
 const About: React.FC = () => {
   // cancel any transition state
@@ -131,6 +132,7 @@ const About: React.FC = () => {
           style={{ backgroundColor: '#EEE' }}
         />
       </main>
+      <Footer />
     </>
   );
 };
