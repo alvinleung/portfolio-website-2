@@ -73,6 +73,7 @@ const AboutPageTransition = ({ children, upcomingRoute, prevRoute }: Props) => {
     <div
       style={{
         overflowX: 'hidden',
+        overflowY: 'hidden',
       }}
     >
       <motion.div

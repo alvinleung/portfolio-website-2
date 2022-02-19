@@ -215,6 +215,7 @@ const CoverImage = ({
         opacity: 1,
         transition: { delay: 0.2 },
       });
+
       onTransitionComplete?.();
     }
     // this will be called on mobile chrome/firefox after you scroll as the viewport changes
@@ -228,6 +229,44 @@ const CoverImage = ({
     // That's why it worked on mobile safari, chrome mobile emulation
     // but not the mobile chrome itself. (browsers which has that frame resizing behaviour when scroll)
   }, [placeholderMeasurement]);
+
+  useEffect(() => {
+    if (!placeholderMeasurement) return;
+
+    if (!shouldPerformEnteringTransition || !isPresent) {
+      return;
+    }
+
+    let isFirstRun = true;
+    const scrollHandler = () => {
+      if (isFirstRun) {
+        isFirstRun = false;
+        return;
+      }
+
+      control.stop();
+      control.start({
+        x: placeholderMeasurement.x,
+        y: placeholderMeasurement.y - window.scrollY,
+        width: placeholderMeasurement.width,
+        height: placeholderMeasurement.height,
+        opacity: 1,
+        scale: 1,
+        transition: {
+          duration: AnimationConfig.FAST,
+          ease: AnimationConfig.EASING,
+        },
+      });
+    };
+    window.addEventListener('scroll', scrollHandler);
+    return () => {
+      window.removeEventListener('scroll', scrollHandler);
+    };
+  }, [
+    shouldPerformEnteringTransition,
+    transitionState,
+    placeholderMeasurement,
+  ]);
 
   const resetPosition = () => {
     console.log('reseting position');

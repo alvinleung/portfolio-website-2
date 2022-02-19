@@ -38,7 +38,6 @@ export const VideoPlayer = ({
 
   const needUnmute = hasSound;
   const [hasUnmuted, setHasUnmuted] = useState(!needUnmute);
-  console.log(needUnmute);
 
   const [isMuted, setIsMuted] = useState(hasSound);
   const [isViewing, setIsViewing] = useState(false);

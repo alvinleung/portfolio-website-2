@@ -44,6 +44,7 @@ import ProjectSectionSeperator from '@/components/ProjectLayout/ProjectSectionSe
 import { AnimationConfig } from '@/components/AnimationConfig';
 import SEOHeader from '@/components/SEOHeader';
 import ProjectCardLink from '@/components/ProjectCard';
+import ResistiveScrollLink from '@/components/ResistiveScrollLink/ResistiveScrollLink';
 
 const variants = {
   initial: {
@@ -128,50 +129,52 @@ export default function Template({
           }}
         ></ProjectCardCover>
       </motion.header>
-
-      <motion.main
-        className="full-width main-grid"
-        ref={contentRef}
-        variants={variants}
-        initial="initial"
-        animate="enter"
-        exit="exit"
-        style={{
-          originY: `${originOffset}px`,
-        }}
-      >
-        <MDXProvider
-          components={{
-            // overriding default markdown syntax for custom look
-            h2: SectionHead,
-            h3: SectionDescription,
-            h4: SubSectionHead,
-            h5: ParagraphHead,
-            blockquote: Blockquote,
-            // p: ParagraphProcessor,
-            p: customParagraphProcessor,
-            hr: ThematicBreak,
-            img: ImageSub,
-            a: LinkElement,
-            // context for custom react component layout
-            ProjectInfo,
-            ProjectInfoItem,
-            ComparisonView,
-            ComparisonItem,
-            FullImage,
-            HalfImage,
-            Pill,
-            InterfaceDemo,
-            InterfaceAnnotation,
-            ResourceLink,
-            ListItem,
-            ListLayout,
-            VideoPlayer,
+      <ResistiveScrollLink target="/">
+        <motion.main
+          className="full-width main-grid"
+          ref={contentRef}
+          variants={variants}
+          initial="initial"
+          animate="enter"
+          exit="exit"
+          style={{
+            originY: `${originOffset}px`,
           }}
         >
-          <MDXRenderer>{body}</MDXRenderer>
-        </MDXProvider>
-      </motion.main>
+          <MDXProvider
+            components={{
+              // overriding default markdown syntax for custom look
+              h2: SectionHead,
+              h3: SectionDescription,
+              h4: SubSectionHead,
+              h5: ParagraphHead,
+              blockquote: Blockquote,
+              // p: ParagraphProcessor,
+              p: customParagraphProcessor,
+              hr: ThematicBreak,
+              img: ImageSub,
+              a: LinkElement,
+              // context for custom react component layout
+              ProjectInfo,
+              ProjectInfoItem,
+              ComparisonView,
+              ComparisonItem,
+              FullImage,
+              HalfImage,
+              Pill,
+              InterfaceDemo,
+              InterfaceAnnotation,
+              ResourceLink,
+              ListItem,
+              ListLayout,
+              VideoPlayer,
+            }}
+          >
+            <MDXRenderer>{body}</MDXRenderer>
+          </MDXProvider>
+        </motion.main>
+      </ResistiveScrollLink>
+
       {/* <div className="full-width main-grid" style={{ paddingTop: '6rem' }}>
         <h4>Next Project</h4>
         <div className="main-grid__full-width">
