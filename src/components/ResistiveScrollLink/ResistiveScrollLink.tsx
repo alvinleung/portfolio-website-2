@@ -18,9 +18,9 @@ type Props = {
 const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
 
 // RELATIVE TO SCREEN SIZE
-const HINT_VERTICAL_POSITION = 0.4;
+const HINT_VERTICAL_POSITION = 0.33;
 const SCROLL_RUNWAY_SIZE = 1.5;
-const LAST_CONTENT_PADDING = '8rem';
+const LAST_CONTENT_PADDING = '10rem';
 
 function ResistiveScrollLink({ children, target }: Props) {
   const buildup = useRef(0);
@@ -44,7 +44,7 @@ function ResistiveScrollLink({ children, target }: Props) {
     const strokeDashoffset = circumference - (progress / 100) * circumference;
 
     const showTransitionDuration = 15;
-    const preStartTimeAmount = 5;
+    const preStartTimeAmount = 10;
     const showProgress = clamp(
       (progress + preStartTimeAmount) / showTransitionDuration,
       0,
@@ -150,58 +150,64 @@ function ResistiveScrollLink({ children, target }: Props) {
           }}
           className="main-grid full-width"
         >
-          <motion.div
-            // animate={{
-            //   opacity: isShowingHint ? 1 : 0,
-            //   scale: isShowingHint ? 1 : 0.95,
-            // }}
-            className="main-grid__full-content"
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              // alignItems: 'center',
-            }}
-            animate={showAnimationControl}
-            initial={{ opacity: 0 }}
-            exit={{
-              opacity: 0,
-              transition: {
-                duration: AnimationConfig.FAST,
-                ease: AnimationConfig.EASING,
-              },
-            }}
-          >
-            <h5 className="label">Back to Works</h5>
-            <svg
-              height={radius * 2}
-              width={radius * 2}
-              style={{ transform: 'rotate(-90deg)', display: 'block' }}
+          <div className="main-grid__full-content">
+            <motion.div
+              // animate={{
+              //   opacity: isShowingHint ? 1 : 0,
+              //   scale: isShowingHint ? 1 : 0.95,
+              // }}
+
+              style={{
+                display: 'inline-flex',
+                flexDirection: 'column',
+                // alignItems: 'center',
+                justifyContent: 'center',
+              }}
+              animate={showAnimationControl}
+              initial={{ opacity: 0 }}
+              exit={{
+                opacity: 0,
+                transition: {
+                  duration: AnimationConfig.FAST,
+                  ease: AnimationConfig.EASING,
+                },
+              }}
             >
-              <motion.circle
-                stroke={strokeColor}
-                fill="transparent"
-                strokeWidth={stroke}
-                strokeDasharray={circumference + ' ' + circumference}
-                stroke-width={stroke}
-                r={normalizedRadius}
-                cx={radius}
-                cy={radius}
-                animate={ringControl}
-                initial={{ strokeDashoffset: 0 }}
-              />
-              <motion.circle
-                stroke={strokeColor}
-                fill="transparent"
-                strokeWidth={stroke}
-                strokeDasharray={circumference + ' ' + circumference}
-                stroke-width={stroke}
-                r={normalizedRadius}
-                cx={radius}
-                cy={radius}
-                opacity={0.2}
-              />
-            </svg>
-          </motion.div>
+              <div>
+                <div className="label">Continue scrolling</div>
+                <h4>Back to Works</h4>
+              </div>
+              <svg
+                height={radius * 2}
+                width={radius * 2}
+                style={{ transform: 'rotate(-90deg)', display: 'block' }}
+              >
+                <motion.circle
+                  stroke={strokeColor}
+                  fill="transparent"
+                  strokeWidth={stroke}
+                  strokeDasharray={circumference + ' ' + circumference}
+                  stroke-width={stroke}
+                  r={normalizedRadius}
+                  cx={radius}
+                  cy={radius}
+                  animate={ringControl}
+                  initial={{ strokeDashoffset: 0 }}
+                />
+                <motion.circle
+                  stroke={strokeColor}
+                  fill="transparent"
+                  strokeWidth={stroke}
+                  strokeDasharray={circumference + ' ' + circumference}
+                  stroke-width={stroke}
+                  r={normalizedRadius}
+                  cx={radius}
+                  cy={radius}
+                  opacity={0.2}
+                />
+              </svg>
+            </motion.div>
+          </div>
         </Link>
       </div>
     </>
