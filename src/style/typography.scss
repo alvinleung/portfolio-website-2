@@ -8,7 +8,8 @@
   -webkit-font-smoothing: antialiased;
 }
 
-h1 {
+h1,
+.h1 {
   // font-family: "source serif pro";
   // font-variant-ligatures: common-ligatures;
   font-weight: 400; // regular
@@ -17,7 +18,8 @@ h1 {
   margin-bottom: 1.5rem;
 }
 
-h2 {
+h2,
+.h2 {
   // font-family: "source serif pro";
   font-size: 24px;
   letter-spacing: -0.023em;
@@ -25,7 +27,8 @@ h2 {
   margin-bottom: 1rem;
 }
 
-h4 {
+h4,
+.h4 {
   font-weight: normal;
   font-size: 24px;
   letter-spacing: 0em;
@@ -34,7 +37,8 @@ h4 {
   margin-bottom: 1rem;
 }
 
-h5 {
+h5,
+.h5 {
   // @include viewportLargerThan($grid-breakpoint-full) {
   //   font-weight: normal;
   // }

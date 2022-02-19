@@ -18,9 +18,9 @@ type Props = {
 const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
 
 // RELATIVE TO SCREEN SIZE
-const HINT_VERTICAL_POSITION = 0.33;
+const HINT_VERTICAL_POSITION = 0.3;
 const SCROLL_RUNWAY_SIZE = 1.5;
-const LAST_CONTENT_PADDING = '10rem';
+const LAST_CONTENT_PADDING = '8rem';
 
 function ResistiveScrollLink({ children, target }: Props) {
   const buildup = useRef(0);
@@ -79,11 +79,25 @@ function ResistiveScrollLink({ children, target }: Props) {
         ),
         // y: progress > 0 ? 1 - progress : 0,
       });
+      articleAnimation.start({
+        opacity: 0.2,
+        transition: {
+          duration: AnimationConfig.NORMAL,
+          ease: AnimationConfig.EASING,
+        },
+      });
     } else {
       articleAnimation.set({
         position: 'relative',
         top: 0,
         // y: progress > 0 ? 1 - progress : 0,
+      });
+      articleAnimation.start({
+        opacity: 1,
+        transition: {
+          duration: AnimationConfig.NORMAL,
+          ease: AnimationConfig.EASING,
+        },
       });
       setContentHeight(null);
     }
@@ -138,8 +152,7 @@ function ResistiveScrollLink({ children, target }: Props) {
           marginTop: `${HINT_VERTICAL_POSITION * 100}vh`,
         }}
       >
-        <Link
-          to="/"
+        <div
           style={{
             position: 'fixed',
             top: `${(1 - HINT_VERTICAL_POSITION) * 100}vh`,
@@ -150,7 +163,14 @@ function ResistiveScrollLink({ children, target }: Props) {
           }}
           className="main-grid full-width"
         >
-          <div className="main-grid__full-content">
+          <div
+            className="main-grid__full-content"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
             <motion.div
               // animate={{
               //   opacity: isShowingHint ? 1 : 0,
@@ -160,10 +180,21 @@ function ResistiveScrollLink({ children, target }: Props) {
               style={{
                 display: 'inline-flex',
                 flexDirection: 'column',
-                // alignItems: 'center',
+                // flexDirection: 'row-reverse',
+                alignItems: 'center',
                 justifyContent: 'center',
               }}
-              animate={showAnimationControl}
+              // animate={showAnimationControl}
+              animate={{
+                opacity: isShowingHint ? 1 : 0,
+                y: isShowingHint ? 0 : 50,
+                transition: {
+                  duration: isShowingHint
+                    ? AnimationConfig.NORMAL
+                    : AnimationConfig.FAST,
+                  ease: AnimationConfig.EASING,
+                },
+              }}
               initial={{ opacity: 0 }}
               exit={{
                 opacity: 0,
@@ -173,10 +204,10 @@ function ResistiveScrollLink({ children, target }: Props) {
                 },
               }}
             >
-              <div>
-                <div className="label">Continue scrolling</div>
-                <h4>Back to Works</h4>
-              </div>
+              <Link to="/">
+                {/* <div className="label">Scroll</div> */}
+                <div>View other works</div>
+              </Link>
               <svg
                 height={radius * 2}
                 width={radius * 2}
@@ -208,7 +239,7 @@ function ResistiveScrollLink({ children, target }: Props) {
               </svg>
             </motion.div>
           </div>
-        </Link>
+        </div>
       </div>
     </>
   );
