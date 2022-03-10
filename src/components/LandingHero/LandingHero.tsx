@@ -45,7 +45,7 @@ export default () => {
           }}
           // exit={AnimationVariants.PRIMARY.exit}
         >
-          <SlideInText visible={isLoaded}>
+          <SlideInText visible={isLoaded} delayFactor={1.5}>
             {/* Hi, this is Alvin! A UI/UX Designer who is obsessed in creating
           functional yet aesthetic experiences. */}
             {/* Hi, this is Alvin! A technologically supercharged Visual Designer who

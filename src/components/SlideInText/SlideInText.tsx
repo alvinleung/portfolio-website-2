@@ -22,7 +22,7 @@ const wordVariants = {
 };
 
 // const DELAY_FACTOR = 1.5;
-const DELAY_FACTOR = 1.6;
+const DELAY_FACTOR = 1.8;
 const DELAY_BASE = 0.2;
 
 const SlideInText: React.FC<Props> = ({
