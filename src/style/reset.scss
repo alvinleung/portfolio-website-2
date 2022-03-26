@@ -15,6 +15,12 @@
 
 html {
   -webkit-tap-highlight-color: transparent;
+
+  // fix the font bold looking problem in firefox
+  // https://www.lockedownseo.com/firefox-font-weight-too-bold/
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
 }
 
 a {
